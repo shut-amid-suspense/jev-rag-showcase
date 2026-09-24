@@ -1,0 +1,587 @@
+{
+  "summary": {
+    "bm25": {
+      "correct": 7,
+      "of": 24,
+      "median_ms": 0.38666700129397213,
+      "p90_ms": 0.5006249994039536
+    },
+    "embed": {
+      "correct": 20,
+      "of": 24,
+      "median_ms": 437.3773339757463,
+      "p90_ms": 564.5171659853077
+    },
+    "jev_all": {
+      "correct": 24,
+      "of": 24,
+      "median_ms": 426.1428329918999,
+      "p90_ms": 454.6136669960106
+    },
+    "embed+jev": {
+      "correct": 24,
+      "of": 24,
+      "median_ms": 840.8230429631658,
+      "p90_ms": 986.909540995839
+    }
+  },
+  "jev_cost_usd": {
+    "jev_all": 0.004562796000000001,
+    "embed+jev": 0.0010142999999999999
+  },
+  "shortlist_recall": 24,
+  "rows": [
+    {
+      "q": "What does Corvid Labs sell?",
+      "gold": "c79",
+      "bm25": {
+        "pick": "c80",
+        "ms": 0.1345409982604906
+      },
+      "embed": {
+        "pick": "c78",
+        "ms": 399.5207090047188,
+        "gold_in_shortlist": true
+      },
+      "jev_all": {
+        "pick": "c79",
+        "conf": 0.99,
+        "ms": 386.7683330026921
+      },
+      "embed+jev": {
+        "pick": "c79",
+        "conf": 1,
+        "ms": 799.9169590038946
+      }
+    },
+    {
+      "q": "How large is the workforce at Oberlin Labs?",
+      "gold": "c32",
+      "bm25": {
+        "pick": "c55",
+        "ms": 0.4423749924171716
+      },
+      "embed": {
+        "pick": "c32",
+        "ms": 522.2092089970829,
+        "gold_in_shortlist": true
+      },
+      "jev_all": {
+        "pick": "c32",
+        "conf": 0.99,
+        "ms": 446.23991700063925
+      },
+      "embed+jev": {
+        "pick": "c32",
+        "conf": 1,
+        "ms": 871.410374995321
+      }
+    },
+    {
+      "q": "What does Rowan Systems sell?",
+      "gold": "c94",
+      "bm25": {
+        "pick": "c95",
+        "ms": 0.3337920061312616
+      },
+      "embed": {
+        "pick": "c94",
+        "ms": 443.3796670055017,
+        "gold_in_shortlist": true
+      },
+      "jev_all": {
+        "pick": "c94",
+        "conf": 0.97,
+        "ms": 1446.707458992023
+      },
+      "embed+jev": {
+        "pick": "c94",
+        "conf": 1,
+        "ms": 825.0215419975575
+      }
+    },
+    {
+      "q": "Who started Marrow Systems?",
+      "gold": "c45",
+      "bm25": {
+        "pick": "c45",
+        "ms": 0.31145798857323825
+      },
+      "embed": {
+        "pick": "c45",
+        "ms": 440.7927499996731,
+        "gold_in_shortlist": true
+      },
+      "jev_all": {
+        "pick": "c45",
+        "conf": 0.99,
+        "ms": 454.20287500019185
+      },
+      "embed+jev": {
+        "pick": "c45",
+        "conf": 1,
+        "ms": 814.5040840026923
+      }
+    },
+    {
+      "q": "Where is Estrel Systems's main office?",
+      "gold": "c101",
+      "bm25": {
+        "pick": "c100",
+        "ms": 0.3834999952232465
+      },
+      "embed": {
+        "pick": "c101",
+        "ms": 390.69000000017695,
+        "gold_in_shortlist": true
+      },
+      "jev_all": {
+        "pick": "c101",
+        "conf": 0.92,
+        "ms": 500.68545900285244
+      },
+      "embed+jev": {
+        "pick": "c101",
+        "conf": 0.99,
+        "ms": 757.5486659916351
+      }
+    },
+    {
+      "q": "What is Lindqvist Systems best known for making?",
+      "gold": "c88",
+      "bm25": {
+        "pick": "c85",
+        "ms": 0.4521670052781701
+      },
+      "embed": {
+        "pick": "c87",
+        "ms": 499.6152079984313,
+        "gold_in_shortlist": true
+      },
+      "jev_all": {
+        "pick": "c88",
+        "conf": 0.95,
+        "ms": 408.66866600117646
+      },
+      "embed+jev": {
+        "pick": "c88",
+        "conf": 0.97,
+        "ms": 986.909540995839
+      }
+    },
+    {
+      "q": "How large is the workforce at Galloway Systems?",
+      "gold": "c107",
+      "bm25": {
+        "pick": "c4",
+        "ms": 0.4616660007741302
+      },
+      "embed": {
+        "pick": "c107",
+        "ms": 603.6264579888666,
+        "gold_in_shortlist": true
+      },
+      "jev_all": {
+        "pick": "c107",
+        "conf": 0.97,
+        "ms": 426.1428329918999
+      },
+      "embed+jev": {
+        "pick": "c107",
+        "conf": 1,
+        "ms": 965.9607079956913
+      }
+    },
+    {
+      "q": "When did Irongate Systems come into existence?",
+      "gold": "c117",
+      "bm25": {
+        "pick": "c115",
+        "ms": 0.3803750005317852
+      },
+      "embed": {
+        "pick": "c117",
+        "ms": 389.75204101006966,
+        "gold_in_shortlist": true
+      },
+      "jev_all": {
+        "pick": "c117",
+        "conf": 0.97,
+        "ms": 363.4043339989148
+      },
+      "embed+jev": {
+        "pick": "c117",
+        "conf": 1,
+        "ms": 707.6264990173513
+      }
+    },
+    {
+      "q": "How large is the workforce at Corvid Systems?",
+      "gold": "c83",
+      "bm25": {
+        "pick": "c82",
+        "ms": 0.5256250005913898
+      },
+      "embed": {
+        "pick": "c83",
+        "ms": 380.84541700663976,
+        "gold_in_shortlist": true
+      },
+      "jev_all": {
+        "pick": "c83",
+        "conf": 0.99,
+        "ms": 373.3018329949118
+      },
+      "embed+jev": {
+        "pick": "c83",
+        "conf": 1,
+        "ms": 780.0045000039972
+      }
+    },
+    {
+      "q": "What does Dunmere Labs sell?",
+      "gold": "c67",
+      "bm25": {
+        "pick": "c68",
+        "ms": 0.3148749965475872
+      },
+      "embed": {
+        "pick": "c68",
+        "ms": 1712.432499989518,
+        "gold_in_shortlist": true
+      },
+      "jev_all": {
+        "pick": "c67",
+        "conf": 0.99,
+        "ms": 442.4837909900816
+      },
+      "embed+jev": {
+        "pick": "c67",
+        "conf": 1,
+        "ms": 2077.186874987092
+      }
+    },
+    {
+      "q": "Who started Norvale Systems?",
+      "gold": "c3",
+      "bm25": {
+        "pick": "c3",
+        "ms": 1.3776249979855493
+      },
+      "embed": {
+        "pick": "c3",
+        "ms": 421.26425000606105,
+        "gold_in_shortlist": true
+      },
+      "jev_all": {
+        "pick": "c3",
+        "conf": 0.99,
+        "ms": 363.30008300137706
+      },
+      "embed+jev": {
+        "pick": "c3",
+        "conf": 0.99,
+        "ms": 790.5340830038767
+      }
+    },
+    {
+      "q": "Where is Fenwick Systems's main office?",
+      "gold": "c113",
+      "bm25": {
+        "pick": "c112",
+        "ms": 0.37812501250300556
+      },
+      "embed": {
+        "pick": "c113",
+        "ms": 718.0022079992341,
+        "gold_in_shortlist": true
+      },
+      "jev_all": {
+        "pick": "c113",
+        "conf": 0.92,
+        "ms": 427.75350000010803
+      },
+      "embed+jev": {
+        "pick": "c113",
+        "conf": 1,
+        "ms": 1106.5804999961983
+      }
+    },
+    {
+      "q": "How large is the workforce at Vantor Systems?",
+      "gold": "c59",
+      "bm25": {
+        "pick": "c55",
+        "ms": 0.5006249994039536
+      },
+      "embed": {
+        "pick": "c59",
+        "ms": 369.96616699616425,
+        "gold_in_shortlist": true
+      },
+      "jev_all": {
+        "pick": "c59",
+        "conf": 0.99,
+        "ms": 363.049375009723
+      },
+      "embed+jev": {
+        "pick": "c59",
+        "conf": 1,
+        "ms": 781.1826249962905
+      }
+    },
+    {
+      "q": "Who started Estrel Systems?",
+      "gold": "c99",
+      "bm25": {
+        "pick": "c99",
+        "ms": 0.36591599928215146
+      },
+      "embed": {
+        "pick": "c99",
+        "ms": 387.33154100191314,
+        "gold_in_shortlist": true
+      },
+      "jev_all": {
+        "pick": "c99",
+        "conf": 0.99,
+        "ms": 413.9697079954203
+      },
+      "embed+jev": {
+        "pick": "c99",
+        "conf": 0.99,
+        "ms": 714.0106659935554
+      }
+    },
+    {
+      "q": "What does Oberlin Labs sell?",
+      "gold": "c31",
+      "bm25": {
+        "pick": "c32",
+        "ms": 0.32416700560133904
+      },
+      "embed": {
+        "pick": "c32",
+        "ms": 461.47525000560563,
+        "gold_in_shortlist": true
+      },
+      "jev_all": {
+        "pick": "c31",
+        "conf": 0.99,
+        "ms": 435.2749579993542
+      },
+      "embed+jev": {
+        "pick": "c31",
+        "conf": 1,
+        "ms": 842.4625420157099
+      }
+    },
+    {
+      "q": "Who started Fenwick Systems?",
+      "gold": "c111",
+      "bm25": {
+        "pick": "c111",
+        "ms": 0.4240420093992725
+      },
+      "embed": {
+        "pick": "c111",
+        "ms": 476.1305410065688,
+        "gold_in_shortlist": true
+      },
+      "jev_all": {
+        "pick": "c111",
+        "conf": 0.99,
+        "ms": 439.78499999502674
+      },
+      "embed+jev": {
+        "pick": "c111",
+        "conf": 1,
+        "ms": 803.1809580133995
+      }
+    },
+    {
+      "q": "Who started Brightwater Labs?",
+      "gold": "c6",
+      "bm25": {
+        "pick": "c6",
+        "ms": 0.3302080003777519
+      },
+      "embed": {
+        "pick": "c6",
+        "ms": 395.25808399775997,
+        "gold_in_shortlist": true
+      },
+      "jev_all": {
+        "pick": "c6",
+        "conf": 1,
+        "ms": 451.35766599560156
+      },
+      "embed+jev": {
+        "pick": "c6",
+        "conf": 1,
+        "ms": 779.9184180039447
+      }
+    },
+    {
+      "q": "How large is the workforce at Ashgrove Labs?",
+      "gold": "c20",
+      "bm25": {
+        "pick": "c19",
+        "ms": 0.4523329989751801
+      },
+      "embed": {
+        "pick": "c20",
+        "ms": 424.53695900621824,
+        "gold_in_shortlist": true
+      },
+      "jev_all": {
+        "pick": "c20",
+        "conf": 0.99,
+        "ms": 409.4095420005033
+      },
+      "embed+jev": {
+        "pick": "c20",
+        "conf": 1,
+        "ms": 863.3590430108598
+      }
+    },
+    {
+      "q": "How large is the workforce at Kestrel Labs?",
+      "gold": "c14",
+      "bm25": {
+        "pick": "c16",
+        "ms": 0.7876250019762665
+      },
+      "embed": {
+        "pick": "c14",
+        "ms": 414.3848329986213,
+        "gold_in_shortlist": true
+      },
+      "jev_all": {
+        "pick": "c14",
+        "conf": 0.99,
+        "ms": 336.72049999586307
+      },
+      "embed+jev": {
+        "pick": "c14",
+        "conf": 1,
+        "ms": 842.8551249962766
+      }
+    },
+    {
+      "q": "How large is the workforce at Marrow Systems?",
+      "gold": "c47",
+      "bm25": {
+        "pick": "c4",
+        "ms": 0.48470799811184406
+      },
+      "embed": {
+        "pick": "c47",
+        "ms": 390.9938750002766,
+        "gold_in_shortlist": true
+      },
+      "jev_all": {
+        "pick": "c47",
+        "conf": 0.98,
+        "ms": 382.00004199461546
+      },
+      "embed+jev": {
+        "pick": "c47",
+        "conf": 1,
+        "ms": 921.191125002224
+      }
+    },
+    {
+      "q": "When did Hollis Labs come into existence?",
+      "gold": "c60",
+      "bm25": {
+        "pick": "c61",
+        "ms": 0.38666700129397213
+      },
+      "embed": {
+        "pick": "c60",
+        "ms": 424.9782920087455,
+        "gold_in_shortlist": true
+      },
+      "jev_all": {
+        "pick": "c60",
+        "conf": 1,
+        "ms": 364.17208299099
+      },
+      "embed+jev": {
+        "pick": "c60",
+        "conf": 1,
+        "ms": 760.0921260163886
+      }
+    },
+    {
+      "q": "When did Galloway Systems come into existence?",
+      "gold": "c105",
+      "bm25": {
+        "pick": "c103",
+        "ms": 0.3819580015260726
+      },
+      "embed": {
+        "pick": "c105",
+        "ms": 437.3773339757463,
+        "gold_in_shortlist": true
+      },
+      "jev_all": {
+        "pick": "c105",
+        "conf": 0.97,
+        "ms": 454.6136669960106
+      },
+      "embed+jev": {
+        "pick": "c105",
+        "conf": 1,
+        "ms": 840.8230429631658
+      }
+    },
+    {
+      "q": "Who started Selby Labs?",
+      "gold": "c48",
+      "bm25": {
+        "pick": "c48",
+        "ms": 0.43741599074564874
+      },
+      "embed": {
+        "pick": "c48",
+        "ms": 564.5171659853077,
+        "gold_in_shortlist": true
+      },
+      "jev_all": {
+        "pick": "c48",
+        "conf": 1,
+        "ms": 357.7619169955142
+      },
+      "embed+jev": {
+        "pick": "c48",
+        "conf": 1,
+        "ms": 886.6492909874069
+      }
+    },
+    {
+      "q": "Who started Dunmere Systems?",
+      "gold": "c69",
+      "bm25": {
+        "pick": "c69",
+        "ms": 0.3026670019607991
+      },
+      "embed": {
+        "pick": "c69",
+        "ms": 465.0319170032162,
+        "gold_in_shortlist": true
+      },
+      "jev_all": {
+        "pick": "c69",
+        "conf": 0.99,
+        "ms": 653.600625009858
+      },
+      "embed+jev": {
+        "pick": "c69",
+        "conf": 1,
+        "ms": 1004.0256250067614
+      }
+    }
+  ]
+}

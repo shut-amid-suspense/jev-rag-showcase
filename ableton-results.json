@@ -1,0 +1,5575 @@
+{
+ "config": {
+  "K": 20,
+  "pool": 50,
+  "jev": "~typesafe/jev-latest",
+  "llm": "google/gemini-3.5-flash-lite",
+  "embed": "openai/text-embedding-3-small",
+  "qgen": "anthropic/claude-haiku-4.5"
+ },
+ "summary": {
+  "bm25": {
+   "chunk": 65,
+   "page": 65,
+   "of": 149,
+   "median_ms": 8.821875002468005,
+   "p90_ms": 11.648208004771732,
+   "cost_usd": 0
+  },
+  "embed": {
+   "chunk": 92,
+   "page": 97,
+   "of": 149,
+   "median_ms": 458.7843330082251,
+   "p90_ms": 680.3645829932066,
+   "cost_usd": 0
+  },
+  "hybrid": {
+   "chunk": 87,
+   "page": 90,
+   "of": 149,
+   "median_ms": 467.56395800912287,
+   "p90_ms": 688.6122079886263,
+   "cost_usd": 0
+  },
+  "hybrid>jev": {
+   "chunk": 124,
+   "page": 124,
+   "of": 149,
+   "median_ms": 942.6136660040356,
+   "p90_ms": 1301.166082994314,
+   "cost_usd": 0.038605224
+  },
+  "hybrid>llm": {
+   "chunk": 122,
+   "page": 123,
+   "of": 149,
+   "median_ms": 1432.3813750088448,
+   "p90_ms": 1824.4292500021402,
+   "cost_usd": 0.2551887
+  },
+  "toc>jev": {
+   "chunk": 68,
+   "page": 68,
+   "of": 149,
+   "median_ms": 1214.5025010104291,
+   "p90_ms": 1477.9890840000007,
+   "cost_usd": 0.027342084
+  }
+ },
+ "rows": [
+  {
+   "q": "How do I make the grid lines closer together or farther apart in Ableton?",
+   "gold": "c124",
+   "page": 128,
+   "bm25": {
+    "pick": "c211",
+    "ms": 3.476833997410722
+   },
+   "embed": {
+    "pick": "c124",
+    "ms": 629.9648330023047,
+    "search_ms": 47.842125000897795
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c124",
+    "ms": 633.4416669997154
+   },
+   "hybrid>jev": {
+    "pick": "c124",
+    "ms": 1180.8307920000516,
+    "step_ms": 547.3891250003362,
+    "cost": 0.000276234
+   },
+   "hybrid>llm": {
+    "pick": "c124",
+    "ms": 1466.2997089908458,
+    "step_ms": 832.8580419911304,
+    "cost": 0.0017866
+   },
+   "toc>jev": {
+    "pick": "c124",
+    "ms": 1138.79729200562,
+    "cost": 0.000113022,
+    "last_step_candidates": 1
+   }
+  },
+  {
+   "q": "How do I turn off a device without removing it from my track?",
+   "gold": "c336",
+   "page": 311,
+   "bm25": {
+    "pick": "c102",
+    "ms": 8.169250009814277
+   },
+   "embed": {
+    "pick": "c336",
+    "ms": 547.8572500142036,
+    "search_ms": 45.25191699212883
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c336",
+    "ms": 556.0265000240179
+   },
+   "hybrid>jev": {
+    "pick": "c921",
+    "ms": 952.63250003336,
+    "step_ms": 396.6060000093421,
+    "cost": 0.00023814
+   },
+   "hybrid>llm": {
+    "pick": "c921",
+    "ms": 1617.6848750328645,
+    "step_ms": 1061.6583750088466,
+    "cost": 0.0015862
+   },
+   "toc>jev": {
+    "pick": "c336",
+    "ms": 1105.2789579989621,
+    "cost": 0.000221256,
+    "last_step_candidates": 10
+   }
+  },
+  {
+   "q": "How do I export audio from Looper as a new clip in Live?",
+   "gold": "c524",
+   "page": 460,
+   "bm25": {
+    "pick": "c524",
+    "ms": 9.166458999970928
+   },
+   "embed": {
+    "pick": "c524",
+    "ms": 383.9734580105869,
+    "search_ms": 43.7227910006186
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c524",
+    "ms": 393.13991701055784
+   },
+   "hybrid>jev": {
+    "pick": "c524",
+    "ms": 859.0895420056768,
+    "step_ms": 465.94962499511894,
+    "cost": 0.000274428
+   },
+   "hybrid>llm": {
+    "pick": "c524",
+    "ms": 1160.9125420072814,
+    "step_ms": 767.7726249967236,
+    "cost": 0.0018397
+   },
+   "toc>jev": {
+    "pick": "c185",
+    "ms": 1195.9822089847876,
+    "cost": 0.00028119,
+    "last_step_candidates": 14
+   }
+  },
+  {
+   "q": "How can I reduce the delay I feel when playing a MIDI keyboard through my DAW?",
+   "gold": "c992",
+   "page": 838,
+   "bm25": {
+    "pick": "c102",
+    "ms": 9.623082994949073
+   },
+   "embed": {
+    "pick": "c992",
+    "ms": 436.16570899030194,
+    "search_ms": 44.34700000274461
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c992",
+    "ms": 445.788791985251
+   },
+   "hybrid>jev": {
+    "pick": "c1000",
+    "ms": 856.8187089840649,
+    "step_ms": 411.02991699881386,
+    "cost": 0.000225204
+   },
+   "hybrid>llm": {
+    "pick": "c1000",
+    "ms": 1518.7555419834098,
+    "step_ms": 1072.9667499981588,
+    "cost": 0.0014792
+   },
+   "toc>jev": {
+    "pick": "c966",
+    "ms": 1142.9466259869514,
+    "cost": 0.00020059199999999998,
+    "last_step_candidates": 10
+   }
+  },
+  {
+   "q": "How do I make the attack and release times faster or slower on the Multiband Dynamics device?",
+   "gold": "c534",
+   "page": 466,
+   "bm25": {
+    "pick": "c534",
+    "ms": 10.697167002945207
+   },
+   "embed": {
+    "pick": "c534",
+    "ms": 482.36262499995064,
+    "search_ms": 45.23495900502894
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c534",
+    "ms": 493.05979200289585
+   },
+   "hybrid>jev": {
+    "pick": "c534",
+    "ms": 946.1805419996381,
+    "step_ms": 453.12074999674223,
+    "cost": 0.00026145
+   },
+   "hybrid>llm": {
+    "pick": "c534",
+    "ms": 1551.2525420053862,
+    "step_ms": 1058.1927500024904,
+    "cost": 0.0017134
+   },
+   "toc>jev": {
+    "pick": "c534",
+    "ms": 1168.2238339999458,
+    "cost": 0.000310884,
+    "last_step_candidates": 11
+   }
+  },
+  {
+   "q": "How do I modulate the resonance of the filter in Operator?",
+   "gold": "c673",
+   "page": 575,
+   "bm25": {
+    "pick": "c651",
+    "ms": 3.1370829965453595
+   },
+   "embed": {
+    "pick": "c664",
+    "ms": 379.6545000077458,
+    "search_ms": 35.78787500737235
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c664",
+    "ms": 382.79158300429117
+   },
+   "hybrid>jev": {
+    "pick": "c673",
+    "ms": 782.3907080164645,
+    "step_ms": 399.5991250121733,
+    "cost": 0.000267876
+   },
+   "hybrid>llm": {
+    "pick": "c673",
+    "ms": 1741.5591239987407,
+    "step_ms": 1358.7675409944495,
+    "cost": 0.0017884
+   },
+   "toc>jev": {
+    "pick": "c665",
+    "ms": 1237.7473340020515,
+    "cost": 0.000215922,
+    "last_step_candidates": 5
+   }
+  },
+  {
+   "q": "How do I change the key or scale on Push 2?",
+   "gold": "c897",
+   "page": 764,
+   "bm25": {
+    "pick": "c896",
+    "ms": 7.227750000311062
+   },
+   "embed": {
+    "pick": "c952",
+    "ms": 393.1882500037318,
+    "search_ms": 44.32066700246651
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c898",
+    "ms": 400.41600000404287
+   },
+   "hybrid>jev": {
+    "pick": "c898",
+    "ms": 915.0511250045383,
+    "step_ms": 514.6351250004955,
+    "cost": 0.000254226
+   },
+   "hybrid>llm": {
+    "pick": "c898",
+    "ms": 1233.6639170098351,
+    "step_ms": 833.2479170057923,
+    "cost": 0.0016882
+   },
+   "toc>jev": {
+    "pick": "c898",
+    "ms": 1085.2129990089452,
+    "cost": 0.00016577400000000002,
+    "last_step_candidates": 4
+   }
+  },
+  {
+   "q": "How can I fix MIDI timing that sounds sloppy or loose in Live?",
+   "gold": "c993",
+   "page": 838,
+   "bm25": {
+    "pick": "c993",
+    "ms": 9.033292008098215
+   },
+   "embed": {
+    "pick": "c993",
+    "ms": 389.84099999652244,
+    "search_ms": 44.57383400585968
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c993",
+    "ms": 398.87429200462066
+   },
+   "hybrid>jev": {
+    "pick": "c1000",
+    "ms": 848.0333339975914,
+    "step_ms": 449.15904199297074,
+    "cost": 0.00025662
+   },
+   "hybrid>llm": {
+    "pick": "c1000",
+    "ms": 1246.182000002591,
+    "step_ms": 847.3077079979703,
+    "cost": 0.0017015
+   },
+   "toc>jev": {
+    "pick": "c211",
+    "ms": 1166.419125001994,
+    "cost": 0.00012826799999999999,
+    "last_step_candidates": 2
+   }
+  },
+  {
+   "q": "How do I make the Arrangement View automatically scroll to keep up with where the song is playing?",
+   "gold": "c108",
+   "page": 115,
+   "bm25": {
+    "pick": "c108",
+    "ms": 11.577208002563566
+   },
+   "embed": {
+    "pick": "c108",
+    "ms": 466.0971669945866,
+    "search_ms": 44.262208000873215
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c108",
+    "ms": 477.67437499715015
+   },
+   "hybrid>jev": {
+    "pick": "c108",
+    "ms": 902.2713340091286,
+    "step_ms": 424.59695901197847,
+    "cost": 0.000226842
+   },
+   "hybrid>llm": {
+    "pick": "c108",
+    "ms": 1481.9032499945024,
+    "step_ms": 1004.2288749973522,
+    "cost": 0.0014386
+   },
+   "toc>jev": {
+    "pick": "c108",
+    "ms": 1171.5127499919618,
+    "cost": 0.000144102,
+    "last_step_candidates": 5
+   }
+  },
+  {
+   "q": "How do I open a Rack on Push 2 to see the devices inside it?",
+   "gold": "c922",
+   "page": 785,
+   "bm25": {
+    "pick": "c922",
+    "ms": 4.08887499361299
+   },
+   "embed": {
+    "pick": "c922",
+    "ms": 402.95495800091885,
+    "search_ms": 38.43441599747166
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c922",
+    "ms": 407.04383299453184
+   },
+   "hybrid>jev": {
+    "pick": "c922",
+    "ms": 847.0132079964969,
+    "step_ms": 439.9693750019651,
+    "cost": 0.000236838
+   },
+   "hybrid>llm": {
+    "pick": "c922",
+    "ms": 1193.9092489919858,
+    "step_ms": 786.865415997454,
+    "cost": 0.001579
+   },
+   "toc>jev": {
+    "pick": "c922",
+    "ms": 1373.7213330023224,
+    "cost": 0.000148596,
+    "last_step_candidates": 3
+   }
+  },
+  {
+   "q": "How do I draw expression envelopes freehand in the MPE note expression lanes?",
+   "gold": "c233",
+   "page": 223,
+   "bm25": {
+    "pick": "c233",
+    "ms": 7.7945419907337055
+   },
+   "embed": {
+    "pick": "c233",
+    "ms": 383.4774589922745,
+    "search_ms": 46.287166987895034
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c233",
+    "ms": 391.2720009830082
+   },
+   "hybrid>jev": {
+    "pick": "c233",
+    "ms": 863.2242509775097,
+    "step_ms": 471.95224999450147,
+    "cost": 0.00027237
+   },
+   "hybrid>llm": {
+    "pick": "c233",
+    "ms": 1533.960375993047,
+    "step_ms": 1142.6883750100387,
+    "cost": 0.0017962
+   },
+   "toc>jev": {
+    "pick": "c233",
+    "ms": 1258.1732089893194,
+    "cost": 0.000116508,
+    "last_step_candidates": 2
+   }
+  },
+  {
+   "q": "How do I navigate through different notes and octaves when using the Melodic Sequencer on Push 2?",
+   "gold": "c933",
+   "page": 796,
+   "bm25": {
+    "pick": "c904",
+    "ms": 11.102165997726843
+   },
+   "embed": {
+    "pick": "c904",
+    "ms": 373.1052090006415,
+    "search_ms": 34.86158300074749
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c904",
+    "ms": 384.2073749983683
+   },
+   "hybrid>jev": {
+    "pick": "c933",
+    "ms": 802.6506669993978,
+    "step_ms": 418.4432920010295,
+    "cost": 0.000273336
+   },
+   "hybrid>llm": {
+    "pick": "c933",
+    "ms": 1410.3990839939797,
+    "step_ms": 1026.1917089956114,
+    "cost": 0.0018172
+   },
+   "toc>jev": {
+    "pick": "c918",
+    "ms": 1755.5290830205195,
+    "cost": 0.00014448,
+    "last_step_candidates": 2
+   }
+  },
+  {
+   "q": "How do I adjust the hardness of the mallet sound in Collision?",
+   "gold": "c626",
+   "page": 541,
+   "bm25": {
+    "pick": "c625",
+    "ms": 8.081000007223338
+   },
+   "embed": {
+    "pick": "c637",
+    "ms": 811.5687089884887,
+    "search_ms": 45.90858399751596
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c625",
+    "ms": 819.649708995712
+   },
+   "hybrid>jev": {
+    "pick": "c626",
+    "ms": 1231.015375989955,
+    "step_ms": 411.36566699424293,
+    "cost": 0.000269682
+   },
+   "hybrid>llm": {
+    "pick": "c626",
+    "ms": 1813.967458991101,
+    "step_ms": 994.317749995389,
+    "cost": 0.0017806
+   },
+   "toc>jev": {
+    "pick": "c626",
+    "ms": 1157.3769990063738,
+    "cost": 0.000183876,
+    "last_step_candidates": 2
+   }
+  },
+  {
+   "q": "How do I load drum samples into Impulse and assign them to my MIDI keyboard?",
+   "gold": "c647",
+   "page": 558,
+   "bm25": {
+    "pick": "c647",
+    "ms": 8.94245800736826
+   },
+   "embed": {
+    "pick": "c647",
+    "ms": 517.5362910085823,
+    "search_ms": 45.04349999479018
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c647",
+    "ms": 526.4787490159506
+   },
+   "hybrid>jev": {
+    "pick": "c647",
+    "ms": 947.8547490143683,
+    "step_ms": 421.3759999984177,
+    "cost": 0.000256788
+   },
+   "hybrid>llm": {
+    "pick": "c647",
+    "ms": 1353.7804990191944,
+    "step_ms": 827.3017500032438,
+    "cost": 0.001714
+   },
+   "toc>jev": {
+    "pick": "c647",
+    "ms": 1387.1278330043424,
+    "cost": 0.000224238,
+    "last_step_candidates": 5
+   }
+  },
+  {
+   "q": "How do I reduce latency when recording with Spectral Time?",
+   "gold": "c579",
+   "page": 502,
+   "bm25": {
+    "pick": "c576",
+    "ms": 2.817000000504777
+   },
+   "embed": {
+    "pick": "c576",
+    "ms": 598.9800420065876,
+    "search_ms": 44.244292002986185
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c576",
+    "ms": 601.7970420070924
+   },
+   "hybrid>jev": {
+    "pick": "c579",
+    "ms": 1013.2787500042468,
+    "step_ms": 411.48170799715444,
+    "cost": 0.000260652
+   },
+   "hybrid>llm": {
+    "pick": "c579",
+    "ms": 1773.8955830136547,
+    "step_ms": 1172.0985410065623,
+    "cost": 0.0017182
+   },
+   "toc>jev": {
+    "pick": "c973",
+    "ms": 1197.2112910007127,
+    "cost": 0.000199836,
+    "last_step_candidates": 10
+   }
+  },
+  {
+   "q": "What's the difference between using a dynamic mic versus a condenser mic on the Cabinet effect?",
+   "gold": "c439",
+   "page": 399,
+   "bm25": {
+    "pick": "c439",
+    "ms": 10.657333012204617
+   },
+   "embed": {
+    "pick": "c439",
+    "ms": 398.2727499969769,
+    "search_ms": 45.154583000112325
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c439",
+    "ms": 408.93008300918154
+   },
+   "hybrid>jev": {
+    "pick": "c439",
+    "ms": 943.559624007321,
+    "step_ms": 534.6295409981394,
+    "cost": 0.000260904
+   },
+   "hybrid>llm": {
+    "pick": "c439",
+    "ms": 1134.3198330141604,
+    "step_ms": 725.3897500049789,
+    "cost": 0.0017008
+   },
+   "toc>jev": {
+    "pick": "c439",
+    "ms": 1081.7572499945527,
+    "cost": 0.000195762,
+    "last_step_candidates": 2
+   }
+  },
+  {
+   "q": "How do I map a MIDI controller that sends relative value changes instead of absolute positions?",
+   "gold": "c813",
+   "page": 686,
+   "bm25": {
+    "pick": "c813",
+    "ms": 10.166334002860822
+   },
+   "embed": {
+    "pick": "c815",
+    "ms": 434.5938340120483,
+    "search_ms": 35.92012499575503
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c813",
+    "ms": 444.76016801490914
+   },
+   "hybrid>jev": {
+    "pick": "c813",
+    "ms": 880.021585006034,
+    "step_ms": 435.26141699112486,
+    "cost": 0.000274722
+   },
+   "hybrid>llm": {
+    "pick": "c815",
+    "ms": 1612.403584018466,
+    "step_ms": 1167.643416003557,
+    "cost": 0.0018313
+   },
+   "toc>jev": {
+    "pick": "c813",
+    "ms": 1210.289416994783,
+    "cost": 0.000164766,
+    "last_step_candidates": 6
+   }
+  },
+  {
+   "q": "How do I make a held chord play as a sequence of individual notes instead of all at once?",
+   "gold": "c596",
+   "page": 517,
+   "bm25": {
+    "pick": "c598",
+    "ms": 11.307417007628828
+   },
+   "embed": {
+    "pick": "c601",
+    "ms": 380.53712499095127,
+    "search_ms": 46.634833997813985
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c601",
+    "ms": 391.8445419985801
+   },
+   "hybrid>jev": {
+    "pick": "c596",
+    "ms": 900.2912500000093,
+    "step_ms": 508.4467080014292,
+    "cost": 0.000266238
+   },
+   "hybrid>llm": {
+    "pick": "c596",
+    "ms": 1510.0535839883378,
+    "step_ms": 1118.2090419897577,
+    "cost": 0.0017482
+   },
+   "toc>jev": {
+    "pick": "c596",
+    "ms": 1365.0866670068353,
+    "cost": 0.000164136,
+    "last_step_candidates": 6
+   }
+  },
+  {
+   "q": "How do I switch between controlling Spectral Resonator with a frequency value versus incoming MIDI notes?",
+   "gold": "c570",
+   "page": 496,
+   "bm25": {
+    "pick": "c570",
+    "ms": 10.776750001241453
+   },
+   "embed": {
+    "pick": "c570",
+    "ms": 341.52745800383855,
+    "search_ms": 41.33329199976288
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c570",
+    "ms": 352.30420800508
+   },
+   "hybrid>jev": {
+    "pick": "c570",
+    "ms": 795.5960000108462,
+    "step_ms": 443.2917920057662,
+    "cost": 0.000268086
+   },
+   "hybrid>llm": {
+    "pick": "c570",
+    "ms": 1365.477583007305,
+    "step_ms": 1013.1733750022249,
+    "cost": 0.0017455
+   },
+   "toc>jev": {
+    "pick": "c633",
+    "ms": 1090.7437920104712,
+    "cost": 0.00024150000000000002,
+    "last_step_candidates": 7
+   }
+  },
+  {
+   "q": "How do I set up Push 2 to play and create drum beats in Live?",
+   "gold": "c879",
+   "page": 746,
+   "bm25": {
+    "pick": "c879",
+    "ms": 12.943666995852254
+   },
+   "embed": {
+    "pick": "c874",
+    "ms": 570.4744590038899,
+    "search_ms": 47.075708003831096
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c879",
+    "ms": 583.4181259997422
+   },
+   "hybrid>jev": {
+    "pick": "c879",
+    "ms": 1012.4436680052895,
+    "step_ms": 429.0255420055473,
+    "cost": 0.00022785
+   },
+   "hybrid>llm": {
+    "pick": "c879",
+    "ms": 1491.7085010092705,
+    "step_ms": 908.2903750095284,
+    "cost": 0.0015151
+   },
+   "toc>jev": {
+    "pick": "c879",
+    "ms": 1227.7093330048956,
+    "cost": 0.000258636,
+    "last_step_candidates": 14
+   }
+  },
+  {
+   "q": "How do I turn oscillators on and off in Wavetable?",
+   "gold": "c759",
+   "page": 638,
+   "bm25": {
+    "pick": "c759",
+    "ms": 11.168750002980232
+   },
+   "embed": {
+    "pick": "c759",
+    "ms": 567.6976250106236,
+    "search_ms": 44.23983300512191
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c759",
+    "ms": 578.8663750136038
+   },
+   "hybrid>jev": {
+    "pick": "c759",
+    "ms": 1058.6981670203386,
+    "step_ms": 479.83179200673476,
+    "cost": 0.00027531
+   },
+   "hybrid>llm": {
+    "pick": "c759",
+    "ms": 1575.4302920104237,
+    "step_ms": 996.5639169968199,
+    "cost": 0.0017794
+   },
+   "toc>jev": {
+    "pick": "c759",
+    "ms": 1177.9370850126725,
+    "cost": 0.000209118,
+    "last_step_candidates": 5
+   }
+  },
+  {
+   "q": "How do I set up my hardware controller so that its knobs and buttons automatically control whatever device I have selected in Live?",
+   "gold": "c806",
+   "page": 681,
+   "bm25": {
+    "pick": "c102",
+    "ms": 15.151625004364178
+   },
+   "embed": {
+    "pick": "c806",
+    "ms": 371.35683400265407,
+    "search_ms": 46.08833299425896
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c806",
+    "ms": 386.50845900701825
+   },
+   "hybrid>jev": {
+    "pick": "c806",
+    "ms": 771.7079590074718,
+    "step_ms": 385.19950000045355,
+    "cost": 0.000251622
+   },
+   "hybrid>llm": {
+    "pick": "c806",
+    "ms": 1490.0046669936273,
+    "step_ms": 1103.496207986609,
+    "cost": 0.001687
+   },
+   "toc>jev": {
+    "pick": "c806",
+    "ms": 1083.9878340048017,
+    "cost": 0.00013679399999999998,
+    "last_step_candidates": 4
+   }
+  },
+  {
+   "q": "How do I control different parameters using pressure, slide, and pitch bend in an MPE device?",
+   "gold": "c797",
+   "page": 674,
+   "bm25": {
+    "pick": "c227",
+    "ms": 11.819916995591484
+   },
+   "embed": {
+    "pick": "c797",
+    "ms": 370.8443340001395,
+    "search_ms": 39.746374997776
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c797",
+    "ms": 382.664250995731
+   },
+   "hybrid>jev": {
+    "pick": "c797",
+    "ms": 890.2912089979509,
+    "step_ms": 507.6269580022199,
+    "cost": 0.000270984
+   },
+   "hybrid>llm": {
+    "pick": "c797",
+    "ms": 1289.3153339828132,
+    "step_ms": 906.6510829870822,
+    "cost": 0.0018127
+   },
+   "toc>jev": {
+    "pick": "c236",
+    "ms": 1464.685750004719,
+    "cost": 0.000120498,
+    "last_step_candidates": 3
+   }
+  },
+  {
+   "q": "How do I adjust the length of the reverb tail in the algorithmic reverb engine?",
+   "gold": "c512",
+   "page": 451,
+   "bm25": {
+    "pick": "c512",
+    "ms": 3.9474999939557165
+   },
+   "embed": {
+    "pick": "c512",
+    "ms": 363.64145900006406,
+    "search_ms": 54.56383399723563
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c512",
+    "ms": 367.5889589940198
+   },
+   "hybrid>jev": {
+    "pick": "c512",
+    "ms": 927.7746259904234,
+    "step_ms": 560.1856669964036,
+    "cost": 0.000267918
+   },
+   "hybrid>llm": {
+    "pick": "c512",
+    "ms": 1374.1423759929603,
+    "step_ms": 1006.5534169989405,
+    "cost": 0.0017368
+   },
+   "toc>jev": {
+    "pick": "c512",
+    "ms": 1251.5206660027616,
+    "cost": 0.00026145,
+    "last_step_candidates": 6
+   }
+  },
+  {
+   "q": "How do I use the DS Clang instrument in Live?",
+   "gold": "c780",
+   "page": 657,
+   "bm25": {
+    "pick": "c780",
+    "ms": 8.180624994565733
+   },
+   "embed": {
+    "pick": "c780",
+    "ms": 470.59962499770336,
+    "search_ms": 45.92429200420156
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c780",
+    "ms": 478.7802499922691
+   },
+   "hybrid>jev": {
+    "pick": "c781",
+    "ms": 942.6136660040356,
+    "step_ms": 463.83341601176653,
+    "cost": 0.000231798
+   },
+   "hybrid>llm": {
+    "pick": "c781",
+    "ms": 1365.868082997622,
+    "step_ms": 887.0878330053529,
+    "cost": 0.0015328
+   },
+   "toc>jev": {
+    "pick": "c610",
+    "ms": 1142.246207993594,
+    "cost": 0.000188664,
+    "last_step_candidates": 3
+   }
+  },
+  {
+   "q": "How do I make the Shaper MIDI device repeat its modulation envelope while I'm holding down a note?",
+   "gold": "c802",
+   "page": 678,
+   "bm25": {
+    "pick": "c1006",
+    "ms": 10.686499997973442
+   },
+   "embed": {
+    "pick": "c801",
+    "ms": 441.0057500062976,
+    "search_ms": 46.56358400825411
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c801",
+    "ms": 451.69225000427105
+   },
+   "hybrid>jev": {
+    "pick": "c802",
+    "ms": 910.1849170110654,
+    "step_ms": 458.49266700679436,
+    "cost": 0.00028266
+   },
+   "hybrid>llm": {
+    "pick": "c802",
+    "ms": 1328.7804590072483,
+    "step_ms": 877.0882090029772,
+    "cost": 0.0018556
+   },
+   "toc>jev": {
+    "pick": "c620",
+    "ms": 1234.6859160024906,
+    "cost": 0.00020395200000000003,
+    "last_step_candidates": 4
+   }
+  },
+  {
+   "q": "How do I route an oscillator's signal to different filters in Analog?",
+   "gold": "c611",
+   "page": 531,
+   "bm25": {
+    "pick": "c610",
+    "ms": 3.3445000008214265
+   },
+   "embed": {
+    "pick": "c611",
+    "ms": 471.13283300132025,
+    "search_ms": 45.37412500940263
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c610",
+    "ms": 474.4773330021417
+   },
+   "hybrid>jev": {
+    "pick": "c611",
+    "ms": 897.3548740032129,
+    "step_ms": 422.8775410010712,
+    "cost": 0.000272076
+   },
+   "hybrid>llm": {
+    "pick": "c611",
+    "ms": 1367.54941601248,
+    "step_ms": 893.0720830103382,
+    "cost": 0.0018016
+   },
+   "toc>jev": {
+    "pick": "c615",
+    "ms": 1347.4522919859737,
+    "cost": 0.00018879,
+    "last_step_candidates": 3
+   }
+  },
+  {
+   "q": "How do the Pos. L and Pos. R controls affect the sound in Corpus?",
+   "gold": "c460",
+   "page": 414,
+   "bm25": {
+    "pick": "c460",
+    "ms": 9.07924999773968
+   },
+   "embed": {
+    "pick": "c456",
+    "ms": 447.6258329959819,
+    "search_ms": 43.565166008193046
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c460",
+    "ms": 456.7050829937216
+   },
+   "hybrid>jev": {
+    "pick": "c460",
+    "ms": 862.0184579922352,
+    "step_ms": 405.3133749985136,
+    "cost": 0.000252672
+   },
+   "hybrid>llm": {
+    "pick": "c460",
+    "ms": 1498.4237080061575,
+    "step_ms": 1041.718625012436,
+    "cost": 0.0016426
+   },
+   "toc>jev": {
+    "pick": "c650",
+    "ms": 1271.3275830028579,
+    "cost": 0.000168588,
+    "last_step_candidates": 1
+   }
+  },
+  {
+   "q": "How do I turn a MIDI clip that I've edited into a groove that I can reuse?",
+   "gold": "c250",
+   "page": 239,
+   "bm25": {
+    "pick": "c101",
+    "ms": 10.124583001015708
+   },
+   "embed": {
+    "pick": "c250",
+    "ms": 392.2537500038743,
+    "search_ms": 45.038290991215035
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c250",
+    "ms": 402.37833300489
+   },
+   "hybrid>jev": {
+    "pick": "c250",
+    "ms": 846.08429200307,
+    "step_ms": 443.70595899818,
+    "cost": 0.000253134
+   },
+   "hybrid>llm": {
+    "pick": "c250",
+    "ms": 24419.26558301202,
+    "step_ms": 24016.88725000713,
+    "cost": 0.0016744
+   },
+   "toc>jev": {
+    "pick": "c250",
+    "ms": 1398.4149170137243,
+    "cost": 0.00010143000000000001,
+    "last_step_candidates": 1
+   }
+  },
+  {
+   "q": "How do I find and access template Live Sets in the browser?",
+   "gold": "c2",
+   "page": 24,
+   "bm25": {
+    "pick": "c100",
+    "ms": 8.430125002632849
+   },
+   "embed": {
+    "pick": "c86",
+    "ms": 488.87662500783335,
+    "search_ms": 35.37558398966212
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c86",
+    "ms": 497.3067500104662
+   },
+   "hybrid>jev": {
+    "pick": "c55",
+    "ms": 993.4774580033263,
+    "step_ms": 496.1707079928601,
+    "cost": 0.000232638
+   },
+   "hybrid>llm": {
+    "pick": "c86",
+    "ms": 1362.1635830204468,
+    "step_ms": 864.8568330099806,
+    "cost": 0.0015444
+   },
+   "toc>jev": {
+    "pick": "c86",
+    "ms": 1181.5447499975562,
+    "cost": 0.000146496,
+    "last_step_candidates": 3
+   }
+  },
+  {
+   "q": "How does an electric piano produce sound when you press a key?",
+   "gold": "c639",
+   "page": 551,
+   "bm25": {
+    "pick": "c639",
+    "ms": 3.263833001255989
+   },
+   "embed": {
+    "pick": "c639",
+    "ms": 531.111417003558,
+    "search_ms": 47.795042002690025
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c639",
+    "ms": 534.375250004814
+   },
+   "hybrid>jev": {
+    "pick": "c639",
+    "ms": 1014.3056250090012,
+    "step_ms": 479.9303750041872,
+    "cost": 0.000256158
+   },
+   "hybrid>llm": {
+    "pick": "c639",
+    "ms": 1495.0337090122048,
+    "step_ms": 960.6584590073908,
+    "cost": 0.0016846
+   },
+   "toc>jev": {
+    "pick": "c639",
+    "ms": 1103.9937500027008,
+    "cost": 0.00024171000000000002,
+    "last_step_candidates": 7
+   }
+  },
+  {
+   "q": "How do I import individual tracks from another Live set into my current project?",
+   "gold": "c83",
+   "page": 95,
+   "bm25": {
+    "pick": "c102",
+    "ms": 8.63658299203962
+   },
+   "embed": {
+    "pick": "c83",
+    "ms": 443.420084004174,
+    "search_ms": 45.85541700362228
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c85",
+    "ms": 452.0566669962136
+   },
+   "hybrid>jev": {
+    "pick": "c83",
+    "ms": 1003.5554999922169,
+    "step_ms": 551.4988329960033,
+    "cost": 0.000249522
+   },
+   "hybrid>llm": {
+    "pick": "c83",
+    "ms": 1373.29404198681,
+    "step_ms": 921.2373749905964,
+    "cost": 0.0016602
+   },
+   "toc>jev": {
+    "pick": "c83",
+    "ms": 1374.9408340081573,
+    "cost": 0.000161364,
+    "last_step_candidates": 5
+   }
+  },
+  {
+   "q": "How do I fix a partial bar that doesn't match my time signature?",
+   "gold": "c116",
+   "page": 120,
+   "bm25": {
+    "pick": "c102",
+    "ms": 8.169667009497061
+   },
+   "embed": {
+    "pick": "c116",
+    "ms": 441.1626249930123,
+    "search_ms": 35.70616600336507
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c116",
+    "ms": 449.33229200250935
+   },
+   "hybrid>jev": {
+    "pick": "c116",
+    "ms": 1016.55466700322,
+    "step_ms": 567.2223750007106,
+    "cost": 0.000234864
+   },
+   "hybrid>llm": {
+    "pick": "c116",
+    "ms": 2026.0803749988554,
+    "step_ms": 1576.748082996346,
+    "cost": 0.0015523
+   },
+   "toc>jev": {
+    "pick": "c116",
+    "ms": 1369.9250009958632,
+    "cost": 0.000144648,
+    "last_step_candidates": 5
+   }
+  },
+  {
+   "q": "How do I set up a delay effect so it processes audio from multiple tracks instead of just one?",
+   "gold": "c301",
+   "page": 281,
+   "bm25": {
+    "pick": "c359",
+    "ms": 8.100458988337778
+   },
+   "embed": {
+    "pick": "c465",
+    "ms": 395.912291991408,
+    "search_ms": 34.67350000573788
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c465",
+    "ms": 404.01275097974576
+   },
+   "hybrid>jev": {
+    "pick": "c301",
+    "ms": 844.5230009820079,
+    "step_ms": 440.5102500022622,
+    "cost": 0.000292404
+   },
+   "hybrid>llm": {
+    "pick": "c301",
+    "ms": 1432.272750971606,
+    "step_ms": 1028.2599999918602,
+    "cost": 0.0019591
+   },
+   "toc>jev": {
+    "pick": "c283",
+    "ms": 1279.2862909991527,
+    "cost": 0.00020643,
+    "last_step_candidates": 11
+   }
+  },
+  {
+   "q": "How do I record parameter changes into a clip so they play back automatically?",
+   "gold": "c851",
+   "page": 720,
+   "bm25": {
+    "pick": "c144",
+    "ms": 3.283333993749693
+   },
+   "embed": {
+    "pick": "c347",
+    "ms": 446.64966700656805,
+    "search_ms": 44.52641701209359
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c928",
+    "ms": 449.93300100031774
+   },
+   "hybrid>jev": {
+    "pick": "c928",
+    "ms": 1057.8163339960156,
+    "step_ms": 607.8833329956979,
+    "cost": 0.000256788
+   },
+   "hybrid>llm": {
+    "pick": "c928",
+    "ms": 1373.0092090117978,
+    "step_ms": 923.07620801148,
+    "cost": 0.0017116
+   },
+   "toc>jev": {
+    "pick": "c403",
+    "ms": 1133.4010839927942,
+    "cost": 0.000132132,
+    "last_step_candidates": 3
+   }
+  },
+  {
+   "q": "How do I save my Live Set as a compressed file for backup or sharing?",
+   "gold": "c101",
+   "page": 109,
+   "bm25": {
+    "pick": "c29",
+    "ms": 4.016542006866075
+   },
+   "embed": {
+    "pick": "c47",
+    "ms": 463.5474160022568,
+    "search_ms": 48.91337500885129
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c101",
+    "ms": 467.56395800912287
+   },
+   "hybrid>jev": {
+    "pick": "c101",
+    "ms": 1043.3115000196267,
+    "step_ms": 575.7475420105038,
+    "cost": 0.000244104
+   },
+   "hybrid>llm": {
+    "pick": "c101",
+    "ms": 1454.4342500012135,
+    "step_ms": 986.8702919920906,
+    "cost": 0.0016354
+   },
+   "toc>jev": {
+    "pick": "c101",
+    "ms": 1203.8026670197723,
+    "cost": 0.000137466,
+    "last_step_candidates": 2
+   }
+  },
+  {
+   "q": "How can I make my snare drum sound punchier and more present in my mix?",
+   "gold": "c470",
+   "page": 422,
+   "bm25": {
+    "pick": "c102",
+    "ms": 10.877624998101965
+   },
+   "embed": {
+    "pick": "c470",
+    "ms": 625.4425419901963,
+    "search_ms": 36.768624995602295
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c787",
+    "ms": 636.3201669882983
+   },
+   "hybrid>jev": {
+    "pick": "c470",
+    "ms": 1077.3143759870436,
+    "step_ms": 440.9942089987453,
+    "cost": 0.000271866
+   },
+   "hybrid>llm": {
+    "pick": "c470",
+    "ms": 1573.263957980089,
+    "step_ms": 936.9437909917906,
+    "cost": 0.0017959
+   },
+   "toc>jev": {
+    "pick": "c295",
+    "ms": 1899.2415419925237,
+    "cost": 0.000128604,
+    "last_step_candidates": 4
+   }
+  },
+  {
+   "q": "How do I reset the Monitor buttons back to their default settings?",
+   "gold": "c11",
+   "page": 30,
+   "bm25": {
+    "pick": "c268",
+    "ms": 7.720374997006729
+   },
+   "embed": {
+    "pick": "c11",
+    "ms": 448.96541599882767,
+    "search_ms": 41.52708400215488
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c268",
+    "ms": 456.6857909958344
+   },
+   "hybrid>jev": {
+    "pick": "c11",
+    "ms": 1311.751874993206,
+    "step_ms": 855.0660839973716,
+    "cost": 0.00026439
+   },
+   "hybrid>llm": {
+    "pick": "c11",
+    "ms": 1507.3622490017442,
+    "step_ms": 1050.6764580059098,
+    "cost": 0.0017847
+   },
+   "toc>jev": {
+    "pick": "c268",
+    "ms": 1467.4206650088308,
+    "cost": 0.000133728,
+    "last_step_candidates": 3
+   }
+  },
+  {
+   "q": "How do I adjust volume, pan, or send levels for multiple tracks at once using Push?",
+   "gold": "c849",
+   "page": 718,
+   "bm25": {
+    "pick": "c293",
+    "ms": 9.136290987953544
+   },
+   "embed": {
+    "pick": "c850",
+    "ms": 598.4188330039615,
+    "search_ms": 43.383915995946154
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c850",
+    "ms": 607.555123991915
+   },
+   "hybrid>jev": {
+    "pick": "c849",
+    "ms": 1514.6259569883114,
+    "step_ms": 907.0708329963963,
+    "cost": 0.000223524
+   },
+   "hybrid>llm": {
+    "pick": "c849",
+    "ms": 1806.2637899856782,
+    "step_ms": 1198.7086659937631,
+    "cost": 0.0014698
+   },
+   "toc>jev": {
+    "pick": "c849",
+    "ms": 1820.2081249910407,
+    "cost": 0.00013440000000000001,
+    "last_step_candidates": 3
+   }
+  },
+  {
+   "q": "How do I automate parameters for individual steps in Push 2's step sequencer?",
+   "gold": "c929",
+   "page": 792,
+   "bm25": {
+    "pick": "c929",
+    "ms": 3.6315000033937395
+   },
+   "embed": {
+    "pick": "c852",
+    "ms": 522.0836249936838,
+    "search_ms": 36.20887501165271
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c929",
+    "ms": 525.7151249970775
+   },
+   "hybrid>jev": {
+    "pick": "c854",
+    "ms": 1913.5804999968968,
+    "step_ms": 1387.8653749998193,
+    "cost": 0.000239316
+   },
+   "hybrid>llm": {
+    "pick": "c929",
+    "ms": 1500.995750000584,
+    "step_ms": 975.2806250035064,
+    "cost": 0.0015775
+   },
+   "toc>jev": {
+    "pick": "c929",
+    "ms": 1156.4334580034483,
+    "cost": 0.00013154399999999999,
+    "last_step_candidates": 1
+   }
+  },
+  {
+   "q": "How do I use the auxiliary envelope to modulate different parameters in Sampler?",
+   "gold": "c712",
+   "page": 605,
+   "bm25": {
+    "pick": "c712",
+    "ms": 3.8937919889576733
+   },
+   "embed": {
+    "pick": "c712",
+    "ms": 465.8154159988044,
+    "search_ms": 36.9010839931434
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c712",
+    "ms": 469.70920798776206
+   },
+   "hybrid>jev": {
+    "pick": "c712",
+    "ms": 973.063582991017,
+    "step_ms": 503.354375003255,
+    "cost": 0.000292236
+   },
+   "hybrid>llm": {
+    "pick": "c712",
+    "ms": 1522.052749976865,
+    "step_ms": 1052.343541989103,
+    "cost": 0.0019291
+   },
+   "toc>jev": {
+    "pick": "c712",
+    "ms": 1727.6816659868928,
+    "cost": 0.00021512400000000002,
+    "last_step_candidates": 5
+   }
+  },
+  {
+   "q": "How do I make the modulation oscillator keep the same frequency regardless of what MIDI notes I play?",
+   "gold": "c706",
+   "page": 600,
+   "bm25": {
+    "pick": "c705",
+    "ms": 10.371125012170523
+   },
+   "embed": {
+    "pick": "c705",
+    "ms": 602.4096670007566,
+    "search_ms": 45.90733299846761
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c705",
+    "ms": 612.7807920129271
+   },
+   "hybrid>jev": {
+    "pick": "c706",
+    "ms": 1110.727876002784,
+    "step_ms": 497.94708398985676,
+    "cost": 0.000266574
+   },
+   "hybrid>llm": {
+    "pick": "c706",
+    "ms": 1733.4227500250563,
+    "step_ms": 1120.6419580121292,
+    "cost": 0.0017476
+   },
+   "toc>jev": {
+    "pick": "c621",
+    "ms": 1281.1395410099067,
+    "cost": 0.000186606,
+    "last_step_candidates": 2
+   }
+  },
+  {
+   "q": "How do I copy a section from one take lane to replace part of the main clip?",
+   "gold": "c329",
+   "page": 305,
+   "bm25": {
+    "pick": "c328",
+    "ms": 4.227917001117021
+   },
+   "embed": {
+    "pick": "c329",
+    "ms": 1869.0900420042453,
+    "search_ms": 45.39295799622778
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c328",
+    "ms": 1873.3179590053624
+   },
+   "hybrid>jev": {
+    "pick": "c329",
+    "ms": 2450.611292006215,
+    "step_ms": 577.2933330008527,
+    "cost": 0.000253176
+   },
+   "hybrid>llm": {
+    "pick": "c329",
+    "ms": 2808.3091669977875,
+    "step_ms": 934.9912079924252,
+    "cost": 0.0016639
+   },
+   "toc>jev": {
+    "pick": "c329",
+    "ms": 1342.8159579925705,
+    "cost": 0.000116382,
+    "last_step_candidates": 2
+   }
+  },
+  {
+   "q": "How do I temporarily silence individual notes in a MIDI clip without deleting them?",
+   "gold": "c220",
+   "page": 211,
+   "bm25": {
+    "pick": "c828",
+    "ms": 10.284459000104107
+   },
+   "embed": {
+    "pick": "c220",
+    "ms": 613.4247500012862,
+    "search_ms": 46.418541998718865
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c828",
+    "ms": 623.7092090013903
+   },
+   "hybrid>jev": {
+    "pick": "c220",
+    "ms": 1169.1433759988286,
+    "step_ms": 545.4341669974383,
+    "cost": 0.000282156
+   },
+   "hybrid>llm": {
+    "pick": "c220",
+    "ms": 1908.5385840007802,
+    "step_ms": 1284.82937499939,
+    "cost": 0.0018592
+   },
+   "toc>jev": {
+    "pick": "c220",
+    "ms": 1285.6368749926332,
+    "cost": 0.000119994,
+    "last_step_candidates": 2
+   }
+  },
+  {
+   "q": "How can I make a short repeating loop sound longer and less repetitive?",
+   "gold": "c415",
+   "page": 377,
+   "bm25": {
+    "pick": "c534",
+    "ms": 3.454457997577265
+   },
+   "embed": {
+    "pick": "c415",
+    "ms": 537.5130829925183,
+    "search_ms": 36.09712500474416
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c415",
+    "ms": 540.9675409900956
+   },
+   "hybrid>jev": {
+    "pick": "c415",
+    "ms": 1165.5767079937505,
+    "step_ms": 624.6091670036549,
+    "cost": 0.000272034
+   },
+   "hybrid>llm": {
+    "pick": "c415",
+    "ms": 1542.394082993269,
+    "step_ms": 1001.4265420031734,
+    "cost": 0.0018016
+   },
+   "toc>jev": {
+    "pick": "c604",
+    "ms": 1388.2484579953598,
+    "cost": 0.00012352200000000001,
+    "last_step_candidates": 3
+   }
+  },
+  {
+   "q": "How do I set up clips to play one after another in a repeating cycle?",
+   "gold": "c262",
+   "page": 250,
+   "bm25": {
+    "pick": "c262",
+    "ms": 9.536124998703599
+   },
+   "embed": {
+    "pick": "c262",
+    "ms": 497.6476250012638,
+    "search_ms": 48.23570800363086
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c262",
+    "ms": 507.1837499999674
+   },
+   "hybrid>jev": {
+    "pick": "c262",
+    "ms": 962.4588329897961,
+    "step_ms": 455.27508298982866,
+    "cost": 0.000251076
+   },
+   "hybrid>llm": {
+    "pick": "c262",
+    "ms": 1385.0456250074785,
+    "step_ms": 877.8618750075111,
+    "cost": 0.0016546
+   },
+   "toc>jev": {
+    "pick": "c262",
+    "ms": 1393.0850839969935,
+    "cost": 0.00011621400000000001,
+    "last_step_candidates": 2
+   }
+  },
+  {
+   "q": "How do I make a chain automatically get selected when it's receiving audio or MIDI?",
+   "gold": "c365",
+   "page": 337,
+   "bm25": {
+    "pick": "c101",
+    "ms": 9.239875013008714
+   },
+   "embed": {
+    "pick": "c365",
+    "ms": 402.0936669985531,
+    "search_ms": 34.90470799442846
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c371",
+    "ms": 411.3335420115618
+   },
+   "hybrid>jev": {
+    "pick": "c365",
+    "ms": 1160.1786250103032,
+    "step_ms": 748.8450829987414,
+    "cost": 0.00024927
+   },
+   "hybrid>llm": {
+    "pick": "c365",
+    "ms": 1284.789625016856,
+    "step_ms": 873.4560830052942,
+    "cost": 0.0016723
+   },
+   "toc>jev": {
+    "pick": "c275",
+    "ms": 1892.6894169999287,
+    "cost": 0.00013335,
+    "last_step_candidates": 4
+   }
+  },
+  {
+   "q": "How do I set up a drum rack so that triggering one drum sound silences another, like closing a hi-hat?",
+   "gold": "c374",
+   "page": 343,
+   "bm25": {
+    "pick": "c883",
+    "ms": 4.84120799228549
+   },
+   "embed": {
+    "pick": "c374",
+    "ms": 629.4874580053147,
+    "search_ms": 35.31804200611077
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c883",
+    "ms": 634.3286659976002
+   },
+   "hybrid>jev": {
+    "pick": "c374",
+    "ms": 1393.8853329891572,
+    "step_ms": 759.556666991557,
+    "cost": 0.000249186
+   },
+   "hybrid>llm": {
+    "pick": "c374",
+    "ms": 1696.3532499939902,
+    "step_ms": 1062.02458399639,
+    "cost": 0.0016699
+   },
+   "toc>jev": {
+    "pick": "c374",
+    "ms": 1419.1440000140574,
+    "cost": 0.000192108,
+    "last_step_candidates": 9
+   }
+  },
+  {
+   "q": "How do the different note layout options work on Push's pad grid?",
+   "gold": "c839",
+   "page": 710,
+   "bm25": {
+    "pick": "c898",
+    "ms": 8.247624995419756
+   },
+   "embed": {
+    "pick": "c952",
+    "ms": 680.3645829932066,
+    "search_ms": 34.61258299648762
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c952",
+    "ms": 688.6122079886263
+   },
+   "hybrid>jev": {
+    "pick": "c839",
+    "ms": 1364.5871659973636,
+    "step_ms": 675.9749580087373,
+    "cost": 0.00025893
+   },
+   "hybrid>llm": {
+    "pick": "c839",
+    "ms": 1743.7503329856554,
+    "step_ms": 1055.138124997029,
+    "cost": 0.0017251
+   },
+   "toc>jev": {
+    "pick": "c838",
+    "ms": 1976.6517090174602,
+    "cost": 0.000172536,
+    "last_step_candidates": 5
+   }
+  },
+  {
+   "q": "How do I draw automation curves directly onto an automation lane instead of using breakpoints?",
+   "gold": "c394",
+   "page": 359,
+   "bm25": {
+    "pick": "c394",
+    "ms": 3.4024159976979718
+   },
+   "embed": {
+    "pick": "c394",
+    "ms": 555.6167920003645,
+    "search_ms": 43.67345801438205
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c394",
+    "ms": 559.0192079980625
+   },
+   "hybrid>jev": {
+    "pick": "c394",
+    "ms": 1198.0747500056168,
+    "step_ms": 639.0555420075543,
+    "cost": 0.000263592
+   },
+   "hybrid>llm": {
+    "pick": "c394",
+    "ms": 1595.734332993743,
+    "step_ms": 1036.7151249956805,
+    "cost": 0.0017149
+   },
+   "toc>jev": {
+    "pick": "c394",
+    "ms": 1410.6651250040159,
+    "cost": 0.000128436,
+    "last_step_candidates": 3
+   }
+  },
+  {
+   "q": "How do I reduce CPU usage when using Wavetable?",
+   "gold": "c774",
+   "page": 649,
+   "bm25": {
+    "pick": "c774",
+    "ms": 5.705458010197617
+   },
+   "embed": {
+    "pick": "c737",
+    "ms": 398.29408400692046,
+    "search_ms": 34.59987499809358
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c774",
+    "ms": 403.9995420171181
+   },
+   "hybrid>jev": {
+    "pick": "c774",
+    "ms": 831.254834018182,
+    "step_ms": 427.25529200106394,
+    "cost": 0.000259182
+   },
+   "hybrid>llm": {
+    "pick": "c774",
+    "ms": 1374.0995840053074,
+    "step_ms": 970.1000419881893,
+    "cost": 0.001687
+   },
+   "toc>jev": {
+    "pick": "c968",
+    "ms": 1091.7777080030646,
+    "cost": 0.000199836,
+    "last_step_candidates": 10
+   }
+  },
+  {
+   "q": "How do I make the Multiband Dynamics device respond to a different audio source instead of the track I'm processing?",
+   "gold": "c535",
+   "page": 467,
+   "bm25": {
+    "pick": "c535",
+    "ms": 12.709499991615303
+   },
+   "embed": {
+    "pick": "c535",
+    "ms": 486.9794999976875,
+    "search_ms": 34.928791006677784
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c535",
+    "ms": 499.68899998930283
+   },
+   "hybrid>jev": {
+    "pick": "c535",
+    "ms": 1117.6950409862911,
+    "step_ms": 618.0060409969883,
+    "cost": 0.00025893
+   },
+   "hybrid>llm": {
+    "pick": "c535",
+    "ms": 1444.171416995232,
+    "step_ms": 944.4824170059292,
+    "cost": 0.0017269
+   },
+   "toc>jev": {
+    "pick": "c535",
+    "ms": 1285.2110409876332,
+    "cost": 0.00019122600000000002,
+    "last_step_candidates": 1
+   }
+  },
+  {
+   "q": "What filter types and circuit models are available in Operator?",
+   "gold": "c664",
+   "page": 569,
+   "bm25": {
+    "pick": "c664",
+    "ms": 7.0747919962741435
+   },
+   "embed": {
+    "pick": "c664",
+    "ms": 747.433958997135,
+    "search_ms": 53.73291700379923
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c664",
+    "ms": 754.5087509934092
+   },
+   "hybrid>jev": {
+    "pick": "c664",
+    "ms": 1207.6780429924838,
+    "step_ms": 453.16929199907463,
+    "cost": 0.000282492
+   },
+   "hybrid>llm": {
+    "pick": "c664",
+    "ms": 1743.2084589963779,
+    "step_ms": 988.6997080029687,
+    "cost": 0.0018838
+   },
+   "toc>jev": {
+    "pick": "c462",
+    "ms": 1717.7392909943592,
+    "cost": 0.0001869,
+    "last_step_candidates": 2
+   }
+  },
+  {
+   "q": "How do I save a clip from my current project so I can use it again in other projects?",
+   "gold": "c79",
+   "page": 92,
+   "bm25": {
+    "pick": "c102",
+    "ms": 4.452125009265728
+   },
+   "embed": {
+    "pick": "c47",
+    "ms": 535.290999992867,
+    "search_ms": 38.96608301147353
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c102",
+    "ms": 539.7431250021327
+   },
+   "hybrid>jev": {
+    "pick": "c79",
+    "ms": 1195.4348330036737,
+    "step_ms": 655.691708001541,
+    "cost": 0.000238224
+   },
+   "hybrid>llm": {
+    "pick": "c79",
+    "ms": 1609.2382079950767,
+    "step_ms": 1069.495082992944,
+    "cost": 0.0015822
+   },
+   "toc>jev": {
+    "pick": "c85",
+    "ms": 1477.9890840000007,
+    "cost": 0.000136584,
+    "last_step_candidates": 2
+   }
+  },
+  {
+   "q": "How do I adjust the balance between the direct string sound and the filtered body resonance in Tension?",
+   "gold": "c751",
+   "page": 632,
+   "bm25": {
+    "pick": "c751",
+    "ms": 4.705457991803996
+   },
+   "embed": {
+    "pick": "c751",
+    "ms": 505.2425839967327,
+    "search_ms": 33.7985420046607
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c751",
+    "ms": 509.9480419885367
+   },
+   "hybrid>jev": {
+    "pick": "c751",
+    "ms": 959.4020419899607,
+    "step_ms": 449.454000001424,
+    "cost": 0.000258594
+   },
+   "hybrid>llm": {
+    "pick": "c751",
+    "ms": 1462.080833982327,
+    "step_ms": 952.1327919937903,
+    "cost": 0.0016897
+   },
+   "toc>jev": {
+    "pick": "c751",
+    "ms": 1041.7349579947768,
+    "cost": 0.00023079000000000003,
+    "last_step_candidates": 7
+   }
+  },
+  {
+   "q": "How can I organize multiple effects or instruments together in a single track?",
+   "gold": "c357",
+   "page": 331,
+   "bm25": {
+    "pick": "c357",
+    "ms": 3.5808750108117238
+   },
+   "embed": {
+    "pick": "c360",
+    "ms": 388.63670799764805,
+    "search_ms": 36.010416006320156
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c281",
+    "ms": 392.21758300845977
+   },
+   "hybrid>jev": {
+    "pick": "c357",
+    "ms": 777.4616249953397,
+    "step_ms": 385.2440419868799,
+    "cost": 0.000244608
+   },
+   "hybrid>llm": {
+    "pick": "c357",
+    "ms": 1179.3972910090815,
+    "step_ms": 787.1797080006218,
+    "cost": 0.0016309
+   },
+   "toc>jev": {
+    "pick": "c358",
+    "ms": 1117.255874996772,
+    "cost": 0.000125706,
+    "last_step_candidates": 2
+   }
+  },
+  {
+   "q": "How do I fix missing samples when I move or delete a project folder?",
+   "gold": "c92",
+   "page": 103,
+   "bm25": {
+    "pick": "c103",
+    "ms": 9.121875002165325
+   },
+   "embed": {
+    "pick": "c92",
+    "ms": 728.2343330007279,
+    "search_ms": 40.600999986054376
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c103",
+    "ms": 737.3562080028933
+   },
+   "hybrid>jev": {
+    "pick": "c92",
+    "ms": 1160.0307920016348,
+    "step_ms": 422.6745839987416,
+    "cost": 0.000236754
+   },
+   "hybrid>llm": {
+    "pick": "c103",
+    "ms": 2012.6697910018265,
+    "step_ms": 1275.3135829989333,
+    "cost": 0.0015802
+   },
+   "toc>jev": {
+    "pick": "c94",
+    "ms": 1214.5025010104291,
+    "cost": 0.000147672,
+    "last_step_candidates": 3
+   }
+  },
+  {
+   "q": "How do I adjust the balance between the wet and dry signal in Spectral Time?",
+   "gold": "c580",
+   "page": 503,
+   "bm25": {
+    "pick": "c580",
+    "ms": 9.358750001410954
+   },
+   "embed": {
+    "pick": "c580",
+    "ms": 1005.856625008164,
+    "search_ms": 34.911041992018
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c580",
+    "ms": 1015.2153750095749
+   },
+   "hybrid>jev": {
+    "pick": "c580",
+    "ms": 1419.3242500041379,
+    "step_ms": 404.10887499456294,
+    "cost": 0.000243726
+   },
+   "hybrid>llm": {
+    "pick": "c580",
+    "ms": 2131.8891660048394,
+    "step_ms": 1116.6737909952644,
+    "cost": 0.0015862
+   },
+   "toc>jev": {
+    "pick": "c580",
+    "ms": 1128.678957989905,
+    "cost": 0.000235116,
+    "last_step_candidates": 5
+   }
+  },
+  {
+   "q": "How do I make a reverb sound more metallic or smaller?",
+   "gold": "c560",
+   "page": 487,
+   "bm25": {
+    "pick": "c507",
+    "ms": 7.215749996248633
+   },
+   "embed": {
+    "pick": "c515",
+    "ms": 408.1923750054557,
+    "search_ms": 45.8345420047408
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c560",
+    "ms": 415.4081250017043
+   },
+   "hybrid>jev": {
+    "pick": "c560",
+    "ms": 806.1463330086553,
+    "step_ms": 390.738208006951,
+    "cost": 0.000265062
+   },
+   "hybrid>llm": {
+    "pick": "c560",
+    "ms": 1824.4292500021402,
+    "step_ms": 1409.0211250004359,
+    "cost": 0.0017242
+   },
+   "toc>jev": {
+    "pick": "c560",
+    "ms": 1500.5267929955153,
+    "cost": 0.00024296999999999999,
+    "last_step_candidates": 6
+   }
+  },
+  {
+   "q": "How can I delay the audio output of a track to sync it with hardware or acoustic delays?",
+   "gold": "c307",
+   "page": 286,
+   "bm25": {
+    "pick": "c307",
+    "ms": 11.78641599835828
+   },
+   "embed": {
+    "pick": "c465",
+    "ms": 397.43462500337046,
+    "search_ms": 46.799624993582256
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c307",
+    "ms": 409.22104100172874
+   },
+   "hybrid>jev": {
+    "pick": "c307",
+    "ms": 901.9188740057871,
+    "step_ms": 492.69783300405834,
+    "cost": 0.000263676
+   },
+   "hybrid>llm": {
+    "pick": "c307",
+    "ms": 1435.0728330027778,
+    "step_ms": 1025.851792001049,
+    "cost": 0.00175
+   },
+   "toc>jev": {
+    "pick": "c268",
+    "ms": 1308.4306250093505,
+    "cost": 0.000134484,
+    "last_step_candidates": 3
+   }
+  },
+  {
+   "q": "How does freezing a track in Session View handle audio that goes longer than two loop cycles?",
+   "gold": "c980",
+   "page": 830,
+   "bm25": {
+    "pick": "c980",
+    "ms": 10.79050000407733
+   },
+   "embed": {
+    "pick": "c980",
+    "ms": 362.545958996634,
+    "search_ms": 45.11962499236688
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c980",
+    "ms": 373.33645900071133
+   },
+   "hybrid>jev": {
+    "pick": "c980",
+    "ms": 865.5470840021735,
+    "step_ms": 492.2106250014622,
+    "cost": 0.00025914
+   },
+   "hybrid>llm": {
+    "pick": "c980",
+    "ms": 1192.2222090070136,
+    "step_ms": 818.8857500063023,
+    "cost": 0.0017098
+   },
+   "toc>jev": {
+    "pick": "c133",
+    "ms": 1216.706624996732,
+    "cost": 0.000121086,
+    "last_step_candidates": 2
+   }
+  },
+  {
+   "q": "How do I control where the reverb effect is applied in the Echo device's signal chain?",
+   "gold": "c478",
+   "page": 428,
+   "bm25": {
+    "pick": "c478",
+    "ms": 8.090584000456147
+   },
+   "embed": {
+    "pick": "c478",
+    "ms": 710.3239999996731,
+    "search_ms": 45.19479199370835
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c478",
+    "ms": 718.4145840001293
+   },
+   "hybrid>jev": {
+    "pick": "c478",
+    "ms": 1129.5876259973738,
+    "step_ms": 411.1730419972446,
+    "cost": 0.000273672
+   },
+   "hybrid>llm": {
+    "pick": "c478",
+    "ms": 1531.2377500085859,
+    "step_ms": 812.8231660084566,
+    "cost": 0.0017977
+   },
+   "toc>jev": {
+    "pick": "c348",
+    "ms": 1191.1600409948733,
+    "cost": 0.000151914,
+    "last_step_candidates": 5
+   }
+  },
+  {
+   "q": "How do I switch between horizontal and vertical layouts in the Clip View?",
+   "gold": "c147",
+   "page": 149,
+   "bm25": {
+    "pick": "c147",
+    "ms": 9.083166005439125
+   },
+   "embed": {
+    "pick": "c147",
+    "ms": 364.13854200509377,
+    "search_ms": 46.37166700558737
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c147",
+    "ms": 373.2217080105329
+   },
+   "hybrid>jev": {
+    "pick": "c147",
+    "ms": 808.1300410121912,
+    "step_ms": 434.9083330016583,
+    "cost": 0.00025431
+   },
+   "hybrid>llm": {
+    "pick": "c147",
+    "ms": 1417.9460830055177,
+    "step_ms": 1044.7243749949848,
+    "cost": 0.0016675
+   },
+   "toc>jev": {
+    "pick": "c157",
+    "ms": 1064.7643330157734,
+    "cost": 0.000167496,
+    "last_step_candidates": 5
+   }
+  },
+  {
+   "q": "How do I set up Simpler to automatically detect and slice a sample at its transient points?",
+   "gold": "c914",
+   "page": 777,
+   "bm25": {
+    "pick": "c914",
+    "ms": 10.32916699477937
+   },
+   "embed": {
+    "pick": "c914",
+    "ms": 499.62108400359284,
+    "search_ms": 44.85429100168403
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c914",
+    "ms": 509.9502509983722
+   },
+   "hybrid>jev": {
+    "pick": "c914",
+    "ms": 939.2445010016672,
+    "step_ms": 429.294250003295,
+    "cost": 0.000264684
+   },
+   "hybrid>llm": {
+    "pick": "c914",
+    "ms": 1390.135959998588,
+    "step_ms": 880.1857090002159,
+    "cost": 0.0017626
+   },
+   "toc>jev": {
+    "pick": "c182",
+    "ms": 1203.74416699633,
+    "cost": 0.00014603400000000002,
+    "last_step_candidates": 4
+   }
+  },
+  {
+   "q": "How do I reduce aliasing artifacts when Operator is producing very bright, high-frequency sounds?",
+   "gold": "c671",
+   "page": 573,
+   "bm25": {
+    "pick": "c671",
+    "ms": 9.928125000442378
+   },
+   "embed": {
+    "pick": "c657",
+    "ms": 363.54583300999366,
+    "search_ms": 46.966416004579514
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c657",
+    "ms": 373.47395801043604
+   },
+   "hybrid>jev": {
+    "pick": "c657",
+    "ms": 835.4482910071965,
+    "step_ms": 461.9743329967605,
+    "cost": 0.000279342
+   },
+   "hybrid>llm": {
+    "pick": "c657",
+    "ms": 1189.9197500024457,
+    "step_ms": 816.4457919920096,
+    "cost": 0.001837
+   },
+   "toc>jev": {
+    "pick": "c657",
+    "ms": 1743.8010000041686,
+    "cost": 0.00024914399999999997,
+    "last_step_candidates": 7
+   }
+  },
+  {
+   "q": "How do I adjust the attack, decay, and release times on Simpler's envelopes?",
+   "gold": "c731",
+   "page": 618,
+   "bm25": {
+    "pick": "c450",
+    "ms": 3.557458010618575
+   },
+   "embed": {
+    "pick": "c731",
+    "ms": 481.05645799660124,
+    "search_ms": 36.430249994737096
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c795",
+    "ms": 484.6139160072198
+   },
+   "hybrid>jev": {
+    "pick": "c731",
+    "ms": 941.2774160155095,
+    "step_ms": 456.6635000082897,
+    "cost": 0.000272538
+   },
+   "hybrid>llm": {
+    "pick": "c731",
+    "ms": 1448.6644580028951,
+    "step_ms": 964.0505419956753,
+    "cost": 0.0017824
+   },
+   "toc>jev": {
+    "pick": "c731",
+    "ms": 1190.4966260044603,
+    "cost": 0.000177324,
+    "last_step_candidates": 2
+   }
+  },
+  {
+   "q": "How do I make the hammer strike at the same spot on the string regardless of which note I'm playing?",
+   "gold": "c744",
+   "page": 626,
+   "bm25": {
+    "pick": "c744",
+    "ms": 13.149833001079969
+   },
+   "embed": {
+    "pick": "c744",
+    "ms": 374.16870800370816,
+    "search_ms": 44.24283299886156
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c744",
+    "ms": 387.31854100478813
+   },
+   "hybrid>jev": {
+    "pick": "c744",
+    "ms": 870.9687079972355,
+    "step_ms": 483.65016699244734,
+    "cost": 0.00024612
+   },
+   "hybrid>llm": {
+    "pick": "c744",
+    "ms": 1297.805750014959,
+    "step_ms": 910.4872090101708,
+    "cost": 0.0016051
+   },
+   "toc>jev": {
+    "pick": "c641",
+    "ms": 1114.7915830079,
+    "cost": 0.000177786,
+    "last_step_candidates": 2
+   }
+  },
+  {
+   "q": "How do I change how long a MIDI note plays in Live?",
+   "gold": "c602",
+   "page": 522,
+   "bm25": {
+    "pick": "c101",
+    "ms": 8.15774999500718
+   },
+   "embed": {
+    "pick": "c602",
+    "ms": 402.6987499964889,
+    "search_ms": 44.31691599893384
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c163",
+    "ms": 410.8564999914961
+   },
+   "hybrid>jev": {
+    "pick": "c210",
+    "ms": 833.1309170025634,
+    "step_ms": 422.27441701106727,
+    "cost": 0.000279636
+   },
+   "hybrid>llm": {
+    "pick": "c210",
+    "ms": 1140.1920419884846,
+    "step_ms": 729.3355419969885,
+    "cost": 0.0018622
+   },
+   "toc>jev": {
+    "pick": "c210",
+    "ms": 1269.1454999876441,
+    "cost": 0.000116718,
+    "last_step_candidates": 1
+   }
+  },
+  {
+   "q": "How do I combine the best parts from multiple recordings into one track?",
+   "gold": "c324",
+   "page": 301,
+   "bm25": {
+    "pick": "c324",
+    "ms": 3.2898329955060035
+   },
+   "embed": {
+    "pick": "c127",
+    "ms": 395.7821249932749,
+    "search_ms": 46.0728750040289
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c324",
+    "ms": 399.0719579887809
+   },
+   "hybrid>jev": {
+    "pick": "c324",
+    "ms": 800.7132499915315,
+    "step_ms": 401.64129200275056,
+    "cost": 0.000289254
+   },
+   "hybrid>llm": {
+    "pick": "c324",
+    "ms": 1733.843790992978,
+    "step_ms": 1334.771833004197,
+    "cost": 0.001939
+   },
+   "toc>jev": {
+    "pick": "c328",
+    "ms": 1237.79804201331,
+    "cost": 0.000115878,
+    "last_step_candidates": 2
+   }
+  },
+  {
+   "q": "How do I make Live take up my entire screen?",
+   "gold": "c25",
+   "page": 43,
+   "bm25": {
+    "pick": "c102",
+    "ms": 2.531707999878563
+   },
+   "embed": {
+    "pick": "c26",
+    "ms": 523.0169999995269,
+    "search_ms": 44.89154199836776
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c25",
+    "ms": 525.5487079994055
+   },
+   "hybrid>jev": {
+    "pick": "c25",
+    "ms": 975.4199160088319,
+    "step_ms": 449.8712080094265,
+    "cost": 0.000250992
+   },
+   "hybrid>llm": {
+    "pick": "c25",
+    "ms": 1532.4544580071233,
+    "step_ms": 1006.9057500077179,
+    "cost": 0.0016623
+   },
+   "toc>jev": {
+    "pick": "c22",
+    "ms": 1159.3057499849238,
+    "cost": 0.000117978,
+    "last_step_candidates": 2
+   }
+  },
+  {
+   "q": "How do I change the color of individual drum pads on my Push 2 controller?",
+   "gold": "c885",
+   "page": 752,
+   "bm25": {
+    "pick": "c885",
+    "ms": 10.660250001819804
+   },
+   "embed": {
+    "pick": "c885",
+    "ms": 417.7245419996325,
+    "search_ms": 48.88225000468083
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c885",
+    "ms": 428.3847920014523
+   },
+   "hybrid>jev": {
+    "pick": "c885",
+    "ms": 833.8174170057755,
+    "step_ms": 405.4326250043232,
+    "cost": 0.000227346
+   },
+   "hybrid>llm": {
+    "pick": "c885",
+    "ms": 1244.5457500143675,
+    "step_ms": 816.1609580129152,
+    "cost": 0.0015121
+   },
+   "toc>jev": {
+    "pick": "c949",
+    "ms": 1319.5633750001434,
+    "cost": 0.000301686,
+    "last_step_candidates": 14
+   }
+  },
+  {
+   "q": "How does the Tension synthesizer create sounds without using samples or wavetables?",
+   "gold": "c738",
+   "page": 623,
+   "bm25": {
+    "pick": "c738",
+    "ms": 8.196708993637003
+   },
+   "embed": {
+    "pick": "c738",
+    "ms": 388.0587919993559,
+    "search_ms": 44.71491700678598
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c738",
+    "ms": 396.2555009929929
+   },
+   "hybrid>jev": {
+    "pick": "c738",
+    "ms": 861.351043000468,
+    "step_ms": 465.09554200747516,
+    "cost": 0.000273924
+   },
+   "hybrid>llm": {
+    "pick": "c738",
+    "ms": 1493.1161260028603,
+    "step_ms": 1096.8606250098674,
+    "cost": 0.0017755
+   },
+   "toc>jev": {
+    "pick": "c738",
+    "ms": 1227.9373340279562,
+    "cost": 0.00040143599999999997,
+    "last_step_candidates": 21
+   }
+  },
+  {
+   "q": "How do I move a drum chain to its own separate track while keeping all its sounds and MIDI notes?",
+   "gold": "c386",
+   "page": 351,
+   "bm25": {
+    "pick": "c334",
+    "ms": 11.648208004771732
+   },
+   "embed": {
+    "pick": "c386",
+    "ms": 502.7227079990553,
+    "search_ms": 45.34483300813008
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c386",
+    "ms": 514.370916003827
+   },
+   "hybrid>jev": {
+    "pick": "c386",
+    "ms": 948.4469990129583,
+    "step_ms": 434.07608300913125,
+    "cost": 0.000243852
+   },
+   "hybrid>llm": {
+    "pick": "c386",
+    "ms": 1288.0438330030302,
+    "step_ms": 773.6729169992032,
+    "cost": 0.0016294
+   },
+   "toc>jev": {
+    "pick": "c129",
+    "ms": 1240.641749012866,
+    "cost": 0.000134442,
+    "last_step_candidates": 4
+   }
+  },
+  {
+   "q": "How do I connect a device parameter to a Macro Control in a Rack?",
+   "gold": "c381",
+   "page": 347,
+   "bm25": {
+    "pick": "c359",
+    "ms": 3.852584006381221
+   },
+   "embed": {
+    "pick": "c381",
+    "ms": 354.53500000585336,
+    "search_ms": 46.3147919945186
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c359",
+    "ms": 358.3875840122346
+   },
+   "hybrid>jev": {
+    "pick": "c381",
+    "ms": 775.1686260162387,
+    "step_ms": 416.7810420040041,
+    "cost": 0.00025641
+   },
+   "hybrid>llm": {
+    "pick": "c381",
+    "ms": 1512.6124590169638,
+    "step_ms": 1154.2248750047293,
+    "cost": 0.0017278
+   },
+   "toc>jev": {
+    "pick": "c381",
+    "ms": 1096.0924580140272,
+    "cost": 0.000135618,
+    "last_step_candidates": 4
+   }
+  },
+  {
+   "q": "How do I adjust bass, midrange, and treble separately on a track?",
+   "gold": "c482",
+   "page": 432,
+   "bm25": {
+    "pick": "c541",
+    "ms": 7.6425419974839315
+   },
+   "embed": {
+    "pick": "c588",
+    "ms": 490.8829590131063,
+    "search_ms": 47.037249998538755
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c540",
+    "ms": 498.52550101059023
+   },
+   "hybrid>jev": {
+    "pick": "c482",
+    "ms": 976.9382510130526,
+    "step_ms": 478.4127500024624,
+    "cost": 0.00027069
+   },
+   "hybrid>llm": {
+    "pick": "c482",
+    "ms": 1461.0691260022577,
+    "step_ms": 962.5436249916675,
+    "cost": 0.001804
+   },
+   "toc>jev": {
+    "pick": "c482",
+    "ms": 1206.999582995195,
+    "cost": 0.00020559,
+    "last_step_candidates": 3
+   }
+  },
+  {
+   "q": "How do I adjust the center frequency of the mid-range EQ band in Channel EQ?",
+   "gold": "c441",
+   "page": 401,
+   "bm25": {
+    "pick": "c441",
+    "ms": 9.750375000294298
+   },
+   "embed": {
+    "pick": "c441",
+    "ms": 431.786707995343,
+    "search_ms": 35.64320800069254
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c441",
+    "ms": 441.5370829956373
+   },
+   "hybrid>jev": {
+    "pick": "c441",
+    "ms": 920.2639989962336,
+    "step_ms": 478.72691600059625,
+    "cost": 0.000271698
+   },
+   "hybrid>llm": {
+    "pick": "c441",
+    "ms": 1225.7643329940038,
+    "step_ms": 784.2272499983665,
+    "cost": 0.0018028
+   },
+   "toc>jev": {
+    "pick": "c441",
+    "ms": 1098.2103330024984,
+    "cost": 0.000217014,
+    "last_step_candidates": 3
+   }
+  },
+  {
+   "q": "How do I move a preset from one folder to another in Live?",
+   "gold": "c93",
+   "page": 103,
+   "bm25": {
+    "pick": "c100",
+    "ms": 8.821875002468005
+   },
+   "embed": {
+    "pick": "c93",
+    "ms": 1150.204167002812,
+    "search_ms": 35.88241699617356
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c93",
+    "ms": 1159.02604200528
+   },
+   "hybrid>jev": {
+    "pick": "c93",
+    "ms": 1606.5705840010196,
+    "step_ms": 447.54454199573956,
+    "cost": 0.000265776
+   },
+   "hybrid>llm": {
+    "pick": "c93",
+    "ms": 2051.765375013929,
+    "step_ms": 892.7393330086488,
+    "cost": 0.0017934
+   },
+   "toc>jev": {
+    "pick": "c60",
+    "ms": 1195.916542012128,
+    "cost": 0.000288414,
+    "last_step_candidates": 16
+   }
+  },
+  {
+   "q": "How do I bring a video file into Ableton Live?",
+   "gold": "c417",
+   "page": 381,
+   "bm25": {
+    "pick": "c101",
+    "ms": 2.7982909959973767
+   },
+   "embed": {
+    "pick": "c417",
+    "ms": 396.30087499972433,
+    "search_ms": 47.478167005465366
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c421",
+    "ms": 399.0991659957217
+   },
+   "hybrid>jev": {
+    "pick": "c417",
+    "ms": 812.8514989948599,
+    "step_ms": 413.75233299913816,
+    "cost": 0.00024297
+   },
+   "hybrid>llm": {
+    "pick": "c417",
+    "ms": 1225.647208004375,
+    "step_ms": 826.5480420086533,
+    "cost": 0.0016048
+   },
+   "toc>jev": {
+    "pick": "c417",
+    "ms": 1238.636709007551,
+    "cost": 0.000106554,
+    "last_step_candidates": 2
+   }
+  },
+  {
+   "q": "How can I tell which operations in Live won't affect my audio quality?",
+   "gold": "c974",
+   "page": 827,
+   "bm25": {
+    "pick": "c974",
+    "ms": 3.6850839969702065
+   },
+   "embed": {
+    "pick": "c974",
+    "ms": 393.3669580001151,
+    "search_ms": 36.19662499113474
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c974",
+    "ms": 397.0520419970853
+   },
+   "hybrid>jev": {
+    "pick": "c974",
+    "ms": 911.499666995951,
+    "step_ms": 514.4476249988656,
+    "cost": 0.000245028
+   },
+   "hybrid>llm": {
+    "pick": "c974",
+    "ms": 1212.2461670078337,
+    "step_ms": 815.1941250107484,
+    "cost": 0.0016303
+   },
+   "toc>jev": {
+    "pick": "c974",
+    "ms": 1233.1930830114288,
+    "cost": 0.00023646,
+    "last_step_candidates": 11
+   }
+  },
+  {
+   "q": "How does the signal flow work in Analog, and what are the main sound sources?",
+   "gold": "c610",
+   "page": 530,
+   "bm25": {
+    "pick": "c610",
+    "ms": 9.969125007046387
+   },
+   "embed": {
+    "pick": "c610",
+    "ms": 474.82637500797864,
+    "search_ms": 38.0649589933455
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c610",
+    "ms": 484.795500015025
+   },
+   "hybrid>jev": {
+    "pick": "c610",
+    "ms": 919.1297500219662,
+    "step_ms": 434.33425000694115,
+    "cost": 0.000272664
+   },
+   "hybrid>llm": {
+    "pick": "c610",
+    "ms": 1287.1364590100711,
+    "step_ms": 802.3409589950461,
+    "cost": 0.0017935
+   },
+   "toc>jev": {
+    "pick": "c278",
+    "ms": 1189.7994989994913,
+    "cost": 0.000264726,
+    "last_step_candidates": 16
+   }
+  },
+  {
+   "q": "How do I set up the Spectral Time effect to automatically freeze audio when it detects a sudden sound?",
+   "gold": "c577",
+   "page": 500,
+   "bm25": {
+    "pick": "c577",
+    "ms": 11.619041004450992
+   },
+   "embed": {
+    "pick": "c576",
+    "ms": 535.503291990608,
+    "search_ms": 45.63341700122692
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c577",
+    "ms": 547.122332995059
+   },
+   "hybrid>jev": {
+    "pick": "c577",
+    "ms": 956.57804099028,
+    "step_ms": 409.455707995221,
+    "cost": 0.00026019
+   },
+   "hybrid>llm": {
+    "pick": "c577",
+    "ms": 1506.49629200052,
+    "step_ms": 959.3739590054611,
+    "cost": 0.0017023
+   },
+   "toc>jev": {
+    "pick": "c577",
+    "ms": 1173.4842910227599,
+    "cost": 0.000202776,
+    "last_step_candidates": 2
+   }
+  },
+  {
+   "q": "How does the Looper's Record button work, and what happens when I press it?",
+   "gold": "c520",
+   "page": 458,
+   "bm25": {
+    "pick": "c523",
+    "ms": 9.902916994178668
+   },
+   "embed": {
+    "pick": "c521",
+    "ms": 350.351540997508,
+    "search_ms": 37.771957999211736
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c520",
+    "ms": 360.25445799168665
+   },
+   "hybrid>jev": {
+    "pick": "c520",
+    "ms": 854.1557080025086,
+    "step_ms": 493.90125001082197,
+    "cost": 0.000239862
+   },
+   "hybrid>llm": {
+    "pick": "c520",
+    "ms": 1414.9193329940317,
+    "step_ms": 1054.664875002345,
+    "cost": 0.0016048
+   },
+   "toc>jev": {
+    "pick": "c312",
+    "ms": 1453.1987079972168,
+    "cost": 0.000184338,
+    "last_step_candidates": 6
+   }
+  },
+  {
+   "q": "How do I select a note on Push 2 without actually playing it?",
+   "gold": "c905",
+   "page": 770,
+   "bm25": {
+    "pick": "c101",
+    "ms": 8.364416004042141
+   },
+   "embed": {
+    "pick": "c905",
+    "ms": 635.1231250009732,
+    "search_ms": 42.189333005808294
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c905",
+    "ms": 643.4875410050154
+   },
+   "hybrid>jev": {
+    "pick": "c905",
+    "ms": 1074.7402499982854,
+    "step_ms": 431.25270899327006,
+    "cost": 0.00022722
+   },
+   "hybrid>llm": {
+    "pick": "c905",
+    "ms": 1562.4113329977263,
+    "step_ms": 918.9237919927109,
+    "cost": 0.0015049
+   },
+   "toc>jev": {
+    "pick": "c917",
+    "ms": 1162.4312490021111,
+    "cost": 0.000143472,
+    "last_step_candidates": 2
+   }
+  },
+  {
+   "q": "How do I select a specific range of time in the Arrangement View?",
+   "gold": "c122",
+   "page": 126,
+   "bm25": {
+    "pick": "c1006",
+    "ms": 3.606083002523519
+   },
+   "embed": {
+    "pick": "c122",
+    "ms": 544.2723750020377,
+    "search_ms": 46.198167008697055
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c123",
+    "ms": 547.8784580045613
+   },
+   "hybrid>jev": {
+    "pick": "c122",
+    "ms": 1007.1406670031138,
+    "step_ms": 459.2622089985525,
+    "cost": 0.00027279
+   },
+   "hybrid>llm": {
+    "pick": "c122",
+    "ms": 1543.9184159913566,
+    "step_ms": 996.0399579867953,
+    "cost": 0.001771
+   },
+   "toc>jev": {
+    "pick": "c122",
+    "ms": 1240.6852510030149,
+    "cost": 0.0001449,
+    "last_step_candidates": 3
+   }
+  },
+  {
+   "q": "How do I make the chorus effect wider or narrower in the stereo field?",
+   "gold": "c444",
+   "page": 404,
+   "bm25": {
+    "pick": "c594",
+    "ms": 9.200166998198256
+   },
+   "embed": {
+    "pick": "c445",
+    "ms": 487.231957988115,
+    "search_ms": 36.2171250017127
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c444",
+    "ms": 496.4321249863133
+   },
+   "hybrid>jev": {
+    "pick": "c444",
+    "ms": 998.8901659817202,
+    "step_ms": 502.4580409954069,
+    "cost": 0.000274386
+   },
+   "hybrid>llm": {
+    "pick": "c444",
+    "ms": 1415.693499991903,
+    "step_ms": 919.2613750055898,
+    "cost": 0.0017977
+   },
+   "toc>jev": {
+    "pick": "c442",
+    "ms": 1268.599290997372,
+    "cost": 0.000203742,
+    "last_step_candidates": 2
+   }
+  },
+  {
+   "q": "How does the Multiband Dynamics device handle audio signals that go above a certain level?",
+   "gold": "c528",
+   "page": 463,
+   "bm25": {
+    "pick": "c528",
+    "ms": 9.36445799015928
+   },
+   "embed": {
+    "pick": "c528",
+    "ms": 349.447833999875,
+    "search_ms": 50.21633399883285
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c528",
+    "ms": 358.8122919900343
+   },
+   "hybrid>jev": {
+    "pick": "c528",
+    "ms": 882.4376669799676,
+    "step_ms": 523.6253749899333,
+    "cost": 0.00027153
+   },
+   "hybrid>llm": {
+    "pick": "c533",
+    "ms": 1344.2950419848785,
+    "step_ms": 985.4827499948442,
+    "cost": 0.0017824
+   },
+   "toc>jev": {
+    "pick": "c528",
+    "ms": 1457.1936250140425,
+    "cost": 0.000310632,
+    "last_step_candidates": 11
+   }
+  },
+  {
+   "q": "How do the pad colors on Push help me understand which notes I'm playing?",
+   "gold": "c836",
+   "page": 707,
+   "bm25": {
+    "pick": "c880",
+    "ms": 3.6641669867094606
+   },
+   "embed": {
+    "pick": "c844",
+    "ms": 556.8360409961315,
+    "search_ms": 46.97545799717773
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c896",
+    "ms": 560.500207982841
+   },
+   "hybrid>jev": {
+    "pick": "c836",
+    "ms": 914.8244159878232,
+    "step_ms": 354.3242080049822,
+    "cost": 0.000244146
+   },
+   "hybrid>llm": {
+    "pick": "c836",
+    "ms": 1395.5769159802003,
+    "step_ms": 835.0767079973593,
+    "cost": 0.0016282
+   },
+   "toc>jev": {
+    "pick": "c836",
+    "ms": 1569.205208987114,
+    "cost": 0.000172788,
+    "last_step_candidates": 5
+   }
+  },
+  {
+   "q": "How do I make sure a Max device has all the files it needs to work properly?",
+   "gold": "c779",
+   "page": 655,
+   "bm25": {
+    "pick": "c778",
+    "ms": 10.743999999249354
+   },
+   "embed": {
+    "pick": "c778",
+    "ms": 458.4775410039583,
+    "search_ms": 47.119124996243045
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c778",
+    "ms": 469.2215410032077
+   },
+   "hybrid>jev": {
+    "pick": "c779",
+    "ms": 900.3373750019819,
+    "step_ms": 431.1158339987742,
+    "cost": 0.000251034
+   },
+   "hybrid>llm": {
+    "pick": "c779",
+    "ms": 1360.9852490044432,
+    "step_ms": 891.7637080012355,
+    "cost": 0.0016807
+   },
+   "toc>jev": {
+    "pick": "c96",
+    "ms": 1183.4453329938697,
+    "cost": 0.000154644,
+    "last_step_candidates": 4
+   }
+  },
+  {
+   "q": "How do I keep the loop length controls visible on my Push 2 so I don't have to switch pages to access them?",
+   "gold": "c904",
+   "page": 769,
+   "bm25": {
+    "pick": "c102",
+    "ms": 18.996500002685934
+   },
+   "embed": {
+    "pick": "c903",
+    "ms": 1202.6943750097416,
+    "search_ms": 45.06699999910779
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c903",
+    "ms": 1221.6908750124276
+   },
+   "hybrid>jev": {
+    "pick": "c882",
+    "ms": 1789.172958000563,
+    "step_ms": 567.4820829881355,
+    "cost": 0.000269388
+   },
+   "hybrid>llm": {
+    "pick": "c901",
+    "ms": 2265.3933330002474,
+    "step_ms": 1043.7024579878198,
+    "cost": 0.0017986
+   },
+   "toc>jev": {
+    "pick": "c904",
+    "ms": 1204.9680830095895,
+    "cost": 0.000176484,
+    "last_step_candidates": 4
+   }
+  },
+  {
+   "q": "How do I change which filters the oscillators in Collision send their signal to?",
+   "gold": "c625",
+   "page": 540,
+   "bm25": {
+    "pick": "c625",
+    "ms": 9.60429199039936
+   },
+   "embed": {
+    "pick": "c625",
+    "ms": 826.3900409947382,
+    "search_ms": 46.77225000341423
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c625",
+    "ms": 835.9943329851376
+   },
+   "hybrid>jev": {
+    "pick": "c625",
+    "ms": 1301.166082994314,
+    "step_ms": 465.1717500091763,
+    "cost": 0.000278082
+   },
+   "hybrid>llm": {
+    "pick": "c625",
+    "ms": 1706.3684159948025,
+    "step_ms": 870.3740830096649,
+    "cost": 0.0018274
+   },
+   "toc>jev": {
+    "pick": "c625",
+    "ms": 1160.4272069962462,
+    "cost": 0.000339486,
+    "last_step_candidates": 15
+   }
+  },
+  {
+   "q": "How do I make a sample fade in gradually when I trigger it in Simpler's one-shot mode?",
+   "gold": "c913",
+   "page": 776,
+   "bm25": {
+    "pick": "c913",
+    "ms": 11.730708996765316
+   },
+   "embed": {
+    "pick": "c913",
+    "ms": 373.98874999780674,
+    "search_ms": 47.803957990254276
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c913",
+    "ms": 385.71945899457205
+   },
+   "hybrid>jev": {
+    "pick": "c913",
+    "ms": 862.8397089923965,
+    "step_ms": 477.12024999782443,
+    "cost": 0.000261702
+   },
+   "hybrid>llm": {
+    "pick": "c913",
+    "ms": 1276.99866698822,
+    "step_ms": 891.279207993648,
+    "cost": 0.0017449
+   },
+   "toc>jev": {
+    "pick": "c731",
+    "ms": 1182.3239589866716,
+    "cost": 0.00017770200000000001,
+    "last_step_candidates": 2
+   }
+  },
+  {
+   "q": "Where do the audio files from freezing a track get saved?",
+   "gold": "c972",
+   "page": 824,
+   "bm25": {
+    "pick": "c981",
+    "ms": 7.977708999533206
+   },
+   "embed": {
+    "pick": "c969",
+    "ms": 491.3445409911219,
+    "search_ms": 46.15075000037905
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c969",
+    "ms": 499.3222499906551
+   },
+   "hybrid>jev": {
+    "pick": "c972",
+    "ms": 928.547332980088,
+    "step_ms": 429.22508298943285,
+    "cost": 0.000237594
+   },
+   "hybrid>llm": {
+    "pick": "c972",
+    "ms": 1382.7737079845974,
+    "step_ms": 883.4514579939423,
+    "cost": 0.0015739
+   },
+   "toc>jev": {
+    "pick": "c71",
+    "ms": 1264.5289580104873,
+    "cost": 0.000222432,
+    "last_step_candidates": 8
+   }
+  },
+  {
+   "q": "How do clip envelopes respond when I adjust warp markers in Linked mode?",
+   "gold": "c416",
+   "page": 378,
+   "bm25": {
+    "pick": "c416",
+    "ms": 8.674500000779517
+   },
+   "embed": {
+    "pick": "c416",
+    "ms": 398.0282080010511,
+    "search_ms": 38.11175000737421
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c416",
+    "ms": 406.7027080018306
+   },
+   "hybrid>jev": {
+    "pick": "c416",
+    "ms": 913.0430420045741,
+    "step_ms": 506.3403340027435,
+    "cost": 0.000282408
+   },
+   "hybrid>llm": {
+    "pick": "c416",
+    "ms": 1328.910124997492,
+    "step_ms": 922.2074169956613,
+    "cost": 0.0018739
+   },
+   "toc>jev": {
+    "pick": "c189",
+    "ms": 1065.6269979954232,
+    "cost": 0.000206388,
+    "last_step_candidates": 8
+   }
+  },
+  {
+   "q": "How do I blend the second LFO with the main LFO in the Phaser-Flanger effect?",
+   "gold": "c547",
+   "page": 477,
+   "bm25": {
+    "pick": "c545",
+    "ms": 9.750582990818657
+   },
+   "embed": {
+    "pick": "c547",
+    "ms": 474.1199999989476,
+    "search_ms": 44.46325000026263
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c545",
+    "ms": 483.87058298976626
+   },
+   "hybrid>jev": {
+    "pick": "c547",
+    "ms": 933.6317080014851,
+    "step_ms": 449.76112501171883,
+    "cost": 0.00029148
+   },
+   "hybrid>llm": {
+    "pick": "c547",
+    "ms": 1484.4885829952545,
+    "step_ms": 1000.6180000054883,
+    "cost": 0.0019408
+   },
+   "toc>jev": {
+    "pick": "c547",
+    "ms": 1116.5361240127822,
+    "cost": 0.000267708,
+    "last_step_candidates": 7
+   }
+  },
+  {
+   "q": "How do I set up which inputs and outputs from my audio interface are available in Live?",
+   "gold": "c269",
+   "page": 255,
+   "bm25": {
+    "pick": "c269",
+    "ms": 11.76850000047125
+   },
+   "embed": {
+    "pick": "c269",
+    "ms": 415.3981669951463,
+    "search_ms": 48.86475000239443
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c269",
+    "ms": 427.16666699561756
+   },
+   "hybrid>jev": {
+    "pick": "c269",
+    "ms": 1149.549499998102,
+    "step_ms": 722.3828330024844,
+    "cost": 0.000283752
+   },
+   "hybrid>llm": {
+    "pick": "c269",
+    "ms": 1309.7409999900265,
+    "step_ms": 882.5743329944089,
+    "cost": 0.0019222
+   },
+   "toc>jev": {
+    "pick": "c269",
+    "ms": 1561.9648749998305,
+    "cost": 0.000136164,
+    "last_step_candidates": 4
+   }
+  },
+  {
+   "q": "How do I access different velocity levels when playing drums on Push 2?",
+   "gold": "c881",
+   "page": 748,
+   "bm25": {
+    "pick": "c858",
+    "ms": 8.336540995514952
+   },
+   "embed": {
+    "pick": "c881",
+    "ms": 2019.1404590004822,
+    "search_ms": 47.02462500426918
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c858",
+    "ms": 2027.4769999959972
+   },
+   "hybrid>jev": {
+    "pick": "c881",
+    "ms": 2497.386832998018,
+    "step_ms": 469.9098330020206,
+    "cost": 0.000245364
+   },
+   "hybrid>llm": {
+    "pick": "c881",
+    "ms": 3115.798499988159,
+    "step_ms": 1088.321499992162,
+    "cost": 0.0016357
+   },
+   "toc>jev": {
+    "pick": "c881",
+    "ms": 1057.1096249914262,
+    "cost": 0.00014792400000000002,
+    "last_step_candidates": 2
+   }
+  },
+  {
+   "q": "How much timing delay can I expect between my MIDI and audio recordings in Live?",
+   "gold": "c998",
+   "page": 841,
+   "bm25": {
+    "pick": "c993",
+    "ms": 10.179167002206668
+   },
+   "embed": {
+    "pick": "c994",
+    "ms": 502.12995799665805,
+    "search_ms": 46.47208299138583
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c993",
+    "ms": 512.3091249988647
+   },
+   "hybrid>jev": {
+    "pick": "c998",
+    "ms": 1006.2424999923678,
+    "step_ms": 493.9333749935031,
+    "cost": 0.000258426
+   },
+   "hybrid>llm": {
+    "pick": "c998",
+    "ms": 1458.4576670022216,
+    "step_ms": 946.1485420033569,
+    "cost": 0.0017182
+   },
+   "toc>jev": {
+    "pick": "c268",
+    "ms": 1240.9248750045663,
+    "cost": 0.000134106,
+    "last_step_candidates": 3
+   }
+  },
+  {
+   "q": "How do I adjust the reference pitch that the Tuner uses to analyze my audio?",
+   "gold": "c587",
+   "page": 509,
+   "bm25": {
+    "pick": "c583",
+    "ms": 9.933417008141987
+   },
+   "embed": {
+    "pick": "c584",
+    "ms": 537.2325409989571,
+    "search_ms": 46.26658400229644
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c583",
+    "ms": 547.1659580070991
+   },
+   "hybrid>jev": {
+    "pick": "c587",
+    "ms": 1041.841458005365,
+    "step_ms": 494.6754999982659,
+    "cost": 0.000255738
+   },
+   "hybrid>llm": {
+    "pick": "c587",
+    "ms": 1429.7380420030095,
+    "step_ms": 882.5720839959104,
+    "cost": 0.0016834
+   },
+   "toc>jev": {
+    "pick": "c587",
+    "ms": 1051.9033750024391,
+    "cost": 0.000196728,
+    "last_step_candidates": 2
+   }
+  },
+  {
+   "q": "How do I use the Glue Compressor to blend multiple tracks together in my mix?",
+   "gold": "c500",
+   "page": 444,
+   "bm25": {
+    "pick": "c500",
+    "ms": 10.788791987579316
+   },
+   "embed": {
+    "pick": "c500",
+    "ms": 372.793417001958,
+    "search_ms": 45.16854100802448
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c500",
+    "ms": 383.5822089895373
+   },
+   "hybrid>jev": {
+    "pick": "c500",
+    "ms": 1048.420334002003,
+    "step_ms": 664.8381250124658,
+    "cost": 0.000237258
+   },
+   "hybrid>llm": {
+    "pick": "c500",
+    "ms": 1314.1054589941632,
+    "step_ms": 930.5232500046259,
+    "cost": 0.0015355
+   },
+   "toc>jev": {
+    "pick": "c298",
+    "ms": 1212.0501659956062,
+    "cost": 0.000135786,
+    "last_step_candidates": 4
+   }
+  },
+  {
+   "q": "How do I sync Live's playback position with an external MIDI sequencer?",
+   "gold": "c961",
+   "page": 816,
+   "bm25": {
+    "pick": "c961",
+    "ms": 8.708166002179496
+   },
+   "embed": {
+    "pick": "c961",
+    "ms": 347.08433400373906,
+    "search_ms": 45.47762499714736
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c961",
+    "ms": 355.79250000591855
+   },
+   "hybrid>jev": {
+    "pick": "c961",
+    "ms": 745.5572089966154,
+    "step_ms": 389.7647089906968,
+    "cost": 0.000250152
+   },
+   "hybrid>llm": {
+    "pick": "c961",
+    "ms": 1432.3813750088448,
+    "step_ms": 1076.5888750029262,
+    "cost": 0.0016429
+   },
+   "toc>jev": {
+    "pick": "c961",
+    "ms": 1249.2747910000617,
+    "cost": 0.00012175800000000001,
+    "last_step_candidates": 3
+   }
+  },
+  {
+   "q": "How do I reduce aliasing artifacts in the Pedal device?",
+   "gold": "c540",
+   "page": 471,
+   "bm25": {
+    "pick": "c541",
+    "ms": 7.344792000367306
+   },
+   "embed": {
+    "pick": "c657",
+    "ms": 463.7733750132611,
+    "search_ms": 45.39641700102948
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c541",
+    "ms": 471.1181670136284
+   },
+   "hybrid>jev": {
+    "pick": "c540",
+    "ms": 942.0653340202989,
+    "step_ms": 470.9471670066705,
+    "cost": 0.000261744
+   },
+   "hybrid>llm": {
+    "pick": "c540",
+    "ms": 1507.4383340106579,
+    "step_ms": 1036.3201669970294,
+    "cost": 0.00172
+   },
+   "toc>jev": {
+    "pick": "c541",
+    "ms": 1429.3008750100853,
+    "cost": 0.000203532,
+    "last_step_candidates": 2
+   }
+  },
+  {
+   "q": "How can I prevent audio dropouts and clicks when using Live?",
+   "gold": "c964",
+   "page": 819,
+   "bm25": {
+    "pick": "c995",
+    "ms": 8.239167000283487
+   },
+   "embed": {
+    "pick": "c973",
+    "ms": 1037.9538330016658,
+    "search_ms": 46.03083299298305
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c973",
+    "ms": 1046.1930000019493
+   },
+   "hybrid>jev": {
+    "pick": "c964",
+    "ms": 1516.8426250020275,
+    "step_ms": 470.64962500007823,
+    "cost": 0.000274764
+   },
+   "hybrid>llm": {
+    "pick": "c964",
+    "ms": 2013.3993750059744,
+    "step_ms": 967.2063750040252,
+    "cost": 0.001837
+   },
+   "toc>jev": {
+    "pick": "c973",
+    "ms": 1444.1458329965826,
+    "cost": 0.00019996199999999998,
+    "last_step_candidates": 10
+   }
+  },
+  {
+   "q": "How do I use the tap tempo feature on Push 2 to set the speed of my song?",
+   "gold": "c942",
+   "page": 803,
+   "bm25": {
+    "pick": "c102",
+    "ms": 4.708833002950996
+   },
+   "embed": {
+    "pick": "c942",
+    "ms": 783.6155840050196,
+    "search_ms": 45.23291700752452
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c942",
+    "ms": 788.3244170079706
+   },
+   "hybrid>jev": {
+    "pick": "c942",
+    "ms": 1461.2602920096833,
+    "step_ms": 672.9358750017127,
+    "cost": 0.000224952
+   },
+   "hybrid>llm": {
+    "pick": "c942",
+    "ms": 1837.9955010168487,
+    "step_ms": 1049.671084008878,
+    "cost": 0.0015004
+   },
+   "toc>jev": {
+    "pick": "c942",
+    "ms": 2138.734917010879,
+    "cost": 0.000302064,
+    "last_step_candidates": 14
+   }
+  },
+  {
+   "q": "How do I make the arpeggiator pattern repeat at specific intervals or restart at certain beats?",
+   "gold": "c600",
+   "page": 520,
+   "bm25": {
+    "pick": "c598",
+    "ms": 10.315125007764436
+   },
+   "embed": {
+    "pick": "c599",
+    "ms": 636.9222499924945,
+    "search_ms": 48.322832997655496
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c599",
+    "ms": 647.2373750002589
+   },
+   "hybrid>jev": {
+    "pick": "c600",
+    "ms": 1091.9568329991307,
+    "step_ms": 444.7194579988718,
+    "cost": 0.000260484
+   },
+   "hybrid>llm": {
+    "pick": "c600",
+    "ms": 1598.150917008752,
+    "step_ms": 950.9135420084931,
+    "cost": 0.0017104
+   },
+   "toc>jev": {
+    "pick": "c600",
+    "ms": 1277.5897899991833,
+    "cost": 0.000137634,
+    "last_step_candidates": 4
+   }
+  },
+  {
+   "q": "How do I configure MPE settings for a hardware synthesizer or third-party plugin?",
+   "gold": "c234",
+   "page": 224,
+   "bm25": {
+    "pick": "c234",
+    "ms": 3.4108339896192774
+   },
+   "embed": {
+    "pick": "c234",
+    "ms": 496.5782079962082,
+    "search_ms": 39.32112499023788
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c234",
+    "ms": 499.9890419858275
+   },
+   "hybrid>jev": {
+    "pick": "c234",
+    "ms": 934.2805419873912,
+    "step_ms": 434.2915000015637,
+    "cost": 0.00027573
+   },
+   "hybrid>llm": {
+    "pick": "c234",
+    "ms": 2079.7999589849496,
+    "step_ms": 1579.8109169991221,
+    "cost": 0.0018397
+   },
+   "toc>jev": {
+    "pick": "c236",
+    "ms": 1091.7958750069374,
+    "cost": 0.00012037199999999999,
+    "last_step_candidates": 3
+   }
+  },
+  {
+   "q": "How do I adjust the shape of different stages in an envelope?",
+   "gold": "c795",
+   "page": 672,
+   "bm25": {
+    "pick": "c795",
+    "ms": 8.153957998729311
+   },
+   "embed": {
+    "pick": "c660",
+    "ms": 493.58745900099166,
+    "search_ms": 46.508792001986876
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c660",
+    "ms": 501.74141699972097
+   },
+   "hybrid>jev": {
+    "pick": "c660",
+    "ms": 951.857876003487,
+    "step_ms": 450.11645900376607,
+    "cost": 0.000282786
+   },
+   "hybrid>llm": {
+    "pick": "c660",
+    "ms": 1422.3265000036918,
+    "step_ms": 920.5850830039708,
+    "cost": 0.0018433
+   },
+   "toc>jev": {
+    "pick": "c397",
+    "ms": 1110.9635409957264,
+    "cost": 0.000120708,
+    "last_step_candidates": 2
+   }
+  },
+  {
+   "q": "How do I make Session View tracks narrower so I can see more of them at once?",
+   "gold": "c135",
+   "page": 138,
+   "bm25": {
+    "pick": "c299",
+    "ms": 9.616416995413601
+   },
+   "embed": {
+    "pick": "c135",
+    "ms": 368.013333005365,
+    "search_ms": 33.89349998906255
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c135",
+    "ms": 377.6297500007786
+   },
+   "hybrid>jev": {
+    "pick": "c135",
+    "ms": 893.8571250037057,
+    "step_ms": 516.2273750029271,
+    "cost": 0.000249438
+   },
+   "hybrid>llm": {
+    "pick": "c135",
+    "ms": 1257.7214579941938,
+    "step_ms": 880.0917079934152,
+    "cost": 0.0016315
+   },
+   "toc>jev": {
+    "pick": "c135",
+    "ms": 1441.316458003712,
+    "cost": 0.000174216,
+    "last_step_candidates": 7
+   }
+  },
+  {
+   "q": "How do I adjust the sound settings for individual steps in the Push sequencer?",
+   "gold": "c852",
+   "page": 721,
+   "bm25": {
+    "pick": "c843",
+    "ms": 9.455624996917322
+   },
+   "embed": {
+    "pick": "c887",
+    "ms": 567.2382499906234,
+    "search_ms": 49.27216700161807
+   },
+   "recall_at_k": false,
+   "hybrid": {
+    "pick": "c845",
+    "ms": 576.6938749875408
+   },
+   "hybrid>jev": {
+    "pick": "c934",
+    "ms": 978.669665986672,
+    "step_ms": 401.9757909991313,
+    "cost": 0.00023226
+   },
+   "hybrid>llm": {
+    "pick": "c934",
+    "ms": 1423.7822919967584,
+    "step_ms": 847.0884170092177,
+    "cost": 0.0015211
+   },
+   "toc>jev": {
+    "pick": "c854",
+    "ms": 1246.15033401642,
+    "cost": 0.000124656,
+    "last_step_candidates": 1
+   }
+  },
+  {
+   "q": "How do I organize and quickly find my favorite items in the browser?",
+   "gold": "c51",
+   "page": 68,
+   "bm25": {
+    "pick": "c51",
+    "ms": 3.3389590098522604
+   },
+   "embed": {
+    "pick": "c51",
+    "ms": 529.5995839987881,
+    "search_ms": 48.981750005623326
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c51",
+    "ms": 532.9385430086404
+   },
+   "hybrid>jev": {
+    "pick": "c51",
+    "ms": 982.5684180104872,
+    "step_ms": 449.6298750018468,
+    "cost": 0.000235368
+   },
+   "hybrid>llm": {
+    "pick": "c51",
+    "ms": 1340.7631260051858,
+    "step_ms": 807.8245829965454,
+    "cost": 0.0015579
+   },
+   "toc>jev": {
+    "pick": "c61",
+    "ms": 1128.2689990184736,
+    "cost": 0.00017787,
+    "last_step_candidates": 5
+   }
+  },
+  {
+   "q": "How do I make the LFO restart at the beginning each time I play a new note in Simpler?",
+   "gold": "c732",
+   "page": 619,
+   "bm25": {
+    "pick": "c732",
+    "ms": 11.988708007265814
+   },
+   "embed": {
+    "pick": "c732",
+    "ms": 422.7800410008058,
+    "search_ms": 50.78733300615568
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c732",
+    "ms": 434.7687490080716
+   },
+   "hybrid>jev": {
+    "pick": "c713",
+    "ms": 838.1967070163228,
+    "step_ms": 403.42795800825115,
+    "cost": 0.000259686
+   },
+   "hybrid>llm": {
+    "pick": "c732",
+    "ms": 1569.374749000417,
+    "step_ms": 1134.6059999923455,
+    "cost": 0.0017299
+   },
+   "toc>jev": {
+    "pick": "c732",
+    "ms": 1005.2769169851672,
+    "cost": 0.000184422,
+    "last_step_candidates": 3
+   }
+  },
+  {
+   "q": "How do I adjust the delay time in Flanger versus Doubler mode on the Phaser-Flanger?",
+   "gold": "c545",
+   "page": 475,
+   "bm25": {
+    "pick": "c545",
+    "ms": 4.181750002317131
+   },
+   "embed": {
+    "pick": "c545",
+    "ms": 410.0320409925189,
+    "search_ms": 47.706625002319925
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c545",
+    "ms": 414.213790994836
+   },
+   "hybrid>jev": {
+    "pick": "c545",
+    "ms": 802.6377909991425,
+    "step_ms": 388.42400000430644,
+    "cost": 0.00027489
+   },
+   "hybrid>llm": {
+    "pick": "c545",
+    "ms": 1238.9070409990381,
+    "step_ms": 824.6932500042021,
+    "cost": 0.0018397
+   },
+   "toc>jev": {
+    "pick": "c545",
+    "ms": 1165.3940819960553,
+    "cost": 0.000267708,
+    "last_step_candidates": 7
+   }
+  },
+  {
+   "q": "How do I prevent clicking sounds when editing sample start and end points?",
+   "gold": "c697",
+   "page": 593,
+   "bm25": {
+    "pick": "c721",
+    "ms": 3.2294999982696027
+   },
+   "embed": {
+    "pick": "c697",
+    "ms": 450.28683300188277,
+    "search_ms": 48.266958008753136
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c721",
+    "ms": 453.5163330001524
+   },
+   "hybrid>jev": {
+    "pick": "c697",
+    "ms": 953.7086250056745,
+    "step_ms": 500.1922920055222,
+    "cost": 0.00025473
+   },
+   "hybrid>llm": {
+    "pick": "c697",
+    "ms": 1355.1909579982748,
+    "step_ms": 901.6746249981225,
+    "cost": 0.0016729
+   },
+   "toc>jev": {
+    "pick": "c187",
+    "ms": 1913.011958997231,
+    "cost": 0.00028106400000000003,
+    "last_step_candidates": 14
+   }
+  },
+  {
+   "q": "How do I move the start marker to a specific position in Live?",
+   "gold": "c1005",
+   "page": 848,
+   "bm25": {
+    "pick": "c157",
+    "ms": 8.47720800084062
+   },
+   "embed": {
+    "pick": "c182",
+    "ms": 1075.2285000053234,
+    "search_ms": 45.88941700058058
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c1005",
+    "ms": 1083.705708006164
+   },
+   "hybrid>jev": {
+    "pick": "c1005",
+    "ms": 1523.770041007083,
+    "step_ms": 440.06433300091885,
+    "cost": 0.000267582
+   },
+   "hybrid>llm": {
+    "pick": "c1005",
+    "ms": 2046.1806670064107,
+    "step_ms": 962.4749590002466,
+    "cost": 0.0017684
+   },
+   "toc>jev": {
+    "pick": "c112",
+    "ms": 1394.8711659904802,
+    "cost": 0.00014301,
+    "last_step_candidates": 4
+   }
+  },
+  {
+   "q": "How do I control how quickly a string sound fades out after I play a note?",
+   "gold": "c745",
+   "page": 627,
+   "bm25": {
+    "pick": "c101",
+    "ms": 9.211708005750552
+   },
+   "embed": {
+    "pick": "c748",
+    "ms": 453.9314169960562,
+    "search_ms": 57.169250008882955
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c746",
+    "ms": 463.14312500180677
+   },
+   "hybrid>jev": {
+    "pick": "c748",
+    "ms": 1161.682917008875,
+    "step_ms": 698.5397920070682,
+    "cost": 0.000250278
+   },
+   "hybrid>llm": {
+    "pick": "c748",
+    "ms": 1301.108750005369,
+    "step_ms": 837.9656250035623,
+    "cost": 0.0016438
+   },
+   "toc>jev": {
+    "pick": "c394",
+    "ms": 1118.1244570034323,
+    "cost": 0.000128184,
+    "last_step_candidates": 3
+   }
+  },
+  {
+   "q": "How do I make one drum sound stop playing when another one starts, like with open and closed hi-hats?",
+   "gold": "c648",
+   "page": 559,
+   "bm25": {
+    "pick": "c648",
+    "ms": 4.819458001293242
+   },
+   "embed": {
+    "pick": "c648",
+    "ms": 439.88812499446794,
+    "search_ms": 49.27908300305717
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c648",
+    "ms": 444.7075829957612
+   },
+   "hybrid>jev": {
+    "pick": "c374",
+    "ms": 875.9990829857998,
+    "step_ms": 431.2914999900386,
+    "cost": 0.000246246
+   },
+   "hybrid>llm": {
+    "pick": "c374",
+    "ms": 1403.386498990585,
+    "step_ms": 958.6789159948239,
+    "cost": 0.0016384
+   },
+   "toc>jev": {
+    "pick": "c210",
+    "ms": 1124.9413750047097,
+    "cost": 0.000117978,
+    "last_step_candidates": 1
+   }
+  },
+  {
+   "q": "How do I make compression sound less harsh when using high compression ratios?",
+   "gold": "c448",
+   "page": 406,
+   "bm25": {
+    "pick": "c448",
+    "ms": 7.438500004354864
+   },
+   "embed": {
+    "pick": "c447",
+    "ms": 391.6610829910496,
+    "search_ms": 35.66987499652896
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c448",
+    "ms": 399.0995829954045
+   },
+   "hybrid>jev": {
+    "pick": "c448",
+    "ms": 829.2414989846293,
+    "step_ms": 430.1419159892248,
+    "cost": 0.000253176
+   },
+   "hybrid>llm": {
+    "pick": "c448",
+    "ms": 1315.0622919929447,
+    "step_ms": 915.9627089975402,
+    "cost": 0.001645
+   },
+   "toc>jev": {
+    "pick": "c454",
+    "ms": 1133.999625002616,
+    "cost": 0.00020979,
+    "last_step_candidates": 3
+   }
+  },
+  {
+   "q": "How do I create a ring modulation effect with the Frequency Shifter?",
+   "gold": "c491",
+   "page": 439,
+   "bm25": {
+    "pick": "c491",
+    "ms": 8.23270800174214
+   },
+   "embed": {
+    "pick": "c491",
+    "ms": 458.7843330082251,
+    "search_ms": 47.72058299568016
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c491",
+    "ms": 467.0170410099672
+   },
+   "hybrid>jev": {
+    "pick": "c491",
+    "ms": 1003.415583007154,
+    "step_ms": 536.3985419971868,
+    "cost": 0.000269724
+   },
+   "hybrid>llm": {
+    "pick": "c491",
+    "ms": 1334.1085000138264,
+    "step_ms": 867.0914590038592,
+    "cost": 0.0017722
+   },
+   "toc>jev": {
+    "pick": "c491",
+    "ms": 1216.7913740122458,
+    "cost": 0.000246708,
+    "last_step_candidates": 6
+   }
+  },
+  {
+   "q": "How do I edit multiple clips at the same time in the Clip View?",
+   "gold": "c148",
+   "page": 150,
+   "bm25": {
+    "pick": "c221",
+    "ms": 9.502958011580631
+   },
+   "embed": {
+    "pick": "c148",
+    "ms": 459.4753330020467,
+    "search_ms": 47.096458001760766
+   },
+   "recall_at_k": false,
+   "hybrid": {
+    "pick": "c221",
+    "ms": 468.9782910136273
+   },
+   "hybrid>jev": {
+    "pick": "c149",
+    "ms": 972.1337910159491,
+    "step_ms": 503.1555000023218,
+    "cost": 0.000283962
+   },
+   "hybrid>llm": {
+    "pick": "c221",
+    "ms": 1560.0159160094336,
+    "step_ms": 1091.0376249958063,
+    "cost": 0.0018787
+   },
+   "toc>jev": {
+    "pick": "c168",
+    "ms": 1233.675249008229,
+    "cost": 0.000131502,
+    "last_step_candidates": 3
+   }
+  },
+  {
+   "q": "How do I set up the Glue Compressor to respond only to certain frequencies from another track?",
+   "gold": "c503",
+   "page": 445,
+   "bm25": {
+    "pick": "c499",
+    "ms": 11.321749989292584
+   },
+   "embed": {
+    "pick": "c500",
+    "ms": 523.4458750055637,
+    "search_ms": 46.147333006956615
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c499",
+    "ms": 534.7676249948563
+   },
+   "hybrid>jev": {
+    "pick": "c503",
+    "ms": 939.0248749987222,
+    "step_ms": 404.2572500038659,
+    "cost": 0.000253344
+   },
+   "hybrid>llm": {
+    "pick": "c503",
+    "ms": 1555.6258750002598,
+    "step_ms": 1020.8582500054035,
+    "cost": 0.0016309
+   },
+   "toc>jev": {
+    "pick": "c503",
+    "ms": 1233.0550829938147,
+    "cost": 0.00020832,
+    "last_step_candidates": 3
+   }
+  },
+  {
+   "q": "How do I fix the error when slicing audio creates too many slices for a Rack?",
+   "gold": "c239",
+   "page": 230,
+   "bm25": {
+    "pick": "c914",
+    "ms": 9.148416997049935
+   },
+   "embed": {
+    "pick": "c239",
+    "ms": 436.449624990928,
+    "search_ms": 34.69337499700487
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c239",
+    "ms": 445.5980419879779
+   },
+   "hybrid>jev": {
+    "pick": "c239",
+    "ms": 886.0891669901321,
+    "step_ms": 440.49112500215415,
+    "cost": 0.000263172
+   },
+   "hybrid>llm": {
+    "pick": "c239",
+    "ms": 1295.0107509968802,
+    "step_ms": 849.4127090089023,
+    "cost": 0.001759
+   },
+   "toc>jev": {
+    "pick": "c195",
+    "ms": 1174.8926250002114,
+    "cost": 0.00013120799999999998,
+    "last_step_candidates": 3
+   }
+  },
+  {
+   "q": "How do I make small tempo adjustments on Push 2?",
+   "gold": "c887",
+   "page": 754,
+   "bm25": {
+    "pick": "c916",
+    "ms": 7.238457998028025
+   },
+   "embed": {
+    "pick": "c887",
+    "ms": 377.4132499966072,
+    "search_ms": 37.30808399268426
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c942",
+    "ms": 384.6517079946352
+   },
+   "hybrid>jev": {
+    "pick": "c887",
+    "ms": 808.6215000075754,
+    "step_ms": 423.96979201294016,
+    "cost": 0.000244482
+   },
+   "hybrid>llm": {
+    "pick": "c942",
+    "ms": 1347.0190419902792,
+    "step_ms": 962.367333995644,
+    "cost": 0.0016276
+   },
+   "toc>jev": {
+    "pick": "c942",
+    "ms": 1377.6851660077227,
+    "cost": 0.00030105599999999996,
+    "last_step_candidates": 14
+   }
+  },
+  {
+   "q": "How do I combine multiple clips on a track into a single clip?",
+   "gold": "c127",
+   "page": 131,
+   "bm25": {
+    "pick": "c101",
+    "ms": 8.495540998410434
+   },
+   "embed": {
+    "pick": "c127",
+    "ms": 527.2100000001956,
+    "search_ms": 43.28312499274034
+   },
+   "recall_at_k": false,
+   "hybrid": {
+    "pick": "c221",
+    "ms": 535.705540998606
+   },
+   "hybrid>jev": {
+    "pick": "c329",
+    "ms": 949.7977069986518,
+    "step_ms": 414.09216600004584,
+    "cost": 0.000259602
+   },
+   "hybrid>llm": {
+    "pick": "c329",
+    "ms": 1700.7413329993142,
+    "step_ms": 1165.0357920007082,
+    "cost": 0.0017269
+   },
+   "toc>jev": {
+    "pick": "c127",
+    "ms": 1196.2676679977449,
+    "cost": 0.000118944,
+    "last_step_candidates": 2
+   }
+  },
+  {
+   "q": "How do I choose which oscillators modulate each other in Operator?",
+   "gold": "c652",
+   "page": 562,
+   "bm25": {
+    "pick": "c651",
+    "ms": 7.305249993805774
+   },
+   "embed": {
+    "pick": "c652",
+    "ms": 506.02229200012516,
+    "search_ms": 35.466000001179054
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c651",
+    "ms": 513.3275419939309
+   },
+   "hybrid>jev": {
+    "pick": "c652",
+    "ms": 961.3376669876743,
+    "step_ms": 448.0101249937434,
+    "cost": 0.00027846
+   },
+   "hybrid>llm": {
+    "pick": "c652",
+    "ms": 1444.1707079822663,
+    "step_ms": 930.8431659883354,
+    "cost": 0.0018082
+   },
+   "toc>jev": {
+    "pick": "c656",
+    "ms": 1200.6466660095612,
+    "cost": 0.00024864,
+    "last_step_candidates": 7
+   }
+  },
+  {
+   "q": "How do I change the filter slope in Simpler, and what options are available?",
+   "gold": "c728",
+   "page": 616,
+   "bm25": {
+    "pick": "c686",
+    "ms": 9.368166996864602
+   },
+   "embed": {
+    "pick": "c730",
+    "ms": 639.6613329998218,
+    "search_ms": 54.13270799908787
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c730",
+    "ms": 649.0294999966864
+   },
+   "hybrid>jev": {
+    "pick": "c728",
+    "ms": 1105.4437499988126,
+    "step_ms": 456.4142500021262,
+    "cost": 0.00027615
+   },
+   "hybrid>llm": {
+    "pick": "c728",
+    "ms": 1552.1460419840878,
+    "step_ms": 903.1165419874014,
+    "cost": 0.0018541
+   },
+   "toc>jev": {
+    "pick": "c728",
+    "ms": 1128.7027490034234,
+    "cost": 0.000213318,
+    "last_step_candidates": 5
+   }
+  },
+  {
+   "q": "How do I control how quickly the gate closes after the sound drops below the threshold?",
+   "gold": "c477",
+   "page": 428,
+   "bm25": {
+    "pick": "c497",
+    "ms": 9.806417001527734
+   },
+   "embed": {
+    "pick": "c497",
+    "ms": 406.80341600091197,
+    "search_ms": 36.61495899723377
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c497",
+    "ms": 416.6098330024397
+   },
+   "hybrid>jev": {
+    "pick": "c477",
+    "ms": 1006.1004169983789,
+    "step_ms": 589.4905839959392,
+    "cost": 0.000259392
+   },
+   "hybrid>llm": {
+    "pick": "c497",
+    "ms": 1374.381125002401,
+    "step_ms": 957.7712919999612,
+    "cost": 0.0016969
+   },
+   "toc>jev": {
+    "pick": "c497",
+    "ms": 1249.1164580278564,
+    "cost": 0.000229992,
+    "last_step_candidates": 5
+   }
+  },
+  {
+   "q": "How do I make a sustain loop play backwards and forwards repeatedly?",
+   "gold": "c701",
+   "page": 595,
+   "bm25": {
+    "pick": "c934",
+    "ms": 7.005499996012077
+   },
+   "embed": {
+    "pick": "c192",
+    "ms": 431.88804099918343,
+    "search_ms": 34.354333009105176
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c701",
+    "ms": 438.8935409951955
+   },
+   "hybrid>jev": {
+    "pick": "c701",
+    "ms": 937.7202500036219,
+    "step_ms": 498.8267090084264,
+    "cost": 0.00025305
+   },
+   "hybrid>llm": {
+    "pick": "c701",
+    "ms": 1364.3624160031322,
+    "step_ms": 925.4688750079367,
+    "cost": 0.0016624
+   },
+   "toc>jev": {
+    "pick": "c187",
+    "ms": 1249.5522500103107,
+    "cost": 0.000280938,
+    "last_step_candidates": 14
+   }
+  },
+  {
+   "q": "How do I make the two LFO waveforms in Flanger run completely opposite to each other?",
+   "gold": "c490",
+   "page": 438,
+   "bm25": {
+    "pick": "c543",
+    "ms": 9.855790995061398
+   },
+   "embed": {
+    "pick": "c546",
+    "ms": 373.67645899939816,
+    "search_ms": 38.7814160058042
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c546",
+    "ms": 383.53224999445956
+   },
+   "hybrid>jev": {
+    "pick": "c543",
+    "ms": 782.3807499953546,
+    "step_ms": 398.848500000895,
+    "cost": 0.000296394
+   },
+   "hybrid>llm": {
+    "pick": "c543",
+    "ms": 1280.8404169918504,
+    "step_ms": 897.3081669973908,
+    "cost": 0.0019741
+   },
+   "toc>jev": {
+    "pick": "c490",
+    "ms": 1124.0228750102688,
+    "cost": 0.000206178,
+    "last_step_candidates": 2
+   }
+  },
+  {
+   "q": "How do I adjust the scratchy sound when using a bow on a string instrument in Live?",
+   "gold": "c742",
+   "page": 625,
+   "bm25": {
+    "pick": "c742",
+    "ms": 11.72749999386724
+   },
+   "embed": {
+    "pick": "c741",
+    "ms": 352.9680420033401,
+    "search_ms": 43.6361250031041
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c741",
+    "ms": 364.69554199720733
+   },
+   "hybrid>jev": {
+    "pick": "c742",
+    "ms": 822.2518340044189,
+    "step_ms": 457.5562920072116,
+    "cost": 0.000257376
+   },
+   "hybrid>llm": {
+    "pick": "c742",
+    "ms": 1191.6277510026703,
+    "step_ms": 826.9322090054629,
+    "cost": 0.0016813
+   },
+   "toc>jev": {
+    "pick": "c742",
+    "ms": 1260.6934580107918,
+    "cost": 0.000297066,
+    "last_step_candidates": 12
+   }
+  },
+  {
+   "q": "How do I control the pitch that Shifter uses\u2014can I use MIDI notes instead of knobs?",
+   "gold": "c568",
+   "page": 494,
+   "bm25": {
+    "pick": "c568",
+    "ms": 10.893083002883941
+   },
+   "embed": {
+    "pick": "c568",
+    "ms": 484.13991699635517,
+    "search_ms": 40.33220799465198
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c568",
+    "ms": 495.0329999992391
+   },
+   "hybrid>jev": {
+    "pick": "c568",
+    "ms": 981.0457910061814,
+    "step_ms": 486.0127910069423,
+    "cost": 0.000271488
+   },
+   "hybrid>llm": {
+    "pick": "c568",
+    "ms": 1380.618167007924,
+    "step_ms": 885.585167008685,
+    "cost": 0.0018115
+   },
+   "toc>jev": {
+    "pick": "c568",
+    "ms": 1256.5406249923399,
+    "cost": 0.00025116,
+    "last_step_candidates": 6
+   }
+  },
+  {
+   "q": "How can I check how much CPU each track is using in my Live set?",
+   "gold": "c967",
+   "page": 821,
+   "bm25": {
+    "pick": "c102",
+    "ms": 4.315166006563231
+   },
+   "embed": {
+    "pick": "c967",
+    "ms": 527.9439580044709,
+    "search_ms": 52.8520420048153
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c967",
+    "ms": 532.2591240110341
+   },
+   "hybrid>jev": {
+    "pick": "c967",
+    "ms": 976.2502910016337,
+    "step_ms": 443.9911669905996,
+    "cost": 0.00024213
+   },
+   "hybrid>llm": {
+    "pick": "c967",
+    "ms": 1500.123957011965,
+    "step_ms": 967.864833000931,
+    "cost": 0.0016012
+   },
+   "toc>jev": {
+    "pick": "c968",
+    "ms": 993.9265410066582,
+    "cost": 0.000115668,
+    "last_step_candidates": 3
+   }
+  },
+  {
+   "q": "How do I switch between different display views on the Tuner device?",
+   "gold": "c583",
+   "page": 505,
+   "bm25": {
+    "pick": "c583",
+    "ms": 7.871541994973086
+   },
+   "embed": {
+    "pick": "c583",
+    "ms": 349.62970900232904,
+    "search_ms": 37.507333006942645
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c583",
+    "ms": 357.5012509973021
+   },
+   "hybrid>jev": {
+    "pick": "c583",
+    "ms": 750.7567509892397,
+    "step_ms": 393.25549999193754,
+    "cost": 0.000245952
+   },
+   "hybrid>llm": {
+    "pick": "c583",
+    "ms": 1243.913458994939,
+    "step_ms": 886.4122079976369,
+    "cost": 0.0016132
+   },
+   "toc>jev": {
+    "pick": "c866",
+    "ms": 1168.582583006355,
+    "cost": 0.000252966,
+    "last_step_candidates": 14
+   }
+  },
+  {
+   "q": "How do I align specific moments in my music with cuts or important points in a video file?",
+   "gold": "c420",
+   "page": 384,
+   "bm25": {
+    "pick": "c422",
+    "ms": 10.818582988576964
+   },
+   "embed": {
+    "pick": "c422",
+    "ms": 407.6713749964256,
+    "search_ms": 40.49141700670589
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c422",
+    "ms": 418.48995798500255
+   },
+   "hybrid>jev": {
+    "pick": "c420",
+    "ms": 884.8049579828512,
+    "step_ms": 466.31499999784864,
+    "cost": 0.000251412
+   },
+   "hybrid>llm": {
+    "pick": "c420",
+    "ms": 1398.6285829887493,
+    "step_ms": 980.1386250037467,
+    "cost": 0.0016555
+   },
+   "toc>jev": {
+    "pick": "c420",
+    "ms": 1173.3582910092082,
+    "cost": 0.000123438,
+    "last_step_candidates": 3
+   }
+  },
+  {
+   "q": "If I start playing a sample and then move the sample selector to a different sample, will it switch to the new sample right away?",
+   "gold": "c696",
+   "page": 592,
+   "bm25": {
+    "pick": "c696",
+    "ms": 15.046957996673882
+   },
+   "embed": {
+    "pick": "c696",
+    "ms": 398.3799999987241,
+    "search_ms": 49.291750008706
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c696",
+    "ms": 413.42695799539797
+   },
+   "hybrid>jev": {
+    "pick": "c696",
+    "ms": 825.8348739909707,
+    "step_ms": 412.4079159955727,
+    "cost": 0.00026292
+   },
+   "hybrid>llm": {
+    "pick": "c696",
+    "ms": 1449.8046670050826,
+    "step_ms": 1036.3777090096846,
+    "cost": 0.001741
+   },
+   "toc>jev": {
+    "pick": "c253",
+    "ms": 1143.9078330149641,
+    "cost": 0.00011243400000000001,
+    "last_step_candidates": 2
+   }
+  },
+  {
+   "q": "How do I add new MIDI notes to a clip that's already playing?",
+   "gold": "c323",
+   "page": 300,
+   "bm25": {
+    "pick": "c283",
+    "ms": 9.395333006978035
+   },
+   "embed": {
+    "pick": "c323",
+    "ms": 415.0937919912394,
+    "search_ms": 47.26170799403917
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c323",
+    "ms": 424.48912499821745
+   },
+   "hybrid>jev": {
+    "pick": "c323",
+    "ms": 853.0126669938909,
+    "step_ms": 428.52354199567344,
+    "cost": 0.000269472
+   },
+   "hybrid>llm": {
+    "pick": "c323",
+    "ms": 1406.1542919953354,
+    "step_ms": 981.6651669971179,
+    "cost": 0.0017962
+   },
+   "toc>jev": {
+    "pick": "c208",
+    "ms": 2109.822416008683,
+    "cost": 0.000165816,
+    "last_step_candidates": 5
+   }
+  },
+  {
+   "q": "How do I set up a MIDI controller to work with Spectral Resonator?",
+   "gold": "c571",
+   "page": 496,
+   "bm25": {
+    "pick": "c571",
+    "ms": 8.34745800239034
+   },
+   "embed": {
+    "pick": "c571",
+    "ms": 502.72191599651705,
+    "search_ms": 46.935708000091836
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c571",
+    "ms": 511.0693739989074
+   },
+   "hybrid>jev": {
+    "pick": "c571",
+    "ms": 929.3557070050156,
+    "step_ms": 418.2863330061082,
+    "cost": 0.000256536
+   },
+   "hybrid>llm": {
+    "pick": "c570",
+    "ms": 1437.8661649971036,
+    "step_ms": 926.7967909981962,
+    "cost": 0.0016696
+   },
+   "toc>jev": {
+    "pick": "c807",
+    "ms": 1234.7452090034494,
+    "cost": 0.00011793599999999999,
+    "last_step_candidates": 3
+   }
+  },
+  {
+   "q": "How do I record multiple takes or add more material to a clip that's already playing in Live?",
+   "gold": "c830",
+   "page": 701,
+   "bm25": {
+    "pick": "c519",
+    "ms": 4.925291999825276
+   },
+   "embed": {
+    "pick": "c323",
+    "ms": 528.3852090069558,
+    "search_ms": 47.89004099438898
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c323",
+    "ms": 533.3105010067811
+   },
+   "hybrid>jev": {
+    "pick": "c871",
+    "ms": 1038.4186670125928,
+    "step_ms": 505.10816600581165,
+    "cost": 0.000269892
+   },
+   "hybrid>llm": {
+    "pick": "c323",
+    "ms": 1573.2123340130784,
+    "step_ms": 1039.9018330062972,
+    "cost": 0.0018073
+   },
+   "toc>jev": {
+    "pick": "c327",
+    "ms": 1312.313666989212,
+    "cost": 0.000121884,
+    "last_step_candidates": 3
+   }
+  },
+  {
+   "q": "How do I create a new audio track using a keyboard shortcut?",
+   "gold": "c1008",
+   "page": 851,
+   "bm25": {
+    "pick": "c101",
+    "ms": 8.10016700415872
+   },
+   "embed": {
+    "pick": "c1008",
+    "ms": 444.52499999897555,
+    "search_ms": 44.514207998872735
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c11",
+    "ms": 452.62516700313427
+   },
+   "hybrid>jev": {
+    "pick": "c1008",
+    "ms": 844.7800830035703,
+    "step_ms": 392.15491600043606,
+    "cost": 0.000260736
+   },
+   "hybrid>llm": {
+    "pick": "c1008",
+    "ms": 1283.7617509940173,
+    "step_ms": 831.1365839908831,
+    "cost": 0.0017213
+   },
+   "toc>jev": {
+    "pick": "c1008",
+    "ms": 1262.77908301563,
+    "cost": 0.00011445,
+    "last_step_candidates": 1
+   }
+  },
+  {
+   "q": "How do I make Looper control whether the whole song plays or stops in Live?",
+   "gold": "c523",
+   "page": 460,
+   "bm25": {
+    "pick": "c522",
+    "ms": 9.032249989104457
+   },
+   "embed": {
+    "pick": "c523",
+    "ms": 400.60104099393357,
+    "search_ms": 34.83374998904765
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c522",
+    "ms": 409.633290983038
+   },
+   "hybrid>jev": {
+    "pick": "c523",
+    "ms": 865.3615409712074,
+    "step_ms": 455.7282499881694,
+    "cost": 0.000264558
+   },
+   "hybrid>llm": {
+    "pick": "c523",
+    "ms": 1252.0176239922876,
+    "step_ms": 842.3843330092495,
+    "cost": 0.0017725
+   },
+   "toc>jev": {
+    "pick": "c599",
+    "ms": 1136.8010429869173,
+    "cost": 0.00016375799999999999,
+    "last_step_candidates": 6
+   }
+  },
+  {
+   "q": "How do fade times work differently between Mono/Poly and Thru playback modes in Simpler?",
+   "gold": "c726",
+   "page": 614,
+   "bm25": {
+    "pick": "c726",
+    "ms": 8.972584008006379
+   },
+   "embed": {
+    "pick": "c726",
+    "ms": 391.3593750039581,
+    "search_ms": 46.28387499542441
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c726",
+    "ms": 400.3319590119645
+   },
+   "hybrid>jev": {
+    "pick": "c726",
+    "ms": 831.3311680103652,
+    "step_ms": 430.9992089984007,
+    "cost": 0.000250866
+   },
+   "hybrid>llm": {
+    "pick": "c726",
+    "ms": 1214.4011670170585,
+    "step_ms": 814.069208005094,
+    "cost": 0.001666
+   },
+   "toc>jev": {
+    "pick": "c726",
+    "ms": 1054.4992920040386,
+    "cost": 0.000269514,
+    "last_step_candidates": 11
+   }
+  },
+  {
+   "q": "How do I temporarily turn off a device on Push 2 without permanently removing it?",
+   "gold": "c921",
+   "page": 784,
+   "bm25": {
+    "pick": "c875",
+    "ms": 9.267041998100467
+   },
+   "embed": {
+    "pick": "c943",
+    "ms": 411.87166700547095,
+    "search_ms": 41.83308299980126
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c921",
+    "ms": 421.1387090035714
+   },
+   "hybrid>jev": {
+    "pick": "c921",
+    "ms": 793.1315419991734,
+    "step_ms": 371.99283299560193,
+    "cost": 0.00025872
+   },
+   "hybrid>llm": {
+    "pick": "c921",
+    "ms": 1286.356959011755,
+    "step_ms": 865.2182500081835,
+    "cost": 0.0017275
+   },
+   "toc>jev": {
+    "pick": "c921",
+    "ms": 1015.9604159998707,
+    "cost": 0.00014670599999999997,
+    "last_step_candidates": 2
+   }
+  },
+  {
+   "q": "How do the different playback modes in Simpler work, and which one should I use for drum breaks?",
+   "gold": "c910",
+   "page": 774,
+   "bm25": {
+    "pick": "c719",
+    "ms": 4.825750002055429
+   },
+   "embed": {
+    "pick": "c719",
+    "ms": 355.4723339912016,
+    "search_ms": 37.08908300905023
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c719",
+    "ms": 360.298083993257
+   },
+   "hybrid>jev": {
+    "pick": "c719",
+    "ms": 770.5805419973331,
+    "step_ms": 410.28245800407603,
+    "cost": 0.000251706
+   },
+   "hybrid>llm": {
+    "pick": "c719",
+    "ms": 1262.848041995312,
+    "step_ms": 902.5499580020551,
+    "cost": 0.0016831
+   },
+   "toc>jev": {
+    "pick": "c719",
+    "ms": 1205.3735819936264,
+    "cost": 0.000269766,
+    "last_step_candidates": 11
+   }
+  },
+  {
+   "q": "How do the different pad colors on Push 2's drum rack display tell me what's happening with each sound?",
+   "gold": "c880",
+   "page": 747,
+   "bm25": {
+    "pick": "c880",
+    "ms": 11.896291995071806
+   },
+   "embed": {
+    "pick": "c880",
+    "ms": 1575.5798750033136,
+    "search_ms": 47.62187499727588
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c880",
+    "ms": 1587.4761669983855
+   },
+   "hybrid>jev": {
+    "pick": "c880",
+    "ms": 2054.8785839928314,
+    "step_ms": 467.40241699444596,
+    "cost": 0.000226968
+   },
+   "hybrid>llm": {
+    "pick": "c880",
+    "ms": 2615.5714170017745,
+    "step_ms": 1028.095250003389,
+    "cost": 0.0015154
+   },
+   "toc>jev": {
+    "pick": "c943",
+    "ms": 1181.7669580050278,
+    "cost": 0.000302442,
+    "last_step_candidates": 14
+   }
+  },
+  {
+   "q": "How do I make the compressor respond to a different signal than the one being compressed?",
+   "gold": "c452",
+   "page": 409,
+   "bm25": {
+    "pick": "c452",
+    "ms": 9.409874997800216
+   },
+   "embed": {
+    "pick": "c451",
+    "ms": 447.7786249917699,
+    "search_ms": 37.71316699567251
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c452",
+    "ms": 457.1884999895701
+   },
+   "hybrid>jev": {
+    "pick": "c453",
+    "ms": 939.0841249842197,
+    "step_ms": 481.89562499464955,
+    "cost": 0.000261072
+   },
+   "hybrid>llm": {
+    "pick": "c452",
+    "ms": 1377.386165986536,
+    "step_ms": 920.197665996966,
+    "cost": 0.001684
+   },
+   "toc>jev": {
+    "pick": "c453",
+    "ms": 1223.5397079784889,
+    "cost": 0.000210798,
+    "last_step_candidates": 3
+   }
+  },
+  {
+   "q": "How do I change the velocity of MIDI notes in Live?",
+   "gold": "c212",
+   "page": 204,
+   "bm25": {
+    "pick": "c212",
+    "ms": 8.066249996772967
+   },
+   "embed": {
+    "pick": "c212",
+    "ms": 448.5026670008665,
+    "search_ms": 40.813750005327165
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c212",
+    "ms": 456.56891699763946
+   },
+   "hybrid>jev": {
+    "pick": "c212",
+    "ms": 980.3899999969872,
+    "step_ms": 523.8210829993477,
+    "cost": 0.000259644
+   },
+   "hybrid>llm": {
+    "pick": "c212",
+    "ms": 1375.7865420047892,
+    "step_ms": 919.2176250071498,
+    "cost": 0.0017125
+   },
+   "toc>jev": {
+    "pick": "c212",
+    "ms": 1074.2367069906322,
+    "cost": 0.00017203200000000002,
+    "last_step_candidates": 6
+   }
+  },
+  {
+   "q": "How do I set up a track to record in Live?",
+   "gold": "c309",
+   "page": 288,
+   "bm25": {
+    "pick": "c101",
+    "ms": 8.381249994272366
+   },
+   "embed": {
+    "pick": "c43",
+    "ms": 335.96908299659844,
+    "search_ms": 35.61295798863284
+   },
+   "recall_at_k": false,
+   "hybrid": {
+    "pick": "c313",
+    "ms": 344.3503329908708
+   },
+   "hybrid>jev": {
+    "pick": "c43",
+    "ms": 741.7952499818057,
+    "step_ms": 397.44491699093487,
+    "cost": 0.000298662
+   },
+   "hybrid>llm": {
+    "pick": "c43",
+    "ms": 1303.0259169900091,
+    "step_ms": 958.6755839991383,
+    "cost": 0.0019911
+   },
+   "toc>jev": {
+    "pick": "c309",
+    "ms": 1157.198458982748,
+    "cost": 0.000125496,
+    "last_step_candidates": 2
+   }
+  },
+  {
+   "q": "How do I route the signal from a specific chain inside a Rack to another track?",
+   "gold": "c280",
+   "page": 262,
+   "bm25": {
+    "pick": "c288",
+    "ms": 9.742417008965276
+   },
+   "embed": {
+    "pick": "c280",
+    "ms": 524.75266600959,
+    "search_ms": 47.43683400738519
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c280",
+    "ms": 534.4950830185553
+   },
+   "hybrid>jev": {
+    "pick": "c280",
+    "ms": 954.6931250224588,
+    "step_ms": 420.19804200390354,
+    "cost": 0.000244146
+   },
+   "hybrid>llm": {
+    "pick": "c280",
+    "ms": 1705.902875008178,
+    "step_ms": 1171.4077919896226,
+    "cost": 0.0016411
+   },
+   "toc>jev": {
+    "pick": "c286",
+    "ms": 1203.6833750025835,
+    "cost": 0.00020605199999999997,
+    "last_step_candidates": 11
+   }
+  },
+  {
+   "q": "How do I change the note display format in the Tuner device between sharps and flats?",
+   "gold": "c9",
+   "page": 29,
+   "bm25": {
+    "pick": "c586",
+    "ms": 11.969375002081506
+   },
+   "embed": {
+    "pick": "c586",
+    "ms": 444.76724999549333,
+    "search_ms": 39.764375003869645
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c586",
+    "ms": 456.73662499757484
+   },
+   "hybrid>jev": {
+    "pick": "c586",
+    "ms": 905.9507500060135,
+    "step_ms": 449.2141250084387,
+    "cost": 0.000262878
+   },
+   "hybrid>llm": {
+    "pick": "c586",
+    "ms": 1427.752124989638,
+    "step_ms": 971.0154999920633,
+    "cost": 0.0017257
+   },
+   "toc>jev": {
+    "pick": "c603",
+    "ms": 1278.0328759981785,
+    "cost": 0.00012003600000000001,
+    "last_step_candidates": 3
+   }
+  },
+  {
+   "q": "How do I get a track to go back to playing the Arrangement after I've launched a Session clip on it?",
+   "gold": "c33",
+   "page": 52,
+   "bm25": {
+    "pick": "c33",
+    "ms": 5.081125011201948
+   },
+   "embed": {
+    "pick": "c33",
+    "ms": 539.1437079961179,
+    "search_ms": 34.81308299524244
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c33",
+    "ms": 544.2248330073198
+   },
+   "hybrid>jev": {
+    "pick": "c34",
+    "ms": 1232.8758330113487,
+    "step_ms": 688.6510000040289,
+    "cost": 0.00024717
+   },
+   "hybrid>llm": {
+    "pick": "c33",
+    "ms": 1463.2072080130456,
+    "step_ms": 918.9823750057258,
+    "cost": 0.001605
+   },
+   "toc>jev": {
+    "pick": "c260",
+    "ms": 1126.1437920038588,
+    "cost": 0.00021609,
+    "last_step_candidates": 10
+   }
+  },
+  {
+   "q": "How do I jump to a specific point in a clip while it's playing?",
+   "gold": "c158",
+   "page": 159,
+   "bm25": {
+    "pick": "c101",
+    "ms": 10.287625002092682
+   },
+   "embed": {
+    "pick": "c158",
+    "ms": 502.8187080024509,
+    "search_ms": 40.070666000247
+   },
+   "recall_at_k": true,
+   "hybrid": {
+    "pick": "c158",
+    "ms": 513.1063330045436
+   },
+   "hybrid>jev": {
+    "pick": "c158",
+    "ms": 959.8356659989804,
+    "step_ms": 446.72933299443685,
+    "cost": 0.000254814
+   },
+   "hybrid>llm": {
+    "pick": "c158",
+    "ms": 1387.94412399875,
+    "step_ms": 874.8377909942064,
+    "cost": 0.0016621
+   },
+   "toc>jev": {
+    "pick": "c186",
+    "ms": 1206.4814579935046,
+    "cost": 0.00020664,
+    "last_step_candidates": 8
+   }
+  }
+ ]
+}

@@ -1,0 +1,747 @@
+[
+ {
+  "q": "How do I make the grid lines closer together or farther apart in Ableton?",
+  "gold": "c124",
+  "page": 128
+ },
+ {
+  "q": "How do I turn off a device without removing it from my track?",
+  "gold": "c336",
+  "page": 311
+ },
+ {
+  "q": "How do I export audio from Looper as a new clip in Live?",
+  "gold": "c524",
+  "page": 460
+ },
+ {
+  "q": "How can I reduce the delay I feel when playing a MIDI keyboard through my DAW?",
+  "gold": "c992",
+  "page": 838
+ },
+ {
+  "q": "How do I make the attack and release times faster or slower on the Multiband Dynamics device?",
+  "gold": "c534",
+  "page": 466
+ },
+ {
+  "q": "How do I modulate the resonance of the filter in Operator?",
+  "gold": "c673",
+  "page": 575
+ },
+ {
+  "q": "How do I change the key or scale on Push 2?",
+  "gold": "c897",
+  "page": 764
+ },
+ {
+  "q": "How can I fix MIDI timing that sounds sloppy or loose in Live?",
+  "gold": "c993",
+  "page": 838
+ },
+ {
+  "q": "How do I make the Arrangement View automatically scroll to keep up with where the song is playing?",
+  "gold": "c108",
+  "page": 115
+ },
+ {
+  "q": "How do I open a Rack on Push 2 to see the devices inside it?",
+  "gold": "c922",
+  "page": 785
+ },
+ {
+  "q": "How do I draw expression envelopes freehand in the MPE note expression lanes?",
+  "gold": "c233",
+  "page": 223
+ },
+ {
+  "q": "How do I navigate through different notes and octaves when using the Melodic Sequencer on Push 2?",
+  "gold": "c933",
+  "page": 796
+ },
+ {
+  "q": "How do I adjust the hardness of the mallet sound in Collision?",
+  "gold": "c626",
+  "page": 541
+ },
+ {
+  "q": "How do I load drum samples into Impulse and assign them to my MIDI keyboard?",
+  "gold": "c647",
+  "page": 558
+ },
+ {
+  "q": "How do I reduce latency when recording with Spectral Time?",
+  "gold": "c579",
+  "page": 502
+ },
+ {
+  "q": "What's the difference between using a dynamic mic versus a condenser mic on the Cabinet effect?",
+  "gold": "c439",
+  "page": 399
+ },
+ {
+  "q": "How do I map a MIDI controller that sends relative value changes instead of absolute positions?",
+  "gold": "c813",
+  "page": 686
+ },
+ {
+  "q": "How do I make a held chord play as a sequence of individual notes instead of all at once?",
+  "gold": "c596",
+  "page": 517
+ },
+ {
+  "q": "How do I switch between controlling Spectral Resonator with a frequency value versus incoming MIDI notes?",
+  "gold": "c570",
+  "page": 496
+ },
+ {
+  "q": "How do I set up Push 2 to play and create drum beats in Live?",
+  "gold": "c879",
+  "page": 746
+ },
+ {
+  "q": "How do I turn oscillators on and off in Wavetable?",
+  "gold": "c759",
+  "page": 638
+ },
+ {
+  "q": "How do I set up my hardware controller so that its knobs and buttons automatically control whatever device I have selected in Live?",
+  "gold": "c806",
+  "page": 681
+ },
+ {
+  "q": "How do I control different parameters using pressure, slide, and pitch bend in an MPE device?",
+  "gold": "c797",
+  "page": 674
+ },
+ {
+  "q": "How do I adjust the length of the reverb tail in the algorithmic reverb engine?",
+  "gold": "c512",
+  "page": 451
+ },
+ {
+  "q": "How do I use the DS Clang instrument in Live?",
+  "gold": "c780",
+  "page": 657
+ },
+ {
+  "q": "How do I make the Shaper MIDI device repeat its modulation envelope while I'm holding down a note?",
+  "gold": "c802",
+  "page": 678
+ },
+ {
+  "q": "How do I route an oscillator's signal to different filters in Analog?",
+  "gold": "c611",
+  "page": 531
+ },
+ {
+  "q": "How do the Pos. L and Pos. R controls affect the sound in Corpus?",
+  "gold": "c460",
+  "page": 414
+ },
+ {
+  "q": "How do I turn a MIDI clip that I've edited into a groove that I can reuse?",
+  "gold": "c250",
+  "page": 239
+ },
+ {
+  "q": "How do I find and access template Live Sets in the browser?",
+  "gold": "c2",
+  "page": 24
+ },
+ {
+  "q": "How does an electric piano produce sound when you press a key?",
+  "gold": "c639",
+  "page": 551
+ },
+ {
+  "q": "How do I import individual tracks from another Live set into my current project?",
+  "gold": "c83",
+  "page": 95
+ },
+ {
+  "q": "How do I fix a partial bar that doesn't match my time signature?",
+  "gold": "c116",
+  "page": 120
+ },
+ {
+  "q": "How do I set up a delay effect so it processes audio from multiple tracks instead of just one?",
+  "gold": "c301",
+  "page": 281
+ },
+ {
+  "q": "How do I record parameter changes into a clip so they play back automatically?",
+  "gold": "c851",
+  "page": 720
+ },
+ {
+  "q": "How do I save my Live Set as a compressed file for backup or sharing?",
+  "gold": "c101",
+  "page": 109
+ },
+ {
+  "q": "How can I make my snare drum sound punchier and more present in my mix?",
+  "gold": "c470",
+  "page": 422
+ },
+ {
+  "q": "How do I reset the Monitor buttons back to their default settings?",
+  "gold": "c11",
+  "page": 30
+ },
+ {
+  "q": "How do I adjust volume, pan, or send levels for multiple tracks at once using Push?",
+  "gold": "c849",
+  "page": 718
+ },
+ {
+  "q": "How do I automate parameters for individual steps in Push 2's step sequencer?",
+  "gold": "c929",
+  "page": 792
+ },
+ {
+  "q": "How do I use the auxiliary envelope to modulate different parameters in Sampler?",
+  "gold": "c712",
+  "page": 605
+ },
+ {
+  "q": "How do I make the modulation oscillator keep the same frequency regardless of what MIDI notes I play?",
+  "gold": "c706",
+  "page": 600
+ },
+ {
+  "q": "How do I copy a section from one take lane to replace part of the main clip?",
+  "gold": "c329",
+  "page": 305
+ },
+ {
+  "q": "How do I temporarily silence individual notes in a MIDI clip without deleting them?",
+  "gold": "c220",
+  "page": 211
+ },
+ {
+  "q": "How can I make a short repeating loop sound longer and less repetitive?",
+  "gold": "c415",
+  "page": 377
+ },
+ {
+  "q": "How do I set up clips to play one after another in a repeating cycle?",
+  "gold": "c262",
+  "page": 250
+ },
+ {
+  "q": "How do I make a chain automatically get selected when it's receiving audio or MIDI?",
+  "gold": "c365",
+  "page": 337
+ },
+ {
+  "q": "How do I set up a drum rack so that triggering one drum sound silences another, like closing a hi-hat?",
+  "gold": "c374",
+  "page": 343
+ },
+ {
+  "q": "How do the different note layout options work on Push's pad grid?",
+  "gold": "c839",
+  "page": 710
+ },
+ {
+  "q": "How do I draw automation curves directly onto an automation lane instead of using breakpoints?",
+  "gold": "c394",
+  "page": 359
+ },
+ {
+  "q": "How do I reduce CPU usage when using Wavetable?",
+  "gold": "c774",
+  "page": 649
+ },
+ {
+  "q": "How do I make the Multiband Dynamics device respond to a different audio source instead of the track I'm processing?",
+  "gold": "c535",
+  "page": 467
+ },
+ {
+  "q": "What filter types and circuit models are available in Operator?",
+  "gold": "c664",
+  "page": 569
+ },
+ {
+  "q": "How do I save a clip from my current project so I can use it again in other projects?",
+  "gold": "c79",
+  "page": 92
+ },
+ {
+  "q": "How do I adjust the balance between the direct string sound and the filtered body resonance in Tension?",
+  "gold": "c751",
+  "page": 632
+ },
+ {
+  "q": "How can I organize multiple effects or instruments together in a single track?",
+  "gold": "c357",
+  "page": 331
+ },
+ {
+  "q": "How do I fix missing samples when I move or delete a project folder?",
+  "gold": "c92",
+  "page": 103
+ },
+ {
+  "q": "How do I adjust the balance between the wet and dry signal in Spectral Time?",
+  "gold": "c580",
+  "page": 503
+ },
+ {
+  "q": "How do I make a reverb sound more metallic or smaller?",
+  "gold": "c560",
+  "page": 487
+ },
+ {
+  "q": "How can I delay the audio output of a track to sync it with hardware or acoustic delays?",
+  "gold": "c307",
+  "page": 286
+ },
+ {
+  "q": "How does freezing a track in Session View handle audio that goes longer than two loop cycles?",
+  "gold": "c980",
+  "page": 830
+ },
+ {
+  "q": "How do I control where the reverb effect is applied in the Echo device's signal chain?",
+  "gold": "c478",
+  "page": 428
+ },
+ {
+  "q": "How do I switch between horizontal and vertical layouts in the Clip View?",
+  "gold": "c147",
+  "page": 149
+ },
+ {
+  "q": "How do I set up Simpler to automatically detect and slice a sample at its transient points?",
+  "gold": "c914",
+  "page": 777
+ },
+ {
+  "q": "How do I reduce aliasing artifacts when Operator is producing very bright, high-frequency sounds?",
+  "gold": "c671",
+  "page": 573
+ },
+ {
+  "q": "How do I adjust the attack, decay, and release times on Simpler's envelopes?",
+  "gold": "c731",
+  "page": 618
+ },
+ {
+  "q": "How do I make the hammer strike at the same spot on the string regardless of which note I'm playing?",
+  "gold": "c744",
+  "page": 626
+ },
+ {
+  "q": "How do I change how long a MIDI note plays in Live?",
+  "gold": "c602",
+  "page": 522
+ },
+ {
+  "q": "How do I combine the best parts from multiple recordings into one track?",
+  "gold": "c324",
+  "page": 301
+ },
+ {
+  "q": "How do I make Live take up my entire screen?",
+  "gold": "c25",
+  "page": 43
+ },
+ {
+  "q": "How do I change the color of individual drum pads on my Push 2 controller?",
+  "gold": "c885",
+  "page": 752
+ },
+ {
+  "q": "How does the Tension synthesizer create sounds without using samples or wavetables?",
+  "gold": "c738",
+  "page": 623
+ },
+ {
+  "q": "How do I move a drum chain to its own separate track while keeping all its sounds and MIDI notes?",
+  "gold": "c386",
+  "page": 351
+ },
+ {
+  "q": "How do I connect a device parameter to a Macro Control in a Rack?",
+  "gold": "c381",
+  "page": 347
+ },
+ {
+  "q": "How do I adjust bass, midrange, and treble separately on a track?",
+  "gold": "c482",
+  "page": 432
+ },
+ {
+  "q": "How do I adjust the center frequency of the mid-range EQ band in Channel EQ?",
+  "gold": "c441",
+  "page": 401
+ },
+ {
+  "q": "How do I move a preset from one folder to another in Live?",
+  "gold": "c93",
+  "page": 103
+ },
+ {
+  "q": "How do I bring a video file into Ableton Live?",
+  "gold": "c417",
+  "page": 381
+ },
+ {
+  "q": "How can I tell which operations in Live won't affect my audio quality?",
+  "gold": "c974",
+  "page": 827
+ },
+ {
+  "q": "How does the signal flow work in Analog, and what are the main sound sources?",
+  "gold": "c610",
+  "page": 530
+ },
+ {
+  "q": "How do I set up the Spectral Time effect to automatically freeze audio when it detects a sudden sound?",
+  "gold": "c577",
+  "page": 500
+ },
+ {
+  "q": "How does the Looper's Record button work, and what happens when I press it?",
+  "gold": "c520",
+  "page": 458
+ },
+ {
+  "q": "How do I select a note on Push 2 without actually playing it?",
+  "gold": "c905",
+  "page": 770
+ },
+ {
+  "q": "How do I select a specific range of time in the Arrangement View?",
+  "gold": "c122",
+  "page": 126
+ },
+ {
+  "q": "How do I make the chorus effect wider or narrower in the stereo field?",
+  "gold": "c444",
+  "page": 404
+ },
+ {
+  "q": "How does the Multiband Dynamics device handle audio signals that go above a certain level?",
+  "gold": "c528",
+  "page": 463
+ },
+ {
+  "q": "How do the pad colors on Push help me understand which notes I'm playing?",
+  "gold": "c836",
+  "page": 707
+ },
+ {
+  "q": "How do I make sure a Max device has all the files it needs to work properly?",
+  "gold": "c779",
+  "page": 655
+ },
+ {
+  "q": "How do I keep the loop length controls visible on my Push 2 so I don't have to switch pages to access them?",
+  "gold": "c904",
+  "page": 769
+ },
+ {
+  "q": "How do I change which filters the oscillators in Collision send their signal to?",
+  "gold": "c625",
+  "page": 540
+ },
+ {
+  "q": "How do I make a sample fade in gradually when I trigger it in Simpler's one-shot mode?",
+  "gold": "c913",
+  "page": 776
+ },
+ {
+  "q": "Where do the audio files from freezing a track get saved?",
+  "gold": "c972",
+  "page": 824
+ },
+ {
+  "q": "How do clip envelopes respond when I adjust warp markers in Linked mode?",
+  "gold": "c416",
+  "page": 378
+ },
+ {
+  "q": "How do I blend the second LFO with the main LFO in the Phaser-Flanger effect?",
+  "gold": "c547",
+  "page": 477
+ },
+ {
+  "q": "How do I set up which inputs and outputs from my audio interface are available in Live?",
+  "gold": "c269",
+  "page": 255
+ },
+ {
+  "q": "How do I access different velocity levels when playing drums on Push 2?",
+  "gold": "c881",
+  "page": 748
+ },
+ {
+  "q": "How much timing delay can I expect between my MIDI and audio recordings in Live?",
+  "gold": "c998",
+  "page": 841
+ },
+ {
+  "q": "How do I adjust the reference pitch that the Tuner uses to analyze my audio?",
+  "gold": "c587",
+  "page": 509
+ },
+ {
+  "q": "How do I use the Glue Compressor to blend multiple tracks together in my mix?",
+  "gold": "c500",
+  "page": 444
+ },
+ {
+  "q": "How do I sync Live's playback position with an external MIDI sequencer?",
+  "gold": "c961",
+  "page": 816
+ },
+ {
+  "q": "How do I reduce aliasing artifacts in the Pedal device?",
+  "gold": "c540",
+  "page": 471
+ },
+ {
+  "q": "How can I prevent audio dropouts and clicks when using Live?",
+  "gold": "c964",
+  "page": 819
+ },
+ {
+  "q": "How do I use the tap tempo feature on Push 2 to set the speed of my song?",
+  "gold": "c942",
+  "page": 803
+ },
+ {
+  "q": "How do I make the arpeggiator pattern repeat at specific intervals or restart at certain beats?",
+  "gold": "c600",
+  "page": 520
+ },
+ {
+  "q": "How do I configure MPE settings for a hardware synthesizer or third-party plugin?",
+  "gold": "c234",
+  "page": 224
+ },
+ {
+  "q": "How do I adjust the shape of different stages in an envelope?",
+  "gold": "c795",
+  "page": 672
+ },
+ {
+  "q": "How do I make Session View tracks narrower so I can see more of them at once?",
+  "gold": "c135",
+  "page": 138
+ },
+ {
+  "q": "How do I adjust the sound settings for individual steps in the Push sequencer?",
+  "gold": "c852",
+  "page": 721
+ },
+ {
+  "q": "How do I organize and quickly find my favorite items in the browser?",
+  "gold": "c51",
+  "page": 68
+ },
+ {
+  "q": "How do I make the LFO restart at the beginning each time I play a new note in Simpler?",
+  "gold": "c732",
+  "page": 619
+ },
+ {
+  "q": "How do I adjust the delay time in Flanger versus Doubler mode on the Phaser-Flanger?",
+  "gold": "c545",
+  "page": 475
+ },
+ {
+  "q": "How do I prevent clicking sounds when editing sample start and end points?",
+  "gold": "c697",
+  "page": 593
+ },
+ {
+  "q": "How do I move the start marker to a specific position in Live?",
+  "gold": "c1005",
+  "page": 848
+ },
+ {
+  "q": "How do I control how quickly a string sound fades out after I play a note?",
+  "gold": "c745",
+  "page": 627
+ },
+ {
+  "q": "How do I make one drum sound stop playing when another one starts, like with open and closed hi-hats?",
+  "gold": "c648",
+  "page": 559
+ },
+ {
+  "q": "How do I make compression sound less harsh when using high compression ratios?",
+  "gold": "c448",
+  "page": 406
+ },
+ {
+  "q": "How do I create a ring modulation effect with the Frequency Shifter?",
+  "gold": "c491",
+  "page": 439
+ },
+ {
+  "q": "How do I edit multiple clips at the same time in the Clip View?",
+  "gold": "c148",
+  "page": 150
+ },
+ {
+  "q": "How do I set up the Glue Compressor to respond only to certain frequencies from another track?",
+  "gold": "c503",
+  "page": 445
+ },
+ {
+  "q": "How do I fix the error when slicing audio creates too many slices for a Rack?",
+  "gold": "c239",
+  "page": 230
+ },
+ {
+  "q": "How do I make small tempo adjustments on Push 2?",
+  "gold": "c887",
+  "page": 754
+ },
+ {
+  "q": "How do I combine multiple clips on a track into a single clip?",
+  "gold": "c127",
+  "page": 131
+ },
+ {
+  "q": "How do I choose which oscillators modulate each other in Operator?",
+  "gold": "c652",
+  "page": 562
+ },
+ {
+  "q": "How do I change the filter slope in Simpler, and what options are available?",
+  "gold": "c728",
+  "page": 616
+ },
+ {
+  "q": "How do I control how quickly the gate closes after the sound drops below the threshold?",
+  "gold": "c477",
+  "page": 428
+ },
+ {
+  "q": "How do I make a sustain loop play backwards and forwards repeatedly?",
+  "gold": "c701",
+  "page": 595
+ },
+ {
+  "q": "How do I make the two LFO waveforms in Flanger run completely opposite to each other?",
+  "gold": "c490",
+  "page": 438
+ },
+ {
+  "q": "How do I adjust the scratchy sound when using a bow on a string instrument in Live?",
+  "gold": "c742",
+  "page": 625
+ },
+ {
+  "q": "How do I control the pitch that Shifter uses\u2014can I use MIDI notes instead of knobs?",
+  "gold": "c568",
+  "page": 494
+ },
+ {
+  "q": "How can I check how much CPU each track is using in my Live set?",
+  "gold": "c967",
+  "page": 821
+ },
+ {
+  "q": "How do I switch between different display views on the Tuner device?",
+  "gold": "c583",
+  "page": 505
+ },
+ {
+  "q": "How do I align specific moments in my music with cuts or important points in a video file?",
+  "gold": "c420",
+  "page": 384
+ },
+ {
+  "q": "If I start playing a sample and then move the sample selector to a different sample, will it switch to the new sample right away?",
+  "gold": "c696",
+  "page": 592
+ },
+ {
+  "q": "How do I add new MIDI notes to a clip that's already playing?",
+  "gold": "c323",
+  "page": 300
+ },
+ {
+  "q": "How do I set up a MIDI controller to work with Spectral Resonator?",
+  "gold": "c571",
+  "page": 496
+ },
+ {
+  "q": "How do I record multiple takes or add more material to a clip that's already playing in Live?",
+  "gold": "c830",
+  "page": 701
+ },
+ {
+  "q": "How do I create a new audio track using a keyboard shortcut?",
+  "gold": "c1008",
+  "page": 851
+ },
+ {
+  "q": "How do I make Looper control whether the whole song plays or stops in Live?",
+  "gold": "c523",
+  "page": 460
+ },
+ {
+  "q": "How do fade times work differently between Mono/Poly and Thru playback modes in Simpler?",
+  "gold": "c726",
+  "page": 614
+ },
+ {
+  "q": "How do I temporarily turn off a device on Push 2 without permanently removing it?",
+  "gold": "c921",
+  "page": 784
+ },
+ {
+  "q": "How do the different playback modes in Simpler work, and which one should I use for drum breaks?",
+  "gold": "c910",
+  "page": 774
+ },
+ {
+  "q": "How do the different pad colors on Push 2's drum rack display tell me what's happening with each sound?",
+  "gold": "c880",
+  "page": 747
+ },
+ {
+  "q": "How do I make the compressor respond to a different signal than the one being compressed?",
+  "gold": "c452",
+  "page": 409
+ },
+ {
+  "q": "How do I change the velocity of MIDI notes in Live?",
+  "gold": "c212",
+  "page": 204
+ },
+ {
+  "q": "How do I set up a track to record in Live?",
+  "gold": "c309",
+  "page": 288
+ },
+ {
+  "q": "How do I route the signal from a specific chain inside a Rack to another track?",
+  "gold": "c280",
+  "page": 262
+ },
+ {
+  "q": "How do I change the note display format in the Tuner device between sharps and flats?",
+  "gold": "c9",
+  "page": 29
+ },
+ {
+  "q": "How do I get a track to go back to playing the Arrangement after I've launched a Session clip on it?",
+  "gold": "c33",
+  "page": 52
+ },
+ {
+  "q": "How do I jump to a specific point in a clip while it's playing?",
+  "gold": "c158",
+  "page": 159
+ }
+]

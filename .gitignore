@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+*.log
+# Downloaded documents, their extracted text and embedding caches: large,
+# regenerable, and the Ableton manual is copyrighted. Only the test questions stay.
+data/*
+!data/questions.json

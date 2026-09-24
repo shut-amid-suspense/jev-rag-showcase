@@ -1,0 +1,6545 @@
+{
+  "config": {
+    "K": 20,
+    "llm": "google/gemini-3.5-flash-lite",
+    "jev": "~typesafe/jev-latest",
+    "embed": "openai/text-embedding-3-small",
+    "workers": 4
+  },
+  "summary": {
+    "bm25": {
+      "answerable_correct": 157,
+      "answerable_said_none": 0,
+      "unanswerable_said_none": 0,
+      "median_ms": 6.219957998837344,
+      "p90_ms": 10.238917006063275,
+      "cost_usd": 0
+    },
+    "embed": {
+      "answerable_correct": 146,
+      "answerable_said_none": 0,
+      "unanswerable_said_none": 0,
+      "median_ms": 437.71641700004693,
+      "p90_ms": 758.0340830027126,
+      "cost_usd": 0
+    },
+    "embed>jev": {
+      "answerable_correct": 187,
+      "answerable_said_none": 3,
+      "unanswerable_said_none": 25,
+      "median_ms": 896.885750014917,
+      "p90_ms": 1221.2025830085622,
+      "cost_usd": 0.044493288
+    },
+    "embed>llm": {
+      "answerable_correct": 189,
+      "answerable_said_none": 3,
+      "unanswerable_said_none": 14,
+      "median_ms": 1321.8807079974795,
+      "p90_ms": 1732.5370000035036,
+      "cost_usd": 0.25851531
+    }
+  },
+  "rows": [
+    {
+      "q": "What is the usual source of heat for boiling water in the steam engine?",
+      "gold": "p228",
+      "bm25": {
+        "pick": "p228",
+        "ms": 3.9650000107940286
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p228",
+        "ms": 545.293709001271,
+        "search_ms": 68.60137499461416
+      },
+      "embed>jev": {
+        "pick": "p228",
+        "ms": 993.0772090010578,
+        "rerank_ms": 447.7834999997867,
+        "cost": 0.000140994
+      },
+      "embed>llm": {
+        "pick": "p228",
+        "ms": 1209.6535010059597,
+        "rerank_ms": 664.3597920046886,
+        "cost": 0.0008494
+      }
+    },
+    {
+      "q": "What is one country that has been suggested for importation of medicines?",
+      "gold": "p538",
+      "bm25": {
+        "pick": "p538",
+        "ms": 3.2704170007491484
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p538",
+        "ms": 523.5415829956764,
+        "search_ms": 80.52099999622442
+      },
+      "embed>jev": {
+        "pick": "p538",
+        "ms": 954.072874999838,
+        "rerank_ms": 430.5312920041615,
+        "cost": 0.000252084
+      },
+      "embed>llm": {
+        "pick": "p538",
+        "ms": 1424.4505829992704,
+        "rerank_ms": 900.909000003594,
+        "cost": 0.0004909
+      }
+    },
+    {
+      "q": "In a type III secretion system, proteins are transported to the host cell in order to do what?",
+      "gold": "p831",
+      "bm25": {
+        "pick": "p831",
+        "ms": 4.574959006276913
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p831",
+        "ms": 460.64608299639076,
+        "search_ms": 57.55645799217746
+      },
+      "embed>jev": {
+        "pick": "p831",
+        "ms": 916.5160419943277,
+        "rerank_ms": 455.8699589979369,
+        "cost": 0.00018291
+      },
+      "embed>llm": {
+        "pick": "p831",
+        "ms": 1279.976332996739,
+        "rerank_ms": 819.3302500003483,
+        "cost": 0.0010726
+      }
+    },
+    {
+      "q": "What organization is the IPCC a part of?",
+      "gold": "p849",
+      "bm25": {
+        "pick": "p852",
+        "ms": 2.4675410095369443
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p849",
+        "ms": 603.3761669968953,
+        "search_ms": 42.02195799734909
+      },
+      "embed>jev": {
+        "pick": "p849",
+        "ms": 1007.441083987942,
+        "rerank_ms": 404.06491699104663,
+        "cost": 0.000161826
+      },
+      "embed>llm": {
+        "pick": "p849",
+        "ms": 1466.7917509941617,
+        "rerank_ms": 863.4155839972664,
+        "cost": 0.0009805
+      }
+    },
+    {
+      "q": "How many Africans were brought into the United States during the slave trade?",
+      "gold": "p1062",
+      "bm25": {
+        "pick": "p1062",
+        "ms": 8.667583009810187
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p1062",
+        "ms": 399.64016700105276,
+        "search_ms": 56.04466699878685
+      },
+      "embed>jev": {
+        "pick": "p1062",
+        "ms": 808.4316669992404,
+        "rerank_ms": 408.79149999818765,
+        "cost": 0.000178458
+      },
+      "embed>llm": {
+        "pick": "p1062",
+        "ms": 1226.1035010014893,
+        "rerank_ms": 826.4633340004366,
+        "cost": 0.0011153
+      }
+    },
+    {
+      "q": "When did Ribault first establish a settlement in South Carolina?",
+      "gold": "p200",
+      "bm25": {
+        "pick": "p200",
+        "ms": 8.14337500196416
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p200",
+        "ms": 381.2001249898458,
+        "search_ms": 41.97658300108742
+      },
+      "embed>jev": {
+        "pick": "p200",
+        "ms": 845.3148330008844,
+        "rerank_ms": 464.1147080110386,
+        "cost": 0.00020685
+      },
+      "embed>llm": {
+        "pick": "p200",
+        "ms": 1298.578499990981,
+        "rerank_ms": 917.3783750011353,
+        "cost": 0.00018862
+      }
+    },
+    {
+      "q": "How many species of bird and mammals are there in the Amazon region?",
+      "gold": "p378",
+      "bm25": {
+        "pick": "p378",
+        "ms": 9.65258400538005
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p378",
+        "ms": 506.7236660106573,
+        "search_ms": 44.09591600415297
+      },
+      "embed>jev": {
+        "pick": "p378",
+        "ms": 964.2475830187323,
+        "rerank_ms": 457.52391700807493,
+        "cost": 0.000163674
+      },
+      "embed>llm": {
+        "pick": "p378",
+        "ms": 1400.5217910162173,
+        "rerank_ms": 893.79812500556,
+        "cost": 0.0009874
+      }
+    },
+    {
+      "q": "What consequence of establishing the Scottish Parliament applies to Scottish MPs sitting in the UK House of Commons?",
+      "gold": "p986",
+      "bm25": {
+        "pick": "p986",
+        "ms": 6.1259590002009645
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p986",
+        "ms": 387.8894169902196,
+        "search_ms": 45.22004199679941
+      },
+      "embed>jev": {
+        "pick": "p986",
+        "ms": 870.5768329964485,
+        "rerank_ms": 482.6874160062289,
+        "cost": 0.000167706
+      },
+      "embed>llm": {
+        "pick": "p986",
+        "ms": 976.3580419967184,
+        "rerank_ms": 588.4686250064988,
+        "cost": 0.0010402
+      }
+    },
+    {
+      "q": "What had Bhutto planned on banning within six months, before he was overthrown?",
+      "gold": "p1019",
+      "bm25": {
+        "pick": "p1019",
+        "ms": 8.93137500679586
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p1019",
+        "ms": 407.811707991641,
+        "search_ms": 51.68845799926203
+      },
+      "embed>jev": {
+        "pick": "p1019",
+        "ms": 893.2746669888729,
+        "rerank_ms": 485.4629589972319,
+        "cost": 0.000158676
+      },
+      "embed>llm": {
+        "pick": "p1019",
+        "ms": 1466.3702499965439,
+        "rerank_ms": 1058.5585420049028,
+        "cost": 0.0009734
+      }
+    },
+    {
+      "q": "What is the average width of the Rhine?",
+      "gold": "p915",
+      "bm25": {
+        "pick": "p915",
+        "ms": 8.312250007293187
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p906",
+        "ms": 898.4675420069834,
+        "search_ms": 85.46349999960512
+      },
+      "embed>jev": {
+        "pick": "p915",
+        "ms": 1342.1469170134515,
+        "rerank_ms": 443.67937500646804,
+        "cost": 0.000171486
+      },
+      "embed>llm": {
+        "pick": "p915",
+        "ms": 1869.2067090014461,
+        "rerank_ms": 970.7391669944627,
+        "cost": 0.0010363
+      }
+    },
+    {
+      "q": "What forces should serve as a brake on wealth concentration?",
+      "gold": "p690",
+      "bm25": {
+        "pick": "p690",
+        "ms": 7.238459002110176
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p690",
+        "ms": 1208.859541991842,
+        "search_ms": 54.68191699765157
+      },
+      "embed>jev": {
+        "pick": "p690",
+        "ms": 1719.8716669954592,
+        "rerank_ms": 511.01212500361726,
+        "cost": 0.00018081
+      },
+      "embed>llm": {
+        "pick": "p690",
+        "ms": 2110.7082499947865,
+        "rerank_ms": 901.8487080029445,
+        "cost": 0.0011389
+      }
+    },
+    {
+      "q": "Where do the branches Waal and Nederrijn-Lek discharge to?",
+      "gold": "p938",
+      "bm25": {
+        "pick": "p938",
+        "ms": 19.63837500079535
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p938",
+        "ms": 524.7315000015078,
+        "search_ms": 74.33662500989158
+      },
+      "embed>jev": {
+        "pick": "p938",
+        "ms": 919.3930000037653,
+        "rerank_ms": 394.6615000022575,
+        "cost": 0.00016401
+      },
+      "embed>llm": {
+        "pick": "p938",
+        "ms": 1461.9066250015749,
+        "rerank_ms": 937.175125000067,
+        "cost": 0.0010009
+      }
+    },
+    {
+      "q": "What is the delta in the Rhine delimited in the east by?",
+      "gold": "p908",
+      "bm25": {
+        "pick": "p908",
+        "ms": 9.64041700353846
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p908",
+        "ms": 461.948249998386,
+        "search_ms": 55.27054199774284
+      },
+      "embed>jev": {
+        "pick": "p908",
+        "ms": 962.0335000072373,
+        "rerank_ms": 500.0852500088513,
+        "cost": 0.000169092
+      },
+      "embed>llm": {
+        "pick": "p908",
+        "ms": 1196.1006250057835,
+        "rerank_ms": 734.1523750073975,
+        "cost": 0.0010174
+      }
+    },
+    {
+      "q": "What causes the symptoms of inflammation?",
+      "gold": "p809",
+      "bm25": {
+        "pick": "p809",
+        "ms": 5.80758300202433
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p809",
+        "ms": 464.06266700068954,
+        "search_ms": 57.40154099476058
+      },
+      "embed>jev": {
+        "pick": "p809",
+        "ms": 954.5548750029411,
+        "rerank_ms": 490.4922080022516,
+        "cost": 0.000166026
+      },
+      "embed>llm": {
+        "pick": "p809",
+        "ms": 1169.5950840075966,
+        "rerank_ms": 705.532417006907,
+        "cost": 0.0009751
+      }
+    },
+    {
+      "q": "Because speakers are drawn from across Scotland, what do the represent the balance of?",
+      "gold": "p961",
+      "bm25": {
+        "pick": "p961",
+        "ms": 10.019167006248608
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p981",
+        "ms": 503.730208001798,
+        "search_ms": 43.87750000751112
+      },
+      "embed>jev": {
+        "pick": "p961",
+        "ms": 906.9840409938479,
+        "rerank_ms": 403.25383299204987,
+        "cost": 0.000158886
+      },
+      "embed>llm": {
+        "pick": "p961",
+        "ms": 1299.514915997861,
+        "rerank_ms": 795.7847079960629,
+        "cost": 0.000976
+      }
+    },
+    {
+      "q": "When did the university decide to start multimillion-dollar expansion projects?",
+      "gold": "p724",
+      "bm25": {
+        "pick": "p724",
+        "ms": 3.0098749994067475
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p724",
+        "ms": 451.0723749990575,
+        "search_ms": 57.36525000247639
+      },
+      "embed>jev": {
+        "pick": "p724",
+        "ms": 895.0768750073621,
+        "rerank_ms": 444.0045000083046,
+        "cost": 0.000205506
+      },
+      "embed>llm": {
+        "pick": "p724",
+        "ms": 1666.5862500085495,
+        "rerank_ms": 1215.513875009492,
+        "cost": 0.00020842
+      }
+    },
+    {
+      "q": "Why are coastal species tough?",
+      "gold": "p399",
+      "bm25": {
+        "pick": "p399",
+        "ms": 4.613790995790623
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p399",
+        "ms": 523.9655839977786,
+        "search_ms": 52.489832989522256
+      },
+      "embed>jev": {
+        "pick": "p399",
+        "ms": 1054.9244180001551,
+        "rerank_ms": 530.9588340023765,
+        "cost": 0.000221634
+      },
+      "embed>llm": {
+        "pick": "p399",
+        "ms": 1422.2552930004895,
+        "rerank_ms": 898.2897090027109,
+        "cost": 0.0013615
+      }
+    },
+    {
+      "q": "Who ruined Roussel de Bailleul's plans for an independent state?",
+      "gold": "p8",
+      "bm25": {
+        "pick": "p8",
+        "ms": 7.470500000636093
+      },
+      "recall_at_k": false,
+      "embed": {
+        "pick": "p1150",
+        "ms": 413.2850839960156,
+        "search_ms": 53.01674999645911
+      },
+      "embed>jev": {
+        "pick": "none",
+        "ms": 857.5131259858608,
+        "rerank_ms": 444.2280419898452,
+        "cost": 0.000176064
+      },
+      "embed>llm": {
+        "pick": "none",
+        "ms": 1149.1818340000464,
+        "rerank_ms": 735.8967500040308,
+        "cost": 0.001066
+      }
+    },
+    {
+      "q": "Whose occupation of Kuwait did the US military personal seek to put an end to?",
+      "gold": "p1007",
+      "bm25": {
+        "pick": "p1007",
+        "ms": 11.172834012540989
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p321",
+        "ms": 458.50104199780617,
+        "search_ms": 44.07108300074469
+      },
+      "embed>jev": {
+        "pick": "p1007",
+        "ms": 1091.2340840004617,
+        "rerank_ms": 632.7330420026556,
+        "cost": 0.000175014
+      },
+      "embed>llm": {
+        "pick": "p1007",
+        "ms": 1267.1053749945713,
+        "rerank_ms": 808.6043329967652,
+        "cost": 0.001094
+      }
+    },
+    {
+      "q": "On what date was Victoria declared independent from New South Wales?",
+      "gold": "p164",
+      "bm25": {
+        "pick": "p154",
+        "ms": 6.397582998033613
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p154",
+        "ms": 590.4609170102049,
+        "search_ms": 43.02941700734664
+      },
+      "embed>jev": {
+        "pick": "p164",
+        "ms": 1155.7005000067875,
+        "rerank_ms": 565.2395829965826,
+        "cost": 0.00015414
+      },
+      "embed>llm": {
+        "pick": "p164",
+        "ms": 1378.066959019634,
+        "rerank_ms": 787.6060420094291,
+        "cost": 0.0009538
+      }
+    },
+    {
+      "q": "What early Huguenot Church was established in England?",
+      "gold": "p214",
+      "bm25": {
+        "pick": "p211",
+        "ms": 2.4455840029986575
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p214",
+        "ms": 440.83904099534266,
+        "search_ms": 72.05737500044052
+      },
+      "embed>jev": {
+        "pick": "p214",
+        "ms": 841.6512910043821,
+        "rerank_ms": 400.8122500090394,
+        "cost": 0.00019845
+      },
+      "embed>llm": {
+        "pick": "p214",
+        "ms": 1277.0502499915892,
+        "rerank_ms": 836.2112089962466,
+        "cost": 0.0011926
+      }
+    },
+    {
+      "q": "What percent of untreated victims of the plague die within 8 days?",
+      "gold": "p482",
+      "bm25": {
+        "pick": "p482",
+        "ms": 3.3929589990293607
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p482",
+        "ms": 381.4540000021225,
+        "search_ms": 84.15845899435226
+      },
+      "embed>jev": {
+        "pick": "p482",
+        "ms": 787.0629999961238,
+        "rerank_ms": 405.60899999400135,
+        "cost": 0.000209286
+      },
+      "embed>llm": {
+        "pick": "p482",
+        "ms": 1274.1199170122854,
+        "rerank_ms": 892.665917010163,
+        "cost": 0.001321
+      }
+    },
+    {
+      "q": "Besides Britain and North America, where else did Huguenot refugees settle?",
+      "gold": "p192",
+      "bm25": {
+        "pick": "p185",
+        "ms": 7.526667002821341
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p206",
+        "ms": 802.4553339928389,
+        "search_ms": 43.92999999981839
+      },
+      "embed>jev": {
+        "pick": "p206",
+        "ms": 1218.659417994786,
+        "rerank_ms": 416.2040840019472,
+        "cost": 0.000177156
+      },
+      "embed>llm": {
+        "pick": "p206",
+        "ms": 1634.3350839888444,
+        "rerank_ms": 831.8797499960056,
+        "cost": 0.0010561
+      }
+    },
+    {
+      "q": "Roughly how many clubs are ran at the university?",
+      "gold": "p739",
+      "bm25": {
+        "pick": "p739",
+        "ms": 2.716457995120436
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p741",
+        "ms": 1802.4885420018109,
+        "search_ms": 51.95791699225083
+      },
+      "embed>jev": {
+        "pick": "p739",
+        "ms": 2182.3516670119716,
+        "rerank_ms": 379.86312501016073,
+        "cost": 0.00018585
+      },
+      "embed>llm": {
+        "pick": "p739",
+        "ms": 2810.2666250051698,
+        "rerank_ms": 1007.7780830033589,
+        "cost": 0.0011722
+      }
+    },
+    {
+      "q": "Who patronized the monks in Italy? ",
+      "gold": "p38",
+      "bm25": {
+        "pick": "p38",
+        "ms": 5.618875002255663
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p36",
+        "ms": 461.96879200579133,
+        "search_ms": 52.019416994880885
+      },
+      "embed>jev": {
+        "pick": "p38",
+        "ms": 885.7947079959558,
+        "rerank_ms": 423.8259159901645,
+        "cost": 0.000159558
+      },
+      "embed>llm": {
+        "pick": "p38",
+        "ms": 1282.3741670144955,
+        "rerank_ms": 820.4053750087041,
+        "cost": 0.0009369
+      }
+    },
+    {
+      "q": "What was the North American portion of War of Austrian Succession?",
+      "gold": "p1130",
+      "bm25": {
+        "pick": "p1130",
+        "ms": 4.05970799329225
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p1130",
+        "ms": 478.7570839980617,
+        "search_ms": 43.161249996046536
+      },
+      "embed>jev": {
+        "pick": "p1130",
+        "ms": 915.6816670001717,
+        "rerank_ms": 436.92458300211,
+        "cost": 0.000165942
+      },
+      "embed>llm": {
+        "pick": "p1130",
+        "ms": 1562.4619999871356,
+        "rerank_ms": 1083.704915989074,
+        "cost": 0.0010343
+      }
+    },
+    {
+      "q": "What serves as a biological barrier by competing for space and food in the GI tract?",
+      "gold": "p808",
+      "bm25": {
+        "pick": "p808",
+        "ms": 9.111999999731779
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p806",
+        "ms": 364.175750000868,
+        "search_ms": 54.34625000634696
+      },
+      "embed>jev": {
+        "pick": "p808",
+        "ms": 803.9567919913679,
+        "rerank_ms": 439.78104199049994,
+        "cost": 0.000188706
+      },
+      "embed>llm": {
+        "pick": "p808",
+        "ms": 1068.128250000882,
+        "rerank_ms": 703.952500000014,
+        "cost": 0.0011029
+      }
+    },
+    {
+      "q": "What order did British make of French?",
+      "gold": "p1116",
+      "bm25": {
+        "pick": "p190",
+        "ms": 5.734792008297518
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p1153",
+        "ms": 609.6381250099512,
+        "search_ms": 53.89124999055639
+      },
+      "embed>jev": {
+        "pick": "p1116",
+        "ms": 1053.1267500045942,
+        "rerank_ms": 443.48862499464303,
+        "cost": 0.00017661
+      },
+      "embed>llm": {
+        "pick": "p1116",
+        "ms": 1324.8988750128774,
+        "rerank_ms": 715.2607500029262,
+        "cost": 0.0011009
+      }
+    },
+    {
+      "q": "What is one issue that adds to the complexity of a pharmacist's job?",
+      "gold": "p529",
+      "bm25": {
+        "pick": "p40",
+        "ms": 5.439957996713929
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p528",
+        "ms": 437.71641700004693,
+        "search_ms": 45.3948750073323
+      },
+      "embed>jev": {
+        "pick": "p529",
+        "ms": 859.6731669967994,
+        "rerank_ms": 421.9567499967525,
+        "cost": 0.000143766
+      },
+      "embed>llm": {
+        "pick": "p529",
+        "ms": 1243.936124999891,
+        "rerank_ms": 806.2197079998441,
+        "cost": 0.0008416
+      }
+    },
+    {
+      "q": "In what country can most of the Amazon rainforest be found?",
+      "gold": "p370",
+      "bm25": {
+        "pick": "p379",
+        "ms": 9.25529099185951
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p370",
+        "ms": 411.79850000480656,
+        "search_ms": 56.61329100257717
+      },
+      "embed>jev": {
+        "pick": "p370",
+        "ms": 923.7446250044741,
+        "rerank_ms": 511.9461249996675,
+        "cost": 0.00016401
+      },
+      "embed>llm": {
+        "pick": "p370",
+        "ms": 1213.6403750046156,
+        "rerank_ms": 801.8418749998091,
+        "cost": 0.0009817
+      }
+    },
+    {
+      "q": "What makes the Wells Fargo Center stand out?",
+      "gold": "p666",
+      "bm25": {
+        "pick": "p666",
+        "ms": 2.3775839945301414
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p666",
+        "ms": 364.91649999516085,
+        "search_ms": 52.99766700773034
+      },
+      "embed>jev": {
+        "pick": "p666",
+        "ms": 848.9447920001112,
+        "rerank_ms": 484.02829200495034,
+        "cost": 0.000202818
+      },
+      "embed>llm": {
+        "pick": "p666",
+        "ms": 1284.1123749967664,
+        "rerank_ms": 919.1958750016056,
+        "cost": 0.0012865
+      }
+    },
+    {
+      "q": "Stromatoveris is similair to which genus?",
+      "gold": "p419",
+      "bm25": {
+        "pick": "p419",
+        "ms": 5.42291600140743
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p419",
+        "ms": 342.30054200452287,
+        "search_ms": 53.41941698861774
+      },
+      "embed>jev": {
+        "pick": "p419",
+        "ms": 826.8094170052791,
+        "rerank_ms": 484.50887500075623,
+        "cost": 0.000226086
+      },
+      "embed>llm": {
+        "pick": "p419",
+        "ms": 1258.6105840018718,
+        "rerank_ms": 916.3100419973489,
+        "cost": 0.0013762
+      }
+    },
+    {
+      "q": "What is violating a law which is not the goal of the protest called?",
+      "gold": "p571",
+      "bm25": {
+        "pick": "p571",
+        "ms": 12.294875006773509
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p570",
+        "ms": 945.5627910065232,
+        "search_ms": 52.502375008771196
+      },
+      "embed>jev": {
+        "pick": "p571",
+        "ms": 1429.8062070010928,
+        "rerank_ms": 484.24341599456966,
+        "cost": 0.000183834
+      },
+      "embed>llm": {
+        "pick": "p571",
+        "ms": 1648.3127490064362,
+        "rerank_ms": 702.749957999913,
+        "cost": 0.001108
+      }
+    },
+    {
+      "q": "What does the time element in construction mean?",
+      "gold": "p587",
+      "bm25": {
+        "pick": "p587",
+        "ms": 4.437124996911734
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p587",
+        "ms": 402.88049999799114,
+        "search_ms": 53.56983300589491
+      },
+      "embed>jev": {
+        "pick": "p587",
+        "ms": 776.4458339952398,
+        "rerank_ms": 373.5653339972487,
+        "cost": 0.000141708
+      },
+      "embed>llm": {
+        "pick": "p587",
+        "ms": 1431.252416994539,
+        "rerank_ms": 1028.371916996548,
+        "cost": 0.0008809
+      }
+    },
+    {
+      "q": "In what year was the school formed?",
+      "gold": "p624",
+      "bm25": {
+        "pick": "p597",
+        "ms": 2.469667000696063
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p624",
+        "ms": 426.53499999141786,
+        "search_ms": 53.0515000136802
+      },
+      "embed>jev": {
+        "pick": "p624",
+        "ms": 891.0678749962244,
+        "rerank_ms": 464.53287500480656,
+        "cost": 0.000169932
+      },
+      "embed>llm": {
+        "pick": "p624",
+        "ms": 1592.9065419913968,
+        "rerank_ms": 1166.371541999979,
+        "cost": 0.001054
+      }
+    },
+    {
+      "q": "Who started the IPCC Trust Fund?",
+      "gold": "p852",
+      "bm25": {
+        "pick": "p852",
+        "ms": 4.788041012943722
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p852",
+        "ms": 386.5842090017395,
+        "search_ms": 56.163291999837384
+      },
+      "embed>jev": {
+        "pick": "p852",
+        "ms": 764.9346260150196,
+        "rerank_ms": 378.3504170132801,
+        "cost": 0.000167454
+      },
+      "embed>llm": {
+        "pick": "p852",
+        "ms": 1118.028459008201,
+        "rerank_ms": 731.4442500064615,
+        "cost": 0.0010162
+      }
+    },
+    {
+      "q": "Europe first colonized the Americas, then Asia, but what continent was third?",
+      "gold": "p1046",
+      "bm25": {
+        "pick": "p476",
+        "ms": 4.615458004991524
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p1042",
+        "ms": 357.95858400524594,
+        "search_ms": 53.4228750038892
+      },
+      "embed>jev": {
+        "pick": "p1046",
+        "ms": 789.3265419988893,
+        "rerank_ms": 431.36795799364336,
+        "cost": 0.000175056
+      },
+      "embed>llm": {
+        "pick": "p1046",
+        "ms": 972.9747510136804,
+        "rerank_ms": 615.0161670084344,
+        "cost": 0.001055
+      }
+    },
+    {
+      "q": "What document formed the Parliament of Victoria?",
+      "gold": "p156",
+      "bm25": {
+        "pick": "p154",
+        "ms": 5.9844170027645305
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p156",
+        "ms": 430.86666701128706,
+        "search_ms": 45.905042003141716
+      },
+      "embed>jev": {
+        "pick": "p156",
+        "ms": 896.885750014917,
+        "rerank_ms": 466.01908300362993,
+        "cost": 0.000155484
+      },
+      "embed>llm": {
+        "pick": "p156",
+        "ms": 1276.6686250106432,
+        "rerank_ms": 845.8019579993561,
+        "cost": 0.0009622
+      }
+    },
+    {
+      "q": "What is the metric term less used than the Newton?",
+      "gold": "p1203",
+      "bm25": {
+        "pick": "p1203",
+        "ms": 7.780040992656723
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p1203",
+        "ms": 505.7496249937685,
+        "search_ms": 53.02349998964928
+      },
+      "embed>jev": {
+        "pick": "p1203",
+        "ms": 916.0704999958398,
+        "rerank_ms": 410.32087500207126,
+        "cost": 0.000168252
+      },
+      "embed>llm": {
+        "pick": "p1203",
+        "ms": 1283.4733750059968,
+        "rerank_ms": 777.7237500122283,
+        "cost": 0.0010481
+      }
+    },
+    {
+      "q": "Civil disobedience can occur when people speak about a certain topic that is deemed as?",
+      "gold": "p560",
+      "bm25": {
+        "pick": "p557",
+        "ms": 10.451583002577536
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p552",
+        "ms": 390.7227080053417,
+        "search_ms": 43.63579100754578
+      },
+      "embed>jev": {
+        "pick": "p560",
+        "ms": 774.4547909969697,
+        "rerank_ms": 383.732082991628,
+        "cost": 0.0001806
+      },
+      "embed>llm": {
+        "pick": "p560",
+        "ms": 1111.9420420000097,
+        "rerank_ms": 721.219333994668,
+        "cost": 0.001087
+      }
+    },
+    {
+      "q": "The Huguenots were the first Europeans to live in what modern New York borough?",
+      "gold": "p178",
+      "bm25": {
+        "pick": "p178",
+        "ms": 4.0606249967822805
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p185",
+        "ms": 545.8122079871828,
+        "search_ms": 53.103958009160124
+      },
+      "embed>jev": {
+        "pick": "p178",
+        "ms": 924.0054579859134,
+        "rerank_ms": 378.1932499987306,
+        "cost": 0.000191688
+      },
+      "embed>llm": {
+        "pick": "p178",
+        "ms": 1257.9273329902207,
+        "rerank_ms": 712.115125003038,
+        "cost": 0.0011536
+      }
+    },
+    {
+      "q": "What gorge is between the Bingen and Bonn?",
+      "gold": "p916",
+      "bm25": {
+        "pick": "p916",
+        "ms": 8.736207993933931
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p916",
+        "ms": 386.7049580003368,
+        "search_ms": 51.58345900417771
+      },
+      "embed>jev": {
+        "pick": "p916",
+        "ms": 754.6532489941455,
+        "rerank_ms": 367.94829099380877,
+        "cost": 0.000164346
+      },
+      "embed>llm": {
+        "pick": "p916",
+        "ms": 1216.195457993308,
+        "rerank_ms": 829.4904999929713,
+        "cost": 0.0009805
+      }
+    },
+    {
+      "q": "What is another type of public key cryptography algorithm?",
+      "gold": "p895",
+      "bm25": {
+        "pick": "p895",
+        "ms": 7.550082998932339
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p895",
+        "ms": 358.3022910024738,
+        "search_ms": 55.567290997714736
+      },
+      "embed>jev": {
+        "pick": "p895",
+        "ms": 788.8384569960181,
+        "rerank_ms": 430.5361659935443,
+        "cost": 0.000143262
+      },
+      "embed>llm": {
+        "pick": "p895",
+        "ms": 1067.318082001293,
+        "rerank_ms": 709.0157909988193,
+        "cost": 0.0008542
+      }
+    },
+    {
+      "q": "How many people would die of plague in largely populated cities?",
+      "gold": "p490",
+      "bm25": {
+        "pick": "p482",
+        "ms": 8.268000005045906
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p490",
+        "ms": 392.5230000022566,
+        "search_ms": 42.0085000077961
+      },
+      "embed>jev": {
+        "pick": "p490",
+        "ms": 840.1646250131307,
+        "rerank_ms": 447.6416250108741,
+        "cost": 0.00021042
+      },
+      "embed>llm": {
+        "pick": "p490",
+        "ms": 1229.133249988081,
+        "rerank_ms": 836.6102499858243,
+        "cost": 0.0013327
+      }
+    },
+    {
+      "q": "When did the Plos Pathogens paper come out?",
+      "gold": "p483",
+      "bm25": {
+        "pick": "p483",
+        "ms": 6.061874999431893
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p483",
+        "ms": 419.9058749945834,
+        "search_ms": 53.37333299394231
+      },
+      "embed>jev": {
+        "pick": "p483",
+        "ms": 789.7016669885488,
+        "rerank_ms": 369.7957919939654,
+        "cost": 0.000196098
+      },
+      "embed>llm": {
+        "pick": "p483",
+        "ms": 1166.0590409883298,
+        "rerank_ms": 746.1531659937464,
+        "cost": 0.001201
+      }
+    },
+    {
+      "q": "What well known political scientists are currently on the university's faculty?",
+      "gold": "p752",
+      "bm25": {
+        "pick": "p723",
+        "ms": 8.775458001764491
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p650",
+        "ms": 427.3653749987716,
+        "search_ms": 53.137208000407554
+      },
+      "embed>jev": {
+        "pick": "p752",
+        "ms": 888.4333340101875,
+        "rerank_ms": 461.06795901141595,
+        "cost": 0.000185766
+      },
+      "embed>llm": {
+        "pick": "p650",
+        "ms": 1326.2238329916727,
+        "rerank_ms": 898.8584579929011,
+        "cost": 0.0011338
+      }
+    },
+    {
+      "q": "What form of oxygen is composed of three oxygen atoms?",
+      "gold": "p264",
+      "bm25": {
+        "pick": "p270",
+        "ms": 3.1383339955937117
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p277",
+        "ms": 500.82308299897704,
+        "search_ms": 51.38762500428129
+      },
+      "embed>jev": {
+        "pick": "p277",
+        "ms": 948.1553329969756,
+        "rerank_ms": 447.3322499979986,
+        "cost": 0.000172242
+      },
+      "embed>llm": {
+        "pick": "p277",
+        "ms": 1324.3025410047267,
+        "rerank_ms": 823.4794580057496,
+        "cost": 0.0010306
+      }
+    },
+    {
+      "q": "When did the Spanish and Portuguese colonies gain their independance.",
+      "gold": "p1058",
+      "bm25": {
+        "pick": "p1058",
+        "ms": 7.862249985919334
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p1159",
+        "ms": 426.0999999969499,
+        "search_ms": 43.98733399284538
+      },
+      "embed>jev": {
+        "pick": "p1058",
+        "ms": 851.8855840084143,
+        "rerank_ms": 425.7855840114644,
+        "cost": 0.000171738
+      },
+      "embed>llm": {
+        "pick": "p1058",
+        "ms": 1225.3825420048088,
+        "rerank_ms": 799.2825420078589,
+        "cost": 0.0010487
+      }
+    },
+    {
+      "q": "What law staes that forces are interactions between bodies?",
+      "gold": "p1168",
+      "bm25": {
+        "pick": "p1168",
+        "ms": 2.864499998395331
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p1168",
+        "ms": 527.0496249868302,
+        "search_ms": 56.565708000562154
+      },
+      "embed>jev": {
+        "pick": "p1168",
+        "ms": 994.574249983998,
+        "rerank_ms": 467.52462499716785,
+        "cost": 0.000170226
+      },
+      "embed>llm": {
+        "pick": "p1168",
+        "ms": 1392.7678339823615,
+        "rerank_ms": 865.7182089955313,
+        "cost": 0.001043
+      }
+    },
+    {
+      "q": "What is QED short for?",
+      "gold": "p1190",
+      "bm25": {
+        "pick": "p1190",
+        "ms": 1.8802499980665743
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p1190",
+        "ms": 434.86679199850187,
+        "search_ms": 55.40974999894388
+      },
+      "embed>jev": {
+        "pick": "p1190",
+        "ms": 933.1136260007042,
+        "rerank_ms": 498.2468340022024,
+        "cost": 0.00016422
+      },
+      "embed>llm": {
+        "pick": "p1190",
+        "ms": 1231.6451670048991,
+        "rerank_ms": 796.7783750063973,
+        "cost": 0.001001
+      }
+    },
+    {
+      "q": "What was the Rhine considered to invaders in WWII?",
+      "gold": "p946",
+      "bm25": {
+        "pick": "p918",
+        "ms": 2.8954169974895194
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p946",
+        "ms": 372.95316699601244,
+        "search_ms": 55.90333300642669
+      },
+      "embed>jev": {
+        "pick": "p946",
+        "ms": 788.1594589998713,
+        "rerank_ms": 415.20629200385883,
+        "cost": 0.000172788
+      },
+      "embed>llm": {
+        "pick": "p946",
+        "ms": 1171.778208008618,
+        "rerank_ms": 798.8250410126057,
+        "cost": 0.0010381
+      }
+    },
+    {
+      "q": "Which famous evolutionist was influenced by the book Principles of Geology?",
+      "gold": "p520",
+      "bm25": {
+        "pick": "p520",
+        "ms": 4.768458005855791
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p520",
+        "ms": 1087.8647079953225,
+        "search_ms": 53.21695799648296
+      },
+      "embed>jev": {
+        "pick": "p520",
+        "ms": 1523.4723329922417,
+        "rerank_ms": 435.6076249969192,
+        "cost": 0.00015582
+      },
+      "embed>llm": {
+        "pick": "p520",
+        "ms": 2166.312665998703,
+        "rerank_ms": 1078.4479580033803,
+        "cost": 0.000916
+      }
+    },
+    {
+      "q": "What are three examples of complexity classes associated with definitions established by probabilistic Turing machines?",
+      "gold": "p65",
+      "bm25": {
+        "pick": "p53",
+        "ms": 10.29345799179282
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p53",
+        "ms": 439.3875410023611,
+        "search_ms": 42.096208009752445
+      },
+      "embed>jev": {
+        "pick": "p65",
+        "ms": 908.3482490095776,
+        "rerank_ms": 468.96070800721645,
+        "cost": 0.000114996
+      },
+      "embed>llm": {
+        "pick": "p65",
+        "ms": 1230.6036240042886,
+        "rerank_ms": 791.2160830019275,
+        "cost": 0.0006651
+      }
+    },
+    {
+      "q": "Matter particles are shown as what kind of lines in a Feynman diagram?",
+      "gold": "p1180",
+      "bm25": {
+        "pick": "p1180",
+        "ms": 3.6301670043030754
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p1180",
+        "ms": 359.534208997502,
+        "search_ms": 53.60141600249335
+      },
+      "embed>jev": {
+        "pick": "p1180",
+        "ms": 802.5608339958126,
+        "rerank_ms": 443.0266249983106,
+        "cost": 0.000170142
+      },
+      "embed>llm": {
+        "pick": "p1180",
+        "ms": 1146.6022089880425,
+        "rerank_ms": 787.0679999905406,
+        "cost": 0.0010367
+      }
+    },
+    {
+      "q": "What denomination is associated with Saint Kentigern College?",
+      "gold": "p610",
+      "bm25": {
+        "pick": "p610",
+        "ms": 2.640874998178333
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p610",
+        "ms": 766.3973750022706,
+        "search_ms": 55.41675000858959
+      },
+      "embed>jev": {
+        "pick": "p610",
+        "ms": 1219.0465410094475,
+        "rerank_ms": 452.649166007177,
+        "cost": 0.00017388
+      },
+      "embed>llm": {
+        "pick": "p610",
+        "ms": 1673.609250006848,
+        "rerank_ms": 907.2118750045775,
+        "cost": 0.0010756
+      }
+    },
+    {
+      "q": "What article of the Grundgesetz grants the right to make private schools?",
+      "gold": "p601",
+      "bm25": {
+        "pick": "p601",
+        "ms": 3.9158750005299225
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p601",
+        "ms": 459.10141700005624,
+        "search_ms": 55.52950000856072
+      },
+      "embed>jev": {
+        "pick": "p601",
+        "ms": 944.86112499726,
+        "rerank_ms": 485.7597079972038,
+        "cost": 0.000240198
+      },
+      "embed>llm": {
+        "pick": "p601",
+        "ms": 1309.3516250082757,
+        "rerank_ms": 850.2502080082195,
+        "cost": 0.0015463
+      }
+    },
+    {
+      "q": "What dynasty did Zhang Rhou help attack?",
+      "gold": "p758",
+      "bm25": {
+        "pick": "p758",
+        "ms": 5.985249998047948
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p766",
+        "ms": 401.308083004551,
+        "search_ms": 43.455708990222774
+      },
+      "embed>jev": {
+        "pick": "p758",
+        "ms": 924.871791008627,
+        "rerank_ms": 523.563708004076,
+        "cost": 0.000217518
+      },
+      "embed>llm": {
+        "pick": "p758",
+        "ms": 1367.5890830054414,
+        "rerank_ms": 966.2810000008903,
+        "cost": 0.00024205
+      }
+    },
+    {
+      "q": "Policies which reduce the inequality associated effects of unemployment support what type of growth?",
+      "gold": "p692",
+      "bm25": {
+        "pick": "p701",
+        "ms": 9.561875005601905
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p701",
+        "ms": 367.20970799797215,
+        "search_ms": 44.19316600251477
+      },
+      "embed>jev": {
+        "pick": "p701",
+        "ms": 720.3961669874843,
+        "rerank_ms": 353.1864589895122,
+        "cost": 0.000154644
+      },
+      "embed>llm": {
+        "pick": "p701",
+        "ms": 1209.3608750001295,
+        "rerank_ms": 842.1511670021573,
+        "cost": 0.0009613
+      }
+    },
+    {
+      "q": "What coalition rose up to oppose Louis XIV's France?",
+      "gold": "p180",
+      "bm25": {
+        "pick": "p180",
+        "ms": 8.380708997719921
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p180",
+        "ms": 361.9802500033984,
+        "search_ms": 55.35058300301898
+      },
+      "embed>jev": {
+        "pick": "p180",
+        "ms": 809.8592500027735,
+        "rerank_ms": 447.8789999993751,
+        "cost": 0.000161364
+      },
+      "embed>llm": {
+        "pick": "p180",
+        "ms": 1263.3217920083553,
+        "rerank_ms": 901.3415420049569,
+        "cost": 0.0009661
+      }
+    },
+    {
+      "q": "What is the scale used to measure the strength of hurricanes called?",
+      "gold": "p669",
+      "bm25": {
+        "pick": "p49",
+        "ms": 8.595332998083904
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p669",
+        "ms": 778.6863749934128,
+        "search_ms": 42.98904098686762
+      },
+      "embed>jev": {
+        "pick": "p669",
+        "ms": 1150.2412079862552,
+        "rerank_ms": 371.5548329928424,
+        "cost": 0.000173376
+      },
+      "embed>llm": {
+        "pick": "p669",
+        "ms": 1534.1533339960733,
+        "rerank_ms": 755.4669590026606,
+        "cost": 0.0010681
+      }
+    },
+    {
+      "q": "Where do plenary meetings take place?",
+      "gold": "p960",
+      "bm25": {
+        "pick": "p960",
+        "ms": 1.7944159917533398
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p960",
+        "ms": 412.55812501185574,
+        "search_ms": 54.786375010735355
+      },
+      "embed>jev": {
+        "pick": "p960",
+        "ms": 792.349417009973,
+        "rerank_ms": 379.79129199811723,
+        "cost": 0.00017682
+      },
+      "embed>llm": {
+        "pick": "p960",
+        "ms": 1140.0773330242373,
+        "rerank_ms": 727.5192080123816,
+        "cost": 0.0011155
+      }
+    },
+    {
+      "q": "The bend on the Rhine goes from the West to what direction?",
+      "gold": "p913",
+      "bm25": {
+        "pick": "p913",
+        "ms": 10.05029100633692
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p913",
+        "ms": 433.6555419868091,
+        "search_ms": 53.55908299679868
+      },
+      "embed>jev": {
+        "pick": "p913",
+        "ms": 918.7562089791754,
+        "rerank_ms": 485.1006669923663,
+        "cost": 0.000175602
+      },
+      "embed>llm": {
+        "pick": "p913",
+        "ms": 1240.1226669899188,
+        "rerank_ms": 806.4671250031097,
+        "cost": 0.001063
+      }
+    },
+    {
+      "q": "What is an autoimmune disease that affects women preferentially?",
+      "gold": "p823",
+      "bm25": {
+        "pick": "p823",
+        "ms": 9.120750008150935
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p823",
+        "ms": 380.9772920067189,
+        "search_ms": 53.43966699729208
+      },
+      "embed>jev": {
+        "pick": "p823",
+        "ms": 760.432375012897,
+        "rerank_ms": 379.45508300617803,
+        "cost": 0.000169722
+      },
+      "embed>llm": {
+        "pick": "p823",
+        "ms": 1068.902958999388,
+        "rerank_ms": 687.925666992669,
+        "cost": 0.0010018
+      }
+    },
+    {
+      "q": "After the operators are warned by the escape of the steam, what may they then do?",
+      "gold": "p223",
+      "bm25": {
+        "pick": "p223",
+        "ms": 4.572749996441416
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p223",
+        "ms": 298.502624995308,
+        "search_ms": 51.86325000249781
+      },
+      "embed>jev": {
+        "pick": "p223",
+        "ms": 764.6366249973653,
+        "rerank_ms": 466.1340000020573,
+        "cost": 0.000153258
+      },
+      "embed>llm": {
+        "pick": "p223",
+        "ms": 1154.7486249910435,
+        "rerank_ms": 856.2459999957355,
+        "cost": 0.0009283
+      }
+    },
+    {
+      "q": "What political leaning does the Cato Institute have?",
+      "gold": "p698",
+      "bm25": {
+        "pick": "p698",
+        "ms": 7.502000007661991
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p683",
+        "ms": 390.1507910049986,
+        "search_ms": 52.82083399652038
+      },
+      "embed>jev": {
+        "pick": "p698",
+        "ms": 927.0645820070058,
+        "rerank_ms": 536.9137910020072,
+        "cost": 0.000183162
+      },
+      "embed>llm": {
+        "pick": "p698",
+        "ms": 1218.6372500000289,
+        "rerank_ms": 828.4864589950303,
+        "cost": 0.0011194
+      }
+    },
+    {
+      "q": "Who was the main proponent of the cellular theory of immunity?",
+      "gold": "p839",
+      "bm25": {
+        "pick": "p839",
+        "ms": 3.657458000816405
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p839",
+        "ms": 571.6146670019953,
+        "search_ms": 54.25383300462272
+      },
+      "embed>jev": {
+        "pick": "p839",
+        "ms": 988.4786249895114,
+        "rerank_ms": 416.8639579875162,
+        "cost": 0.000165984
+      },
+      "embed>llm": {
+        "pick": "p839",
+        "ms": 1107.5970420060912,
+        "rerank_ms": 535.982375004096,
+        "cost": 0.0009739
+      }
+    },
+    {
+      "q": "How many seats did the SNP take from the Liberal Democrats?",
+      "gold": "p984",
+      "bm25": {
+        "pick": "p984",
+        "ms": 3.051082996535115
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p984",
+        "ms": 319.5632920105709,
+        "search_ms": 55.180833995109424
+      },
+      "embed>jev": {
+        "pick": "p984",
+        "ms": 805.5794579995563,
+        "rerank_ms": 486.01616598898545,
+        "cost": 0.00016401
+      },
+      "embed>llm": {
+        "pick": "p984",
+        "ms": 1100.133125015418,
+        "rerank_ms": 780.5698330048472,
+        "cost": 0.0010216
+      }
+    },
+    {
+      "q": "What compounds are released by injured or infected cells, triggering inflammation?",
+      "gold": "p809",
+      "bm25": {
+        "pick": "p809",
+        "ms": 8.600582994404249
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p809",
+        "ms": 365.827999994508,
+        "search_ms": 42.27133298991248
+      },
+      "embed>jev": {
+        "pick": "p809",
+        "ms": 1048.213540983852,
+        "rerank_ms": 682.385540989344,
+        "cost": 0.000174216
+      },
+      "embed>llm": {
+        "pick": "p809",
+        "ms": 1150.7429169869283,
+        "rerank_ms": 784.9149169924203,
+        "cost": 0.0010228
+      }
+    },
+    {
+      "q": "What else contributes to Jacksonville's summer storms other than land heating beside the water?",
+      "gold": "p668",
+      "bm25": {
+        "pick": "p668",
+        "ms": 3.578499992727302
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p667",
+        "ms": 361.0380839963909,
+        "search_ms": 42.048584000440314
+      },
+      "embed>jev": {
+        "pick": "p668",
+        "ms": 751.8724999972619,
+        "rerank_ms": 390.834416000871,
+        "cost": 0.000178206
+      },
+      "embed>llm": {
+        "pick": "p668",
+        "ms": 1280.400583986193,
+        "rerank_ms": 919.362499989802,
+        "cost": 0.0011188
+      }
+    },
+    {
+      "q": "What are numbers greater than 1 that can be divided by 3 or more numbers called?",
+      "gold": "p873",
+      "bm25": {
+        "pick": "p877",
+        "ms": 4.7454580053454265
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p882",
+        "ms": 393.7400839931797,
+        "search_ms": 48.884750009165145
+      },
+      "embed>jev": {
+        "pick": "p873",
+        "ms": 790.9410839929478,
+        "rerank_ms": 397.2009999997681,
+        "cost": 0.000168798
+      },
+      "embed>llm": {
+        "pick": "p873",
+        "ms": 1229.8745419830084,
+        "rerank_ms": 836.1344579898287,
+        "cost": 0.0010453
+      }
+    },
+    {
+      "q": "After its re-opening, which types of movies did the Tower Theatre show?",
+      "gold": "p432",
+      "bm25": {
+        "pick": "p432",
+        "ms": 10.468041989952326
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p432",
+        "ms": 521.3449169968953,
+        "search_ms": 55.56666699703783
+      },
+      "embed>jev": {
+        "pick": "p432",
+        "ms": 911.2664999993285,
+        "rerank_ms": 389.9215830024332,
+        "cost": 0.000173922
+      },
+      "embed>llm": {
+        "pick": "p432",
+        "ms": 1410.790709007415,
+        "rerank_ms": 889.4457920105197,
+        "cost": 0.0010885
+      }
+    },
+    {
+      "q": "Who is best able to leverage the accumulation of wealth?",
+      "gold": "p689",
+      "bm25": {
+        "pick": "p689",
+        "ms": 8.567333003156818
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p689",
+        "ms": 323.00791700254194,
+        "search_ms": 53.10499999905005
+      },
+      "embed>jev": {
+        "pick": "p689",
+        "ms": 698.7714590068208,
+        "rerank_ms": 375.76354200427886,
+        "cost": 0.000167202
+      },
+      "embed>llm": {
+        "pick": "p689",
+        "ms": 1067.4971669941442,
+        "rerank_ms": 744.4892499916023,
+        "cost": 0.0010402
+      }
+    },
+    {
+      "q": "What is the name of the old north branch of the Rhine?",
+      "gold": "p922",
+      "bm25": {
+        "pick": "p922",
+        "ms": 12.022875002003275
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p922",
+        "ms": 421.4730000094278,
+        "search_ms": 52.9868329904275
+      },
+      "embed>jev": {
+        "pick": "p922",
+        "ms": 876.7182080046041,
+        "rerank_ms": 455.2452079951763,
+        "cost": 0.000174678
+      },
+      "embed>llm": {
+        "pick": "p922",
+        "ms": 1173.0935840168968,
+        "rerank_ms": 751.620584007469,
+        "cost": 0.0010594
+      }
+    },
+    {
+      "q": "How did the Yuan come to have the 4 schools of medicine?",
+      "gold": "p789",
+      "bm25": {
+        "pick": "p789",
+        "ms": 9.609374988940544
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p789",
+        "ms": 786.3979579997249,
+        "search_ms": 49.49062500963919
+      },
+      "embed>jev": {
+        "pick": "p789",
+        "ms": 1238.9462080027442,
+        "rerank_ms": 452.54825000301935,
+        "cost": 0.000218694
+      },
+      "embed>llm": {
+        "pick": "p789",
+        "ms": 1760.9451249882113,
+        "rerank_ms": 974.5471669884864,
+        "cost": 0.0013471
+      }
+    },
+    {
+      "q": "Who is on the IPCC Panel?",
+      "gold": "p851",
+      "bm25": {
+        "pick": "p867",
+        "ms": 7.823624997399747
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p851",
+        "ms": 758.0340830027126,
+        "search_ms": 52.3777920025168
+      },
+      "embed>jev": {
+        "pick": "p851",
+        "ms": 1181.0464580048574,
+        "rerank_ms": 423.01237500214484,
+        "cost": 0.00016359
+      },
+      "embed>llm": {
+        "pick": "p851",
+        "ms": 1622.9766250035027,
+        "rerank_ms": 864.9425420007901,
+        "cost": 0.0009895
+      }
+    },
+    {
+      "q": "What did the IPCC say was mistaken?",
+      "gold": "p860",
+      "bm25": {
+        "pick": "p861",
+        "ms": 6.001208006637171
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p861",
+        "ms": 455.3205839911243,
+        "search_ms": 51.125917001627386
+      },
+      "embed>jev": {
+        "pick": "p860",
+        "ms": 838.8388759922236,
+        "rerank_ms": 383.5182920010993,
+        "cost": 0.000174258
+      },
+      "embed>llm": {
+        "pick": "p860",
+        "ms": 1361.4461249817396,
+        "rerank_ms": 906.1255409906153,
+        "cost": 0.0010669
+      }
+    },
+    {
+      "q": "What is an example of a measurement within a complexity class that would create a bigger set of problems if the bounds were relaxed?",
+      "gold": "p66",
+      "bm25": {
+        "pick": "p70",
+        "ms": 6.035458005499095
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p64",
+        "ms": 348.09345900430344,
+        "search_ms": 54.43970799387898
+      },
+      "embed>jev": {
+        "pick": "p66",
+        "ms": 701.1359180032741,
+        "rerank_ms": 353.0424589989707,
+        "cost": 0.000110334
+      },
+      "embed>llm": {
+        "pick": "p66",
+        "ms": 1054.0395420102868,
+        "rerank_ms": 705.9460830059834,
+        "cost": 0.0006531
+      }
+    },
+    {
+      "q": "When did the Rhine become borders with Francia?",
+      "gold": "p943",
+      "bm25": {
+        "pick": "p943",
+        "ms": 6.275332998484373
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p943",
+        "ms": 356.3220829964848,
+        "search_ms": 55.28445899835788
+      },
+      "embed>jev": {
+        "pick": "p943",
+        "ms": 851.5148750011576,
+        "rerank_ms": 495.1927920046728,
+        "cost": 0.000173838
+      },
+      "embed>llm": {
+        "pick": "p943",
+        "ms": 1037.1377079864033,
+        "rerank_ms": 680.8156249899184,
+        "cost": 0.0010459
+      }
+    },
+    {
+      "q": "How many tree species were found in one square kilometer of Ecuadorian rainforest in 2001?",
+      "gold": "p379",
+      "bm25": {
+        "pick": "p379",
+        "ms": 9.787999995751306
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p379",
+        "ms": 517.4868340109242,
+        "search_ms": 55.62587500025984
+      },
+      "embed>jev": {
+        "pick": "p379",
+        "ms": 984.3967920169234,
+        "rerank_ms": 466.9099580059992,
+        "cost": 0.00016611
+      },
+      "embed>llm": {
+        "pick": "p379",
+        "ms": 1285.0765000184765,
+        "rerank_ms": 767.5896660075523,
+        "cost": 0.0009961
+      }
+    },
+    {
+      "q": "What do power station steam turbines use as a cold sink in the absence of CHP?",
+      "gold": "p246",
+      "bm25": {
+        "pick": "p246",
+        "ms": 11.734750005416572
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p246",
+        "ms": 449.381792001077,
+        "search_ms": 43.79845899529755
+      },
+      "embed>jev": {
+        "pick": "p246",
+        "ms": 893.860958996811,
+        "rerank_ms": 444.479166995734,
+        "cost": 0.000160062
+      },
+      "embed>llm": {
+        "pick": "p246",
+        "ms": 1147.5964170094812,
+        "rerank_ms": 698.2146250084043,
+        "cost": 0.0009745
+      }
+    },
+    {
+      "q": "How many extended metropolitan areas are there?",
+      "gold": "p109",
+      "bm25": {
+        "pick": "p109",
+        "ms": 4.82999999076128
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p109",
+        "ms": 477.4258329998702,
+        "search_ms": 44.14683399954811
+      },
+      "embed>jev": {
+        "pick": "p109",
+        "ms": 878.8467489939649,
+        "rerank_ms": 401.4209159940947,
+        "cost": 0.00012999
+      },
+      "embed>llm": {
+        "pick": "p109",
+        "ms": 1243.4594990045298,
+        "rerank_ms": 766.0336660046596,
+        "cost": 0.0007918
+      }
+    },
+    {
+      "q": "What does pushing and pulling perceptions provide for describing forces?",
+      "gold": "p1170",
+      "bm25": {
+        "pick": "p1171",
+        "ms": 7.080875002429821
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p1170",
+        "ms": 707.3653330007801,
+        "search_ms": 54.544917002203874
+      },
+      "embed>jev": {
+        "pick": "p1170",
+        "ms": 1133.2285829994362,
+        "rerank_ms": 425.8632499986561,
+        "cost": 0.000177072
+      },
+      "embed>llm": {
+        "pick": "p1170",
+        "ms": 1664.8619580082595,
+        "rerank_ms": 957.4966250074795,
+        "cost": 0.0010895
+      }
+    },
+    {
+      "q": "What remain unsolved problems with the Kyoto Protocol?",
+      "gold": "p870",
+      "bm25": {
+        "pick": "p870",
+        "ms": 2.4792080075712875
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p869",
+        "ms": 534.720916999504,
+        "search_ms": 42.58770801243372
+      },
+      "embed>jev": {
+        "pick": "p870",
+        "ms": 955.8543339953758,
+        "rerank_ms": 421.1334169958718,
+        "cost": 0.000161658
+      },
+      "embed>llm": {
+        "pick": "p870",
+        "ms": 1282.7618760056794,
+        "rerank_ms": 748.0409590061754,
+        "cost": 0.0009832
+      }
+    },
+    {
+      "q": "Why has Warsaw seen many improvements over the past decade?",
+      "gold": "p1101",
+      "bm25": {
+        "pick": "p1101",
+        "ms": 2.898332997574471
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p1101",
+        "ms": 428.801249989192,
+        "search_ms": 48.45516599016264
+      },
+      "embed>jev": {
+        "pick": "p1101",
+        "ms": 903.4695000009378,
+        "rerank_ms": 474.66825001174584,
+        "cost": 0.000192654
+      },
+      "embed>llm": {
+        "pick": "p1101",
+        "ms": 1126.360707989079,
+        "rerank_ms": 697.559457999887,
+        "cost": 0.0012263
+      }
+    },
+    {
+      "q": "How are nuclear forces transmitted?",
+      "gold": "p1192",
+      "bm25": {
+        "pick": "p1192",
+        "ms": 4.180457995971665
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p1192",
+        "ms": 517.8212079918012,
+        "search_ms": 42.15091599326115
+      },
+      "embed>jev": {
+        "pick": "p1192",
+        "ms": 937.2509579843609,
+        "rerank_ms": 419.42974999255966,
+        "cost": 0.000168042
+      },
+      "embed>llm": {
+        "pick": "p1192",
+        "ms": 1716.7547499993816,
+        "rerank_ms": 1198.9335420075804,
+        "cost": 0.0010136
+      }
+    },
+    {
+      "q": "What did the Islamic State proclaim itself in 2014?",
+      "gold": "p1020",
+      "bm25": {
+        "pick": "p1020",
+        "ms": 6.349458999466151
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p1020",
+        "ms": 405.04958300152794,
+        "search_ms": 54.077916996902786
+      },
+      "embed>jev": {
+        "pick": "p1020",
+        "ms": 823.6427910014754,
+        "rerank_ms": 418.5932079999475,
+        "cost": 0.000158928
+      },
+      "embed>llm": {
+        "pick": "p1020",
+        "ms": 1150.8774990070378,
+        "rerank_ms": 745.8279160055099,
+        "cost": 0.0009665
+      }
+    },
+    {
+      "q": "What does high levels of inequality do for economic growth in richer countries?",
+      "gold": "p704",
+      "bm25": {
+        "pick": "p704",
+        "ms": 8.468875006656162
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p700",
+        "ms": 761.7794580000918,
+        "search_ms": 54.21837499307003
+      },
+      "embed>jev": {
+        "pick": "p704",
+        "ms": 1476.1247080023168,
+        "rerank_ms": 714.3452500022249,
+        "cost": 0.00016191
+      },
+      "embed>llm": {
+        "pick": "p704",
+        "ms": 1748.2393329992192,
+        "rerank_ms": 986.4598749991274,
+        "cost": 0.0010138
+      }
+    },
+    {
+      "q": "Who were later Yuan emperors isolated from?",
+      "gold": "p773",
+      "bm25": {
+        "pick": "p773",
+        "ms": 2.2794579999754205
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p773",
+        "ms": 409.48441698856186,
+        "search_ms": 55.494458007160574
+      },
+      "embed>jev": {
+        "pick": "p773",
+        "ms": 884.6089579892578,
+        "rerank_ms": 475.1245410006959,
+        "cost": 0.00021567
+      },
+      "embed>llm": {
+        "pick": "p773",
+        "ms": 1378.945999982534,
+        "rerank_ms": 969.4615829939721,
+        "cost": 0.0013264
+      }
+    },
+    {
+      "q": "By sunlight, what compound did  Priestley concentrate on to make the gas he called \"dephlogisticated air\"?",
+      "gold": "p266",
+      "bm25": {
+        "pick": "p266",
+        "ms": 4.276249994290993
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p266",
+        "ms": 481.19458300061524,
+        "search_ms": 55.42420799611136
+      },
+      "embed>jev": {
+        "pick": "p266",
+        "ms": 894.9827499891398,
+        "rerank_ms": 413.7881669885246,
+        "cost": 0.000174006
+      },
+      "embed>llm": {
+        "pick": "p266",
+        "ms": 1389.9024999991525,
+        "rerank_ms": 908.7079169985373,
+        "cost": 0.001051
+      }
+    },
+    {
+      "q": "Who did the Mongols bring to China as administrators?",
+      "gold": "p794",
+      "bm25": {
+        "pick": "p794",
+        "ms": 5.115124993608333
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p794",
+        "ms": 342.8012500080513,
+        "search_ms": 53.74437499267515
+      },
+      "embed>jev": {
+        "pick": "p794",
+        "ms": 769.6703749970766,
+        "rerank_ms": 426.8691249890253,
+        "cost": 0.000205926
+      },
+      "embed>llm": {
+        "pick": "p794",
+        "ms": 1281.0280840058113,
+        "rerank_ms": 938.22683399776,
+        "cost": 0.0012517
+      }
+    },
+    {
+      "q": "Indigenous territories are largely being destroyed in what two ways?",
+      "gold": "p386",
+      "bm25": {
+        "pick": "p386",
+        "ms": 6.976457996643148
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p386",
+        "ms": 468.01050000067335,
+        "search_ms": 46.541874995455146
+      },
+      "embed>jev": {
+        "pick": "p386",
+        "ms": 880.8353340136819,
+        "rerank_ms": 412.8248340130085,
+        "cost": 0.000170982
+      },
+      "embed>llm": {
+        "pick": "p386",
+        "ms": 1795.3817910020007,
+        "rerank_ms": 1327.3712910013273,
+        "cost": 0.0010228
+      }
+    },
+    {
+      "q": "What happens to the working fluid in a closed loop system?",
+      "gold": "p234",
+      "bm25": {
+        "pick": "p234",
+        "ms": 8.741833007661626
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p234",
+        "ms": 396.3980420085136,
+        "search_ms": 55.5341659928672
+      },
+      "embed>jev": {
+        "pick": "p234",
+        "ms": 917.1555010107113,
+        "rerank_ms": 520.7574590021977,
+        "cost": 0.000156912
+      },
+      "embed>llm": {
+        "pick": "p234",
+        "ms": 1124.0360840020003,
+        "rerank_ms": 727.6380419934867,
+        "cost": 0.0009529
+      }
+    },
+    {
+      "q": "A forced trade agreement between two countries would be an example of what?",
+      "gold": "p1028",
+      "bm25": {
+        "pick": "p685",
+        "ms": 3.4067919914377853
+      },
+      "recall_at_k": false,
+      "embed": {
+        "pick": "p359",
+        "ms": 417.69791599654127,
+        "search_ms": 45.00229100813158
+      },
+      "embed>jev": {
+        "pick": "p1027",
+        "ms": 913.1590819888515,
+        "rerank_ms": 495.46116599231027,
+        "cost": 0.000308994
+      },
+      "embed>llm": {
+        "pick": "none",
+        "ms": 1355.399791005766,
+        "rerank_ms": 937.7018750092248,
+        "cost": 0.0019714
+      }
+    },
+    {
+      "q": "What did Aristotle refer to forced motion as?",
+      "gold": "p1162",
+      "bm25": {
+        "pick": "p1162",
+        "ms": 2.691875008167699
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p1162",
+        "ms": 1330.709832996945,
+        "search_ms": 45.499832995119505
+      },
+      "embed>jev": {
+        "pick": "p1162",
+        "ms": 1752.888332994189,
+        "rerank_ms": 422.1784999972442,
+        "cost": 0.000172326
+      },
+      "embed>llm": {
+        "pick": "p1162",
+        "ms": 2065.7129579922184,
+        "rerank_ms": 735.0031249952735,
+        "cost": 0.0010691
+      }
+    },
+    {
+      "q": "Who developed the actinide concept?",
+      "gold": "p751",
+      "bm25": {
+        "pick": "p751",
+        "ms": 4.865208989940584
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p750",
+        "ms": 393.042208001134,
+        "search_ms": 42.25820799183566
+      },
+      "embed>jev": {
+        "pick": "p751",
+        "ms": 978.6597490019631,
+        "rerank_ms": 585.6175410008291,
+        "cost": 0.000161994
+      },
+      "embed>llm": {
+        "pick": "p751",
+        "ms": 1560.5894580075983,
+        "rerank_ms": 1167.5472500064643,
+        "cost": 0.0009769
+      }
+    },
+    {
+      "q": "How many rooms does the Warsaw Historical Museum have?",
+      "gold": "p1107",
+      "bm25": {
+        "pick": "p1107",
+        "ms": 6.82799999776762
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p1107",
+        "ms": 492.0853749936214,
+        "search_ms": 45.10129100526683
+      },
+      "embed>jev": {
+        "pick": "p1107",
+        "ms": 1003.1487499945797,
+        "rerank_ms": 511.06337500095833,
+        "cost": 0.000192066
+      },
+      "embed>llm": {
+        "pick": "p1107",
+        "ms": 1269.6470840019174,
+        "rerank_ms": 777.561709008296,
+        "cost": 0.0012095
+      }
+    },
+    {
+      "q": "How old was Toghun Temur when he became emperor?",
+      "gold": "p772",
+      "bm25": {
+        "pick": "p772",
+        "ms": 2.485667006112635
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p772",
+        "ms": 377.0651250088122,
+        "search_ms": 41.97500000009313
+      },
+      "embed>jev": {
+        "pick": "p772",
+        "ms": 875.3384170122445,
+        "rerank_ms": 498.2732920034323,
+        "cost": 0.000210042
+      },
+      "embed>llm": {
+        "pick": "p772",
+        "ms": 1264.7131250123493,
+        "rerank_ms": 887.6480000035372,
+        "cost": 0.0012964
+      }
+    },
+    {
+      "q": "What is the derivative of an object's changing momentum called?",
+      "gold": "p1187",
+      "bm25": {
+        "pick": "p1187",
+        "ms": 3.1752089998917654
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p1199",
+        "ms": 561.735833005514,
+        "search_ms": 55.30704099510331
+      },
+      "embed>jev": {
+        "pick": "p1187",
+        "ms": 1043.436208012281,
+        "rerank_ms": 481.700375006767,
+        "cost": 0.000172326
+      },
+      "embed>llm": {
+        "pick": "p1187",
+        "ms": 1353.7215830147034,
+        "rerank_ms": 791.9857500091894,
+        "cost": 0.0010664
+      }
+    },
+    {
+      "q": "What has shortened the Rhine river? ",
+      "gold": "p906",
+      "bm25": {
+        "pick": "p906",
+        "ms": 5.426499992609024
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p914",
+        "ms": 461.2303750036517,
+        "search_ms": 55.7403339917073
+      },
+      "embed>jev": {
+        "pick": "p906",
+        "ms": 921.4622080035042,
+        "rerank_ms": 460.2318329998525,
+        "cost": 0.00016884
+      },
+      "embed>llm": {
+        "pick": "p906",
+        "ms": 1260.0410000013653,
+        "rerank_ms": 798.8106249977136,
+        "cost": 0.0010165
+      }
+    },
+    {
+      "q": "What did the  fossils found in the Burgess Shale lack?",
+      "gold": "p418",
+      "bm25": {
+        "pick": "p418",
+        "ms": 3.9074999949662015
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p418",
+        "ms": 403.5179159982363,
+        "search_ms": 43.54524999507703
+      },
+      "embed>jev": {
+        "pick": "p418",
+        "ms": 795.9802910045255,
+        "rerank_ms": 392.4623750062892,
+        "cost": 0.000179802
+      },
+      "embed>llm": {
+        "pick": "p418",
+        "ms": 1371.4341659942875,
+        "rerank_ms": 967.9162499960512,
+        "cost": 0.0010732
+      }
+    },
+    {
+      "q": "What is the famous rock near Sanke Goarshausen?",
+      "gold": "p918",
+      "bm25": {
+        "pick": "p918",
+        "ms": 7.762708002701402
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p918",
+        "ms": 984.0931250073481,
+        "search_ms": 53.03333299525548
+      },
+      "embed>jev": {
+        "pick": "p918",
+        "ms": 1365.7598750141915,
+        "rerank_ms": 381.66675000684336,
+        "cost": 0.00018018
+      },
+      "embed>llm": {
+        "pick": "p918",
+        "ms": 3337.399917014409,
+        "rerank_ms": 2353.3067920070607,
+        "cost": 0.0010906
+      }
+    },
+    {
+      "q": "How many of the richest 400 Americans grew up in substantial privilege?",
+      "gold": "p673",
+      "bm25": {
+        "pick": "p673",
+        "ms": 3.5566250007832423
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p673",
+        "ms": 435.0249580020318,
+        "search_ms": 52.454124990617856
+      },
+      "embed>jev": {
+        "pick": "p673",
+        "ms": 967.7554160007276,
+        "rerank_ms": 532.7304579986958,
+        "cost": 0.00016611
+      },
+      "embed>llm": {
+        "pick": "p673",
+        "ms": 1533.951999997953,
+        "rerank_ms": 1098.9270419959212,
+        "cost": 0.0010411
+      }
+    },
+    {
+      "q": "How many items is the University Library home to?",
+      "gold": "p1100",
+      "bm25": {
+        "pick": "p1100",
+        "ms": 7.196374994236976
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p733",
+        "ms": 711.6362500091782,
+        "search_ms": 97.63674999703653
+      },
+      "embed>jev": {
+        "pick": "p1100",
+        "ms": 1134.384917007992,
+        "rerank_ms": 422.74866699881386,
+        "cost": 0.000188664
+      },
+      "embed>llm": {
+        "pick": "p1100",
+        "ms": 1707.406625020667,
+        "rerank_ms": 995.7703750114888,
+        "cost": 0.0011975
+      }
+    },
+    {
+      "q": "James Hutton published a 2 volume version of his theories in what year?",
+      "gold": "p518",
+      "bm25": {
+        "pick": "p518",
+        "ms": 3.4490830003051087
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p518",
+        "ms": 559.1276250052033,
+        "search_ms": 81.54124999418855
+      },
+      "embed>jev": {
+        "pick": "p518",
+        "ms": 934.4001249992289,
+        "rerank_ms": 375.27249999402557,
+        "cost": 0.000181356
+      },
+      "embed>llm": {
+        "pick": "p518",
+        "ms": 2220.96175000479,
+        "rerank_ms": 1661.8341249995865,
+        "cost": 0.0011107
+      }
+    },
+    {
+      "q": "The inland delta at the mouth of the Rhine is with what Lake?",
+      "gold": "p908",
+      "bm25": {
+        "pick": "p908",
+        "ms": 3.7421250017359853
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p908",
+        "ms": 604.4499580020783,
+        "search_ms": 52.12791600206401
+      },
+      "embed>jev": {
+        "pick": "p908",
+        "ms": 1389.0738330082968,
+        "rerank_ms": 784.6238750062184,
+        "cost": 0.000169092
+      },
+      "embed>llm": {
+        "pick": "p908",
+        "ms": 1211.3666250079405,
+        "rerank_ms": 606.9166670058621,
+        "cost": 0.0010252
+      }
+    },
+    {
+      "q": "Some people describe what between individuals or groups as imperialism or colonialism?",
+      "gold": "p1062",
+      "bm25": {
+        "pick": "p1030",
+        "ms": 8.422791986959055
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p1030",
+        "ms": 447.4046250106767,
+        "search_ms": 51.93383300502319
+      },
+      "embed>jev": {
+        "pick": "p1062",
+        "ms": 1015.9149590035668,
+        "rerank_ms": 568.5103339928901,
+        "cost": 0.000218022
+      },
+      "embed>llm": {
+        "pick": "p1062",
+        "ms": 1333.279708007467,
+        "rerank_ms": 885.8750829967903,
+        "cost": 0.0012983
+      }
+    },
+    {
+      "q": "What is the process of vaccination also known as?",
+      "gold": "p830",
+      "bm25": {
+        "pick": "p830",
+        "ms": 8.495415997458622
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p830",
+        "ms": 464.5688750024419,
+        "search_ms": 42.670042006648146
+      },
+      "embed>jev": {
+        "pick": "p830",
+        "ms": 887.8156670107273,
+        "rerank_ms": 423.2467920082854,
+        "cost": 0.00017367
+      },
+      "embed>llm": {
+        "pick": "p830",
+        "ms": 1349.56700001203,
+        "rerank_ms": 884.998125009588,
+        "cost": 0.0010291
+      }
+    },
+    {
+      "q": "What lands were reserved for natives?",
+      "gold": "p1158",
+      "bm25": {
+        "pick": "p1128",
+        "ms": 2.0868749998044223
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p1158",
+        "ms": 410.0605830026325,
+        "search_ms": 52.608833997510374
+      },
+      "embed>jev": {
+        "pick": "p1158",
+        "ms": 869.4608740042895,
+        "rerank_ms": 459.400291001657,
+        "cost": 0.000166782
+      },
+      "embed>llm": {
+        "pick": "p1158",
+        "ms": 1373.4182490006788,
+        "rerank_ms": 963.3576659980463,
+        "cost": 0.0010331
+      }
+    },
+    {
+      "q": "Why did Confucians like the medical field?",
+      "gold": "p788",
+      "bm25": {
+        "pick": "p861",
+        "ms": 7.175124992500059
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p788",
+        "ms": 751.5890840004431,
+        "search_ms": 43.771374999778345
+      },
+      "embed>jev": {
+        "pick": "p788",
+        "ms": 1197.6263339893194,
+        "rerank_ms": 446.0372499888763,
+        "cost": 0.000204834
+      },
+      "embed>llm": {
+        "pick": "p788",
+        "ms": 1574.5871260005515,
+        "rerank_ms": 822.9980420001084,
+        "cost": 0.0012706
+      }
+    },
+    {
+      "q": "What may explain why some Americans who've become rich may have had a head start?",
+      "gold": "p673",
+      "bm25": {
+        "pick": "p673",
+        "ms": 8.918292005546391
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p673",
+        "ms": 318.09758399322163,
+        "search_ms": 55.468833990744315
+      },
+      "embed>jev": {
+        "pick": "p673",
+        "ms": 773.6006670020288,
+        "rerank_ms": 455.50308300880715,
+        "cost": 0.00016821
+      },
+      "embed>llm": {
+        "pick": "p673",
+        "ms": 1115.087666985346,
+        "rerank_ms": 796.9900829921244,
+        "cost": 0.0010471
+      }
+    },
+    {
+      "q": "What is one method of achieving aspirational consumption?",
+      "gold": "p710",
+      "bm25": {
+        "pick": "p710",
+        "ms": 6.172374996822327
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p710",
+        "ms": 378.670999998576,
+        "search_ms": 41.46108400891535
+      },
+      "embed>jev": {
+        "pick": "p710",
+        "ms": 845.2289169945288,
+        "rerank_ms": 466.55791699595284,
+        "cost": 0.000154392
+      },
+      "embed>llm": {
+        "pick": "p710",
+        "ms": 1234.8696249973727,
+        "rerank_ms": 856.1986249987967,
+        "cost": 0.000955
+      }
+    },
+    {
+      "q": "When were competition rules included in the Treaty of Rome?",
+      "gold": "p357",
+      "bm25": {
+        "pick": "p357",
+        "ms": 3.81504200049676
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p357",
+        "ms": 407.1833750058431,
+        "search_ms": 52.678666994324885
+      },
+      "embed>jev": {
+        "pick": "p357",
+        "ms": 854.5822919986676,
+        "rerank_ms": 447.3989169928245,
+        "cost": 0.000368802
+      },
+      "embed>llm": {
+        "pick": "p357",
+        "ms": 1381.6335830051685,
+        "rerank_ms": 974.4502079993254,
+        "cost": 0.00076384
+      }
+    },
+    {
+      "q": "When was Europe's last major epidemic?",
+      "gold": "p494",
+      "bm25": {
+        "pick": "p494",
+        "ms": 6.862916998215951
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p491",
+        "ms": 438.12949999119155,
+        "search_ms": 56.09716700564604
+      },
+      "embed>jev": {
+        "pick": "p494",
+        "ms": 823.6225419823313,
+        "rerank_ms": 385.49304199113976,
+        "cost": 0.000208698
+      },
+      "embed>llm": {
+        "pick": "p494",
+        "ms": 1246.0428749909624,
+        "rerank_ms": 807.9133749997709,
+        "cost": 0.00022435
+      }
+    },
+    {
+      "q": "Which city is planned to be a part of the California High Speed Rail?",
+      "gold": "p449",
+      "bm25": {
+        "pick": "p449",
+        "ms": 10.238917006063275
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p449",
+        "ms": 450.5722089961637,
+        "search_ms": 42.8645409992896
+      },
+      "embed>jev": {
+        "pick": "p449",
+        "ms": 819.6397919964511,
+        "rerank_ms": 369.0675830002874,
+        "cost": 0.00013944
+      },
+      "embed>llm": {
+        "pick": "p449",
+        "ms": 1211.5071259904653,
+        "rerank_ms": 760.9349169943016,
+        "cost": 0.0008452
+      }
+    },
+    {
+      "q": "Who sold the rights?",
+      "gold": "p29",
+      "bm25": {
+        "pick": "p29",
+        "ms": 3.741167005500756
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p141",
+        "ms": 450.40954199794214,
+        "search_ms": 43.13383300905116
+      },
+      "embed>jev": {
+        "pick": "p29",
+        "ms": 843.9848330017412,
+        "rerank_ms": 393.57529100379907,
+        "cost": 0.000174888
+      },
+      "embed>llm": {
+        "pick": "p29",
+        "ms": 1373.3392499998445,
+        "rerank_ms": 922.9297080019023,
+        "cost": 0.0011127
+      }
+    },
+    {
+      "q": "What is an example of a problem to which effective algorithms have provided a solution in spite of the intractability associated with the breadth of sizes?",
+      "gold": "p81",
+      "bm25": {
+        "pick": "p81",
+        "ms": 15.148833001148887
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p81",
+        "ms": 734.2701669986127,
+        "search_ms": 51.81133298901841
+      },
+      "embed>jev": {
+        "pick": "p81",
+        "ms": 1120.7121670013294,
+        "rerank_ms": 386.44200000271667,
+        "cost": 0.000133644
+      },
+      "embed>llm": {
+        "pick": "p81",
+        "ms": 1619.1386669961503,
+        "rerank_ms": 884.8684999975376,
+        "cost": 0.0008139
+      }
+    },
+    {
+      "q": "How is the O2 molecule referred to in its ground state? ",
+      "gold": "p275",
+      "bm25": {
+        "pick": "p275",
+        "ms": 3.237624987377785
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p275",
+        "ms": 384.17737500276417,
+        "search_ms": 50.63649998919573
+      },
+      "embed>jev": {
+        "pick": "p275",
+        "ms": 884.6087920101127,
+        "rerank_ms": 500.4314170073485,
+        "cost": 0.000172452
+      },
+      "embed>llm": {
+        "pick": "p275",
+        "ms": 1203.8407500076573,
+        "rerank_ms": 819.6633750048932,
+        "cost": 0.0010288
+      }
+    },
+    {
+      "q": "What list was Warsaw's Old Town inscribed onto in 1980?",
+      "gold": "p1076",
+      "bm25": {
+        "pick": "p1076",
+        "ms": 2.7757909992942587
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p1076",
+        "ms": 880.2740420069313,
+        "search_ms": 54.64304200722836
+      },
+      "embed>jev": {
+        "pick": "p1076",
+        "ms": 1465.8320839953376,
+        "rerank_ms": 585.5580419884063,
+        "cost": 0.000188706
+      },
+      "embed>llm": {
+        "pick": "p1076",
+        "ms": 1780.088416999206,
+        "rerank_ms": 899.8143749922747,
+        "cost": 0.0011921
+      }
+    },
+    {
+      "q": "What do the leaders of the opposition parties and other MSPs question the First Minister about?",
+      "gold": "p979",
+      "bm25": {
+        "pick": "p979",
+        "ms": 12.17816601274535
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p979",
+        "ms": 380.02595798752736,
+        "search_ms": 51.490666999598034
+      },
+      "embed>jev": {
+        "pick": "p979",
+        "ms": 802.5222489814041,
+        "rerank_ms": 422.49629099387676,
+        "cost": 0.00016296
+      },
+      "embed>llm": {
+        "pick": "p979",
+        "ms": 1243.4552919876296,
+        "rerank_ms": 863.4293340001022,
+        "cost": 0.0010099
+      }
+    },
+    {
+      "q": "When did Khan formally declare the Yuan dynasty?",
+      "gold": "p753",
+      "bm25": {
+        "pick": "p755",
+        "ms": 6.1990420072106645
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p753",
+        "ms": 590.7932079862803,
+        "search_ms": 55.05149999225978
+      },
+      "embed>jev": {
+        "pick": "p762",
+        "ms": 1028.6177919915644,
+        "rerank_ms": 437.8245840052841,
+        "cost": 0.00021798
+      },
+      "embed>llm": {
+        "pick": "p753",
+        "ms": 1492.1533329761587,
+        "rerank_ms": 901.3601249898784,
+        "cost": 0.00023995
+      }
+    },
+    {
+      "q": "What did the Kyoto Protocol try to address?",
+      "gold": "p869",
+      "bm25": {
+        "pick": "p869",
+        "ms": 6.631458003539592
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p869",
+        "ms": 530.974958994193,
+        "search_ms": 55.83133301115595
+      },
+      "embed>jev": {
+        "pick": "p849",
+        "ms": 923.4973749989877,
+        "rerank_ms": 392.52241600479465,
+        "cost": 0.00015582
+      },
+      "embed>llm": {
+        "pick": "none",
+        "ms": 1381.9411250005942,
+        "rerank_ms": 850.9661660064012,
+        "cost": 0.0009367
+      }
+    },
+    {
+      "q": "The flushing action of what expels pathogens from the eyes?",
+      "gold": "p806",
+      "bm25": {
+        "pick": "p806",
+        "ms": 4.421124991495162
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p806",
+        "ms": 353.71466699871235,
+        "search_ms": 44.3306249944726
+      },
+      "embed>jev": {
+        "pick": "p806",
+        "ms": 918.0384169885656,
+        "rerank_ms": 564.3237499898532,
+        "cost": 0.000164472
+      },
+      "embed>llm": {
+        "pick": "p806",
+        "ms": 1242.879792000167,
+        "rerank_ms": 889.1651250014547,
+        "cost": 0.0009496
+      }
+    },
+    {
+      "q": "What is the average construction salary in the Middle East?",
+      "gold": "p593",
+      "bm25": {
+        "pick": "p593",
+        "ms": 3.3971249940805137
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p593",
+        "ms": 494.0619169938145,
+        "search_ms": 55.31962499662768
+      },
+      "embed>jev": {
+        "pick": "p593",
+        "ms": 1065.9927089873236,
+        "rerank_ms": 571.930791993509,
+        "cost": 0.000150108
+      },
+      "embed>llm": {
+        "pick": "p593",
+        "ms": 1321.8381259939633,
+        "rerank_ms": 827.7762090001488,
+        "cost": 0.0009328
+      }
+    },
+    {
+      "q": "When was the Lisbon Treaty established?",
+      "gold": "p353",
+      "bm25": {
+        "pick": "p335",
+        "ms": 5.103957999381237
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p335",
+        "ms": 373.2390410004882,
+        "search_ms": 54.42137499630917
+      },
+      "embed>jev": {
+        "pick": "p334",
+        "ms": 860.7611659972463,
+        "rerank_ms": 487.52212499675807,
+        "cost": 0.000283164
+      },
+      "embed>llm": {
+        "pick": "p334",
+        "ms": 1254.2624159978004,
+        "rerank_ms": 881.0233749973122,
+        "cost": 0.00074089
+      }
+    },
+    {
+      "q": "How recently has the homes in Fresno been restored?",
+      "gold": "p434",
+      "bm25": {
+        "pick": "p434",
+        "ms": 7.698790999711491
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p434",
+        "ms": 526.8382920039585,
+        "search_ms": 55.781874994863756
+      },
+      "embed>jev": {
+        "pick": "p434",
+        "ms": 945.1271260040812,
+        "rerank_ms": 418.28883400012273,
+        "cost": 0.000201012
+      },
+      "embed>llm": {
+        "pick": "p434",
+        "ms": 1538.7227090104716,
+        "rerank_ms": 1011.8844170065131,
+        "cost": 0.0012769
+      }
+    },
+    {
+      "q": "Where was there a weakness in British supply chain?",
+      "gold": "p1146",
+      "bm25": {
+        "pick": "p1146",
+        "ms": 8.335667007486336
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p1048",
+        "ms": 368.5451670025941,
+        "search_ms": 44.93324999930337
+      },
+      "embed>jev": {
+        "pick": "p1146",
+        "ms": 744.700875991839,
+        "rerank_ms": 376.1557089892449,
+        "cost": 0.000172074
+      },
+      "embed>llm": {
+        "pick": "p1146",
+        "ms": 1504.2960419959854,
+        "rerank_ms": 1135.7508749933913,
+        "cost": 0.0010712
+      }
+    },
+    {
+      "q": "The immune system protects organisms against what?",
+      "gold": "p800",
+      "bm25": {
+        "pick": "p800",
+        "ms": 2.2527920082211494
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p803",
+        "ms": 412.0919999986654,
+        "search_ms": 55.244500006665476
+      },
+      "embed>jev": {
+        "pick": "p800",
+        "ms": 802.9419590020552,
+        "rerank_ms": 390.8499590033898,
+        "cost": 0.000162036
+      },
+      "embed>llm": {
+        "pick": "p800",
+        "ms": 1399.6028340043267,
+        "rerank_ms": 987.5108340056613,
+        "cost": 0.0009382
+      }
+    },
+    {
+      "q": "When did Temur rule?",
+      "gold": "p767",
+      "bm25": {
+        "pick": "p782",
+        "ms": 3.8672500086249784
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p772",
+        "ms": 456.86829200712964,
+        "search_ms": 53.72941600217018
+      },
+      "embed>jev": {
+        "pick": "p767",
+        "ms": 968.2205840072129,
+        "rerank_ms": 511.35229200008325,
+        "cost": 0.00021441
+      },
+      "embed>llm": {
+        "pick": "p767",
+        "ms": 1267.3117500089575,
+        "rerank_ms": 810.4434580018278,
+        "cost": 0.0013252
+      }
+    },
+    {
+      "q": "Complement proteins bind to what kind of molecules on the surface of microbes in order to elicit an immune response?",
+      "gold": "p848",
+      "bm25": {
+        "pick": "p848",
+        "ms": 5.5514999985462055
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p848",
+        "ms": 394.64729199244175,
+        "search_ms": 52.48470799415372
+      },
+      "embed>jev": {
+        "pick": "p848",
+        "ms": 812.3533329926431,
+        "rerank_ms": 417.70604100020137,
+        "cost": 0.00017388
+      },
+      "embed>llm": {
+        "pick": "p848",
+        "ms": 1237.5687919848133,
+        "rerank_ms": 842.9214999923715,
+        "cost": 0.0010129
+      }
+    },
+    {
+      "q": "What does the matching helper T cell release when it binds with the MHC:antigen complex of the B cell?",
+      "gold": "p820",
+      "bm25": {
+        "pick": "p818",
+        "ms": 12.433124997187406
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p818",
+        "ms": 359.89158299344126,
+        "search_ms": 51.57349999353755
+      },
+      "embed>jev": {
+        "pick": "p820",
+        "ms": 745.1779999973951,
+        "rerank_ms": 385.28641700395383,
+        "cost": 0.000170394
+      },
+      "embed>llm": {
+        "pick": "p820",
+        "ms": 1318.4104159881826,
+        "rerank_ms": 958.5188329947414,
+        "cost": 0.0010309
+      }
+    },
+    {
+      "q": "What would income differentials be if individual contributions were relevant to the social product?",
+      "gold": "p712",
+      "bm25": {
+        "pick": "p712",
+        "ms": 3.755167010240257
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p679",
+        "ms": 385.615791004966,
+        "search_ms": 51.127458005794324
+      },
+      "embed>jev": {
+        "pick": "p712",
+        "ms": 963.3846660144627,
+        "rerank_ms": 577.7688750094967,
+        "cost": 0.000156492
+      },
+      "embed>llm": {
+        "pick": "p712",
+        "ms": 1430.2355410036398,
+        "rerank_ms": 1044.6197499986738,
+        "cost": 0.000976
+      }
+    },
+    {
+      "q": "What flows between Bingen and Bonn?",
+      "gold": "p916",
+      "bm25": {
+        "pick": "p916",
+        "ms": 5.435625003883615
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p916",
+        "ms": 343.20600000501145,
+        "search_ms": 56.33987499459181
+      },
+      "embed>jev": {
+        "pick": "p916",
+        "ms": 765.7990000006976,
+        "rerank_ms": 422.5929999956861,
+        "cost": 0.00017094
+      },
+      "embed>llm": {
+        "pick": "p916",
+        "ms": 1373.1646250089398,
+        "rerank_ms": 1029.9586250039283,
+        "cost": 0.0010273
+      }
+    },
+    {
+      "q": "What was there a significant minority of in Warsaw?",
+      "gold": "p1090",
+      "bm25": {
+        "pick": "p1090",
+        "ms": 2.8889160021208227
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p1090",
+        "ms": 396.88758400734514,
+        "search_ms": 51.294125005370006
+      },
+      "embed>jev": {
+        "pick": "p1090",
+        "ms": 805.8523340150714,
+        "rerank_ms": 408.96475000772625,
+        "cost": 0.000188202
+      },
+      "embed>llm": {
+        "pick": "p1090",
+        "ms": 1396.3963340065675,
+        "rerank_ms": 999.5087499992223,
+        "cost": 0.0011936
+      }
+    },
+    {
+      "q": "Who was the most influential researcher among those grappling with the deficit of work surrounding the complexity posed by algorithmic problems?",
+      "gold": "p82",
+      "bm25": {
+        "pick": "p82",
+        "ms": 14.118457998847589
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p82",
+        "ms": 433.09687500004657,
+        "search_ms": 54.37745800008997
+      },
+      "embed>jev": {
+        "pick": "p82",
+        "ms": 932.973499991931,
+        "rerank_ms": 499.87662499188446,
+        "cost": 0.000135156
+      },
+      "embed>llm": {
+        "pick": "p82",
+        "ms": 1236.6825419885572,
+        "rerank_ms": 803.5856669885106,
+        "cost": 0.000801
+      }
+    },
+    {
+      "q": "Why are researchers struggling to identify the history of the plague?",
+      "gold": "p487",
+      "bm25": {
+        "pick": "p487",
+        "ms": 9.895708004478365
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p487",
+        "ms": 359.1372499940917,
+        "search_ms": 57.24620800174307
+      },
+      "embed>jev": {
+        "pick": "p487",
+        "ms": 794.0344589878805,
+        "rerank_ms": 434.8972089937888,
+        "cost": 0.000200634
+      },
+      "embed>llm": {
+        "pick": "p487",
+        "ms": 1336.6242919873912,
+        "rerank_ms": 977.4870419932995,
+        "cost": 0.0012589
+      }
+    },
+    {
+      "q": "What entities are included in the federal health care system?",
+      "gold": "p533",
+      "bm25": {
+        "pick": "p533",
+        "ms": 2.9522090044338256
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p533",
+        "ms": 436.85279198689386,
+        "search_ms": 48.06912499770988
+      },
+      "embed>jev": {
+        "pick": "p533",
+        "ms": 915.5351249792147,
+        "rerank_ms": 478.6823329923209,
+        "cost": 0.000153384
+      },
+      "embed>llm": {
+        "pick": "p533",
+        "ms": 1431.6737089975504,
+        "rerank_ms": 994.8209170106566,
+        "cost": 0.0009133
+      }
+    },
+    {
+      "q": "What is the Chinese name for the Yuan dynasty?",
+      "gold": "p753",
+      "bm25": {
+        "pick": "p754",
+        "ms": 7.699124995269813
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p755",
+        "ms": 468.26270800374914,
+        "search_ms": 54.08483400242403
+      },
+      "embed>jev": {
+        "pick": "p753",
+        "ms": 928.8806240074337,
+        "rerank_ms": 460.6179160036845,
+        "cost": 0.000221466
+      },
+      "embed>llm": {
+        "pick": "p753",
+        "ms": 1532.9615410009865,
+        "rerank_ms": 1064.6988329972373,
+        "cost": 0.00027148
+      }
+    },
+    {
+      "q": "When was the French colony in modern day Brazil founded?",
+      "gold": "p193",
+      "bm25": {
+        "pick": "p200",
+        "ms": 7.896583003457636
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p193",
+        "ms": 425.30737500055693,
+        "search_ms": 50.721583000267856
+      },
+      "embed>jev": {
+        "pick": "p193",
+        "ms": 888.1601670000236,
+        "rerank_ms": 462.8527919994667,
+        "cost": 0.000180684
+      },
+      "embed>llm": {
+        "pick": "p193",
+        "ms": 1359.154125006171,
+        "rerank_ms": 933.846750005614,
+        "cost": 0.0011155
+      }
+    },
+    {
+      "q": "How much did Silas B. Cobb pledge to the university?",
+      "gold": "p719",
+      "bm25": {
+        "pick": "p719",
+        "ms": 7.274625007994473
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p719",
+        "ms": 431.78904200613033,
+        "search_ms": 55.317000005743466
+      },
+      "embed>jev": {
+        "pick": "p719",
+        "ms": 819.0672920027282,
+        "rerank_ms": 387.2782499965979,
+        "cost": 0.000182952
+      },
+      "embed>llm": {
+        "pick": "p719",
+        "ms": 1302.1129590051714,
+        "rerank_ms": 870.3239169990411,
+        "cost": 0.0011404
+      }
+    },
+    {
+      "q": "What political response was convening in June/July 1754?",
+      "gold": "p1139",
+      "bm25": {
+        "pick": "p1139",
+        "ms": 3.078374997130595
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p1139",
+        "ms": 357.9486249946058,
+        "search_ms": 53.25533400173299
+      },
+      "embed>jev": {
+        "pick": "p1139",
+        "ms": 826.4952079916839,
+        "rerank_ms": 468.5465829970781,
+        "cost": 0.000167706
+      },
+      "embed>llm": {
+        "pick": "p1139",
+        "ms": 1177.5384999928065,
+        "rerank_ms": 819.5898749982007,
+        "cost": 0.0010361
+      }
+    },
+    {
+      "q": "What is often misunderstood as the cause of matter rigidity?",
+      "gold": "p1191",
+      "bm25": {
+        "pick": "p1191",
+        "ms": 3.133042002446018
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p1191",
+        "ms": 1562.6047919940902,
+        "search_ms": 56.29916700127069
+      },
+      "embed>jev": {
+        "pick": "p1191",
+        "ms": 1982.183251006063,
+        "rerank_ms": 419.5784590119729,
+        "cost": 0.0001743
+      },
+      "embed>llm": {
+        "pick": "p1191",
+        "ms": 2480.9352919837693,
+        "rerank_ms": 918.3304999896791,
+        "cost": 0.0010661
+      }
+    },
+    {
+      "q": "What does the WG I Summary for Policymakers report say human activities are doing to greenhouse gases?",
+      "gold": "p855",
+      "bm25": {
+        "pick": "p855",
+        "ms": 11.069708009017631
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p855",
+        "ms": 423.0275000008987,
+        "search_ms": 54.201874998398125
+      },
+      "embed>jev": {
+        "pick": "p855",
+        "ms": 953.7653750012396,
+        "rerank_ms": 530.7378750003409,
+        "cost": 0.000166908
+      },
+      "embed>llm": {
+        "pick": "p855",
+        "ms": 1182.3369170015212,
+        "rerank_ms": 759.3094170006225,
+        "cost": 0.0010201
+      }
+    },
+    {
+      "q": "Where is Audra McDonald from?",
+      "gold": "p432",
+      "bm25": {
+        "pick": "p432",
+        "ms": 5.330500003765337
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p432",
+        "ms": 423.8095000036992,
+        "search_ms": 54.14316699898336
+      },
+      "embed>jev": {
+        "pick": "p432",
+        "ms": 939.456500011147,
+        "rerank_ms": 515.6470000074478,
+        "cost": 0.000169134
+      },
+      "embed>llm": {
+        "pick": "p432",
+        "ms": 1243.7802080094116,
+        "rerank_ms": 819.9707080057124,
+        "cost": 0.0010324
+      }
+    },
+    {
+      "q": "What alumni is also the Governor of the Bank of Japan?",
+      "gold": "p744",
+      "bm25": {
+        "pick": "p744",
+        "ms": 3.4810000070137903
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p752",
+        "ms": 441.4076250104699,
+        "search_ms": 41.98054199514445
+      },
+      "embed>jev": {
+        "pick": "p744",
+        "ms": 1318.2149580097757,
+        "rerank_ms": 876.8073329993058,
+        "cost": 0.000170184
+      },
+      "embed>llm": {
+        "pick": "p744",
+        "ms": 1201.0554170119576,
+        "rerank_ms": 759.6477920014877,
+        "cost": 0.0010168
+      }
+    },
+    {
+      "q": "What is one of the supplementary sources of European Union law? ",
+      "gold": "p331",
+      "bm25": {
+        "pick": "p330",
+        "ms": 5.547415988985449
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p330",
+        "ms": 790.915584002505,
+        "search_ms": 53.14462499518413
+      },
+      "embed>jev": {
+        "pick": "p331",
+        "ms": 1220.112668001093,
+        "rerank_ms": 429.1970839985879,
+        "cost": 0.000276654
+      },
+      "embed>llm": {
+        "pick": "p331",
+        "ms": 1796.6012920078356,
+        "rerank_ms": 1005.6857080053305,
+        "cost": 0.0017956
+      }
+    },
+    {
+      "q": "Who wrote \"The Hidden Prosperity of the Poor\"?",
+      "gold": "p698",
+      "bm25": {
+        "pick": "p698",
+        "ms": 6.752582994522527
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p713",
+        "ms": 377.2693749924656,
+        "search_ms": 55.26020799879916
+      },
+      "embed>jev": {
+        "pick": "p698",
+        "ms": 801.7223749920959,
+        "rerank_ms": 424.45299999963026,
+        "cost": 0.000160902
+      },
+      "embed>llm": {
+        "pick": "p698",
+        "ms": 1190.3672089974862,
+        "rerank_ms": 813.0978340050206,
+        "cost": 0.0009982
+      }
+    },
+    {
+      "q": "When was Sky Digital launched?",
+      "gold": "p137",
+      "bm25": {
+        "pick": "p143",
+        "ms": 1.8366250005783513
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p143",
+        "ms": 699.4833749922691,
+        "search_ms": 54.90787499002181
+      },
+      "embed>jev": {
+        "pick": "p143",
+        "ms": 1140.5722909985343,
+        "rerank_ms": 441.0889160062652,
+        "cost": 0.000153636
+      },
+      "embed>llm": {
+        "pick": "p143",
+        "ms": 1643.663665978238,
+        "rerank_ms": 944.1802909859689,
+        "cost": 0.0009835
+      }
+    },
+    {
+      "q": "What is the largest city of Poland?",
+      "gold": "p1065",
+      "bm25": {
+        "pick": "p1065",
+        "ms": 7.039999996777624
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p1065",
+        "ms": 563.6167920019943,
+        "search_ms": 51.329916997929104
+      },
+      "embed>jev": {
+        "pick": "p1065",
+        "ms": 1037.1253339981195,
+        "rerank_ms": 473.50854199612513,
+        "cost": 0.000196644
+      },
+      "embed>llm": {
+        "pick": "p1065",
+        "ms": 1462.6138750027167,
+        "rerank_ms": 898.9970830007223,
+        "cost": 0.00014819
+      }
+    },
+    {
+      "q": "How many housing units were there in 2000?",
+      "gold": "p445",
+      "bm25": {
+        "pick": "p445",
+        "ms": 6.050415991921909
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p445",
+        "ms": 344.9704170052428,
+        "search_ms": 53.77654200128745
+      },
+      "embed>jev": {
+        "pick": "p445",
+        "ms": 767.7366670104675,
+        "rerank_ms": 422.7662500052247,
+        "cost": 0.00021252
+      },
+      "embed>llm": {
+        "pick": "p445",
+        "ms": 1490.8630010177149,
+        "rerank_ms": 1145.892584012472,
+        "cost": 0.0013645
+      }
+    },
+    {
+      "q": "What South African law recognized two types of schools?",
+      "gold": "p613",
+      "bm25": {
+        "pick": "p613",
+        "ms": 6.219957998837344
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p613",
+        "ms": 490.5435840046266,
+        "search_ms": 56.33720899641048
+      },
+      "embed>jev": {
+        "pick": "p613",
+        "ms": 859.6748340060003,
+        "rerank_ms": 369.1312500013737,
+        "cost": 0.00015897
+      },
+      "embed>llm": {
+        "pick": "p613",
+        "ms": 1269.9392500071554,
+        "rerank_ms": 779.3956660025287,
+        "cost": 0.0009883
+      }
+    },
+    {
+      "q": "What persons were not allowed to settle in New France?",
+      "gold": "p190",
+      "bm25": {
+        "pick": "p190",
+        "ms": 8.446250009001233
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p190",
+        "ms": 1023.720333003439,
+        "search_ms": 52.14995799178723
+      },
+      "embed>jev": {
+        "pick": "p178",
+        "ms": 1468.3446240087505,
+        "rerank_ms": 444.62429100531153,
+        "cost": 0.00016926
+      },
+      "embed>llm": {
+        "pick": "p178",
+        "ms": 1864.8717920004856,
+        "rerank_ms": 841.1514589970466,
+        "cost": 0.0010273
+      }
+    },
+    {
+      "q": "Which court argued that the Treaty of Rome did not prevent energy nationalism?",
+      "gold": "p341",
+      "bm25": {
+        "pick": "p341",
+        "ms": 9.016541996970773
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p341",
+        "ms": 454.72441700985655,
+        "search_ms": 55.064000000129454
+      },
+      "embed>jev": {
+        "pick": "p341",
+        "ms": 901.7175420012791,
+        "rerank_ms": 446.9931249914225,
+        "cost": 0.000398706
+      },
+      "embed>llm": {
+        "pick": "p341",
+        "ms": 2001.5959580050549,
+        "rerank_ms": 1546.8715409951983,
+        "cost": 0.00042133
+      }
+    },
+    {
+      "q": "If the average U.S. worker were to complete an additional year of school, what amount of growth would be generated over 5 years?",
+      "gold": "p681",
+      "bm25": {
+        "pick": "p681",
+        "ms": 5.520417005755007
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p681",
+        "ms": 429.04141600592993,
+        "search_ms": 48.35658299271017
+      },
+      "embed>jev": {
+        "pick": "p681",
+        "ms": 1568.455915999948,
+        "rerank_ms": 1139.4144999940181,
+        "cost": 0.000163254
+      },
+      "embed>llm": {
+        "pick": "p681",
+        "ms": 1406.0396249988116,
+        "rerank_ms": 976.9982089928817,
+        "cost": 0.001024
+      }
+    },
+    {
+      "q": "Silicates of magnesium and iron make up of the Earth's ___",
+      "gold": "p270",
+      "bm25": {
+        "pick": "p270",
+        "ms": 8.854917003191076
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p270",
+        "ms": 473.11700000136625,
+        "search_ms": 54.21695900440682
+      },
+      "embed>jev": {
+        "pick": "p270",
+        "ms": 846.8585410009837,
+        "rerank_ms": 373.7415409996174,
+        "cost": 0.00016401
+      },
+      "embed>llm": {
+        "pick": "p270",
+        "ms": 1336.810124994372,
+        "rerank_ms": 863.6931249930058,
+        "cost": 0.0009733
+      }
+    },
+    {
+      "q": "What player first won the Heisman Trophy for the university?",
+      "gold": "p738",
+      "bm25": {
+        "pick": "p738",
+        "ms": 7.37995799863711
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p645",
+        "ms": 364.5909580081934,
+        "search_ms": 50.92754198994953
+      },
+      "embed>jev": {
+        "pick": "p738",
+        "ms": 851.0489580221474,
+        "rerank_ms": 486.458000013954,
+        "cost": 0.00016464
+      },
+      "embed>llm": {
+        "pick": "p738",
+        "ms": 1304.0120829973603,
+        "rerank_ms": 939.4211249891669,
+        "cost": 0.0010183
+      }
+    },
+    {
+      "q": "What is one example of an instance that the quantitative answer to the traveling salesman problem fails to answer?",
+      "gold": "p43",
+      "bm25": {
+        "pick": "p43",
+        "ms": 12.393833007081412
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p43",
+        "ms": 516.583916003583,
+        "search_ms": 43.74187499342952
+      },
+      "embed>jev": {
+        "pick": "p43",
+        "ms": 933.348124002805,
+        "rerank_ms": 416.764207999222,
+        "cost": 0.000135996
+      },
+      "embed>llm": {
+        "pick": "p43",
+        "ms": 1369.7679990000324,
+        "rerank_ms": 853.1840829964494,
+        "cost": 0.0008229
+      }
+    },
+    {
+      "q": "Where did these uprisings take place?",
+      "gold": "p183",
+      "bm25": {
+        "pick": "p1147",
+        "ms": 1.8178749887738377
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p547",
+        "ms": 406.0578750068089,
+        "search_ms": 52.85533300775569
+      },
+      "embed>jev": {
+        "pick": "none",
+        "ms": 804.702958004782,
+        "rerank_ms": 398.6450829979731,
+        "cost": 0.000197736
+      },
+      "embed>llm": {
+        "pick": "p183",
+        "ms": 982.2916670091217,
+        "rerank_ms": 576.2337920023128,
+        "cost": 0.0012334
+      }
+    },
+    {
+      "q": "When were the Normans in Normandy?",
+      "gold": "p0",
+      "bm25": {
+        "pick": "p14",
+        "ms": 2.2872499976074323
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p0",
+        "ms": 379.8332080041291,
+        "search_ms": 53.306665999116376
+      },
+      "embed>jev": {
+        "pick": "p0",
+        "ms": 810.0694580061827,
+        "rerank_ms": 430.23625000205357,
+        "cost": 0.00015918
+      },
+      "embed>llm": {
+        "pick": "p0",
+        "ms": 1358.985541999573,
+        "rerank_ms": 979.1523339954438,
+        "cost": 0.0009449
+      }
+    },
+    {
+      "q": "How many fraternities form the University of Chicago Interfraternity Council?",
+      "gold": "p741",
+      "bm25": {
+        "pick": "p741",
+        "ms": 8.262250004918315
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p741",
+        "ms": 446.49529199523386,
+        "search_ms": 53.891417002887465
+      },
+      "embed>jev": {
+        "pick": "p741",
+        "ms": 859.4435839913785,
+        "rerank_ms": 412.9482919961447,
+        "cost": 0.000188706
+      },
+      "embed>llm": {
+        "pick": "p741",
+        "ms": 1383.2159589946968,
+        "rerank_ms": 936.720666999463,
+        "cost": 0.0011845
+      }
+    },
+    {
+      "q": "How did trying to establish a devolved Scottish Assembly go in 1979?",
+      "gold": "p951",
+      "bm25": {
+        "pick": "p951",
+        "ms": 7.266166998306289
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p951",
+        "ms": 531.3516250025714,
+        "search_ms": 42.92737500509247
+      },
+      "embed>jev": {
+        "pick": "p951",
+        "ms": 883.0809999926714,
+        "rerank_ms": 351.72937499010004,
+        "cost": 0.000161532
+      },
+      "embed>llm": {
+        "pick": "p951",
+        "ms": 1841.9892079982674,
+        "rerank_ms": 1310.637582995696,
+        "cost": 0.0010012
+      }
+    },
+    {
+      "q": "What is the alpine valley that the Rhine flows through?",
+      "gold": "p907",
+      "bm25": {
+        "pick": "p907",
+        "ms": 9.078292001504451
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p907",
+        "ms": 619.8650419974001,
+        "search_ms": 56.878041999880224
+      },
+      "embed>jev": {
+        "pick": "p907",
+        "ms": 1095.522957999492,
+        "rerank_ms": 475.65791600209195,
+        "cost": 0.00016569
+      },
+      "embed>llm": {
+        "pick": "p907",
+        "ms": 1599.9852090026252,
+        "rerank_ms": 980.1201670052251,
+        "cost": 0.0009931
+      }
+    },
+    {
+      "q": "How many narrow gauge rail lines were previously government owned?",
+      "gold": "p167",
+      "bm25": {
+        "pick": "p167",
+        "ms": 2.7836669905809686
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p167",
+        "ms": 603.050624995376,
+        "search_ms": 52.8010410052957
+      },
+      "embed>jev": {
+        "pick": "p167",
+        "ms": 1027.707792003639,
+        "rerank_ms": 424.65716700826306,
+        "cost": 0.000156324
+      },
+      "embed>llm": {
+        "pick": "p167",
+        "ms": 1531.916292005917,
+        "rerank_ms": 928.8656670105411,
+        "cost": 0.0009523
+      }
+    },
+    {
+      "q": "The motto of the Muslim Brotherhood specifies what as being their constitution?",
+      "gold": "p1000",
+      "bm25": {
+        "pick": "p1000",
+        "ms": 10.006500000599772
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p1000",
+        "ms": 554.488791996846,
+        "search_ms": 57.94937499740627
+      },
+      "embed>jev": {
+        "pick": "p1000",
+        "ms": 975.1903750002384,
+        "rerank_ms": 420.70158300339244,
+        "cost": 0.000155736
+      },
+      "embed>llm": {
+        "pick": "p1000",
+        "ms": 1467.5943339971127,
+        "rerank_ms": 913.1055420002667,
+        "cost": 0.0009407
+      }
+    },
+    {
+      "q": "What must the adoption of laws which will have legal effect in the EU have?",
+      "gold": "p350",
+      "bm25": {
+        "pick": "p350",
+        "ms": 10.675833007553592
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p330",
+        "ms": 462.22712499729823,
+        "search_ms": 57.21533400355838
+      },
+      "embed>jev": {
+        "pick": "p350",
+        "ms": 881.1580000037793,
+        "rerank_ms": 418.9308750064811,
+        "cost": 0.000299586
+      },
+      "embed>llm": {
+        "pick": "p350",
+        "ms": 1784.7534579923376,
+        "rerank_ms": 1322.5263329950394,
+        "cost": 0.0019585
+      }
+    },
+    {
+      "q": "When do juvenile develop into adults?",
+      "gold": "p413",
+      "bm25": {
+        "pick": "p413",
+        "ms": 1.7910419992404059
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p413",
+        "ms": 479.4450409972342,
+        "search_ms": 54.54966599063482
+      },
+      "embed>jev": {
+        "pick": "p393",
+        "ms": 921.9967489916598,
+        "rerank_ms": 442.55170799442567,
+        "cost": 0.000158844
+      },
+      "embed>llm": {
+        "pick": "p393",
+        "ms": 1301.2865829950897,
+        "rerank_ms": 821.8415419978555,
+        "cost": 0.0009364
+      }
+    },
+    {
+      "q": "How many crank rotations are there in an engine cycle?",
+      "gold": "p231",
+      "bm25": {
+        "pick": "p231",
+        "ms": 2.8786249895347282
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p231",
+        "ms": 526.2030419980874,
+        "search_ms": 53.042582992929965
+      },
+      "embed>jev": {
+        "pick": "p231",
+        "ms": 906.0958759946516,
+        "rerank_ms": 379.89283399656415,
+        "cost": 0.00016296
+      },
+      "embed>llm": {
+        "pick": "p231",
+        "ms": 1644.3581250059651,
+        "rerank_ms": 1118.1550830078777,
+        "cost": 0.0010039
+      }
+    },
+    {
+      "q": "The Taliban was so different from other moments that they could be more accurately described as being what?",
+      "gold": "p1018",
+      "bm25": {
+        "pick": "p1018",
+        "ms": 11.77762501174584
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p1018",
+        "ms": 341.8212499964284,
+        "search_ms": 55.305709000094794
+      },
+      "embed>jev": {
+        "pick": "p1018",
+        "ms": 753.5615829838207,
+        "rerank_ms": 411.7403329873923,
+        "cost": 0.000169596
+      },
+      "embed>llm": {
+        "pick": "p1018",
+        "ms": 1213.6454999999842,
+        "rerank_ms": 871.8242500035558,
+        "cost": 0.0010292
+      }
+    },
+    {
+      "q": "What kind of region can be found inside the urban area of southern California?",
+      "gold": "p101",
+      "bm25": {
+        "pick": "p101",
+        "ms": 3.725167000084184
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p101",
+        "ms": 457.1547919913428,
+        "search_ms": 48.78387499775272
+      },
+      "embed>jev": {
+        "pick": "p101",
+        "ms": 789.8549999808893,
+        "rerank_ms": 332.70020798954647,
+        "cost": 0.000119364
+      },
+      "embed>llm": {
+        "pick": "p101",
+        "ms": 1224.173126000096,
+        "rerank_ms": 767.0183340087533,
+        "cost": 0.0007165
+      }
+    },
+    {
+      "q": "How long is the section of the Rhine near Chur?",
+      "gold": "p907",
+      "bm25": {
+        "pick": "p907",
+        "ms": 7.917292008642107
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p907",
+        "ms": 347.60037501109764,
+        "search_ms": 44.108959002187476
+      },
+      "embed>jev": {
+        "pick": "p907",
+        "ms": 708.9624580112286,
+        "rerank_ms": 361.36208300013095,
+        "cost": 0.000167202
+      },
+      "embed>llm": {
+        "pick": "p907",
+        "ms": 1100.548083006288,
+        "rerank_ms": 752.9477079951903,
+        "cost": 0.0010024
+      }
+    },
+    {
+      "q": "Which company provides train service in Fresno?",
+      "gold": "p449",
+      "bm25": {
+        "pick": "p134",
+        "ms": 5.85116699221544
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p449",
+        "ms": 437.7726669918047,
+        "search_ms": 53.937707998557016
+      },
+      "embed>jev": {
+        "pick": "p449",
+        "ms": 864.3049579986837,
+        "rerank_ms": 426.53229100687895,
+        "cost": 0.00018816
+      },
+      "embed>llm": {
+        "pick": "p449",
+        "ms": 1223.9731249865144,
+        "rerank_ms": 786.2004579947097,
+        "cost": 0.0011845
+      }
+    },
+    {
+      "q": "What car is licensed by the FSO Car Factory and built in Egypt?",
+      "gold": "p1098",
+      "bm25": {
+        "pick": "p1098",
+        "ms": 9.91495800553821
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p1098",
+        "ms": 388.63762498658616,
+        "search_ms": 52.06899999757297
+      },
+      "embed>jev": {
+        "pick": "p1098",
+        "ms": 861.6374999837717,
+        "rerank_ms": 472.99987499718554,
+        "cost": 0.000153384
+      },
+      "embed>llm": {
+        "pick": "p1098",
+        "ms": 1366.8401669856394,
+        "rerank_ms": 978.2025419990532,
+        "cost": 0.0009497
+      }
+    },
+    {
+      "q": "When did the colonization of India occur?",
+      "gold": "p1042",
+      "bm25": {
+        "pick": "p1042",
+        "ms": 6.251291997614317
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p1042",
+        "ms": 412.9933750082273,
+        "search_ms": 55.08337500214111
+      },
+      "embed>jev": {
+        "pick": "p1042",
+        "ms": 937.5243749964284,
+        "rerank_ms": 524.5309999882011,
+        "cost": 0.000190596
+      },
+      "embed>llm": {
+        "pick": "p1042",
+        "ms": 1200.947334014927,
+        "rerank_ms": 787.9539590066997,
+        "cost": 0.0011426
+      }
+    },
+    {
+      "q": "What is a PPP also known as?",
+      "gold": "p588",
+      "bm25": {
+        "pick": "p1171",
+        "ms": 2.3079999955371022
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p588",
+        "ms": 452.0396250009071,
+        "search_ms": 45.5746670049848
+      },
+      "embed>jev": {
+        "pick": "p588",
+        "ms": 827.9287080076756,
+        "rerank_ms": 375.8890830067685,
+        "cost": 0.000134568
+      },
+      "embed>llm": {
+        "pick": "p588",
+        "ms": 1523.7091250019148,
+        "rerank_ms": 1071.6695000010077,
+        "cost": 0.0008218
+      }
+    },
+    {
+      "q": "What spacecraft contained data to determine the oxygen content of the Sun?",
+      "gold": "p283",
+      "bm25": {
+        "pick": "p283",
+        "ms": 3.518917001201771
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p283",
+        "ms": 373.1429160106927,
+        "search_ms": 52.94249999860767
+      },
+      "embed>jev": {
+        "pick": "p283",
+        "ms": 904.4256250199396,
+        "rerank_ms": 531.2827090092469,
+        "cost": 0.000163674
+      },
+      "embed>llm": {
+        "pick": "p283",
+        "ms": 1159.7994990006555,
+        "rerank_ms": 786.6565829899628,
+        "cost": 0.0009799
+      }
+    },
+    {
+      "q": "Who killed Harold II? ",
+      "gold": "p16",
+      "bm25": {
+        "pick": "p16",
+        "ms": 3.3182499901158735
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p16",
+        "ms": 1116.352500001085,
+        "search_ms": 47.72891600441653
+      },
+      "embed>jev": {
+        "pick": "p16",
+        "ms": 1492.1052499994403,
+        "rerank_ms": 375.7527499983553,
+        "cost": 0.000176946
+      },
+      "embed>llm": {
+        "pick": "p16",
+        "ms": 1918.0572909972398,
+        "rerank_ms": 801.7047909961548,
+        "cost": 0.001071
+      }
+    },
+    {
+      "q": "What is the dispensary subject to in a majority of countries?",
+      "gold": "p528",
+      "bm25": {
+        "pick": "p528",
+        "ms": 9.907291998388246
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p528",
+        "ms": 398.19020799768623,
+        "search_ms": 53.60479200317059
+      },
+      "embed>jev": {
+        "pick": "p528",
+        "ms": 851.9736250018468,
+        "rerank_ms": 453.7834170041606,
+        "cost": 0.000260568
+      },
+      "embed>llm": {
+        "pick": "p528",
+        "ms": 1433.5480829904554,
+        "rerank_ms": 1035.3578749927692,
+        "cost": 0.0016531
+      }
+    },
+    {
+      "q": "When did the Warsaw area enlargement take place?",
+      "gold": "p1091",
+      "bm25": {
+        "pick": "p1091",
+        "ms": 2.2673339990433306
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p1091",
+        "ms": 383.4127920126775,
+        "search_ms": 53.86179199558683
+      },
+      "embed>jev": {
+        "pick": "p1091",
+        "ms": 782.5352080108132,
+        "rerank_ms": 399.1224159981357,
+        "cost": 0.000194628
+      },
+      "embed>llm": {
+        "pick": "p1091",
+        "ms": 1380.7167090126313,
+        "rerank_ms": 997.3039169999538,
+        "cost": 0.00014669
+      }
+    },
+    {
+      "q": "What do the former Midlothian County Buildings face?",
+      "gold": "p955",
+      "bm25": {
+        "pick": "p955",
+        "ms": 2.3594160011271015
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p955",
+        "ms": 561.6840419970686,
+        "search_ms": 51.841666994732805
+      },
+      "embed>jev": {
+        "pick": "p955",
+        "ms": 987.5204999843845,
+        "rerank_ms": 425.83645798731595,
+        "cost": 0.000164892
+      },
+      "embed>llm": {
+        "pick": "p955",
+        "ms": 1551.885749999201,
+        "rerank_ms": 990.2017080021324,
+        "cost": 0.0010147
+      }
+    },
+    {
+      "q": "How many legions in five bases were along the Rhine by the Romans?",
+      "gold": "p941",
+      "bm25": {
+        "pick": "p941",
+        "ms": 9.16750000033062
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p941",
+        "ms": 429.26579200138804,
+        "search_ms": 53.579415995045565
+      },
+      "embed>jev": {
+        "pick": "p941",
+        "ms": 927.0924589945935,
+        "rerank_ms": 497.82666699320544,
+        "cost": 0.000175014
+      },
+      "embed>llm": {
+        "pick": "p941",
+        "ms": 2035.4511250043288,
+        "rerank_ms": 1606.1853330029408,
+        "cost": 0.0010552
+      }
+    },
+    {
+      "q": "What are two types of phagocytes that travel through the body to find invading pathogens?",
+      "gold": "p811",
+      "bm25": {
+        "pick": "p811",
+        "ms": 11.493625002913177
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p811",
+        "ms": 889.1283330012811,
+        "search_ms": 42.43108299851883
+      },
+      "embed>jev": {
+        "pick": "p811",
+        "ms": 1406.7435410106555,
+        "rerank_ms": 517.6152080093743,
+        "cost": 0.000171654
+      },
+      "embed>llm": {
+        "pick": "p811",
+        "ms": 1732.5370000035036,
+        "rerank_ms": 843.4086670022225,
+        "cost": 0.0010087
+      }
+    },
+    {
+      "q": "What was the importance of the congress?",
+      "gold": "p1139",
+      "bm25": {
+        "pick": "p1139",
+        "ms": 7.198917010100558
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p1139",
+        "ms": 760.6682499899762,
+        "search_ms": 56.98933301027864
+      },
+      "embed>jev": {
+        "pick": "p1139",
+        "ms": 1295.2689999947324,
+        "rerank_ms": 534.6007500047563,
+        "cost": 0.000163968
+      },
+      "embed>llm": {
+        "pick": "p1139",
+        "ms": 1471.2336249795044,
+        "rerank_ms": 710.5653749895282,
+        "cost": 0.0010151
+      }
+    },
+    {
+      "q": "What would change the rotational inertia of a body under Newton's First Law of Motion?",
+      "gold": "p1198",
+      "bm25": {
+        "pick": "p1198",
+        "ms": 4.119584002182819
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p1198",
+        "ms": 519.6448329952545,
+        "search_ms": 55.718375006108545
+      },
+      "embed>jev": {
+        "pick": "none",
+        "ms": 985.2477079984965,
+        "rerank_ms": 465.60287500324193,
+        "cost": 0.000170226
+      },
+      "embed>llm": {
+        "pick": "p1198",
+        "ms": 1262.0601249946048,
+        "rerank_ms": 742.4152919993503,
+        "cost": 0.0010628
+      }
+    },
+    {
+      "q": "In what year was the Corliss engine patented?",
+      "gold": "p256",
+      "bm25": {
+        "pick": "p256",
+        "ms": 7.574083007057197
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p256",
+        "ms": 572.0141659985529,
+        "search_ms": 54.190291004488245
+      },
+      "embed>jev": {
+        "pick": "p256",
+        "ms": 984.5057070051553,
+        "rerank_ms": 412.49154100660235,
+        "cost": 0.00015498
+      },
+      "embed>llm": {
+        "pick": "p256",
+        "ms": 1288.3515410067048,
+        "rerank_ms": 716.3373750081519,
+        "cost": 0.000952
+      }
+    },
+    {
+      "q": "When was the measurement of the Rhine introduced? ",
+      "gold": "p906",
+      "bm25": {
+        "pick": "p906",
+        "ms": 7.2099999961210415
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p906",
+        "ms": 610.0250420131488,
+        "search_ms": 49.92491699522361
+      },
+      "embed>jev": {
+        "pick": "p906",
+        "ms": 996.3169170223409,
+        "rerank_ms": 386.29187500919215,
+        "cost": 0.00017535
+      },
+      "embed>llm": {
+        "pick": "p906",
+        "ms": 1346.295708004618,
+        "rerank_ms": 736.2706659914693,
+        "cost": 0.00106
+      }
+    },
+    {
+      "q": "What is the total make up of fish species living in the Amazon?",
+      "gold": "p378",
+      "bm25": {
+        "pick": "p379",
+        "ms": 10.588040997390635
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p378",
+        "ms": 632.623292010976,
+        "search_ms": 51.474874999257736
+      },
+      "embed>jev": {
+        "pick": "p378",
+        "ms": 1042.7440840139752,
+        "rerank_ms": 410.1207920029992,
+        "cost": 0.000168882
+      },
+      "embed>llm": {
+        "pick": "p378",
+        "ms": 1426.7328340210952,
+        "rerank_ms": 794.1095420101192,
+        "cost": 0.0010159
+      }
+    },
+    {
+      "q": "What did Kublai do to prevent famines?",
+      "gold": "p778",
+      "bm25": {
+        "pick": "p778",
+        "ms": 7.268417000886984
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p761",
+        "ms": 557.364874999621,
+        "search_ms": 43.75170900311787
+      },
+      "embed>jev": {
+        "pick": "p778",
+        "ms": 971.6381250036648,
+        "rerank_ms": 414.2732500040438,
+        "cost": 0.000214452
+      },
+      "embed>llm": {
+        "pick": "p778",
+        "ms": 1517.9783750063507,
+        "rerank_ms": 960.6135000067297,
+        "cost": 0.0013138
+      }
+    },
+    {
+      "q": "How long does it take to know the outcome of a division?",
+      "gold": "p963",
+      "bm25": {
+        "pick": "p555",
+        "ms": 9.527875008643605
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p963",
+        "ms": 428.8106250023702,
+        "search_ms": 50.05662499752361
+      },
+      "embed>jev": {
+        "pick": "p963",
+        "ms": 830.5452089989558,
+        "rerank_ms": 401.73458399658557,
+        "cost": 0.000143724
+      },
+      "embed>llm": {
+        "pick": "p963",
+        "ms": 1427.1823750023032,
+        "rerank_ms": 998.371749999933,
+        "cost": 0.0008899
+      }
+    },
+    {
+      "q": "Of what length are engine cycle events when the simplest valve gears are used?",
+      "gold": "p249",
+      "bm25": {
+        "pick": "p249",
+        "ms": 7.63399999414105
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p249",
+        "ms": 417.37575001025107,
+        "search_ms": 44.493292007246055
+      },
+      "embed>jev": {
+        "pick": "p249",
+        "ms": 846.2583330110647,
+        "rerank_ms": 428.8825830008136,
+        "cost": 0.000156072
+      },
+      "embed>llm": {
+        "pick": "p249",
+        "ms": 1438.4200000058627,
+        "rerank_ms": 1021.0442499956116,
+        "cost": 0.0009652
+      }
+    },
+    {
+      "q": "How many members can voters choose to represent the constituency? ",
+      "gold": "p981",
+      "bm25": {
+        "pick": "p981",
+        "ms": 3.1123340013436973
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p981",
+        "ms": 441.34433299768716,
+        "search_ms": 52.8409999969881
+      },
+      "embed>jev": {
+        "pick": "p981",
+        "ms": 856.6531659889733,
+        "rerank_ms": 415.3088329912862,
+        "cost": 0.000174342
+      },
+      "embed>llm": {
+        "pick": "p981",
+        "ms": 1235.535040992545,
+        "rerank_ms": 794.1907079948578,
+        "cost": 0.0010885
+      }
+    },
+    {
+      "q": "When did England formally declare war on France?",
+      "gold": "p1145",
+      "bm25": {
+        "pick": "p1145",
+        "ms": 2.4977080029202625
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p191",
+        "ms": 430.283291003434,
+        "search_ms": 52.77933299657889
+      },
+      "embed>jev": {
+        "pick": "p1145",
+        "ms": 881.8758330016863,
+        "rerank_ms": 451.5925419982523,
+        "cost": 0.000153006
+      },
+      "embed>llm": {
+        "pick": "p1145",
+        "ms": 1188.5785830090754,
+        "rerank_ms": 758.2952920056414,
+        "cost": 0.0009248
+      }
+    },
+    {
+      "q": "Other than T cells, what other immune cells express CYP27B1?",
+      "gold": "p835",
+      "bm25": {
+        "pick": "p835",
+        "ms": 6.922250002389774
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p835",
+        "ms": 438.5730830108514,
+        "search_ms": 53.48095799854491
+      },
+      "embed>jev": {
+        "pick": "p835",
+        "ms": 914.5450830110349,
+        "rerank_ms": 475.97200000018347,
+        "cost": 0.000174762
+      },
+      "embed>llm": {
+        "pick": "p835",
+        "ms": 1584.5237080066,
+        "rerank_ms": 1145.9506249957485,
+        "cost": 0.0010372
+      }
+    },
+    {
+      "q": "How significant was the transfer of disease through fleas?",
+      "gold": "p488",
+      "bm25": {
+        "pick": "p480",
+        "ms": 8.314167003845796
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p480",
+        "ms": 588.706791997538,
+        "search_ms": 45.47570800059475
+      },
+      "embed>jev": {
+        "pick": "p488",
+        "ms": 1072.8749589907238,
+        "rerank_ms": 484.1681669931859,
+        "cost": 0.000197946
+      },
+      "embed>llm": {
+        "pick": "p488",
+        "ms": 1395.2685839904007,
+        "rerank_ms": 806.5617919928627,
+        "cost": 0.0012406
+      }
+    },
+    {
+      "q": "Who sets the legislative agenda in Victoria?",
+      "gold": "p170",
+      "bm25": {
+        "pick": "p170",
+        "ms": 6.525832999614067
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p170",
+        "ms": 404.0422920079436,
+        "search_ms": 54.558165997150354
+      },
+      "embed>jev": {
+        "pick": "p170",
+        "ms": 793.8143339997623,
+        "rerank_ms": 389.7720419918187,
+        "cost": 0.000151536
+      },
+      "embed>llm": {
+        "pick": "p170",
+        "ms": 1312.4744170054328,
+        "rerank_ms": 908.4321249974892,
+        "cost": 0.0009346
+      }
+    },
+    {
+      "q": "What did Kuznets argue resulted from stages of development?",
+      "gold": "p687",
+      "bm25": {
+        "pick": "p687",
+        "ms": 2.5980829959735274
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p687",
+        "ms": 429.43945799197536,
+        "search_ms": 44.77770900120959
+      },
+      "embed>jev": {
+        "pick": "p687",
+        "ms": 1023.0900419846876,
+        "rerank_ms": 593.6505839927122,
+        "cost": 0.00016296
+      },
+      "embed>llm": {
+        "pick": "p687",
+        "ms": 1181.4464989874978,
+        "rerank_ms": 752.0070409955224,
+        "cost": 0.0010168
+      }
+    },
+    {
+      "q": "What type of process is the oxygen cycle?",
+      "gold": "p292",
+      "bm25": {
+        "pick": "p292",
+        "ms": 7.363459008047357
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p292",
+        "ms": 399.7338339977432,
+        "search_ms": 42.765374993905425
+      },
+      "embed>jev": {
+        "pick": "p292",
+        "ms": 889.7730009921361,
+        "rerank_ms": 490.0391669943929,
+        "cost": 0.000172956
+      },
+      "embed>llm": {
+        "pick": "p292",
+        "ms": 1295.706668010098,
+        "rerank_ms": 895.9728340123547,
+        "cost": 0.0010345
+      }
+    },
+    {
+      "q": "What scientific field's theory has received contributions from the steam engine?",
+      "gold": "p257",
+      "bm25": {
+        "pick": "p257",
+        "ms": 8.084583998424932
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p257",
+        "ms": 399.40662500157487,
+        "search_ms": 43.82462499779649
+      },
+      "embed>jev": {
+        "pick": "p257",
+        "ms": 763.4000000107335,
+        "rerank_ms": 363.9933750091586,
+        "cost": 0.000141372
+      },
+      "embed>llm": {
+        "pick": "p257",
+        "ms": 1449.3981249979697,
+        "rerank_ms": 1049.9914999963949,
+        "cost": 0.0008587
+      }
+    },
+    {
+      "q": "How much does it cost to gain entry to a parliament meeting?",
+      "gold": "p960",
+      "bm25": {
+        "pick": "p49",
+        "ms": 8.204333003959619
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p960",
+        "ms": 560.5314999993425,
+        "search_ms": 45.897417003288865
+      },
+      "embed>jev": {
+        "pick": "p960",
+        "ms": 941.946499995538,
+        "rerank_ms": 381.41499999619555,
+        "cost": 0.000164262
+      },
+      "embed>llm": {
+        "pick": "p960",
+        "ms": 1331.7847909929696,
+        "rerank_ms": 771.2532909936272,
+        "cost": 0.0010258
+      }
+    },
+    {
+      "q": "What can be combined with geophysical data to produce a better view of the subsurface?",
+      "gold": "p515",
+      "bm25": {
+        "pick": "p515",
+        "ms": 10.948958995868452
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p515",
+        "ms": 522.0128750079311,
+        "search_ms": 51.128708000760525
+      },
+      "embed>jev": {
+        "pick": "p515",
+        "ms": 889.108417017269,
+        "rerank_ms": 367.0955420093378,
+        "cost": 0.000162288
+      },
+      "embed>llm": {
+        "pick": "p515",
+        "ms": 1321.8807079974795,
+        "rerank_ms": 799.8678329895483,
+        "cost": 0.0009475
+      }
+    },
+    {
+      "q": "What is the chemical that mediates Type 1 hypersensitivity?",
+      "gold": "p841",
+      "bm25": {
+        "pick": "p841",
+        "ms": 7.382667012279853
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p841",
+        "ms": 417.91479199309833,
+        "search_ms": 44.363542008795775
+      },
+      "embed>jev": {
+        "pick": "p841",
+        "ms": 873.7390839960426,
+        "rerank_ms": 455.8242920029443,
+        "cost": 0.000177996
+      },
+      "embed>llm": {
+        "pick": "p841",
+        "ms": 1261.7917509924155,
+        "rerank_ms": 843.8769589993171,
+        "cost": 0.0010564
+      }
+    },
+    {
+      "q": "What contributed to the decreased inequality between trained and untrained workers?",
+      "gold": "p682",
+      "bm25": {
+        "pick": "p682",
+        "ms": 8.219166993512772
+      },
+      "recall_at_k": true,
+      "embed": {
+        "pick": "p685",
+        "ms": 324.3435829936061,
+        "search_ms": 52.87375001353212
+      },
+      "embed>jev": {
+        "pick": "p682",
+        "ms": 821.8908329872647,
+        "rerank_ms": 497.5472499936586,
+        "cost": 0.000157962
+      },
+      "embed>llm": {
+        "pick": "p682",
+        "ms": 1150.8094579912722,
+        "rerank_ms": 826.4658749976661,
+        "cost": 0.0009859
+      }
+    },
+    {
+      "q": "What university was John of London an alum of?",
+      "gold": "none",
+      "bm25": {
+        "pick": "p624",
+        "ms": 2.952625000034459
+      },
+      "recall_at_k": false,
+      "embed": {
+        "pick": "p625",
+        "ms": 367.5682089960901,
+        "search_ms": 44.35287500382401
+      },
+      "embed>jev": {
+        "pick": "p624",
+        "ms": 778.2063339836895,
+        "rerank_ms": 410.63812498759944,
+        "cost": 0.00018018
+      },
+      "embed>llm": {
+        "pick": "p624",
+        "ms": 1260.6540840060916,
+        "rerank_ms": 893.0858750100015,
+        "cost": 0.0011107
+      }
+    },
+    {
+      "q": "What were Pierre Raoul Pictet's professions?",
+      "gold": "none",
+      "bm25": {
+        "pick": "p282",
+        "ms": 5.138041989994235
+      },
+      "recall_at_k": false,
+      "embed": {
+        "pick": "p751",
+        "ms": 373.14233399229124,
+        "search_ms": 44.187874998897314
+      },
+      "embed>jev": {
+        "pick": "none",
+        "ms": 717.9170839954168,
+        "rerank_ms": 344.7747500031255,
+        "cost": 0.00016359
+      },
+      "embed>llm": {
+        "pick": "none",
+        "ms": 1191.413542997907,
+        "rerank_ms": 818.2712090056157,
+        "cost": 0.0009595
+      }
+    },
+    {
+      "q": "What is not a cause of tumor antigens?",
+      "gold": "none",
+      "bm25": {
+        "pick": "p844",
+        "ms": 6.737165997037664
+      },
+      "recall_at_k": false,
+      "embed": {
+        "pick": "p844",
+        "ms": 379.9304580024909,
+        "search_ms": 55.6136660015909
+      },
+      "embed>jev": {
+        "pick": "p844",
+        "ms": 1099.426916000084,
+        "rerank_ms": 719.4964579975931,
+        "cost": 0.000176694
+      },
+      "embed>llm": {
+        "pick": "p844",
+        "ms": 1317.3249579995172,
+        "rerank_ms": 937.3944999970263,
+        "cost": 0.0010621
+      }
+    },
+    {
+      "q": "Which country dod Rewe-Zentrale AG not wish to import from?",
+      "gold": "none",
+      "bm25": {
+        "pick": "p361",
+        "ms": 7.052917004330084
+      },
+      "recall_at_k": false,
+      "embed": {
+        "pick": "p917",
+        "ms": 632.3989579977933,
+        "search_ms": 44.1788330062991
+      },
+      "embed>jev": {
+        "pick": "p361",
+        "ms": 1071.8435000017053,
+        "rerank_ms": 439.4445420039119,
+        "cost": 0.000286104
+      },
+      "embed>llm": {
+        "pick": "p361",
+        "ms": 1685.7944989897078,
+        "rerank_ms": 1053.3955409919145,
+        "cost": 0.0018214
+      }
+    },
+    {
+      "q": "In what article does it give Gleichschaltung the right to create private schools?",
+      "gold": "none",
+      "bm25": {
+        "pick": "p601",
+        "ms": 4.125541003304534
+      },
+      "recall_at_k": false,
+      "embed": {
+        "pick": "p601",
+        "ms": 389.51495800574776,
+        "search_ms": 44.122374994913116
+      },
+      "embed>jev": {
+        "pick": "p601",
+        "ms": 836.6818750073435,
+        "rerank_ms": 447.1669170015957,
+        "cost": 0.000233142
+      },
+      "embed>llm": {
+        "pick": "p601",
+        "ms": 1547.6798330055317,
+        "rerank_ms": 1158.164874999784,
+        "cost": 0.0014953
+      }
+    },
+    {
+      "q": " What cannot be solved by mechanical application of mathematical steps?",
+      "gold": "none",
+      "bm25": {
+        "pick": "p39",
+        "ms": 3.038333001313731
+      },
+      "recall_at_k": false,
+      "embed": {
+        "pick": "p80",
+        "ms": 416.74620800768025,
+        "search_ms": 43.700958995032124
+      },
+      "embed>jev": {
+        "pick": "none",
+        "ms": 1188.5922080109594,
+        "rerank_ms": 771.8460000032792,
+        "cost": 0.000141078
+      },
+      "embed>llm": {
+        "pick": "p39",
+        "ms": 1136.1972080194391,
+        "rerank_ms": 719.4510000117589,
+        "cost": 0.0008535
+      }
+    },
+    {
+      "q": "In what year did John Calvin become a Protestant?",
+      "gold": "none",
+      "bm25": {
+        "pick": "p208",
+        "ms": 6.839791996753775
+      },
+      "recall_at_k": false,
+      "embed": {
+        "pick": "p208",
+        "ms": 368.1731250107987,
+        "search_ms": 54.75891700189095
+      },
+      "embed>jev": {
+        "pick": "none",
+        "ms": 776.2159170233645,
+        "rerank_ms": 408.04279201256577,
+        "cost": 0.00018165
+      },
+      "embed>llm": {
+        "pick": "p208",
+        "ms": 1259.7470420150785,
+        "rerank_ms": 891.5739170042798,
+        "cost": 0.0010771
+      }
+    },
+    {
+      "q": "How much did it cost to build Harvard Stadium?",
+      "gold": "none",
+      "bm25": {
+        "pick": "p645",
+        "ms": 6.323916997644119
+      },
+      "recall_at_k": false,
+      "embed": {
+        "pick": "p632",
+        "ms": 476.04141700139735,
+        "search_ms": 43.17945800721645
+      },
+      "embed>jev": {
+        "pick": "none",
+        "ms": 888.2878759904997,
+        "rerank_ms": 412.2464589891024,
+        "cost": 0.000181986
+      },
+      "embed>llm": {
+        "pick": "none",
+        "ms": 1395.2572499983944,
+        "rerank_ms": 919.215832996997,
+        "cost": 0.0011425
+      }
+    },
+    {
+      "q": "How many Victorians have a Buddha statue?",
+      "gold": "none",
+      "bm25": {
+        "pick": "p152",
+        "ms": 4.960707999998704
+      },
+      "recall_at_k": false,
+      "embed": {
+        "pick": "p152",
+        "ms": 371.41395900107455,
+        "search_ms": 44.04537500522565
+      },
+      "embed>jev": {
+        "pick": "none",
+        "ms": 784.5202929893276,
+        "rerank_ms": 413.106333988253,
+        "cost": 0.000162204
+      },
+      "embed>llm": {
+        "pick": "none",
+        "ms": 1113.796874997206,
+        "rerank_ms": 742.3829159961315,
+        "cost": 0.0009979
+      }
+    },
+    {
+      "q": "What are the two largest cities in the United States?",
+      "gold": "none",
+      "bm25": {
+        "pick": "p110",
+        "ms": 8.00070799596142
+      },
+      "recall_at_k": false,
+      "embed": {
+        "pick": "p110",
+        "ms": 413.33462500188034,
+        "search_ms": 42.768958999658935
+      },
+      "embed>jev": {
+        "pick": "none",
+        "ms": 855.6652499974007,
+        "rerank_ms": 442.33062499552034,
+        "cost": 0.000129864
+      },
+      "embed>llm": {
+        "pick": "p110",
+        "ms": 1046.2395420036046,
+        "rerank_ms": 632.9049170017242,
+        "cost": 0.0007966
+      }
+    },
+    {
+      "q": "What did Harvey Wheeler direct the Hungarians to do?",
+      "gold": "none",
+      "bm25": {
+        "pick": "p557",
+        "ms": 6.686958004138432
+      },
+      "recall_at_k": false,
+      "embed": {
+        "pick": "p795",
+        "ms": 616.080250008963,
+        "search_ms": 42.866916992352344
+      },
+      "embed>jev": {
+        "pick": "none",
+        "ms": 1221.2025830085622,
+        "rerank_ms": 605.1223329995992,
+        "cost": 0.00019068
+      },
+      "embed>llm": {
+        "pick": "p557",
+        "ms": 1309.3938340171007,
+        "rerank_ms": 693.3135840081377,
+        "cost": 0.0011683
+      }
+    },
+    {
+      "q": " Which country today is not a remnant of the Ottoman empire?",
+      "gold": "none",
+      "bm25": {
+        "pick": "p1063",
+        "ms": 8.142874998156913
+      },
+      "recall_at_k": false,
+      "embed": {
+        "pick": "p1064",
+        "ms": 448.73925000138115,
+        "search_ms": 90.0668329995824
+      },
+      "embed>jev": {
+        "pick": "none",
+        "ms": 879.7715840046294,
+        "rerank_ms": 431.03233400324825,
+        "cost": 0.000179298
+      },
+      "embed>llm": {
+        "pick": "p1064",
+        "ms": 1339.5200410013786,
+        "rerank_ms": 890.7807909999974,
+        "cost": 0.0010856
+      }
+    },
+    {
+      "q": "By how much did the Navy increase the defendant's sentence?",
+      "gold": "none",
+      "bm25": {
+        "pick": "p568",
+        "ms": 6.170207998366095
+      },
+      "recall_at_k": false,
+      "embed": {
+        "pick": "p568",
+        "ms": 427.3451670014765,
+        "search_ms": 90.84833299857564
+      },
+      "embed>jev": {
+        "pick": "p568",
+        "ms": 901.5741250041174,
+        "rerank_ms": 474.22895800264087,
+        "cost": 0.000202692
+      },
+      "embed>llm": {
+        "pick": "p568",
+        "ms": 1348.8479999941774,
+        "rerank_ms": 921.5028329927009,
+        "cost": 0.0012829
+      }
+    },
+    {
+      "q": "What does not fall under the field of analysis of algorithms>",
+      "gold": "none",
+      "bm25": {
+        "pick": "p41",
+        "ms": 7.310792003409006
+      },
+      "recall_at_k": false,
+      "embed": {
+        "pick": "p41",
+        "ms": 465.42479100753553,
+        "search_ms": 42.451125002116896
+      },
+      "embed>jev": {
+        "pick": "p41",
+        "ms": 844.2997910024133,
+        "rerank_ms": 378.8749999948777,
+        "cost": 0.000125958
+      },
+      "embed>llm": {
+        "pick": "p41",
+        "ms": 1140.273666009307,
+        "rerank_ms": 674.8488750017714,
+        "cost": 0.000753
+      }
+    },
+    {
+      "q": "How does one note classify the computation time (or similar resources)?",
+      "gold": "none",
+      "bm25": {
+        "pick": "p60",
+        "ms": 8.363500004634261
+      },
+      "recall_at_k": false,
+      "embed": {
+        "pick": "p60",
+        "ms": 534.4391250109766,
+        "search_ms": 104.76899999775924
+      },
+      "embed>jev": {
+        "pick": "p60",
+        "ms": 902.5839170062682,
+        "rerank_ms": 368.1447919952916,
+        "cost": 0.000128352
+      },
+      "embed>llm": {
+        "pick": "p61",
+        "ms": 1235.640875005629,
+        "rerank_ms": 701.2017499946523,
+        "cost": 0.0007722
+      }
+    },
+    {
+      "q": "What is the function of specialize cells located in the brain?",
+      "gold": "none",
+      "bm25": {
+        "pick": "p800",
+        "ms": 9.043083002325147
+      },
+      "recall_at_k": false,
+      "embed": {
+        "pick": "p800",
+        "ms": 421.4241250010673,
+        "search_ms": 103.03158299939241
+      },
+      "embed>jev": {
+        "pick": "none",
+        "ms": 837.7263750007842,
+        "rerank_ms": 416.3022499997169,
+        "cost": 0.000156618
+      },
+      "embed>llm": {
+        "pick": "none",
+        "ms": 1439.8100420075934,
+        "rerank_ms": 1018.3859170065261,
+        "cost": 0.000919
+      }
+    },
+    {
+      "q": "When did Buyantu stop testing potential government employees?",
+      "gold": "none",
+      "bm25": {
+        "pick": "p768",
+        "ms": 5.54420800472144
+      },
+      "recall_at_k": false,
+      "embed": {
+        "pick": "p768",
+        "ms": 336.85483399312943,
+        "search_ms": 53.50870799156837
+      },
+      "embed>jev": {
+        "pick": "none",
+        "ms": 822.3597089963732,
+        "rerank_ms": 485.5048750032438,
+        "cost": 0.000177996
+      },
+      "embed>llm": {
+        "pick": "p768",
+        "ms": 12091.600708998158,
+        "rerank_ms": 11754.745875005028,
+        "cost": 0.001114
+      }
+    },
+    {
+      "q": "Who is a man studying medicinal applicants of plants in Modern Greece?",
+      "gold": "none",
+      "bm25": {
+        "pick": "p524",
+        "ms": 10.75445901369676
+      },
+      "recall_at_k": false,
+      "embed": {
+        "pick": "p524",
+        "ms": 370.0590829976136,
+        "search_ms": 96.2892919924343
+      },
+      "embed>jev": {
+        "pick": "none",
+        "ms": 759.8218739876756,
+        "rerank_ms": 389.76279099006206,
+        "cost": 0.00018732
+      },
+      "embed>llm": {
+        "pick": "none",
+        "ms": 1157.3336250003194,
+        "rerank_ms": 787.2745420027059,
+        "cost": 0.0011329
+      }
+    },
+    {
+      "q": "What areas did English recruit natives from?",
+      "gold": "none",
+      "bm25": {
+        "pick": "p17",
+        "ms": 5.1050829933956265
+      },
+      "recall_at_k": false,
+      "embed": {
+        "pick": "p1123",
+        "ms": 906.7275839915965,
+        "search_ms": 52.52016699523665
+      },
+      "embed>jev": {
+        "pick": "p1124",
+        "ms": 1347.7939589938615,
+        "rerank_ms": 441.066375002265,
+        "cost": 0.00015498
+      },
+      "embed>llm": {
+        "pick": "p1124",
+        "ms": 1576.2684590008575,
+        "rerank_ms": 669.5408750092611,
+        "cost": 0.0009452
+      }
+    },
+    {
+      "q": "How old is a lava flow after it cools?",
+      "gold": "none",
+      "bm25": {
+        "pick": "p924",
+        "ms": 8.622833993285894
+      },
+      "recall_at_k": false,
+      "embed": {
+        "pick": "p505",
+        "ms": 1476.5990000014426,
+        "search_ms": 56.66200000268873
+      },
+      "embed>jev": {
+        "pick": "none",
+        "ms": 1850.851249997504,
+        "rerank_ms": 374.25224999606144,
+        "cost": 0.000173292
+      },
+      "embed>llm": {
+        "pick": "p505",
+        "ms": 2299.2322079953738,
+        "rerank_ms": 822.6332079939311,
+        "cost": 0.00103
+      }
+    },
+    {
+      "q": "The first buildings of the University of Oxford are known as what?",
+      "gold": "none",
+      "bm25": {
+        "pick": "p725",
+        "ms": 10.223083998425864
+      },
+      "recall_at_k": false,
+      "embed": {
+        "pick": "p725",
+        "ms": 728.5984589980217,
+        "search_ms": 44.262249997700565
+      },
+      "embed>jev": {
+        "pick": "none",
+        "ms": 1093.0128339969087,
+        "rerank_ms": 364.41437499888707,
+        "cost": 0.000178584
+      },
+      "embed>llm": {
+        "pick": "p725",
+        "ms": 1494.9474169989116,
+        "rerank_ms": 766.34895800089,
+        "cost": 0.0010933
+      }
+    },
+    {
+      "q": "Whom was Charles Lyell influenced by?",
+      "gold": "none",
+      "bm25": {
+        "pick": "p520",
+        "ms": 2.0729999960167333
+      },
+      "recall_at_k": false,
+      "embed": {
+        "pick": "p520",
+        "ms": 407.07770799053833,
+        "search_ms": 52.02845799794886
+      },
+      "embed>jev": {
+        "pick": "p520",
+        "ms": 812.2735829965677,
+        "rerank_ms": 405.1958750060294,
+        "cost": 0.000160062
+      },
+      "embed>llm": {
+        "pick": "none",
+        "ms": 1138.6883329978446,
+        "rerank_ms": 731.6106250073062,
+        "cost": 0.0009442
+      }
+    },
+    {
+      "q": "What sort of system releases the exhaust steam into the boiler?",
+      "gold": "none",
+      "bm25": {
+        "pick": "p234",
+        "ms": 8.46483300847467
+      },
+      "recall_at_k": false,
+      "embed": {
+        "pick": "p259",
+        "ms": 1914.6912500000326,
+        "search_ms": 57.204333003028296
+      },
+      "embed>jev": {
+        "pick": "p217",
+        "ms": 2356.941582998843,
+        "rerank_ms": 442.25033299881034,
+        "cost": 0.00016149
+      },
+      "embed>llm": {
+        "pick": "none",
+        "ms": 2703.591500001494,
+        "rerank_ms": 788.9002500014612,
+        "cost": 0.0009775
+      }
+    },
+    {
+      "q": "What enzyme is not an antibacterial?",
+      "gold": "none",
+      "bm25": {
+        "pick": "p844",
+        "ms": 5.086707998998463
+      },
+      "recall_at_k": false,
+      "embed": {
+        "pick": "p807",
+        "ms": 916.5631249925354,
+        "search_ms": 52.178415993694216
+      },
+      "embed>jev": {
+        "pick": "none",
+        "ms": 1423.1167499820003,
+        "rerank_ms": 506.5536249894649,
+        "cost": 0.000174804
+      },
+      "embed>llm": {
+        "pick": "none",
+        "ms": 1694.677249994129,
+        "rerank_ms": 778.1141250015935,
+        "cost": 0.0010036
+      }
+    },
+    {
+      "q": "Who is the 75th United States Secretary of the Treasury?",
+      "gold": "none",
+      "bm25": {
+        "pick": "p752",
+        "ms": 8.138457997119986
+      },
+      "recall_at_k": false,
+      "embed": {
+        "pick": "p752",
+        "ms": 551.154790999135,
+        "search_ms": 43.32358301326167
+      },
+      "embed>jev": {
+        "pick": "none",
+        "ms": 1151.1195829953067,
+        "rerank_ms": 599.9647919961717,
+        "cost": 0.000182826
+      },
+      "embed>llm": {
+        "pick": "p752",
+        "ms": 1336.5825829969253,
+        "rerank_ms": 785.4277919977903,
+        "cost": 0.0011152
+      }
+    },
+    {
+      "q": "What were the northern Alps flooded by?",
+      "gold": "none",
+      "bm25": {
+        "pick": "p1080",
+        "ms": 5.960374997812323
+      },
+      "recall_at_k": false,
+      "embed": {
+        "pick": "p930",
+        "ms": 441.3109169981908,
+        "search_ms": 53.953624999849126
+      },
+      "embed>jev": {
+        "pick": "none",
+        "ms": 867.0726669952273,
+        "rerank_ms": 425.76174999703653,
+        "cost": 0.000170352
+      },
+      "embed>llm": {
+        "pick": "none",
+        "ms": 1282.7227919915458,
+        "rerank_ms": 841.411874993355,
+        "cost": 0.0010207
+      }
+    },
+    {
+      "q": " How did the party overthrow the elected government in 1929?",
+      "gold": "none",
+      "bm25": {
+        "pick": "p1015",
+        "ms": 3.3317920024273917
+      },
+      "recall_at_k": false,
+      "embed": {
+        "pick": "p1015",
+        "ms": 414.75754100247286,
+        "search_ms": 46.074958008830436
+      },
+      "embed>jev": {
+        "pick": "none",
+        "ms": 842.6969160063891,
+        "rerank_ms": 427.9393750039162,
+        "cost": 0.000176358
+      },
+      "embed>llm": {
+        "pick": "none",
+        "ms": 1476.6117910039611,
+        "rerank_ms": 1061.8542500014883,
+        "cost": 0.0010822
+      }
+    },
+    {
+      "q": "What was rationing intended to promote in the market?",
+      "gold": "none",
+      "bm25": {
+        "pick": "p317",
+        "ms": 3.250165987992659
+      },
+      "recall_at_k": false,
+      "embed": {
+        "pick": "p317",
+        "ms": 516.556209011469,
+        "search_ms": 54.3338749994291
+      },
+      "embed>jev": {
+        "pick": "p317",
+        "ms": 1631.1049590003677,
+        "rerank_ms": 1114.5487499888986,
+        "cost": 0.000221004
+      },
+      "embed>llm": {
+        "pick": "p317",
+        "ms": 1979.0965010033688,
+        "rerank_ms": 1462.5402919918997,
+        "cost": 0.0014077
+      }
+    },
+    {
+      "q": "What beds are nitrogen-saturated? ",
+      "gold": "none",
+      "bm25": {
+        "pick": "p293",
+        "ms": 5.071833991678432
+      },
+      "recall_at_k": false,
+      "embed": {
+        "pick": "p293",
+        "ms": 396.6070000024047,
+        "search_ms": 57.35412500507664
+      },
+      "embed>jev": {
+        "pick": "p293",
+        "ms": 847.0565840107156,
+        "rerank_ms": 450.4495840083109,
+        "cost": 0.00016758
+      },
+      "embed>llm": {
+        "pick": "p293",
+        "ms": 1269.6753750060452,
+        "rerank_ms": 873.0683750036405,
+        "cost": 0.0010045
+      }
+    },
+    {
+      "q": "What debate lasts for 55 minutes?",
+      "gold": "none",
+      "bm25": {
+        "pick": "p965",
+        "ms": 1.8859160045394674
+      },
+      "recall_at_k": false,
+      "embed": {
+        "pick": "p965",
+        "ms": 402.6480409957003,
+        "search_ms": 51.90325000148732
+      },
+      "embed>jev": {
+        "pick": "none",
+        "ms": 799.8269160016207,
+        "rerank_ms": 397.1788750059204,
+        "cost": 0.000168546
+      },
+      "embed>llm": {
+        "pick": "none",
+        "ms": 1191.6340829920955,
+        "rerank_ms": 788.9860419963952,
+        "cost": 0.0010429
+      }
+    },
+    {
+      "q": "What does not explain the failure of vaccines directed at the HIV virus?",
+      "gold": "none",
+      "bm25": {
+        "pick": "p843",
+        "ms": 10.351167002227157
+      },
+      "recall_at_k": false,
+      "embed": {
+        "pick": "p843",
+        "ms": 436.27462501171976,
+        "search_ms": 50.929250006447546
+      },
+      "embed>jev": {
+        "pick": "p843",
+        "ms": 907.0843330118805,
+        "rerank_ms": 470.80970800016075,
+        "cost": 0.000176568
+      },
+      "embed>llm": {
+        "pick": "p843",
+        "ms": 1277.5371669995366,
+        "rerank_ms": 841.2625419878168,
+        "cost": 0.001051
+      }
+    },
+    {
+      "q": "What rain forced supports more than 11,003 species",
+      "gold": "none",
+      "bm25": {
+        "pick": "p379",
+        "ms": 6.797042005928233
+      },
+      "recall_at_k": false,
+      "embed": {
+        "pick": "p378",
+        "ms": 325.7221660023788,
+        "search_ms": 42.45495800569188
+      },
+      "embed>jev": {
+        "pick": "none",
+        "ms": 746.40949901368,
+        "rerank_ms": 420.68733301130123,
+        "cost": 0.000181146
+      },
+      "embed>llm": {
+        "pick": "p379",
+        "ms": 1339.9173740035621,
+        "rerank_ms": 1014.1952080011833,
+        "cost": 0.0010957
+      }
+    },
+    {
+      "q": "What the marginal utility of wealth per income per person do as that person becomes poorer?",
+      "gold": "none",
+      "bm25": {
+        "pick": "p697",
+        "ms": 10.268500001984648
+      },
+      "recall_at_k": false,
+      "embed": {
+        "pick": "p697",
+        "ms": 485.1625830051489,
+        "search_ms": 53.89541600015946
+      },
+      "embed>jev": {
+        "pick": "p697",
+        "ms": 931.4777079998748,
+        "rerank_ms": 446.3151249947259,
+        "cost": 0.000172872
+      },
+      "embed>llm": {
+        "pick": "p697",
+        "ms": 1282.975374997477,
+        "rerank_ms": 797.8127919923281,
+        "cost": 0.0010885
+      }
+    },
+    {
+      "q": "Who specifically does HT target to maintain the opinion of?",
+      "gold": "none",
+      "bm25": {
+        "pick": "p1023",
+        "ms": 8.807999998680316
+      },
+      "recall_at_k": false,
+      "embed": {
+        "pick": "p1023",
+        "ms": 368.98629200004507,
+        "search_ms": 57.06420801288914
+      },
+      "embed>jev": {
+        "pick": "p1023",
+        "ms": 755.3869169933023,
+        "rerank_ms": 386.4006249932572,
+        "cost": 0.000169638
+      },
+      "embed>llm": {
+        "pick": "p1023",
+        "ms": 1073.2782919949386,
+        "rerank_ms": 704.2919999948936,
+        "cost": 0.0010433
+      }
+    },
+    {
+      "q": "Whose needs will the growth in pharmacy informatics damage?",
+      "gold": "none",
+      "bm25": {
+        "pick": "p539",
+        "ms": 7.517707999795675
+      },
+      "recall_at_k": false,
+      "embed": {
+        "pick": "p539",
+        "ms": 435.88704099238385,
+        "search_ms": 47.29195901018102
+      },
+      "embed>jev": {
+        "pick": "none",
+        "ms": 807.5691659905715,
+        "rerank_ms": 371.68212499818765,
+        "cost": 0.000155946
+      },
+      "embed>llm": {
+        "pick": "none",
+        "ms": 1325.3108329954557,
+        "rerank_ms": 889.4237920030719,
+        "cost": 0.0009022
+      }
+    },
+    {
+      "q": "When was the Model United Nations team ranked second in North America?",
+      "gold": "none",
+      "bm25": {
+        "pick": "p739",
+        "ms": 3.365957993082702
+      },
+      "recall_at_k": false,
+      "embed": {
+        "pick": "p739",
+        "ms": 344.59112500189804,
+        "search_ms": 42.388125002617016
+      },
+      "embed>jev": {
+        "pick": "none",
+        "ms": 737.4648330005584,
+        "rerank_ms": 392.8737079986604,
+        "cost": 0.000192402
+      },
+      "embed>llm": {
+        "pick": "p739",
+        "ms": 1222.7906250045635,
+        "rerank_ms": 878.1995000026654,
+        "cost": 0.0012136
+      }
+    },
+    {
+      "q": "The Second Minister can deliver what?",
+      "gold": "none",
+      "bm25": {
+        "pick": "p979",
+        "ms": 3.9477910031564534
+      },
+      "recall_at_k": false,
+      "embed": {
+        "pick": "p979",
+        "ms": 661.1066669865977,
+        "search_ms": 52.04537499230355
+      },
+      "embed>jev": {
+        "pick": "none",
+        "ms": 1031.5227499813773,
+        "rerank_ms": 370.4160829947796,
+        "cost": 0.000162288
+      },
+      "embed>llm": {
+        "pick": "none",
+        "ms": 1373.5460839961888,
+        "rerank_ms": 712.4394170095911,
+        "cost": 0.0010066
+      }
+    },
+    {
+      "q": "Fresno is the capital of what state?",
+      "gold": "none",
+      "bm25": {
+        "pick": "p422",
+        "ms": 6.726666993927211
+      },
+      "recall_at_k": false,
+      "embed": {
+        "pick": "p422",
+        "ms": 493.51283299620263,
+        "search_ms": 58.180292005999945
+      },
+      "embed>jev": {
+        "pick": "none",
+        "ms": 882.8627909970237,
+        "rerank_ms": 389.34995800082106,
+        "cost": 0.00017955
+      },
+      "embed>llm": {
+        "pick": "p422",
+        "ms": 1249.0450000041164,
+        "rerank_ms": 755.5321670079138,
+        "cost": 0.0011263
+      }
+    },
+    {
+      "q": "Where wasn't France concentraing efforts?",
+      "gold": "none",
+      "bm25": {
+        "pick": "p817",
+        "ms": 4.344833010691218
+      },
+      "recall_at_k": false,
+      "embed": {
+        "pick": "p1049",
+        "ms": 409.3423750018701,
+        "search_ms": 56.36874999618158
+      },
+      "embed>jev": {
+        "pick": "p1117",
+        "ms": 837.89920801064,
+        "rerank_ms": 428.5568330087699,
+        "cost": 0.000163506
+      },
+      "embed>llm": {
+        "pick": "p1117",
+        "ms": 1138.5722090053605,
+        "rerank_ms": 729.2298340034904,
+        "cost": 0.0010046
+      }
+    },
+    {
+      "q": "A vertical force pointing northeast can be split into how many forces?",
+      "gold": "none",
+      "bm25": {
+        "pick": "p1173",
+        "ms": 3.4223750117234886
+      },
+      "recall_at_k": false,
+      "embed": {
+        "pick": "p1173",
+        "ms": 332.10516700637527,
+        "search_ms": 41.78354100440629
+      },
+      "embed>jev": {
+        "pick": "p1173",
+        "ms": 766.6735420061741,
+        "rerank_ms": 434.56837499979883,
+        "cost": 0.000181272
+      },
+      "embed>llm": {
+        "pick": "p1173",
+        "ms": 1219.0370420139516,
+        "rerank_ms": 886.9318750075763,
+        "cost": 0.0011135
+      }
+    },
+    {
+      "q": "What did Alec Shelbrooke propose payments of benefits never be made on?",
+      "gold": "none",
+      "bm25": {
+        "pick": "p146",
+        "ms": 3.1616250053048134
+      },
+      "recall_at_k": false,
+      "embed": {
+        "pick": "p146",
+        "ms": 434.01825000182725,
+        "search_ms": 51.98437500803266
+      },
+      "embed>jev": {
+        "pick": "p146",
+        "ms": 873.8583749945974,
+        "rerank_ms": 439.84012499277014,
+        "cost": 0.000271194
+      },
+      "embed>llm": {
+        "pick": "p146",
+        "ms": 1230.2192920033121,
+        "rerank_ms": 796.2010420014849,
+        "cost": 0.0017599
+      }
+    },
+    {
+      "q": "What property of the harmonic series 1 + 1/2 + 1/3 +1/4 ... shows that there is an infinite number of Basels?",
+      "gold": "none",
+      "bm25": {
+        "pick": "p889",
+        "ms": 14.101915992796421
+      },
+      "recall_at_k": false,
+      "embed": {
+        "pick": "p889",
+        "ms": 396.9678339926759,
+        "search_ms": 54.5892499940237
+      },
+      "embed>jev": {
+        "pick": "p889",
+        "ms": 872.8242919896729,
+        "rerank_ms": 475.85645799699705,
+        "cost": 0.00016212
+      },
+      "embed>llm": {
+        "pick": "p889",
+        "ms": 1467.7710429823492,
+        "rerank_ms": 1070.8032089896733,
+        "cost": 0.0009871
+      }
+    },
+    {
+      "q": "What does a basic program also require?",
+      "gold": "none",
+      "bm25": {
+        "pick": "p639",
+        "ms": 5.611000000499189
+      },
+      "recall_at_k": false,
+      "embed": {
+        "pick": "p638",
+        "ms": 607.0480839989614,
+        "search_ms": 52.82825000176672
+      },
+      "embed>jev": {
+        "pick": "p639",
+        "ms": 1046.3405839982443,
+        "rerank_ms": 439.2924999992829,
+        "cost": 0.00017304
+      },
+      "embed>llm": {
+        "pick": "p639",
+        "ms": 1595.6567500106758,
+        "rerank_ms": 988.6086660117144,
+        "cost": 0.0010831
+      }
+    },
+    {
+      "q": "What is an important solved problem in complexity theory?",
+      "gold": "none",
+      "bm25": {
+        "pick": "p41",
+        "ms": 2.7857079985551536
+      },
+      "recall_at_k": false,
+      "embed": {
+        "pick": "p86",
+        "ms": 656.491375004407,
+        "search_ms": 52.441457999520935
+      },
+      "embed>jev": {
+        "pick": "p86",
+        "ms": 1031.6021670005284,
+        "rerank_ms": 375.1107919961214,
+        "cost": 0.000133812
+      },
+      "embed>llm": {
+        "pick": "p75",
+        "ms": 1379.8069160111481,
+        "rerank_ms": 723.3155410067411,
+        "cost": 0.0008025
+      }
+    },
+    {
+      "q": "What was not central to European development since the Treaty of Rome 1957?",
+      "gold": "none",
+      "bm25": {
+        "pick": "p334",
+        "ms": 11.103500000899658
+      },
+      "recall_at_k": false,
+      "embed": {
+        "pick": "p334",
+        "ms": 484.69037500035483,
+        "search_ms": 48.67645900230855
+      },
+      "embed>jev": {
+        "pick": "p359",
+        "ms": 899.0866669919342,
+        "rerank_ms": 414.39629199157935,
+        "cost": 0.000290724
+      },
+      "embed>llm": {
+        "pick": "p359",
+        "ms": 1384.0159170067636,
+        "rerank_ms": 899.3255420064088,
+        "cost": 0.0018919
+      }
+    },
+    {
+      "q": "What is FMCG's economy characterized by?",
+      "gold": "none",
+      "bm25": {
+        "pick": "p1066",
+        "ms": 2.329458002350293
+      },
+      "recall_at_k": false,
+      "embed": {
+        "pick": "p699",
+        "ms": 354.13395801151637,
+        "search_ms": 47.26837499765679
+      },
+      "embed>jev": {
+        "pick": "none",
+        "ms": 799.6310420130612,
+        "rerank_ms": 445.49708400154486,
+        "cost": 0.000200214
+      },
+      "embed>llm": {
+        "pick": "none",
+        "ms": 1436.071083007846,
+        "rerank_ms": 1081.9371249963297,
+        "cost": 0.0012667
+      }
+    },
+    {
+      "q": "What would be a Kuwaiti response to US actions be?",
+      "gold": "none",
+      "bm25": {
+        "pick": "p1061",
+        "ms": 3.3397909865016118
+      },
+      "recall_at_k": false,
+      "embed": {
+        "pick": "p321",
+        "ms": 5370.783957987442,
+        "search_ms": 55.12308300239965
+      },
+      "embed>jev": {
+        "pick": "p311",
+        "ms": 5759.038166987011,
+        "rerank_ms": 388.2542089995695,
+        "cost": 0.000170016
+      },
+      "embed>llm": {
+        "pick": "p322",
+        "ms": 6308.657624991611,
+        "rerank_ms": 937.873667004169,
+        "cost": 0.0010486
+      }
+    },
+    {
+      "q": "Who were there disputes between when California ruled Mexico?",
+      "gold": "none",
+      "bm25": {
+        "pick": "p97",
+        "ms": 2.793583000311628
+      },
+      "recall_at_k": false,
+      "embed": {
+        "pick": "p97",
+        "ms": 437.1292080031708,
+        "search_ms": 51.7636250006035
+      },
+      "embed>jev": {
+        "pick": "p97",
+        "ms": 965.683332993649,
+        "rerank_ms": 528.5541249904782,
+        "cost": 0.000136164
+      },
+      "embed>llm": {
+        "pick": "p97",
+        "ms": 1130.4715000005672,
+        "rerank_ms": 693.3422919973964,
+        "cost": 0.0008265
+      }
+    },
+    {
+      "q": "Why did Prussia gain the title of the \"Phoenix Counrty\"?",
+      "gold": "none",
+      "bm25": {
+        "pick": "p1067",
+        "ms": 7.992291997652501
+      },
+      "recall_at_k": false,
+      "embed": {
+        "pick": "p1053",
+        "ms": 635.8113750029588,
+        "search_ms": 50.8080840081675
+      },
+      "embed>jev": {
+        "pick": "none",
+        "ms": 1142.901957995491,
+        "rerank_ms": 507.0905829925323,
+        "cost": 0.000180474
+      },
+      "embed>llm": {
+        "pick": "p1067",
+        "ms": 1471.8122920021415,
+        "rerank_ms": 836.0009169991827,
+        "cost": 0.0010943
+      }
+    },
+    {
+      "q": "Of what form are Mersenne tests?",
+      "gold": "none",
+      "bm25": {
+        "pick": "p885",
+        "ms": 5.638834001729265
+      },
+      "recall_at_k": false,
+      "embed": {
+        "pick": "p886",
+        "ms": 337.39829099795315,
+        "search_ms": 54.602333999355324
+      },
+      "embed>jev": {
+        "pick": "p885",
+        "ms": 844.5008330018027,
+        "rerank_ms": 507.1025420038495,
+        "cost": 0.000176148
+      },
+      "embed>llm": {
+        "pick": "p885",
+        "ms": 1298.3001240063459,
+        "rerank_ms": 960.9018330083927,
+        "cost": 0.0010924
+      }
+    }
+  ]
+}
