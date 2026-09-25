@@ -1,36 +1,40 @@
-"""Ask a large PDF — answers from a large PDF, with a live comparison of RAG methods.
+"""Ask a large PDF — an agent searches the PDF and answers with the pages it used.
 
-Upload a PDF and it is indexed right away. Ask a question: the answer comes from
-the Hybrid → Jev method (BM25 + embeddings shortlist 20 passages, Jev picks one,
-a small chat model writes the answer from that one passage) and is shown as soon
-as it is ready. The other five methods keep running and fill the "Compare
-methods" panel when they finish.
+Three steps on one page: (1) an OpenRouter key — asked for up front when the
+server has none, kept in the browser; (2) upload a PDF — indexed right away
+(BM25 + embeddings) with live progress; (3) ask — a tool-calling agent (agent.py)
+searches as often as it needs, each search a hybrid shortlist ranked by Jev, and
+answers with the passages it relied on, or says the PDF doesn't cover the question.
+Asking is locked until the PDF is ready.
 
 Run:  .venv/bin/python app.py      (then open the printed local URL)
-Key:  Settings → OpenRouter key, else $OPENROUTER_API_KEY, else the file /tmp/or.
+Key:  entered in the page, else $OPENROUTER_API_KEY, else the file /tmp/or.
 """
 
+import collections
 import os
 import re
 import time
 import traceback
 import urllib.error
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 import gradio as gr
 import pymupdf
 
-from ableton_eval import Toc, jev_choice, llm_pick, rrf
-from poc import BM25, HTTPStatusError, embed, post
-from squad_eval import CHAT_URL, LLM_MODEL, top_k, unit
+from agent import AGENT_MODEL, body_text, run_agent
+from poc import BM25, HTTPStatusError, embed
+from squad_eval import unit
 
-MAX_WORDS, MIN_WORDS, K, POOL = 300, 25, 20, 50
-PICK = "Which single passage answers the question in state?"
-M_BM25, EMB, HYB = "BM25", "Embeddings", "Hybrid"
-JEV, LLM, TOC = "Hybrid → Jev", "Hybrid → Gemini", "Jev via contents"
-ORDER = (M_BM25, EMB, HYB, JEV, LLM, TOC)
-USED = JEV  # the method whose passage the answer is written from
+MAX_WORDS, MIN_WORDS, BATCH = 300, 25, 100
+# Indexes live on the server, keyed by the uploaded file's path (Gradio names uploads by a
+# hash of their content). Gradio deletes per-session state when the browser's connection
+# drops, which silently lost the index while the page still said "ready".
+INDEXES = collections.OrderedDict()
+MAX_INDEXES = 3
 POOL_EXEC = ThreadPoolExecutor(8)
+HOW = "How it found this"
+GUIDE = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "HOW_IT_WORKS.md")).read()
 
 
 def friendly(e):
@@ -38,7 +42,7 @@ def friendly(e):
     traceback.print_exception(e)
     if isinstance(e, HTTPStatusError):
         if e.code == 401:
-            return "OpenRouter rejected the API key. Check it under Settings."
+            return "OpenRouter rejected the API key. Press “Change key” and enter a valid one."
         if e.code == 402:
             return "Your OpenRouter account is out of credit."
         if e.code == 429:
@@ -54,27 +58,85 @@ def md_escape(text):
     return re.sub(r"([\\`*_{}\[\]<>#|~])", r"\\\1", text)
 
 
-def get_key(field):
-    key = (field or "").strip() or os.environ.get("OPENROUTER_API_KEY", "")
+def server_key():
+    key = os.environ.get("OPENROUTER_API_KEY", "")
     if not key and os.path.exists("/tmp/or"):
         key = open("/tmp/or").read().strip()
     return key
 
 
-# ---------------------------------------------------------------- indexing
+def get_key(saved):
+    """The key saved in this browser wins; otherwise the server's own key."""
+    return (saved or "").strip() or server_key()
 
-def build_index(pdf_path, key_field, progress=gr.Progress()):
-    """Returns (index or None, status markdown). Never raises: failures become a status."""
+
+def bar(done, total, width=20):
+    filled = round(width * done / total) if total else 0
+    return "█" * filled + "░" * (width - filled) + f" {round(100 * done / total) if total else 0}%"
+
+
+# ---------------------------------------------------------------- step 1: the key
+
+def key_view(saved):
+    """(key step, key line, key-line row, pdf+ask steps) for the key currently in force."""
+    shown, hidden = gr.update(visible=True), gr.update(visible=False)
+    if (saved or "").strip():
+        return hidden, "**1 · OpenRouter key:** yours, saved in this browser", shown, shown
+    if server_key():
+        return hidden, "**1 · OpenRouter key:** the server's", shown, shown
+    return shown, "", hidden, hidden
+
+
+def save_key(entered):
+    """Check the key with one tiny request before keeping it."""
+    entered = (entered or "").strip()
+    if not entered:
+        return gr.skip(), "Paste your key first.", *[gr.skip()] * 5
+    try:
+        embed(["key check"], entered)
+    except HTTPStatusError as e:
+        msg = ("OpenRouter rejected this key. Check it and try again." if e.code == 401
+               else friendly(e))
+        return gr.skip(), msg, *[gr.skip()] * 5
+    except Exception as e:
+        return gr.skip(), friendly(e), *[gr.skip()] * 5
+    return entered, "", "", *key_view(entered)
+
+
+# ---------------------------------------------------------------- step 2: the PDF
+
+LOCKED = "Wait until the PDF is ready"
+
+
+def ask_lock(ready, placeholder, has_pdf=True):
+    """Question box, Ask button and Index again button: Ask only when the PDF is ready."""
+    return (gr.update(interactive=ready, placeholder=placeholder),
+            gr.update(interactive=ready), gr.update(visible=has_pdf))
+
+
+def index_pdf(pdf_path, saved):
+    """Generator: indexes the PDF, showing progress in the status line after every batch.
+    Yields (status, answer, how, steps, history, earlier, question, ask, index again)."""
+    cleared = ("", gr.update(label=HOW), "", [], "")
     if not pdf_path:
         gr.Warning("Upload a PDF first.")
-        return None, ""
-    name = os.path.basename(pdf_path)
-    key = get_key(key_field)
+        yield ("", *cleared, *ask_lock(False, "Upload a PDF first", has_pdf=False))
+        return
+    name = md_escape(os.path.basename(pdf_path))
+    if pdf_path in INDEXES:
+        INDEXES.move_to_end(pdf_path)
+        index = INDEXES[pdf_path]
+        yield (f"**{name}** · {index['pages']} pages · {len(index['chunks'])} passages · "
+               f"**ready** (already indexed)", *cleared, *ask_lock(True, "Ask about your PDF"))
+        return
+    key = get_key(saved)
     if not key:
-        return None, f"**{name}** · no OpenRouter key — enter one under Settings, then press **Index again**."
+        yield (f"**{name}** · no OpenRouter key. Enter one in step 1.", *cleared,
+               *ask_lock(False, LOCKED))
+        return
+    t0 = time.perf_counter()
+    yield f"**{name}** · reading the PDF…", *cleared, *ask_lock(False, LOCKED)
     try:
-        t0 = time.perf_counter()
-        progress(0, desc="Reading the PDF…")
         doc = pymupdf.open(pdf_path)
         outline = [{"level": lvl, "title": " ".join(title.split()), "page": page}
                    for lvl, title, page in doc.get_toc() if page >= 1]
@@ -92,196 +154,171 @@ def build_index(pdf_path, key_field, progress=gr.Progress()):
                     chunks.append({"id": f"c{len(chunks)}", "page": pno, "section": section,
                                    "label": label, "text": label + " ".join(w)})
         if not chunks:
-            return None, (f"**{name}** · no text found. This looks like a scanned PDF "
-                          f"without a text layer, so it can't be searched.")
-        progress(0.2, desc=f"Indexing {len(chunks)} passages…")
-        batches = [chunks[i:i + 100] for i in range(0, len(chunks), 100)]
-        results = list(POOL_EXEC.map(lambda b: embed([c["text"] for c in b], key), batches))
+            yield (f"**{name}** · no text found. This looks like a scanned PDF without a text "
+                   f"layer, so it can't be searched.", *cleared,
+                   *ask_lock(False, "This PDF can't be searched"))
+            return
+        total, done = len(chunks), 0
+        batches = [chunks[i:i + BATCH] for i in range(0, total, BATCH)]
+        futures = {POOL_EXEC.submit(embed, [c["text"] for c in b], key): n
+                   for n, b in enumerate(batches)}
+        results = [None] * len(batches)
+        yield (f"**{name}** · indexing {bar(0, total)} 0 of {total} passages", *cleared,
+               *ask_lock(False, LOCKED))
+        for fut in as_completed(futures):
+            results[futures[fut]] = fut.result()
+            done += len(batches[futures[fut]])
+            yield (f"**{name}** · indexing {bar(done, total)} {done} of {total} passages · "
+                   f"{time.perf_counter() - t0:.0f} s", *cleared, *ask_lock(False, LOCKED))
         vecs = [v for r in results for v in r[0]]
         cost = sum(r[2].get("cost", 0) for r in results)
-        index = {"name": name, "chunks": chunks, "bm25": BM25([c["text"] for c in chunks]),
-                 "uvecs": [unit(v) for v in vecs],
-                 "toc": Toc(outline, chunks, last_page=len(doc)) if outline else None,
-                 "chapters": sum(1 for i in outline if i["level"] == 1)}
-        return index, (f"**{name}** · {len(doc)} pages · {len(chunks)} passages · "
-                       f"**ready** · indexed in {time.perf_counter() - t0:.0f} s for ${cost:.4f}")
+        INDEXES[pdf_path] = {"name": name, "pages": len(doc), "chunks": chunks,
+                             "bm25": BM25([c["text"] for c in chunks]),
+                             "uvecs": [unit(v) for v in vecs]}
+        while len(INDEXES) > MAX_INDEXES:
+            INDEXES.popitem(last=False)
+        yield (f"**{name}** · {len(doc)} pages · {total} passages · **ready** · indexed in "
+               f"{time.perf_counter() - t0:.0f} s for ${cost:.4f}", *cleared,
+               *ask_lock(True, "Ask about your PDF"))
     except Exception as e:
-        return None, f"**{name}** · indexing failed. {friendly(e)} Then press **Index again**."
+        yield (f"**{name}** · indexing failed. {friendly(e)} Then press **Index again**.",
+               *cleared, *ask_lock(False, "Indexing failed. See the message above"))
 
 
-# ---------------------------------------------------------------- asking
+def on_clear():
+    return ("", "", gr.update(label=HOW), "", [], "",
+            *ask_lock(False, "Upload a PDF first", has_pdf=False))
+
+
+# ---------------------------------------------------------------- step 3: asking
 
 def history_md(history):
     if not history:
         return ""
-    lines = [f"- {md_escape(h['q'])} · p. {h['page']}" for h in history]
+    lines = [f"- {md_escape(h['q'])} · {h['pages']}" for h in history]
     return "**Earlier questions**\n\n" + "\n".join(lines)
 
 
-def ask(question, index, key_field, history):
-    """Generator: yields the answer as soon as Jev's path is done, then the comparison."""
+def steps_md(steps):
+    lines = []
+    for n, s in enumerate(steps, 1):
+        if s["tool"] == "search":
+            found = ", ".join(f"p. {r['page']} ({r['relevance']:.0%})" for r in s["results"]) or "nothing"
+            lines.append(f"{n}. Searched “{md_escape(s['query'])}” → {found} · {s['ms'] / 1000:.1f} s")
+        else:
+            lines.append(f"{n}. Read page {s['page']} · {s['ms'] / 1000:.1f} s")
+    return "\n".join(lines)
+
+
+def ask(question, pdf_path, saved, history):
+    """Generator: shows each agent step as it happens, then the answer and its sources."""
     history = history or []
-    if not index:
-        gr.Warning("The PDF isn't ready yet. Upload one, or wait until it says “ready”.")
-        yield gr.skip(), gr.skip(), gr.skip(), gr.skip(), gr.skip(), gr.skip()
+    index = INDEXES.get(pdf_path) if pdf_path else None
+    if not index:  # the button is locked until ready; this guards a stale page
+        gr.Warning("The PDF isn't ready. Upload it again.")
+        yield gr.skip(), gr.skip(), gr.skip(), gr.skip(), gr.skip()
         return
     if not (question or "").strip():
         gr.Warning("Type a question first.")
-        yield gr.skip(), gr.skip(), gr.skip(), gr.skip(), gr.skip(), gr.skip()
+        yield gr.skip(), gr.skip(), gr.skip(), gr.skip(), gr.skip()
         return
-    key = get_key(key_field)
-    t_start = time.perf_counter()
-    chunks, by_id = index["chunks"], {c["id"]: c for c in index["chunks"]}
-    res = {}
+    key = get_key(saved)
+    steps, done = [], None
+    yield ("### Answer\n*Searching the PDF…*", gr.update(label=f"{HOW} · working…"), "",
+           gr.skip(), gr.skip())
     try:
-        t0 = time.perf_counter()
-        s = index["bm25"].scores(question)
-        bm_order = sorted(range(len(s)), key=lambda i: -s[i])[:POOL]
-        bm_ms = (time.perf_counter() - t0) * 1000
-        res[M_BM25] = (chunks[bm_order[0]]["id"], bm_ms, 0.0)
-        (qv,), emb_ms, usage = embed([question], key)
+        for kind, event in run_agent(question.strip(), index, key):
+            if kind == "step":
+                steps.append(event)
+                yield (f"### Answer\n*Searching the PDF… step {len(steps)}*",
+                       gr.update(label=f"{HOW} · working… {len(steps)} step(s) so far"),
+                       steps_md(steps), gr.skip(), gr.skip())
+            else:
+                done = event
     except Exception as e:
-        gr.Warning(friendly(e))
-        yield gr.skip(), gr.skip(), gr.skip(), gr.skip(), gr.skip(), gr.skip()
+        message = friendly(e)
+        gr.Warning(message)
+        yield (f"### Answer\nThe search stopped: {message}", gr.update(label=HOW),
+               steps_md(steps), gr.skip(), gr.skip())
         return
-    emb_cost = usage.get("cost", 0)
-    t0 = time.perf_counter()
-    em_order = top_k(qv, index["uvecs"], POOL)
-    search_ms = (time.perf_counter() - t0) * 1000
-    res[EMB] = (chunks[em_order[0]]["id"], emb_ms + search_ms, emb_cost)
-    cands = [chunks[i] for i in rrf(bm_order, em_order)[:K]]
-    base_ms = bm_ms + emb_ms + search_ms
-    res[HYB] = (cands[0]["id"], base_ms, emb_cost)
-
-    def run_jev():
-        pick, ms, cost = jev_choice(question, {c["id"]: c["text"] for c in cands}, PICK, key)
-        return pick, base_ms + ms, emb_cost + cost
-
-    def run_llm():
-        pick, ms, cost = llm_pick(question, cands, key)
-        return pick, base_ms + ms, emb_cost + cost
-
-    def run_toc():
-        if not index["toc"] or not index["chapters"]:
-            raise LookupError("this PDF has no table of contents")
-        if index["chapters"] > 255:
-            raise LookupError("more than 255 chapters")
-        pick, ms, cost, _ = index["toc"].pick(question, key)
-        return pick, ms, cost
-
-    futures = {JEV: POOL_EXEC.submit(run_jev), LLM: POOL_EXEC.submit(run_llm),
-               TOC: POOL_EXEC.submit(run_toc)}
-
-    def result(name):
-        try:
-            return futures[name].result()
-        except LookupError as e:  # an expected "can't run here", shown as-is
-            return (f"not available: {e}", 0.0, 0.0)
-        except Exception as e:
-            return (f"failed: {friendly(e)}", 0.0, 0.0)
-
-    # 1) The answer, from the passage Jev picked — shown without waiting for the others.
-    res[JEV] = result(JEV)
-    jev_pick = res[JEV][0]
-    p = by_id.get(jev_pick)
-    if p:
-        prompt = (f"Answer the question using only this passage. If the passage does not "
-                  f"answer it, say so. Be brief.\n\nPassage (page {p['page']}):\n{p['text']}"
-                  f"\n\nQuestion: {question}")
-        try:
-            data, ans_ms = post(CHAT_URL, {"model": LLM_MODEL, "max_tokens": 300, "temperature": 0,
-                                           "messages": [{"role": "user", "content": prompt}]}, key)
-            text = (data["choices"][0]["message"].get("content") or "").strip()
-            ans_cost = data.get("usage", {}).get("cost", 0)
-        except Exception as e:
-            text, ans_ms, ans_cost = f"Couldn't write the answer: {friendly(e)}", 0, 0
-        wall = time.perf_counter() - t_start
-        quote = p["text"][len(p["label"]):]
-        quote = md_escape(quote[:600]) + ("…" if len(quote) > 600 else "")
-        where = f"Page {p['page']}" + (f" · {p['section']}" if p["section"] else "")
-        answer_md = (f"### Answer\n{text}\n\n**{where}**\n\n> {quote}\n\n"
-                     f"<small>Found by **{USED}** · answer in {wall:.1f} s · "
-                     f"cost ${res[JEV][2] + ans_cost:.4f}</small>")
+    # Model-written Markdown is kept (bold, lists); brackets from the PDF stay literal.
+    text = (done["answer"].strip() or "No answer: the search ran out of steps.")
+    text = text.replace("[", "\\[").replace("]", "\\]")
+    sources = done["sources"]
+    if sources:
+        blocks = [f"**Page {c['page']}**" + (f" · {md_escape(c['section'])}" if c["section"] else "")
+                  + f"\n\n> {md_escape(body_text(c))}" for c in sources]
+        sources_md = "\n\n#### Sources\n\n" + "\n\n".join(blocks)
     else:
-        answer_md = f"### Answer\nNo answer: {USED} couldn't pick a passage ({jev_pick})."
-    yield (answer_md, gr.update(label="Compare methods · still running…"), [],
-           "", gr.skip(), gr.skip())
-
-    # 2) The comparison, once every method has finished.
-    res[LLM], res[TOC] = result(LLM), result(TOC)
-    used_page = p["page"] if p else None
-    rows, details, agree = [], [], 0
-    for name in ORDER:
-        pick, ms, cost = res[name]
-        c = by_id.get(pick)
-        agree += bool(c and used_page and c["page"] == used_page)
-        label = f"{name} ✓ used for answer" if name == USED else name
-        rows.append([label if c else f"{name} — {pick}", c["page"] if c else "—",
-                     round(ms), f"{cost * 1000:.2f}"])
-        if c:
-            where = f"page {c['page']}" + (f" · {c['section']}" if c["section"] else "")
-            details.append(f"**{name}** — {where}\n\n> {md_escape(c['text'][len(c['label']):][:800])}\n")
-    summary = (f"Compare methods · {agree} of {len(ORDER)} picked page {used_page}"
-               if used_page else "Compare methods")
+        sources_md = "\n\n*No source passages were named.*"
+    meta = (f"<small>{len(steps)} step(s) · {done['seconds']:.1f} s · ${done['cost']:.4f} · "
+            f"agent {AGENT_MODEL}, passages ranked by Jev</small>")
+    pages = ", ".join(f"p. {p}" for p in dict.fromkeys(c["page"] for c in sources)) or "no source"
     earlier = history_md(history)
-    history = [{"q": question.strip(), "page": used_page or "—"}] + history
-    yield (gr.skip(), gr.update(label=summary), rows,
-           "**Passage each method picked**\n\n" + "\n---\n".join(details), history, earlier)
-
-
-def on_new_pdf(pdf_path, key_field, progress=gr.Progress()):
-    index, status = build_index(pdf_path, key_field, progress)
-    return index, status, "", gr.update(label="Compare methods"), [], "", [], ""
-
-
-def indexing_notice(pdf_path):
-    """Shown the moment a PDF arrives, so the wait is visible before indexing starts."""
-    if not pdf_path:
-        return None, "", "", gr.update(label="Compare methods"), [], "", [], ""
-    name = os.path.basename(pdf_path)
-    return (None, f"**{name}** · indexing… (large PDFs take up to a minute)", "",
-            gr.update(label="Compare methods"), [], "", [], "")
-
-
-def on_clear():
-    return None, "", "", gr.update(label="Compare methods"), [], "", [], ""
+    history = [{"q": question.strip(), "pages": pages}] + history
+    yield (f"### Answer\n{text}{sources_md}\n\n{meta}", gr.update(label=f"{HOW} · {len(steps)} step(s)"),
+           steps_md(steps), history, earlier)
 
 
 # ---------------------------------------------------------------- UI
 
 with gr.Blocks(title="Ask a large PDF") as demo:
-    gr.Markdown("# Ask a large PDF\nUpload a PDF and ask questions about it. Answers "
-                "quote the page they come from.")
-    index = gr.State(None)
+    gr.Markdown("# Ask a large PDF\nUpload a PDF and ask questions about it. An agent searches "
+                "the PDF as often as it needs and answers with the passages it used.")
+    with gr.Accordion("How it works", open=False):
+        gr.Markdown(GUIDE.split("\n", 1)[1])  # the file's own title is the accordion label
+    # Kept in this browser's storage, so a reload doesn't ask for the key again.
+    saved_key = gr.BrowserState("", storage_key="ask-large-pdf-openrouter-key",
+                                secret="ask-large-pdf-local")
     history = gr.State([])
-    pdf = gr.File(label="PDF", file_types=[".pdf"], type="filepath")
-    status = gr.Markdown()
-    with gr.Accordion("Settings", open=False):
-        key = gr.Textbox(label="OpenRouter API key", type="password",
-                         placeholder="sk-or-… (leave empty to use the server's key)")
-        reindex = gr.Button("Index again", variant="secondary")
-    with gr.Row(equal_height=True):
-        question = gr.Textbox(show_label=False, placeholder="Ask about your PDF",
-                              lines=1, max_lines=4, scale=5, min_width=200)
-        go = gr.Button("Ask", variant="primary", scale=1, min_width=80)
-    answer = gr.Markdown()
-    with gr.Accordion("Compare methods", open=False) as compare:
-        gr.Markdown("Every question also runs through five other retrieval methods. "
-                    "*Hybrid* merges BM25 and embeddings; its top 20 passages go to Jev or "
-                    "Gemini, which pick one. ms = time for this question, $ / 1k = cost "
-                    "per 1,000 questions.")
-        table = gr.Dataframe(headers=["Method", "Page", "ms", "$ / 1k"], interactive=False,
-                             wrap=True, column_widths=["43%", "19%", "18%", "20%"])
-        passages = gr.Markdown()
-    earlier = gr.Markdown()
 
-    reset_outputs = [index, status, answer, compare, table, passages, history, earlier]
-    pdf.upload(indexing_notice, [pdf], reset_outputs).then(on_new_pdf, [pdf, key], reset_outputs)
-    pdf.clear(on_clear, None, reset_outputs)
-    reindex.click(indexing_notice, [pdf], reset_outputs).then(on_new_pdf, [pdf, key], reset_outputs)
-    ask_outputs = [answer, compare, table, passages, history, earlier]
-    go.click(ask, [question, index, key, history], ask_outputs)
-    question.submit(ask, [question, index, key, history], ask_outputs)
+    with gr.Column(visible=False) as key_step:
+        gr.Markdown("### 1 · Your OpenRouter key\nThe app uses OpenRouter to read the PDF and "
+                    "answer. Paste an API key from your OpenRouter account (Keys page).")
+        with gr.Row(equal_height=True):
+            key_in = gr.Textbox(show_label=False, type="password", placeholder="sk-or-v1-…",
+                                scale=5, min_width=200)
+            save = gr.Button("Save key", variant="primary", scale=1, min_width=100)
+        key_msg = gr.Markdown()
+        cancel_key = gr.Button("Cancel", variant="secondary", size="sm", visible=False)
+    with gr.Row(equal_height=True, visible=False) as key_row:
+        key_line = gr.Markdown()
+        change_key = gr.Button("Change key", variant="secondary", size="sm", scale=0,
+                               min_width=110)
+
+    with gr.Column(visible=False) as rest:
+        gr.Markdown("### 2 · Your PDF")
+        pdf = gr.File(show_label=False, file_types=[".pdf"], type="filepath")
+        status = gr.Markdown()
+        reindex = gr.Button("Index again", variant="secondary", size="sm", visible=False)
+        gr.Markdown("### 3 · Ask")
+        with gr.Row(equal_height=True):
+            question = gr.Textbox(show_label=False, placeholder="Upload a PDF first",
+                                  interactive=False, lines=1, max_lines=4, scale=5, min_width=200)
+            go = gr.Button("Ask", variant="primary", interactive=False, scale=1, min_width=80)
+        answer = gr.Markdown()
+        with gr.Accordion(HOW, open=False) as how:
+            steps = gr.Markdown()
+        earlier = gr.Markdown()
+
+    gr.Markdown("<small>Supported by [airabbit.blog](https://airabbit.blog)</small>")
+
+    key_outputs = [key_step, key_line, key_row, rest]
+    demo.load(key_view, [saved_key], key_outputs)
+    save.click(save_key, [key_in], [saved_key, key_msg, key_in, *key_outputs])
+    key_in.submit(save_key, [key_in], [saved_key, key_msg, key_in, *key_outputs])
+    change_key.click(lambda: (gr.update(visible=True), "", gr.update(visible=True)), None,
+                     [key_step, key_msg, cancel_key])
+    cancel_key.click(lambda saved: ("", "", gr.update(visible=False), *key_view(saved)),
+                     [saved_key], [key_in, key_msg, cancel_key, *key_outputs])
+
+    pdf_outputs = [status, answer, how, steps, history, earlier, question, go, reindex]
+    pdf.upload(index_pdf, [pdf, saved_key], pdf_outputs, show_progress="hidden")
+    reindex.click(index_pdf, [pdf, saved_key], pdf_outputs, show_progress="hidden")
+    pdf.clear(on_clear, None, pdf_outputs)
+    ask_outputs = [answer, how, steps, history, earlier]
+    go.click(ask, [question, pdf, saved_key, history], ask_outputs, show_progress="hidden")
+    question.submit(ask, [question, pdf, saved_key, history], ask_outputs, show_progress="hidden")
 
 if __name__ == "__main__":
     demo.launch()
