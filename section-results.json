@@ -1,0 +1,51 @@
+{
+ "headings_found": 735,
+ "headings_total": 735,
+ "results": {
+  "page": {
+   "chunks": 1014,
+   "median_words": 192,
+   "avg_pages_per_chunk": 1.0,
+   "hits": {
+    "bm25": 65,
+    "embed": 97,
+    "hybrid": 90,
+    "hybrid>jev": 126
+   },
+   "shortlist_recall": 145,
+   "of": 149,
+   "jev_median_ms": 405,
+   "cost_usd": 0.0387
+  },
+  "section+page": {
+   "chunks": 1393,
+   "median_words": 145,
+   "avg_pages_per_chunk": 1.0,
+   "hits": {
+    "bm25": 58,
+    "embed": 86,
+    "hybrid": 82,
+    "hybrid>jev": 123
+   },
+   "shortlist_recall": 145,
+   "of": 149,
+   "jev_median_ms": 418,
+   "cost_usd": 0.0316
+  },
+  "section": {
+   "chunks": 1037,
+   "median_words": 205,
+   "avg_pages_per_chunk": 1.77,
+   "hits": {
+    "bm25": 74,
+    "embed": 89,
+    "hybrid": 90,
+    "hybrid>jev": 125
+   },
+   "shortlist_recall": 147,
+   "of": 149,
+   "jev_median_ms": 517,
+   "cost_usd": 0.0395
+  }
+ }
+}
