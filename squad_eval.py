@@ -34,7 +34,7 @@ from poc import BM25, JEV_MODEL, DECISIONS_URL, EMBED_MODEL, RETRIES, api_key, e
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(HERE, "data", "squad-dev-v2.0.json")
 EMB_CACHE = os.path.join(HERE, "data", "corpus-embeddings.json")
-CHAT_URL = "https://openrouter.ai/api/v1/chat/completions"
+CHAT_URL = os.environ.get("OPENROUTER_BASE_URL", "https://openrouter.ai") + "/api/v1/chat/completions"
 LLM_MODEL = "google/gemini-3.5-flash-lite"
 K = 20
 N_ANSWERABLE = 200

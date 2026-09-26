@@ -8,8 +8,8 @@ answers with the passages it relied on, or says the PDF doesn't cover the questi
 Asking is locked until the PDF is ready.
 
 Run:  .venv/bin/python app.py      (then open the printed local URL)
-Keys: OpenRouter entered in the page, else $OPENROUTER_API_KEY, else the file /tmp/or.
-      Cerebras (for the Qwen model): $CEREBRAS_API_KEY, else the file /tmp/cer.
+Keys: only the ones entered in the page, kept in that browser and removable there.
+      The server never supplies a key of its own.
 """
 
 import base64
@@ -26,7 +26,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 import gradio as gr
 import pymupdf
 
-from agent import PROVIDERS, body_text, run_agent
+from agent import CEREBRAS, PROVIDERS, body_text, run_agent
 from poc import BM25, HTTPStatusError, embed
 from squad_eval import unit
 
@@ -62,26 +62,12 @@ def md_escape(text):
     return re.sub(r"([\\`*_{}\[\]<>#|~])", r"\\\1", text)
 
 
-def server_key():
-    key = os.environ.get("OPENROUTER_API_KEY", "")
-    if not key and os.path.exists("/tmp/or"):
-        key = open("/tmp/or").read().strip()
-    return key
-
-
-CEREBRAS_MODELS_URL = "https://api.cerebras.ai/v1/models"
-
-
-def server_cerebras_key():
-    key = os.environ.get("CEREBRAS_API_KEY", "").strip()
-    if not key and os.path.exists("/tmp/cer"):
-        key = open("/tmp/cer").read().strip()
-    return key
+CEREBRAS_MODELS_URL = CEREBRAS + "/v1/models"
 
 
 def cerebras_key(saved=None):
-    """The Cerebras key saved in this browser wins; otherwise the server's own."""
-    return (saved or "").strip() or server_cerebras_key()
+    """The Cerebras key saved in this browser; the server never supplies one."""
+    return (saved or "").strip()
 
 
 def model_choices(saved_cb=None):
@@ -113,8 +99,8 @@ def image_data_url(path):
 
 
 def get_key(saved):
-    """The key saved in this browser wins; otherwise the server's own key."""
-    return (saved or "").strip() or server_key()
+    """The OpenRouter key saved in this browser; the server never supplies one."""
+    return (saved or "").strip()
 
 
 def bar(done, total, width=20):
@@ -131,19 +117,10 @@ def key_view(saved_or, saved_cb, model_value=None):
     choices = model_choices(saved_cb)
     ids = [c[1] for c in choices]
     model = gr.update(choices=choices, value=model_value if model_value in ids else "gemini")
-    if (saved_or or "").strip():
-        or_src = "yours"
-    elif server_key():
-        or_src = "the server's"
-    else:
+    if not (saved_or or "").strip():
         return shown, "", hidden, hidden, hidden, model
-    if (saved_cb or "").strip():
-        cb_src = "yours"
-    elif server_cerebras_key():
-        cb_src = "the server's"
-    else:
-        cb_src = "not set, so only Gemini is available"
-    line = f"**1 · Keys:** OpenRouter: {or_src} · Cerebras: {cb_src}"
+    cb = "saved" if (saved_cb or "").strip() else "not added, so only Gemini is available"
+    line = f"**1 · Keys** (kept in this browser): OpenRouter saved · Cerebras {cb}"
     return hidden, line, shown, shown, hidden, model
 
 
@@ -179,6 +156,12 @@ def save_keys(or_in, cb_in, saved_or, saved_cb, model_value):
     new_or = or_in or saved_or
     new_cb = cb_in or saved_cb
     return new_or, new_cb, "", "", "", *key_view(new_or, new_cb, model_value)
+
+
+def remove_keys(model_value):
+    """Delete both keys from this browser's storage; the page asks for keys again."""
+    gr.Info("Keys removed from this browser.")
+    return "", "", "", "", "", *key_view("", "", model_value)
 
 
 def open_keys():
@@ -379,15 +362,19 @@ with gr.Blocks(title="Ask a large PDF") as demo:
     history = gr.State([])
 
     # Step 1 is either this one line or the panel below it, never both.
-    with gr.Row(equal_height=True, visible=False) as key_row:
+    with gr.Column(visible=False) as key_row:
         key_line = gr.Markdown()
-        change_key = gr.Button("Change keys", variant="secondary", size="sm", scale=0,
-                               min_width=120)
+        with gr.Row():
+            change_key = gr.Button("Change keys", variant="secondary", size="sm", scale=0,
+                                   min_width=120)
+            forget_keys = gr.Button("Remove keys", variant="secondary", size="sm", scale=0,
+                                    min_width=120)
     with gr.Column(visible=False) as key_step:
         gr.Markdown("### 1 · Your keys\nThe app uses OpenRouter to read the PDF and answer. "
                     "Paste an API key from your [OpenRouter keys page]"
                     "(https://openrouter.ai/settings/keys). A [Cerebras](https://cloud.cerebras.ai) "
-                    "key is optional and adds the faster Qwen model.")
+                    "key is optional and adds the faster Qwen model. Keys are kept only in this "
+                    "browser; **Remove keys** deletes them.")
         key_in = gr.Textbox(label="OpenRouter key", type="password", placeholder="sk-or-v1-…")
         cb_in = gr.Textbox(label="Cerebras key (optional)", type="password", placeholder="csk-…")
         key_msg = gr.Markdown()
@@ -429,6 +416,11 @@ with gr.Blocks(title="Ask a large PDF") as demo:
     key_in.submit(save_keys, save_inputs, save_outputs)
     cb_in.submit(save_keys, save_inputs, save_outputs)
     change_key.click(open_keys, None, [key_step, key_msg, cancel_key, key_row])
+    # Gradio's BrowserState only writes non-empty values, so setting the keys to "" would
+    # leave the old ones in storage. Delete the stored entries in the browser directly.
+    forget_keys.click(remove_keys, [model], save_outputs, js=(
+        "(m) => { localStorage.removeItem('ask-large-pdf-openrouter-key'); "
+        "localStorage.removeItem('ask-large-pdf-cerebras-key'); return m; }"))
     cancel_key.click(lambda o, c, m: ("", "", "", *key_view(o, c, m)), [saved_key, saved_cb, model],
                      [key_in, cb_in, key_msg, *key_outputs])
 

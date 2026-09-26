@@ -4,7 +4,7 @@ A long manual is hard to search. Ctrl+F only finds the exact words you type, and
 
 ### Using it
 
-1. **Key.** The app uses [OpenRouter](https://openrouter.ai) to read the PDF and write answers, so it needs an OpenRouter API key. If the app has none set up, you paste yours once. It's checked and then kept in your browser.
+1. **Keys.** The app uses [OpenRouter](https://openrouter.ai) to read the PDF and write answers, so it needs your OpenRouter API key. A [Cerebras](https://cloud.cerebras.ai) key is optional and adds the faster Qwen model. You paste them once; they're checked, then kept only in your browser. **Remove keys** deletes them. The app never uses a key of its own.
 2. **PDF.** Upload a PDF. It's indexed right away, with progress shown. The 867-page Ableton Live 11 manual usually takes 15–40 seconds, and up to about a minute and a half when OpenRouter is busy. It costs about half a cent.
 3. **Ask.** Type a question the way you'd ask a colleague. The answer shows up with the passages it's based on. Open **How it found this** to see every search it ran.
 
@@ -45,6 +45,7 @@ A full answer from the agent takes about **5 seconds** for a simple question and
 ### Good to know
 
 - **Your PDF's text is sent to OpenRouter** and the model providers behind it, to index it and answer. Don't upload confidential documents.
+- **Your keys** go to the app's server with each request, because it makes the calls for you, and are stored in your browser, not on the server.
 - **Scanned PDFs** without a text layer can't be searched. Images aren't read, and tables lose their layout.
 - **Answers take seconds, not milliseconds.** Most of the time goes to the agent deciding what to search next.
 - **Indexes live in memory.** After the app restarts, a PDF is indexed again. Re-uploading the same PDF while the app is running is instant.

@@ -28,8 +28,10 @@ from collections import Counter
 
 JEV_MODEL = "~typesafe/jev-latest"
 EMBED_MODEL = "openai/text-embedding-3-small"
-DECISIONS_URL = "https://openrouter.ai/api/alpha/decisions"
-EMBED_URL = "https://openrouter.ai/api/v1/embeddings"
+# OPENROUTER_BASE_URL exists only to point a test run at a local fake service.
+OPENROUTER = os.environ.get("OPENROUTER_BASE_URL", "https://openrouter.ai")
+DECISIONS_URL = OPENROUTER + "/api/alpha/decisions"
+EMBED_URL = OPENROUTER + "/api/v1/embeddings"
 SHORTLIST_K = 20
 N_QUESTIONS = 24
 

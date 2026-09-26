@@ -13,18 +13,22 @@ run_agent() is a generator of events so a UI can show each step as it happens.
 """
 
 import json
+import os
 import time
 
 from poc import DECISIONS_URL, JEV_MODEL, HTTPStatusError, embed, post
 from ableton_eval import rrf
 from squad_eval import CHAT_URL, top_k
 
+# CEREBRAS_BASE_URL exists only to point a test run at a local fake service.
+CEREBRAS = os.environ.get("CEREBRAS_BASE_URL", "https://api.cerebras.ai")
+
 # Models that can drive the agent. Search (embeddings + Jev) always runs on OpenRouter.
 # Cerebras returns no cost, so its cost is estimated from tokens at its published price.
 PROVIDERS = {
     "gemini": {"label": "Gemini 3.7 Flash · OpenRouter", "url": CHAT_URL,
                "model": "google/gemini-3.7-flash", "key": "openrouter", "price": None},
-    "qwen": {"label": "Qwen 3.8 27B · Cerebras", "url": "https://api.cerebras.ai/v1/chat/completions",
+    "qwen": {"label": "Qwen 3.8 27B · Cerebras", "url": CEREBRAS + "/v1/chat/completions",
              "model": "qwen-3.8-27b", "key": "cerebras", "price": (0.99, 1.49)},  # $ per M tokens in, out
 }
 AGENT_MODEL = PROVIDERS["gemini"]["model"]
