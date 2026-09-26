@@ -15,11 +15,19 @@ run_agent() is a generator of events so a UI can show each step as it happens.
 import json
 import time
 
-from poc import DECISIONS_URL, JEV_MODEL, embed, post
+from poc import DECISIONS_URL, JEV_MODEL, HTTPStatusError, embed, post
 from ableton_eval import rrf
 from squad_eval import CHAT_URL, top_k
 
-AGENT_MODEL = "google/gemini-3.7-flash"
+# Models that can drive the agent. Search (embeddings + Jev) always runs on OpenRouter.
+# Cerebras returns no cost, so its cost is estimated from tokens at its published price.
+PROVIDERS = {
+    "gemini": {"label": "Gemini 3.7 Flash · OpenRouter", "url": CHAT_URL,
+               "model": "google/gemini-3.7-flash", "key": "openrouter", "price": None},
+    "qwen": {"label": "Qwen 3.8 27B · Cerebras", "url": "https://api.cerebras.ai/v1/chat/completions",
+             "model": "qwen-3.8-27b", "key": "cerebras", "price": (0.99, 1.49)},  # $ per M tokens in, out
+}
+AGENT_MODEL = PROVIDERS["gemini"]["model"]
 MAX_STEPS = 6
 SHORTLIST, POOL, TOP = 20, 50, 3
 
@@ -33,7 +41,11 @@ of its page.
 
 Finish by calling final_answer with a brief answer and the ids of the passages it
 is based on. If the document does not answer the question after searching, say so
-in final_answer and pass no ids. Never answer from your own knowledge."""
+in final_answer and pass no ids. Never answer from your own knowledge.
+
+The user may attach an image, such as a screenshot of what they see. Use it to
+understand their situation and to choose search terms, but answer only from the
+document."""
 
 TOOLS = [
     {"type": "function", "function": {
@@ -89,26 +101,50 @@ def read_page(page, index):
             for c in index["chunks"] if c["page"] == page]
 
 
-def run_agent(question, index, key):
-    """Yields ("step", dict) for each tool call, then ("done", dict)."""
+def turn_cost(data, provider):
+    usage = data.get("usage", {})
+    if "cost" in usage or not provider["price"]:
+        return usage.get("cost", 0)
+    p_in, p_out = provider["price"]
+    return (usage.get("prompt_tokens", 0) * p_in + usage.get("completion_tokens", 0) * p_out) / 1e6
+
+
+def run_agent(question, index, key, image=None, provider="gemini", agent_key=None):
+    """Yields ("step", dict) for each tool call, then ("done", dict).
+    key: OpenRouter key (search). agent_key: key for the agent's provider (defaults to key).
+    image: optional data URL of an image the user attached."""
     t_start = time.perf_counter()
+    prov = PROVIDERS[provider]
     by_id = {c["id"]: c for c in index["chunks"]}
-    messages = [{"role": "system", "content": SYSTEM}, {"role": "user", "content": question}]
-    cost = 0.0
+    content = question if not image else [{"type": "text", "text": question},
+                                           {"type": "image_url", "image_url": {"url": image}}]
+    messages = [{"role": "system", "content": SYSTEM}, {"role": "user", "content": content}]
+    cost, retries = 0.0, 0
     for turn in range(MAX_STEPS):
         last = turn == MAX_STEPS - 1
-        body = {"model": AGENT_MODEL, "temperature": 0, "messages": messages,
+        body = {"model": prov["model"], "temperature": 0, "messages": messages,
                 "tools": TOOLS if not last else TOOLS[2:],
                 "tool_choice": "required"}
-        data, model_ms = post(CHAT_URL, body, key)
-        cost += data.get("usage", {}).get("cost", 0)
+        # Cerebras sometimes fails to produce a valid tool call and answers 400 (seen at the
+        # final step with an image in the conversation). At temperature 0 the same request
+        # fails the same way every time; a retry at temperature 0.7 succeeded 3/3 in tests.
+        for attempt in range(3):
+            try:
+                data, model_ms = post(prov["url"], body, agent_key or key)
+                break
+            except HTTPStatusError as e:
+                if e.code != 400 or attempt == 2:
+                    raise
+                retries += 1
+                body = {**body, "temperature": 0.7}
+        cost += turn_cost(data, prov)
         msg = data["choices"][0]["message"]
         calls = msg.get("tool_calls") or []
         messages.append({"role": "assistant", "content": msg.get("content") or "",
                          "tool_calls": calls})
         if not calls:  # a plain-text reply despite tool_choice=required: treat as the answer
             yield "done", {"answer": msg.get("content") or "", "sources": [], "cost": cost,
-                           "seconds": time.perf_counter() - t_start, "turns": turn + 1}
+                           "seconds": time.perf_counter() - t_start, "turns": turn + 1, "retries": retries}
             return
         for call in calls:
             name = call["function"]["name"]
@@ -117,7 +153,7 @@ def run_agent(question, index, key):
                 ids = [i for i in args.get("passage_ids", []) if i in by_id]
                 yield "done", {"answer": args.get("answer", ""),
                                "sources": [by_id[i] for i in dict.fromkeys(ids)], "cost": cost,
-                               "seconds": time.perf_counter() - t_start, "turns": turn + 1}
+                               "seconds": time.perf_counter() - t_start, "turns": turn + 1, "retries": retries}
                 return
             if name == "search":
                 top, ms, c = search(args.get("query", ""), index, key)
@@ -135,4 +171,4 @@ def run_agent(question, index, key):
             messages.append({"role": "tool", "tool_call_id": call["id"],
                              "content": json.dumps(result)})
     yield "done", {"answer": "", "sources": [], "cost": cost, "turns": MAX_STEPS,
-                   "seconds": time.perf_counter() - t_start}
+                   "seconds": time.perf_counter() - t_start, "retries": retries}

@@ -8,10 +8,13 @@ answers with the passages it relied on, or says the PDF doesn't cover the questi
 Asking is locked until the PDF is ready.
 
 Run:  .venv/bin/python app.py      (then open the printed local URL)
-Key:  entered in the page, else $OPENROUTER_API_KEY, else the file /tmp/or.
+Keys: OpenRouter entered in the page, else $OPENROUTER_API_KEY, else the file /tmp/or.
+      Cerebras (for the Qwen model): $CEREBRAS_API_KEY, else the file /tmp/cer.
 """
 
+import base64
 import collections
+import mimetypes
 import os
 import re
 import time
@@ -22,7 +25,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 import gradio as gr
 import pymupdf
 
-from agent import AGENT_MODEL, body_text, run_agent
+from agent import PROVIDERS, body_text, run_agent
 from poc import BM25, HTTPStatusError, embed
 from squad_eval import unit
 
@@ -63,6 +66,31 @@ def server_key():
     if not key and os.path.exists("/tmp/or"):
         key = open("/tmp/or").read().strip()
     return key
+
+
+def cerebras_key():
+    key = os.environ.get("CEREBRAS_API_KEY", "").strip()
+    if not key and os.path.exists("/tmp/cer"):
+        key = open("/tmp/cer").read().strip()
+    return key
+
+
+def model_choices():
+    """Agent models on offer: Gemini always; Qwen only when a Cerebras key is set."""
+    ids = ["gemini"] + (["qwen"] if cerebras_key() else [])
+    return [(PROVIDERS[i]["label"], i) for i in ids]
+
+
+MAX_IMAGE_MB = 5
+IMAGE_ONLY_QUESTION = "What is shown in this image, and what does the document say about it?"
+
+
+def image_data_url(path):
+    """The attached image as a data URL, or raises ValueError with a plain message."""
+    if os.path.getsize(path) > MAX_IMAGE_MB * 1024 * 1024:
+        raise ValueError(f"The image is larger than {MAX_IMAGE_MB} MB. Attach a smaller one.")
+    mime = mimetypes.guess_type(path)[0] or "image/png"
+    return f"data:{mime};base64," + base64.b64encode(open(path, "rb").read()).decode()
 
 
 def get_key(saved):
@@ -210,7 +238,7 @@ def steps_md(steps):
     return "\n".join(lines)
 
 
-def ask(question, pdf_path, saved, history):
+def ask(question, image_path, model, pdf_path, saved, history):
     """Generator: shows each agent step as it happens, then the answer and its sources."""
     history = history or []
     index = INDEXES.get(pdf_path) if pdf_path else None
@@ -218,8 +246,24 @@ def ask(question, pdf_path, saved, history):
         gr.Warning("The PDF isn't ready. Upload it again.")
         yield gr.skip(), gr.skip(), gr.skip(), gr.skip(), gr.skip()
         return
-    if not (question or "").strip():
-        gr.Warning("Type a question first.")
+    question = (question or "").strip()
+    if not question and not image_path:
+        gr.Warning("Type a question or attach an image first.")
+        yield gr.skip(), gr.skip(), gr.skip(), gr.skip(), gr.skip()
+        return
+    image = None
+    if image_path:
+        try:
+            image = image_data_url(image_path)
+        except ValueError as e:
+            gr.Warning(str(e))
+            yield gr.skip(), gr.skip(), gr.skip(), gr.skip(), gr.skip()
+            return
+    question = question or IMAGE_ONLY_QUESTION
+    model = model if model in PROVIDERS else "gemini"
+    agent_key = cerebras_key() if PROVIDERS[model]["key"] == "cerebras" else None
+    if PROVIDERS[model]["key"] == "cerebras" and not agent_key:
+        gr.Warning("No Cerebras key is set up, so Qwen isn't available. Choose Gemini.")
         yield gr.skip(), gr.skip(), gr.skip(), gr.skip(), gr.skip()
         return
     key = get_key(saved)
@@ -227,7 +271,8 @@ def ask(question, pdf_path, saved, history):
     yield ("### Answer\n*Searching the PDF…*", gr.update(label=f"{HOW} · working…"), "",
            gr.skip(), gr.skip())
     try:
-        for kind, event in run_agent(question.strip(), index, key):
+        for kind, event in run_agent(question, index, key, image=image, provider=model,
+                                     agent_key=agent_key):
             if kind == "step":
                 steps.append(event)
                 yield (f"### Answer\n*Searching the PDF… step {len(steps)}*",
@@ -251,11 +296,13 @@ def ask(question, pdf_path, saved, history):
         sources_md = "\n\n#### Sources\n\n" + "\n\n".join(blocks)
     else:
         sources_md = "\n\n*No source passages were named.*"
-    meta = (f"<small>{len(steps)} step(s) · {done['seconds']:.1f} s · ${done['cost']:.4f} · "
-            f"agent {AGENT_MODEL}, passages ranked by Jev</small>")
+    estimate = " (estimated)" if PROVIDERS[model]["price"] else ""
+    meta = (f"<small>{len(steps)} step(s) · {done['seconds']:.1f} s · ${done['cost']:.4f}{estimate} · "
+            f"{PROVIDERS[model]['label']}{' · with your image' if image else ''} · "
+            f"passages ranked by Jev</small>")
     pages = ", ".join(f"p. {p}" for p in dict.fromkeys(c["page"] for c in sources)) or "no source"
     earlier = history_md(history)
-    history = [{"q": question.strip(), "pages": pages}] + history
+    history = [{"q": question + (" (with image)" if image else ""), "pages": pages}] + history
     yield (f"### Answer\n{text}{sources_md}\n\n{meta}", gr.update(label=f"{HOW} · {len(steps)} step(s)"),
            steps_md(steps), history, earlier)
 
@@ -292,10 +339,16 @@ with gr.Blocks(title="Ask a large PDF") as demo:
         status = gr.Markdown()
         reindex = gr.Button("Index again", variant="secondary", size="sm", visible=False)
         gr.Markdown("### 3 · Ask")
+        model = gr.Radio(model_choices(), value="gemini", label="Model", container=False)
+        gr.Markdown("<small>Qwen on Cerebras is the fastest for text questions. With an image "
+                    "attached, Gemini is steadier: Qwen sometimes needs retries that take 20–45 s."
+                    "</small>")
         with gr.Row(equal_height=True):
             question = gr.Textbox(show_label=False, placeholder="Upload a PDF first",
                                   interactive=False, lines=1, max_lines=4, scale=5, min_width=200)
             go = gr.Button("Ask", variant="primary", interactive=False, scale=1, min_width=80)
+        image = gr.Image(label="Image (optional): a screenshot of what you see", type="filepath",
+                         sources=["upload", "clipboard"], height=180)
         answer = gr.Markdown()
         with gr.Accordion(HOW, open=False) as how:
             steps = gr.Markdown()
@@ -317,8 +370,9 @@ with gr.Blocks(title="Ask a large PDF") as demo:
     reindex.click(index_pdf, [pdf, saved_key], pdf_outputs, show_progress="hidden")
     pdf.clear(on_clear, None, pdf_outputs)
     ask_outputs = [answer, how, steps, history, earlier]
-    go.click(ask, [question, pdf, saved_key, history], ask_outputs, show_progress="hidden")
-    question.submit(ask, [question, pdf, saved_key, history], ask_outputs, show_progress="hidden")
+    ask_inputs = [question, image, model, pdf, saved_key, history]
+    go.click(ask, ask_inputs, ask_outputs, show_progress="hidden")
+    question.submit(ask, ask_inputs, ask_outputs, show_progress="hidden")
 
 if __name__ == "__main__":
     demo.launch()
