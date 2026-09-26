@@ -27,6 +27,7 @@ import gradio as gr
 import pymupdf
 
 from agent import CEREBRAS, PROVIDERS, body_text, run_agent
+from classic import run_classic
 from poc import BM25, HTTPStatusError, embed
 from squad_eval import unit
 
@@ -270,14 +271,16 @@ def steps_md(steps):
     lines = []
     for n, s in enumerate(steps, 1):
         if s["tool"] == "search":
-            found = ", ".join(f"p. {r['page']} ({r['relevance']:.0%})" for r in s["results"]) or "nothing"
+            found = ", ".join(f"p. {r['page']}" + (f" ({r['relevance']:.0%})" if r.get("relevance")
+                                                    is not None else "")
+                              for r in s["results"]) or "nothing"
             lines.append(f"{n}. Searched “{md_escape(s['query'])}” → {found} · {s['ms'] / 1000:.1f} s")
         else:
             lines.append(f"{n}. Read page {s['page']} · {s['ms'] / 1000:.1f} s")
     return "\n".join(lines)
 
 
-def ask(question, image_path, model, pdf_path, saved, saved_cb, history):
+def ask(question, image_path, method, model, pdf_path, saved, saved_cb, history):
     """Generator: shows each agent step as it happens, then the answer and its sources."""
     history = history or []
     index = INDEXES.get(pdf_path) if pdf_path else None
@@ -311,8 +314,9 @@ def ask(question, image_path, model, pdf_path, saved, saved_cb, history):
     yield ("### Answer\n*Searching the PDF…*", gr.update(label=f"{HOW} · working…"), "",
            gr.skip(), gr.skip())
     try:
-        for kind, event in run_agent(question, index, key, image=image, provider=model,
-                                     agent_key=agent_key):
+        runner = run_classic if method == "classic" else run_agent
+        for kind, event in runner(question, index, key, image=image, provider=model,
+                                  agent_key=agent_key):
             if kind == "step":
                 steps.append(event)
                 yield (f"### Answer\n*Searching the PDF… step {len(steps)}*",
@@ -339,7 +343,8 @@ def ask(question, image_path, model, pdf_path, saved, saved_cb, history):
     estimate = " (estimated)" if PROVIDERS[model]["price"] else ""
     meta = (f"<small>{len(steps)} step(s) · {done['seconds']:.1f} s · ${done['cost']:.4f}{estimate} · "
             f"{PROVIDERS[model]['label']}{' · with your image' if image else ''} · "
-            f"passages ranked by Jev</small>")
+            + ("Classic RAG: one search, top 5 passages" if method == "classic"
+               else "Agent, passages ranked by Jev") + "</small>")
     pages = ", ".join(f"p. {p}" for p in dict.fromkeys(c["page"] for c in sources)) or "no source"
     earlier = history_md(history)
     history = [{"q": question + (" (with image)" if image else ""), "pages": pages}] + history
@@ -391,6 +396,9 @@ with gr.Blocks(title="Ask a large PDF") as demo:
             reindex = gr.Button("Index again", variant="secondary", size="sm", visible=False,
                                 scale=0, min_width=120)
         gr.Markdown("### 3 · Ask")
+        method = gr.Radio([("Agent: searches as often as needed", "agent"),
+                           ("Classic RAG: one search, one answer", "classic")],
+                          value="agent", label="Method", container=False)
         model = gr.Radio(model_choices(), value="gemini", label="Model", container=False)
         gr.Markdown("<small>Qwen on Cerebras is the fastest for text questions. With an image "
                     "attached, Gemini is steadier: Qwen sometimes needs retries that take 20–45 s."
@@ -429,7 +437,7 @@ with gr.Blocks(title="Ask a large PDF") as demo:
     reindex.click(index_pdf, [pdf, saved_key], pdf_outputs, show_progress="hidden")
     pdf.clear(on_clear, None, pdf_outputs)
     ask_outputs = [answer, how, steps, history, earlier]
-    ask_inputs = [question, image, model, pdf, saved_key, saved_cb, history]
+    ask_inputs = [question, image, method, model, pdf, saved_key, saved_cb, history]
     go.click(ask, ask_inputs, ask_outputs, show_progress="hidden")
     question.submit(ask, ask_inputs, ask_outputs, show_progress="hidden")
 
