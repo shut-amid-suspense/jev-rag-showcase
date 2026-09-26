@@ -20,6 +20,7 @@ import re
 import time
 import traceback
 import urllib.error
+import urllib.request
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 import gradio as gr
@@ -68,17 +69,35 @@ def server_key():
     return key
 
 
-def cerebras_key():
+CEREBRAS_MODELS_URL = "https://api.cerebras.ai/v1/models"
+
+
+def server_cerebras_key():
     key = os.environ.get("CEREBRAS_API_KEY", "").strip()
     if not key and os.path.exists("/tmp/cer"):
         key = open("/tmp/cer").read().strip()
     return key
 
 
-def model_choices():
+def cerebras_key(saved=None):
+    """The Cerebras key saved in this browser wins; otherwise the server's own."""
+    return (saved or "").strip() or server_cerebras_key()
+
+
+def model_choices(saved_cb=None):
     """Agent models on offer: Gemini always; Qwen only when a Cerebras key is set."""
-    ids = ["gemini"] + (["qwen"] if cerebras_key() else [])
+    ids = ["gemini"] + (["qwen"] if cerebras_key(saved_cb) else [])
     return [(PROVIDERS[i]["label"], i) for i in ids]
+
+
+def check_cerebras(key):
+    """One tiny request to see whether Cerebras accepts the key."""
+    req = urllib.request.Request(CEREBRAS_MODELS_URL, headers={
+        "Authorization": f"Bearer {key}", "User-Agent": "jev-rag-poc/0.1"})
+    try:
+        urllib.request.urlopen(req, timeout=30).read()
+    except urllib.error.HTTPError as e:
+        raise HTTPStatusError(CEREBRAS_MODELS_URL, e.code, e.read()) from None
 
 
 MAX_IMAGE_MB = 5
@@ -103,32 +122,69 @@ def bar(done, total, width=20):
     return "█" * filled + "░" * (width - filled) + f" {round(100 * done / total) if total else 0}%"
 
 
-# ---------------------------------------------------------------- step 1: the key
+# ---------------------------------------------------------------- step 1: the keys
 
-def key_view(saved):
-    """(key step, key line, key-line row, pdf+ask steps) for the key currently in force."""
+def key_view(saved_or, saved_cb, model_value=None):
+    """Step 1 shows either the keys line or the keys panel, never both.
+    Returns (keys panel, keys line, keys-line row, steps 2-3, cancel button, model choice)."""
     shown, hidden = gr.update(visible=True), gr.update(visible=False)
-    if (saved or "").strip():
-        return hidden, "**1 · OpenRouter key:** yours, saved in this browser", shown, shown
-    if server_key():
-        return hidden, "**1 · OpenRouter key:** the server's", shown, shown
-    return shown, "", hidden, hidden
+    choices = model_choices(saved_cb)
+    ids = [c[1] for c in choices]
+    model = gr.update(choices=choices, value=model_value if model_value in ids else "gemini")
+    if (saved_or or "").strip():
+        or_src = "yours"
+    elif server_key():
+        or_src = "the server's"
+    else:
+        return shown, "", hidden, hidden, hidden, model
+    if (saved_cb or "").strip():
+        cb_src = "yours"
+    elif server_cerebras_key():
+        cb_src = "the server's"
+    else:
+        cb_src = "not set, so only Gemini is available"
+    line = f"**1 · Keys:** OpenRouter: {or_src} · Cerebras: {cb_src}"
+    return hidden, line, shown, shown, hidden, model
 
 
-def save_key(entered):
-    """Check the key with one tiny request before keeping it."""
-    entered = (entered or "").strip()
-    if not entered:
-        return gr.skip(), "Paste your key first.", *[gr.skip()] * 5
-    try:
-        embed(["key check"], entered)
-    except HTTPStatusError as e:
-        msg = ("OpenRouter rejected this key. Check it and try again." if e.code == 401
-               else friendly(e))
-        return gr.skip(), msg, *[gr.skip()] * 5
-    except Exception as e:
-        return gr.skip(), friendly(e), *[gr.skip()] * 5
-    return entered, "", "", *key_view(entered)
+def save_keys(or_in, cb_in, saved_or, saved_cb, model_value):
+    """Check each key entered with one tiny request before keeping it; an empty field keeps
+    the current key. Returns (saved OpenRouter, saved Cerebras, message, the two fields,
+    *key_view)."""
+    or_in, cb_in = (or_in or "").strip(), (cb_in or "").strip()
+    keep = [gr.skip()] * 10
+
+    def refuse(msg):
+        return gr.skip(), gr.skip(), msg, *keep[:8]
+    if not or_in and not cb_in:
+        return refuse("Paste a key first.")
+    if or_in:
+        try:
+            embed(["key check"], or_in)
+        except HTTPStatusError as e:
+            return refuse("OpenRouter rejected this key. Check it and try again." if e.code == 401
+                          else friendly(e))
+        except Exception as e:
+            return refuse(friendly(e))
+    elif not get_key(saved_or):
+        return refuse("Paste your OpenRouter key too. Every question needs it.")
+    if cb_in:
+        try:
+            check_cerebras(cb_in)
+        except HTTPStatusError as e:
+            return refuse("Cerebras rejected this key. Check it and try again."
+                          if e.code in (401, 403) else f"Cerebras returned an error ({e.code}).")
+        except Exception as e:
+            return refuse(friendly(e).replace("OpenRouter", "Cerebras"))
+    new_or = or_in or saved_or
+    new_cb = cb_in or saved_cb
+    return new_or, new_cb, "", "", "", *key_view(new_or, new_cb, model_value)
+
+
+def open_keys():
+    """Change keys: the panel takes the place of the keys line."""
+    return (gr.update(visible=True), "Leave a field empty to keep its current key.",
+            gr.update(visible=True), gr.update(visible=False))
 
 
 # ---------------------------------------------------------------- step 2: the PDF
@@ -238,7 +294,7 @@ def steps_md(steps):
     return "\n".join(lines)
 
 
-def ask(question, image_path, model, pdf_path, saved, history):
+def ask(question, image_path, model, pdf_path, saved, saved_cb, history):
     """Generator: shows each agent step as it happens, then the answer and its sources."""
     history = history or []
     index = INDEXES.get(pdf_path) if pdf_path else None
@@ -261,9 +317,10 @@ def ask(question, image_path, model, pdf_path, saved, history):
             return
     question = question or IMAGE_ONLY_QUESTION
     model = model if model in PROVIDERS else "gemini"
-    agent_key = cerebras_key() if PROVIDERS[model]["key"] == "cerebras" else None
+    agent_key = cerebras_key(saved_cb) if PROVIDERS[model]["key"] == "cerebras" else None
     if PROVIDERS[model]["key"] == "cerebras" and not agent_key:
-        gr.Warning("No Cerebras key is set up, so Qwen isn't available. Choose Gemini.")
+        gr.Warning("No Cerebras key is set up, so Qwen isn't available. Add one with "
+                   "“Change keys”, or choose Gemini.")
         yield gr.skip(), gr.skip(), gr.skip(), gr.skip(), gr.skip()
         return
     key = get_key(saved)
@@ -314,30 +371,38 @@ with gr.Blocks(title="Ask a large PDF") as demo:
                 "the PDF as often as it needs and answers with the passages it used.")
     with gr.Accordion("How it works", open=False):
         gr.Markdown(GUIDE.split("\n", 1)[1])  # the file's own title is the accordion label
-    # Kept in this browser's storage, so a reload doesn't ask for the key again.
+    # Kept in this browser's storage, so a reload doesn't ask for the keys again.
     saved_key = gr.BrowserState("", storage_key="ask-large-pdf-openrouter-key",
                                 secret="ask-large-pdf-local")
+    saved_cb = gr.BrowserState("", storage_key="ask-large-pdf-cerebras-key",
+                               secret="ask-large-pdf-local")
     history = gr.State([])
 
-    with gr.Column(visible=False) as key_step:
-        gr.Markdown("### 1 · Your OpenRouter key\nThe app uses OpenRouter to read the PDF and "
-                    "answer. Paste an API key from your OpenRouter account (Keys page).")
-        with gr.Row(equal_height=True):
-            key_in = gr.Textbox(show_label=False, type="password", placeholder="sk-or-v1-…",
-                                scale=5, min_width=200)
-            save = gr.Button("Save key", variant="primary", scale=1, min_width=100)
-        key_msg = gr.Markdown()
-        cancel_key = gr.Button("Cancel", variant="secondary", size="sm", visible=False)
+    # Step 1 is either this one line or the panel below it, never both.
     with gr.Row(equal_height=True, visible=False) as key_row:
         key_line = gr.Markdown()
-        change_key = gr.Button("Change key", variant="secondary", size="sm", scale=0,
-                               min_width=110)
+        change_key = gr.Button("Change keys", variant="secondary", size="sm", scale=0,
+                               min_width=120)
+    with gr.Column(visible=False) as key_step:
+        gr.Markdown("### 1 · Your keys\nThe app uses OpenRouter to read the PDF and answer. "
+                    "Paste an API key from your [OpenRouter keys page]"
+                    "(https://openrouter.ai/settings/keys). A [Cerebras](https://cloud.cerebras.ai) "
+                    "key is optional and adds the faster Qwen model.")
+        key_in = gr.Textbox(label="OpenRouter key", type="password", placeholder="sk-or-v1-…")
+        cb_in = gr.Textbox(label="Cerebras key (optional)", type="password", placeholder="csk-…")
+        key_msg = gr.Markdown()
+        with gr.Row():
+            save = gr.Button("Save keys", variant="primary", scale=0, min_width=120)
+            cancel_key = gr.Button("Cancel", variant="secondary", scale=0, min_width=100,
+                                   visible=False)
 
     with gr.Column(visible=False) as rest:
         gr.Markdown("### 2 · Your PDF")
         pdf = gr.File(show_label=False, file_types=[".pdf"], type="filepath")
-        status = gr.Markdown()
-        reindex = gr.Button("Index again", variant="secondary", size="sm", visible=False)
+        with gr.Row(equal_height=True):
+            status = gr.Markdown()
+            reindex = gr.Button("Index again", variant="secondary", size="sm", visible=False,
+                                scale=0, min_width=120)
         gr.Markdown("### 3 · Ask")
         model = gr.Radio(model_choices(), value="gemini", label="Model", container=False)
         gr.Markdown("<small>Qwen on Cerebras is the fastest for text questions. With an image "
@@ -356,21 +421,23 @@ with gr.Blocks(title="Ask a large PDF") as demo:
 
     gr.Markdown("<small>Supported by [airabbit.blog](https://airabbit.blog)</small>")
 
-    key_outputs = [key_step, key_line, key_row, rest]
-    demo.load(key_view, [saved_key], key_outputs)
-    save.click(save_key, [key_in], [saved_key, key_msg, key_in, *key_outputs])
-    key_in.submit(save_key, [key_in], [saved_key, key_msg, key_in, *key_outputs])
-    change_key.click(lambda: (gr.update(visible=True), "", gr.update(visible=True)), None,
-                     [key_step, key_msg, cancel_key])
-    cancel_key.click(lambda saved: ("", "", gr.update(visible=False), *key_view(saved)),
-                     [saved_key], [key_in, key_msg, cancel_key, *key_outputs])
+    key_outputs = [key_step, key_line, key_row, rest, cancel_key, model]
+    demo.load(key_view, [saved_key, saved_cb, model], key_outputs)
+    save_inputs = [key_in, cb_in, saved_key, saved_cb, model]
+    save_outputs = [saved_key, saved_cb, key_msg, key_in, cb_in, *key_outputs]
+    save.click(save_keys, save_inputs, save_outputs)
+    key_in.submit(save_keys, save_inputs, save_outputs)
+    cb_in.submit(save_keys, save_inputs, save_outputs)
+    change_key.click(open_keys, None, [key_step, key_msg, cancel_key, key_row])
+    cancel_key.click(lambda o, c, m: ("", "", "", *key_view(o, c, m)), [saved_key, saved_cb, model],
+                     [key_in, cb_in, key_msg, *key_outputs])
 
     pdf_outputs = [status, answer, how, steps, history, earlier, question, go, reindex]
     pdf.upload(index_pdf, [pdf, saved_key], pdf_outputs, show_progress="hidden")
     reindex.click(index_pdf, [pdf, saved_key], pdf_outputs, show_progress="hidden")
     pdf.clear(on_clear, None, pdf_outputs)
     ask_outputs = [answer, how, steps, history, earlier]
-    ask_inputs = [question, image, model, pdf, saved_key, history]
+    ask_inputs = [question, image, model, pdf, saved_key, saved_cb, history]
     go.click(ask, ask_inputs, ask_outputs, show_progress="hidden")
     question.submit(ask, ask_inputs, ask_outputs, show_progress="hidden")
 
