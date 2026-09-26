@@ -60,7 +60,7 @@ With a screenshot, Gemini is the better reader: shown the Note Echo device with 
 - **Your keys** go to the app's server with each request, because it makes the calls for you, and are stored in your browser, not on the server.
 - **Scanned PDFs** without a text layer can't be searched. Images aren't read, and tables lose their layout.
 - **Answers take seconds, not milliseconds.** Most of the time goes to the AI thinking, not to the search.
-- **Indexes live in memory.** After the app restarts, a PDF is indexed again. Re-uploading the same PDF while the app is running is instant.
+- **A PDF is indexed once.** The index is saved on the app's computer under the file's fingerprint, so the same unchanged PDF is ready at once, even after a restart, and reloading the page reopens it. A changed file is indexed fresh. **Index again** rebuilds it on demand; removing the PDF with × makes the page forget it.
 
 ### Tips for better answers
 

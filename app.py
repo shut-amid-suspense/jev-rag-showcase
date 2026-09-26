@@ -30,13 +30,15 @@ import pymupdf
 from agent import CEREBRAS, PROVIDERS, body_text, run_agent
 from classic import run_classic
 from keywords import run_keywords
+import index_store
 from poc import BM25, HTTPStatusError, embed
 from squad_eval import unit
 
 MAX_WORDS, MIN_WORDS, BATCH = 300, 25, 100
-# Indexes live on the server, keyed by the uploaded file's path (Gradio names uploads by a
-# hash of their content). Gradio deletes per-session state when the browser's connection
-# drops, which silently lost the index while the page still said "ready".
+# Indexes live on the server, keyed by the fingerprint of the PDF's bytes: the most recent
+# ones in memory, all of them on disk (index_store.py), so an unchanged PDF is never indexed
+# twice, even after a restart. (Gradio deletes per-session state when the browser's
+# connection drops, which once lost the index while the page still said "ready".)
 INDEXES = collections.OrderedDict()
 MAX_INDEXES = 3
 POOL_EXEC = ThreadPoolExecutor(8)
@@ -187,28 +189,53 @@ def ask_lock(ready, placeholder, has_pdf=True):
     return gr.update(interactive=ready, placeholder=placeholder), gr.update(visible=has_pdf)
 
 
-def index_pdf(pdf_path, saved):
+def remember(fp, index):
+    INDEXES[fp] = index
+    INDEXES.move_to_end(fp)
+    while len(INDEXES) > MAX_INDEXES:
+        INDEXES.popitem(last=False)
+
+
+def find_index(fp):
+    """The index for this fingerprint from memory or disk, or None."""
+    if not fp:
+        return None
+    if fp in INDEXES:
+        INDEXES.move_to_end(fp)
+        return INDEXES[fp]
+    index = index_store.load(fp)
+    if index:
+        remember(fp, index)
+    return index
+
+
+def ready_line(name, index):
+    return (f"**{name}** · {index['pages']} pages · {len(index['chunks'])} passages · "
+            f"**ready** (indexed before, nothing to redo)")
+
+
+def index_pdf(pdf_path, saved, force=False):
     """Generator: indexes the PDF, showing progress in the status line after every batch.
-    Yields (status, answer, how, steps, history, earlier, question, index again)."""
+    An unchanged PDF indexed before is ready at once, unless force (Index again).
+    Yields (status, answer, how, steps, history, earlier, question, index again, document)."""
     cleared = ("", gr.update(label=HOW, visible=False), "", [], "")
     if not pdf_path:
         gr.Warning("Upload a PDF first.")
-        yield ("", *cleared, *ask_lock(False, "Upload a PDF first", has_pdf=False))
+        yield ("", *cleared, *ask_lock(False, "Upload a PDF first", has_pdf=False), gr.skip())
         return
     name = md_escape(os.path.basename(pdf_path))
-    if pdf_path in INDEXES:
-        INDEXES.move_to_end(pdf_path)
-        index = INDEXES[pdf_path]
-        yield (f"**{name}** · {index['pages']} pages · {len(index['chunks'])} passages · "
-               f"**ready** (already indexed)", *cleared, *ask_lock(True, READY))
+    fp = index_store.fingerprint(pdf_path)
+    index = None if force else find_index(fp)
+    if index:
+        yield ready_line(name, index), *cleared, *ask_lock(True, READY), fp
         return
     key = get_key(saved)
     if not key:
         yield (f"**{name}** · no OpenRouter key. Enter one in step 1.", *cleared,
-               *ask_lock(False, LOCKED))
+               *ask_lock(False, LOCKED), gr.skip())
         return
     t0 = time.perf_counter()
-    yield f"**{name}** · reading the PDF…", *cleared, *ask_lock(False, LOCKED)
+    yield f"**{name}** · reading the PDF…", *cleared, *ask_lock(False, LOCKED), gr.skip()
     try:
         doc = pymupdf.open(pdf_path)
         outline = [{"level": lvl, "title": " ".join(title.split()), "page": page}
@@ -229,7 +256,7 @@ def index_pdf(pdf_path, saved):
         if not chunks:
             yield (f"**{name}** · no text found. This looks like a scanned PDF without a text "
                    f"layer, so it can't be searched.", *cleared,
-                   *ask_lock(False, "This PDF can't be searched"))
+                   *ask_lock(False, "This PDF can't be searched"), gr.skip())
             return
         total, done = len(chunks), 0
         batches = [chunks[i:i + BATCH] for i in range(0, total, BATCH)]
@@ -237,30 +264,44 @@ def index_pdf(pdf_path, saved):
                    for n, b in enumerate(batches)}
         results = [None] * len(batches)
         yield (f"**{name}** · indexing {bar(0, total)} 0 of {total} passages", *cleared,
-               *ask_lock(False, LOCKED))
+               *ask_lock(False, LOCKED), gr.skip())
         for fut in as_completed(futures):
             results[futures[fut]] = fut.result()
             done += len(batches[futures[fut]])
             yield (f"**{name}** · indexing {bar(done, total)} {done} of {total} passages · "
-                   f"{time.perf_counter() - t0:.0f} s", *cleared, *ask_lock(False, LOCKED))
+                   f"{time.perf_counter() - t0:.0f} s", *cleared, *ask_lock(False, LOCKED), gr.skip())
         vecs = [v for r in results for v in r[0]]
         cost = sum(r[2].get("cost", 0) for r in results)
-        INDEXES[pdf_path] = {"name": name, "pages": len(doc), "chunks": chunks,
-                             "bm25": BM25([c["text"] for c in chunks]),
-                             "uvecs": [unit(v) for v in vecs]}
-        while len(INDEXES) > MAX_INDEXES:
-            INDEXES.popitem(last=False)
+        index = {"name": name, "pages": len(doc), "chunks": chunks,
+                 "bm25": BM25([c["text"] for c in chunks]), "uvecs": [unit(v) for v in vecs]}
+        remember(fp, index)
+        index_store.save(fp, index)
         yield (f"**{name}** · {len(doc)} pages · {total} passages · **ready** · indexed in "
                f"{time.perf_counter() - t0:.0f} s for ${cost:.4f}", *cleared,
-               *ask_lock(True, READY))
+               *ask_lock(True, READY), fp)
     except Exception as e:
         yield (f"**{name}** · indexing failed. {friendly(e)} Then press **Index again**.",
-               *cleared, *ask_lock(False, "Indexing failed. See the message above"))
+               *cleared, *ask_lock(False, "Indexing failed. See the message above"), gr.skip())
+
+
+def reindex_pdf(pdf_path, saved):
+    """Index again: rebuild even an unchanged PDF, replacing its saved index."""
+    yield from index_pdf(pdf_path, saved, force=True)
+
+
+def restore_pdf(fp):
+    """On page load: the PDF this browser used last is ready again, without uploading it."""
+    index = find_index(fp)
+    if not index:
+        return ("", *[gr.skip()] * 5, *ask_lock(False, "Upload a PDF first", has_pdf=False),
+                gr.skip())
+    return (ready_line(index["name"], index), *[gr.skip()] * 5, *ask_lock(True, READY)[:1],
+            gr.update(visible=False), gr.skip())
 
 
 def on_clear():
     return ("", "", gr.update(label=HOW, visible=False), "", [], "",
-            *ask_lock(False, "Upload a PDF first", has_pdf=False))
+            *ask_lock(False, "Upload a PDF first", has_pdf=False), "")
 
 
 # ---------------------------------------------------------------- step 3: asking
@@ -315,7 +356,7 @@ def method_help(method):
     return f"**{name}:** {text}"
 
 
-def ask(box, method, model, pdf_path, saved, saved_cb, history):
+def ask(box, method, model, fp, saved, saved_cb, history):
     """Generator: shows each search step as it happens, then the answer and its sources."""
     history = history or []
     box = box or {}
@@ -323,7 +364,7 @@ def ask(box, method, model, pdf_path, saved, saved_cb, history):
     image_path = files[0] if files else None
     if isinstance(image_path, dict):
         image_path = image_path.get("path")
-    index = INDEXES.get(pdf_path) if pdf_path else None
+    index = find_index(fp)
     if not index:  # the button is locked until ready; this guards a stale page
         gr.Warning("The PDF isn't ready. Upload it again.")
         yield gr.skip(), gr.skip(), gr.skip(), gr.skip(), gr.skip()
@@ -521,6 +562,11 @@ with gr.Blocks(title="Ask a large PDF") as demo:
     saved_cb = gr.BrowserState("", storage_key="ask-large-pdf-cerebras-key",
                                secret="ask-large-pdf-local")
     history = gr.State([])
+    # Fingerprint of the PDF this browser used last, so a reload doesn't ask for it again.
+    # A fixed secret, like the keys': without one Gradio picks a new one at every start and
+    # the stored value can't be read after a restart.
+    document = gr.BrowserState("", storage_key="ask-large-pdf-document",
+                               secret="ask-large-pdf-local")
 
     # Step 1 is either this one line or the panel below it, never both.
     with gr.Column(visible=False) as key_row:
@@ -589,12 +635,15 @@ with gr.Blocks(title="Ask a large PDF") as demo:
     cancel_key.click(lambda o, c, m: ("", "", "", *key_view(o, c, m)), [saved_key, saved_cb, model],
                      [key_in, cb_in, key_msg, *key_outputs])
 
-    pdf_outputs = [status, answer, how, steps, history, earlier, question, reindex]
+    pdf_outputs = [status, answer, how, steps, history, earlier, question, reindex, document]
+    demo.load(restore_pdf, document, pdf_outputs)
     pdf.upload(index_pdf, [pdf, saved_key], pdf_outputs, show_progress="hidden")
-    reindex.click(index_pdf, [pdf, saved_key], pdf_outputs, show_progress="hidden")
-    pdf.clear(on_clear, None, pdf_outputs)
+    reindex.click(reindex_pdf, [pdf, saved_key], pdf_outputs, show_progress="hidden")
+    # BrowserState doesn't store "", so the remembered PDF is deleted in the browser directly.
+    pdf.clear(on_clear, None, pdf_outputs,
+              js="() => { localStorage.removeItem('ask-large-pdf-document'); }")
     ask_outputs = [answer, how, steps, history, earlier]
-    ask_inputs = [question, method, model, pdf, saved_key, saved_cb, history]
+    ask_inputs = [question, method, model, document, saved_key, saved_cb, history]
     # The box and the switches are locked while a question runs: no second Ask on top of it,
     # and the answer's line names the search and model that were really used.
     lock = [question, method, model]
