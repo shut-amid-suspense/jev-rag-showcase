@@ -76,7 +76,7 @@ def cerebras_key(saved=None):
 def model_choices(saved_cb=None):
     """Agent models on offer: Gemini always; Qwen only when a Cerebras key is set."""
     ids = ["gemini"] + (["qwen"] if cerebras_key(saved_cb) else [])
-    return [(PROVIDERS[i]["label"], i) for i in ids]
+    return [(PROVIDERS[i]["label"].split(" · ")[0], i) for i in ids]
 
 
 def check_cerebras(key):
@@ -179,7 +179,7 @@ def open_keys():
 # ---------------------------------------------------------------- step 2: the PDF
 
 LOCKED = "Wait until the PDF is ready"
-READY = "Ask about the PDF. Attach a screenshot with 📎 if it helps."
+READY = "Ask about the PDF, e.g. “I don’t hear anything when I play a note”"
 
 
 def ask_lock(ready, placeholder, has_pdf=True):
@@ -265,6 +265,15 @@ def on_clear():
 
 # ---------------------------------------------------------------- step 3: asking
 
+def plural(n, word):
+    return f"{n} {word}" + ("" if n == 1 else "s")
+
+
+def readable(text):
+    """Table-of-contents dot leaders ("Audio........41") shown as one ellipsis."""
+    return re.sub(r"(?:\s*[.…]){4,}\s*", " … ", text)
+
+
 def history_md(history):
     if not history:
         return ""
@@ -285,7 +294,7 @@ def steps_md(steps):
             found = ", ".join(f"p. {r['page']}" + (f" ({r['relevance']:.0%})" if r.get("relevance")
                                                     is not None else "")
                               for r in s["results"]) or "nothing"
-            what = (f"Jev kept the best of {s['from']}" if s["tool"] == "pick"
+            what = (f"Kept the best of {s['from']} passages (ranked by Jev)" if s["tool"] == "pick"
                     else f"Searched “{md_escape(s['query'])}”")
             lines.append(f"{n}. {what} → {found} · {s['ms'] / 1000:.1f} s")
         else:
@@ -293,15 +302,17 @@ def steps_md(steps):
     return "\n".join(lines)
 
 
-METHODS = {"classic": ("Fast: one search", run_classic),
-           "keywords": ("Standard: writes search terms, keeps the best passages", run_keywords),
-           "agent": ("Thorough: keeps searching until sure (slowest)", run_agent)}
+# The three searches: (name on the switch, the one line shown under it, runner).
+METHODS = {"classic": ("Fast", "One search with your words. Fastest, but can miss details.",
+                       run_classic),
+           "keywords": ("Standard", "Writes search terms from your question and screenshot, then "
+                                    "keeps the best passages.", run_keywords),
+           "agent": ("Thorough", "Keeps searching until it is sure. Slowest.", run_agent)}
 
 
-def options_label(method, model):
-    """The Options accordion names the current choice, so it can stay closed."""
-    name = METHODS.get(method, METHODS["keywords"])[0].split(":")[0]
-    return f"Options: {name} search · {PROVIDERS.get(model, PROVIDERS['gemini'])['label'].split(' · ')[0]}"
+def method_help(method):
+    name, text, _ = METHODS.get(method, METHODS["keywords"])
+    return f"**{name}:** {text}"
 
 
 def ask(box, method, model, pdf_path, saved, saved_cb, history):
@@ -343,13 +354,13 @@ def ask(box, method, model, pdf_path, saved, saved_cb, history):
     yield ("### Answer\n*Searching the PDF…*", gr.update(label=f"{HOW} · working…", visible=True), "",
            gr.skip(), gr.skip())
     try:
-        runner = METHODS.get(method, METHODS["keywords"])[1]
+        runner = METHODS.get(method, METHODS["keywords"])[2]
         for kind, event in runner(question, index, key, image=image, provider=model,
                                   agent_key=agent_key):
             if kind == "step":
                 steps.append(event)
                 yield (f"### Answer\n*Searching the PDF… step {len(steps)}*",
-                       gr.update(label=f"{HOW} · working… {len(steps)} step(s) so far"),
+                       gr.update(label=f"{HOW} · working… {plural(len(steps), 'step')} so far"),
                        steps_md(steps), gr.skip(), gr.skip())
             else:
                 done = event
@@ -365,28 +376,134 @@ def ask(box, method, model, pdf_path, saved, saved_cb, history):
     sources = done["sources"]
     if sources:
         blocks = [f"**Page {c['page']}**" + (f" · {md_escape(c['section'])}" if c["section"] else "")
-                  + f"\n\n> {md_escape(body_text(c))}" for c in sources]
+                  + f"\n\n> {md_escape(readable(body_text(c)))}" for c in sources]
         sources_md = "\n\n#### Sources\n\n" + "\n\n".join(blocks)
     else:
         sources_md = "\n\n*No source passages were named.*"
     estimate = " (estimated)" if PROVIDERS[model]["price"] else ""
-    meta = (f"<small>{len(steps)} step(s) · {done['seconds']:.1f} s · ${done['cost']:.4f}{estimate} · "
-            f"{PROVIDERS[model]['label']}{' · with your image' if image else ''} · "
-            + METHODS.get(method, METHODS["keywords"])[0].split(":")[0] + " search</small>")
+    cost = done["cost"]
+    cost = f"${cost:.4f}" if cost >= 0.0001 else "<$0.0001" if cost > 0 else "$0"
+    meta = (f'<span class="meta">{plural(len(steps), "step")} · {done["seconds"]:.1f} s · '
+            f"{cost}{estimate} · {PROVIDERS[model]['label']}"
+            f"{' · with your image' if image else ''} · "
+            + METHODS.get(method, METHODS["keywords"])[0] + " search</span>")
     pages = ", ".join(f"p. {p}" for p in dict.fromkeys(c["page"] for c in sources)) or "no source"
     earlier = history_md(history)
     history = [{"q": question + (" (with image)" if image else ""), "pages": pages}] + history
-    yield (f"### Answer\n{meta}\n\n{text}{sources_md}", gr.update(label=f"{HOW} · {len(steps)} step(s)"),
+    yield (f"### Answer\n{meta}\n\n{text}{sources_md}", gr.update(label=f"{HOW} · {plural(len(steps), 'step')}"),
            steps_md(steps), history, earlier)
 
 
 # ---------------------------------------------------------------- UI
 
 # A readable column on wide screens; each search choice on its own full-width line.
+# A readable column on wide screens; the two choices as compact switches with 44px targets;
+# a clear primary Ask button. Colours come from the theme, so dark mode follows.
 CSS = """
 .gradio-container { max-width: 760px !important; margin: 0 auto !important; }
-.stacked-choice .wrap { flex-direction: column; }
-.stacked-choice .wrap label { width: 100%; }
+.settings { gap: 12px 28px !important; align-items: flex-start; }
+.settings > * { flex: 0 0 auto !important; min-width: 0 !important; }
+.settings .form { background: transparent !important; border: 0 !important;
+       box-shadow: none !important; }
+.seg { border: 0 !important; padding: 0 !important; background: transparent !important;
+       box-shadow: none !important; display: flex !important; flex-wrap: wrap;
+       align-items: center; gap: 8px; }
+.seg > [data-testid="block-info"] { margin: 0 !important; font-size: 13px; font-weight: 600;
+       color: var(--body-text-color) !important; }
+.seg > .wrap:not([data-testid]) { display: inline-flex !important; flex-wrap: nowrap !important; gap: 2px !important;
+       padding: 3px; border-radius: 10px; background: var(--background-fill-secondary); }
+.seg > .wrap:not([data-testid]) label { position: relative; min-height: 44px; margin: 0 !important;
+       padding: 0 16px !important; display: flex; align-items: center; border: 0 !important;
+       border-radius: 8px !important; background: transparent !important;
+       box-shadow: none !important; color: var(--body-text-color) !important; cursor: pointer; }
+.seg > .wrap:not([data-testid]) label input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0;
+       opacity: 0; cursor: pointer; }
+.seg > .wrap:not([data-testid]) label span { margin: 0 !important; }
+.seg > .wrap:not([data-testid]) label.selected { background: var(--background-fill-primary) !important;
+       font-weight: 600; box-shadow: 0 1px 3px rgba(0, 0, 0, .18) !important; }
+.seg > .wrap:not([data-testid]) label:has(input:focus-visible) { outline: 2px solid #2563eb; outline-offset: 1px; }
+.help, .model-note { font-size: 13px; }
+.help p, .model-note p { margin: 4px 0 0 !important; }
+.multimodal-textbox .submit-button { min-width: 76px; min-height: 44px; border-radius: 8px !important;
+       background: #c2410c !important; color: #fff !important; font-weight: 600; }
+.multimodal-textbox .submit-button:disabled { opacity: .45; }
+.multimodal-textbox .thumbnail-image { cursor: zoom-in; }
+.multimodal-textbox .upload-button { min-width: 44px; min-height: 44px; }
+/* The thumbnail opens the screenshot; removing it is a visible badge on its corner, so a tap
+   on the picture can never remove it. The badge's hit area reaches 40px outside the image. */
+.multimodal-textbox .thumbnail-wrapper, .multimodal-textbox .thumbnail-item,
+.multimodal-textbox .thumbnails { overflow: visible !important; }
+.multimodal-textbox .thumbnail-item { position: relative; width: 72px !important;
+       height: 52px !important; }
+.multimodal-textbox .thumbnail-image { width: 72px !important; height: 52px !important;
+       object-fit: cover; border-radius: 6px; }
+.multimodal-textbox .delete-button { position: absolute !important; top: -9px !important;
+       right: -9px !important; left: auto !important; bottom: auto !important;
+       width: 22px !important; height: 22px !important; padding: 5px !important;
+       opacity: 1 !important; border-radius: 50% !important; background: #374151 !important;
+       color: #fff !important; }
+.multimodal-textbox .delete-button::after { content: ""; position: absolute; inset: -9px; }
+.multimodal-textbox .thumbnails { padding: 10px 10px 0 0 !important; }
+.seg > [data-testid="block-info"] { min-width: 52px; }
+.meta { font-size: 14px; color: #5f5f67; }
+.dark .meta { color: #a1a1aa; }
+#shot-view { border: 0; padding: 0; background: transparent; max-width: 96vw; max-height: 96vh; }
+#shot-view::backdrop { background: rgba(0, 0, 0, .8); }
+#shot-view img { display: block; max-width: 96vw; max-height: 90vh; border-radius: 8px; }
+#shot-view button { position: fixed; top: 12px; right: 12px; min-width: 44px; min-height: 44px;
+       border: 0; border-radius: 8px; background: rgba(255, 255, 255, .9); color: #111;
+       font-size: 15px; cursor: pointer; }
+"""
+
+# The attached screenshot opens full size: click (or Enter on) its thumbnail. A native
+# <dialog> keeps focus inside, closes on Esc, the Close button or a click outside the
+# image, and gives focus back to the thumbnail. The answer is announced when it changes.
+HEAD = """
+<script>
+(() => {
+  function dialog() {
+    let d = document.getElementById("shot-view");
+    if (d) return d;
+    d = document.createElement("dialog");
+    d.id = "shot-view";
+    d.setAttribute("aria-label", "Screenshot, full size");
+    d.innerHTML = '<button type="button">Close</button><img alt="Attached screenshot, full size">';
+    d.querySelector("button").onclick = () => d.close();
+    d.addEventListener("click", (e) => { if (e.target === d) d.close(); });
+    document.body.appendChild(d);
+    return d;
+  }
+  function open(img) {
+    const d = dialog();
+    d.querySelector("img").src = img.src;
+    img.focus();  // the dialog gives focus back to whatever had it when it opened
+    d.showModal();
+    d.querySelector("button").focus();
+  }
+  const thumb = (e) => e.target.closest && e.target.closest(".multimodal-textbox .thumbnail-image");
+  // Capture phase: the text box stops clicks on its thumbnails before they bubble up.
+  document.addEventListener("click", (e) => {
+    const t = thumb(e);
+    if (t) { e.preventDefault(); e.stopPropagation(); open(t); }
+  }, true);
+  document.addEventListener("keydown", (e) => {
+    const t = thumb(e);
+    if (t && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); e.stopPropagation(); open(t); }
+  }, true);
+  new MutationObserver(() => {
+    document.querySelectorAll(".multimodal-textbox .thumbnail-image:not([tabindex])").forEach((t) => {
+      t.tabIndex = 0;
+      t.setAttribute("role", "button");
+      t.setAttribute("aria-label", "View screenshot full size");
+      t.title = "View full size";
+    });
+    document.querySelectorAll(".multimodal-textbox .submit-button[aria-label='Submit']")
+      .forEach((b) => b.setAttribute("aria-label", "Ask"));
+    const a = document.getElementById("answer");
+    if (a && !a.hasAttribute("aria-live")) a.setAttribute("aria-live", "polite");
+  }).observe(document.documentElement, { childList: true, subtree: true });
+})();
+</script>
 """
 
 with gr.Blocks(title="Ask a large PDF") as demo:
@@ -436,15 +553,16 @@ with gr.Blocks(title="Ask a large PDF") as demo:
                                         interactive=False, file_types=["image"],
                                         file_count="single", sources=["upload"],
                                         submit_btn="Ask", lines=2, max_lines=6)
-        with gr.Accordion(options_label("keywords", "gemini"), open=False) as options:
-            method = gr.Radio([(label, key) for key, (label, _) in METHODS.items()],
-                              value="keywords", label="Search", elem_classes="stacked-choice")
+        with gr.Row(elem_classes="settings"):
+            method = gr.Radio([(name, key) for key, (name, _, _) in METHODS.items()],
+                              value="keywords", label="Search", elem_classes="seg")
             with gr.Column() as model_box:
-                model = gr.Radio(model_choices(), value="gemini", label="Model",
-                                 elem_classes="stacked-choice")
+                model = gr.Radio(model_choices(), value="gemini", label="Model", elem_classes="seg")
             model_note = gr.Markdown("**Model:** Gemini 3.7 Flash. Add a Cerebras key in step 1 "
-                                     "to use Qwen.", visible=False)
-        answer = gr.Markdown()
+                                     "to use Qwen.", visible=False, elem_classes="model-note")
+        # Below both switches: a help line that wraps must not move the Model switch.
+        help_line = gr.Markdown(method_help("keywords"), elem_classes="help")
+        answer = gr.Markdown(elem_id="answer")
         with gr.Accordion(HOW, open=False, visible=False) as how:
             steps = gr.Markdown()
         earlier = gr.Markdown()
@@ -453,10 +571,6 @@ with gr.Blocks(title="Ask a large PDF") as demo:
 
     key_outputs = [key_step, key_line, key_row, rest, cancel_key, model, model_box, model_note]
     demo.load(key_view, [saved_key, saved_cb, model], key_outputs)
-    # A visibility change sent while Options is closed can be lost (Gradio 6.28: the page
-    # still showed the one-choice model list after loading), so it is sent again on opening.
-    options.expand(lambda o, c, m: key_view(o, c, m)[-2:], [saved_key, saved_cb, model],
-                   [model_box, model_note])
     save_inputs = [key_in, cb_in, saved_key, saved_cb, model]
     save_outputs = [saved_key, saved_cb, key_msg, key_in, cb_in, *key_outputs]
     save.click(save_keys, save_inputs, save_outputs)
@@ -477,9 +591,17 @@ with gr.Blocks(title="Ask a large PDF") as demo:
     pdf.clear(on_clear, None, pdf_outputs)
     ask_outputs = [answer, how, steps, history, earlier]
     ask_inputs = [question, method, model, pdf, saved_key, saved_cb, history]
-    question.submit(ask, ask_inputs, ask_outputs, show_progress="hidden")
-    for choice in (method, model):
-        choice.change(lambda a, b: gr.update(label=options_label(a, b)), [method, model], options)
+    # The box and the switches are locked while a question runs: no second Ask on top of it,
+    # and the answer's line names the search and model that were really used.
+    lock = [question, method, model]
+    # The answer area keeps its height while the next answer runs, so the page doesn't jump.
+    question.submit(lambda: [gr.update(interactive=False)] * 3, None, lock, js=(
+        "() => { const a = document.getElementById('answer');"
+        " if (a) a.style.minHeight = a.offsetHeight + 'px'; }")).then(
+        ask, ask_inputs, ask_outputs, show_progress="hidden").then(
+        lambda: [gr.update(interactive=True)] * 3, None, lock, js=(
+            "() => { const a = document.getElementById('answer'); if (a) a.style.minHeight = ''; }"))
+    method.change(method_help, method, help_line)
 
 if __name__ == "__main__":
-    demo.launch(css=CSS, footer_links=[])
+    demo.launch(css=CSS, head=HEAD, footer_links=[])

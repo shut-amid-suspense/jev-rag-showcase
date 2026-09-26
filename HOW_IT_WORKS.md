@@ -6,7 +6,7 @@ A long manual is hard to search. Ctrl+F only finds the exact words you type, and
 
 1. **Keys.** The app uses [OpenRouter](https://openrouter.ai) to read the PDF and write answers, so it needs your OpenRouter API key. A [Cerebras](https://cloud.cerebras.ai) key is optional and adds the faster Qwen model. You paste them once; they're checked, then kept only in your browser. **Remove keys** deletes them. The app never uses a key of its own.
 2. **PDF.** Upload a PDF. It's indexed right away, with progress shown. The 867-page Ableton Live 11 manual usually takes 15–40 seconds, and up to about a minute and a half when OpenRouter is busy. It costs about half a cent.
-3. **Ask.** Type a question the way you'd ask a colleague. Attach or paste a screenshot with 📎 if it helps. The answer shows up with the passages it's based on. Open **How it found this** to see every search it ran. **Options** lets you pick the search and the model.
+3. **Ask.** Type a question the way you'd ask a colleague. Attach a screenshot with the paperclip if it helps; click its thumbnail to see it full size. Pick the **Search** and the **Model** under the box. The answer shows up with the passages it's based on. Open **How it found this** to see every search it ran.
 
 ### What happens when you upload
 
@@ -16,7 +16,7 @@ A long manual is hard to search. Ctrl+F only finds the exact words you type, and
 
 ### What happens when you ask
 
-There are three ways to search, under **Options**:
+There are three ways to search, chosen under **Search**:
 
 - **Standard** (the default). The AI reads your question and screenshot and writes a few search terms in the manual's own words, such as the names of the controls it sees. Each term is searched (keyword and meaning search together), the hits go into one pool of up to 40 passages, **Jev**, a model built to pick from a list, keeps the best 5, and the AI answers from those.
 - **Fast.** One search with your question as typed. The top 5 passages go straight to the AI. No Jev.
