@@ -343,7 +343,7 @@ def ask(question, image_path, model, pdf_path, saved, saved_cb, history):
     pages = ", ".join(f"p. {p}" for p in dict.fromkeys(c["page"] for c in sources)) or "no source"
     earlier = history_md(history)
     history = [{"q": question + (" (with image)" if image else ""), "pages": pages}] + history
-    yield (f"### Answer\n{text}{sources_md}\n\n{meta}", gr.update(label=f"{HOW} · {len(steps)} step(s)"),
+    yield (f"### Answer\n{meta}\n\n{text}{sources_md}", gr.update(label=f"{HOW} · {len(steps)} step(s)"),
            steps_md(steps), history, earlier)
 
 
