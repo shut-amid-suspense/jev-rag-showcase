@@ -6,7 +6,7 @@ those passages and names the ones it used (the agent's final_answer tool, so the
 page shows sources the same way). Works with either provider and an optional image.
 
 run_classic() yields the same events as agent.run_agent(): one ("step", ...) for
-the search, then ("done", ...).
+the search, then ("done", ...). answer_from() is shared with keywords.py.
 """
 
 import json
@@ -29,6 +29,45 @@ The user may attach an image, such as a screenshot of what they see. Use it to
 understand their situation, but answer only from the passages."""
 
 
+def call_model(prov, body, key):
+    """POST a chat request; returns (data, retries).
+    Same as the agent: Cerebras sometimes answers 400 when it fails to produce a tool
+    call; a retry at temperature 0.7 has succeeded where temperature 0 kept failing."""
+    retries = 0
+    for attempt in range(3):
+        try:
+            data, _ = post(prov["url"], body, key)
+            return data, retries
+        except HTTPStatusError as e:
+            if e.code != 400 or attempt == 2:
+                raise
+            retries += 1
+            body = {**body, "temperature": 0.7}
+
+
+def answer_from(question, passages, image, prov, key):
+    """One model call answers from the passages. Returns (answer, sources, cost, retries)."""
+    listing = "\n\n".join(f"[{c['id']}] (page {c['page']}"
+                          + (f", {c['section']}" if c["section"] else "") + f")\n{body_text(c)}"
+                          for c in passages)
+    text = f"Question: {question}\n\nPassages:\n\n{listing}"
+    content = text if not image else [{"type": "text", "text": text},
+                                      {"type": "image_url", "image_url": {"url": image}}]
+    body = {"model": prov["model"], "temperature": 0, "tools": FINAL_ANSWER,
+            "tool_choice": "required",
+            "messages": [{"role": "system", "content": SYSTEM}, {"role": "user", "content": content}]}
+    data, retries = call_model(prov, body, key)
+    msg = data["choices"][0]["message"]
+    calls = msg.get("tool_calls") or []
+    answer, ids = msg.get("content") or "", []
+    if calls:
+        args = json.loads(calls[0]["function"].get("arguments") or "{}")
+        answer, ids = args.get("answer", ""), args.get("passage_ids", [])
+    by_id = {c["id"]: c for c in passages}
+    sources = [by_id[i] for i in dict.fromkeys(ids) if i in by_id]
+    return answer, sources, turn_cost(data, prov), retries
+
+
 def run_classic(question, index, key, image=None, provider="gemini", agent_key=None):
     """Yields ("step", dict) for the one search, then ("done", dict) like run_agent."""
     t_start = time.perf_counter()
@@ -45,37 +84,8 @@ def run_classic(question, index, key, image=None, provider="gemini", agent_key=N
                    "results": [{"id": c["id"], "page": c["page"], "section": c["section"],
                                 "relevance": None, "text": body_text(c)} for c in passages]}
 
-    listing = "\n\n".join(f"[{c['id']}] (page {c['page']}"
-                          + (f", {c['section']}" if c["section"] else "") + f")\n{body_text(c)}"
-                          for c in passages)
-    text = f"Question: {question}\n\nPassages:\n\n{listing}"
-    content = text if not image else [{"type": "text", "text": text},
-                                      {"type": "image_url", "image_url": {"url": image}}]
-    body = {"model": prov["model"], "temperature": 0, "tools": FINAL_ANSWER,
-            "tool_choice": "required",
-            "messages": [{"role": "system", "content": SYSTEM}, {"role": "user", "content": content}]}
-    retries = 0
     t_model = time.perf_counter()
-    # Same as the agent: Cerebras sometimes answers 400 when it fails to produce a tool
-    # call; a retry at temperature 0.7 has succeeded where temperature 0 kept failing.
-    for attempt in range(3):
-        try:
-            data, _ = post(prov["url"], body, agent_key or key)
-            break
-        except HTTPStatusError as e:
-            if e.code != 400 or attempt == 2:
-                raise
-            retries += 1
-            body = {**body, "temperature": 0.7}
-    cost += turn_cost(data, prov)
-    msg = data["choices"][0]["message"]
-    calls = msg.get("tool_calls") or []
-    answer, ids = msg.get("content") or "", []
-    if calls:
-        args = json.loads(calls[0]["function"].get("arguments") or "{}")
-        answer, ids = args.get("answer", ""), args.get("passage_ids", [])
-    by_id = {c["id"]: c for c in passages}
-    sources = [by_id[i] for i in dict.fromkeys(ids) if i in by_id]
-    yield "done", {"answer": answer, "sources": sources, "cost": cost, "retries": retries,
+    answer, sources, c, retries = answer_from(question, passages, image, prov, agent_key or key)
+    yield "done", {"answer": answer, "sources": sources, "cost": cost + c, "retries": retries,
                    "turns": 1, "seconds": time.perf_counter() - t_start,
                    "model_ms": (time.perf_counter() - t_model) * 1000}
