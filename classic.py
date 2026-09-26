@@ -5,8 +5,8 @@ Jev ranking and no further searches. One model call then writes the answer from
 those passages and names the ones it used (the agent's final_answer tool, so the
 page shows sources the same way). Works with either provider and an optional image.
 
-run_classic() yields the same events as agent.run_agent(): one ("step", ...) for
-the search, then ("done", ...). answer_from() is shared with keywords.py.
+run_classic() yields the same events as agent.run_agent(): ("stage", text) before each
+stage, one ("step", ...) for the search, then ("done", ...). answer_from() is shared with keywords.py.
 """
 
 import json
@@ -74,6 +74,7 @@ def run_classic(question, index, key, image=None, provider="gemini", agent_key=N
     prov = PROVIDERS[provider]
     chunks = index["chunks"]
 
+    yield "stage", "Searching the PDF…"
     s = index["bm25"].scores(question)
     bm_order = sorted(range(len(s)), key=lambda i: -s[i])[:POOL]
     (qv,), _, usage = embed([question], key)
@@ -84,6 +85,7 @@ def run_classic(question, index, key, image=None, provider="gemini", agent_key=N
                    "results": [{"id": c["id"], "page": c["page"], "section": c["section"],
                                 "relevance": None, "text": body_text(c)} for c in passages]}
 
+    yield "stage", "Writing the answer…"
     t_model = time.perf_counter()
     answer, sources, c, retries = answer_from(question, passages, image, prov, agent_key or key)
     yield "done", {"answer": answer, "sources": sources, "cost": cost + c, "retries": retries,

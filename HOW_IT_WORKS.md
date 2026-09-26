@@ -45,9 +45,9 @@ Full answers on 20 of those questions (typical time, slowest, cost per question)
 
 | Search | Model | Right page found | Typical | Slowest | Cost |
 |---|---|---|---|---|---|
-| Fast | Gemini | 16 of 20 | 4.1 s | 11.0 s | $0.003 |
-| Standard | Gemini | **20 of 20** | 7.5 s | 11.2 s | $0.004 |
-| Thorough | Gemini | 20 of 20 | 6.0 s | 20.8 s | $0.004 |
+| Fast | Gemini 3.8 | 16 of 20 | 4.3 s | 46.1 s | $0.004 |
+| Standard | Gemini 3.8 | **20 of 20** | 7.9 s | 10.6 s | $0.004 |
+| Thorough | Gemini 3.8 | 20 of 20 | 6.7 s | 19.5 s | $0.005 |
 | Fast | Qwen | 16 of 20 | 1.3 s | 2.7 s | $0.003 |
 | Standard | Qwen | 19 of 20 | 2.5 s | 3.9 s | $0.004 |
 | Thorough | Qwen | 19 of 20 | 3.0 s | 9.0 s | $0.007 |

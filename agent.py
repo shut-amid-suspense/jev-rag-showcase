@@ -1,6 +1,6 @@
 """Agentic retrieval over one indexed PDF: a tool-calling model searches, Jev selects.
 
-The agent (Gemini 3.7 Flash on OpenRouter) gets three tools:
+The agent (Gemini 3.8 Flash on OpenRouter) gets three tools:
   search(query)            hybrid BM25 + embeddings shortlist of 20 passages, ranked
                            by Jev; returns the top 3 with Jev's probability
   read_page(page)          the full text of one page, for surrounding context
@@ -9,7 +9,9 @@ The agent (Gemini 3.7 Flash on OpenRouter) gets three tools:
 It may search as often as it needs (up to MAX_STEPS model turns), rephrasing
 queries into the document's own terms, and must say when the PDF lacks the answer.
 
-run_agent() is a generator of events so a UI can show each step as it happens.
+run_agent() is a generator of events so a UI can show each step as it happens:
+("stage", text) names what it is doing now, ("step", dict) reports a finished tool
+call, ("done", dict) ends the run.
 """
 
 import json
@@ -26,8 +28,8 @@ CEREBRAS = os.environ.get("CEREBRAS_BASE_URL", "https://api.cerebras.ai")
 # Models that can drive the agent. Search (embeddings + Jev) always runs on OpenRouter.
 # Cerebras returns no cost, so its cost is estimated from tokens at its published price.
 PROVIDERS = {
-    "gemini": {"label": "Gemini 3.7 Flash · OpenRouter", "url": CHAT_URL,
-               "model": "google/gemini-3.7-flash", "key": "openrouter", "price": None},
+    "gemini": {"label": "Gemini 3.8 Flash · OpenRouter", "url": CHAT_URL,
+               "model": "google/gemini-3.8-flash", "key": "openrouter", "price": None},
     "qwen": {"label": "Qwen 3.8 27B · Cerebras", "url": CEREBRAS + "/v1/chat/completions",
              "model": "qwen-3.8-27b", "key": "cerebras", "price": (0.99, 1.49)},  # $ per M tokens in, out
 }
@@ -126,6 +128,8 @@ def run_agent(question, index, key, image=None, provider="gemini", agent_key=Non
     cost, retries = 0.0, 0
     for turn in range(MAX_STEPS):
         last = turn == MAX_STEPS - 1
+        yield "stage", ("Writing the answer…" if last else
+                        "Deciding what to search…" if turn == 0 else "Deciding the next step…")
         body = {"model": prov["model"], "temperature": 0, "messages": messages,
                 "tools": TOOLS if not last else TOOLS[2:],
                 "tool_choice": "required"}
@@ -160,12 +164,14 @@ def run_agent(question, index, key, image=None, provider="gemini", agent_key=Non
                                "seconds": time.perf_counter() - t_start, "turns": turn + 1, "retries": retries}
                 return
             if name == "search":
+                yield "stage", f"Searching the PDF for “{args.get('query', '')}”…"
                 top, ms, c = search(args.get("query", ""), index, key)
                 cost += c
                 result = top
                 yield "step", {"tool": "search", "query": args.get("query", ""), "results": top,
                                "ms": ms + model_ms}
             elif name == "read_page":
+                yield "stage", f"Reading page {args.get('page')}…"
                 result = read_page(int(args.get("page", 0)), index)
                 yield "step", {"tool": "read_page", "page": args.get("page"),
                                "results": result, "ms": model_ms}

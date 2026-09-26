@@ -9,7 +9,8 @@
 4. One model call answers from those passages (classic.answer_from), naming its sources.
 
 A fixed three calls plus one Jev call, unlike the agent's open-ended loop.
-run_keywords() yields the same events as agent.run_agent().
+run_keywords() yields the same events as agent.run_agent(): ("stage", text) before each
+stage, ("step", dict) after it, then ("done", dict).
 """
 
 import json
@@ -48,6 +49,7 @@ def run_keywords(question, index, key, image=None, provider="gemini", agent_key=
             "tool_choice": "required",
             "messages": [{"role": "system", "content": TERMS_SYSTEM},
                          {"role": "user", "content": content}]}
+    yield "stage", "Writing search terms…"
     t0 = time.perf_counter()
     data, retries = call_model(prov, body, agent_key or key)
     cost = turn_cost(data, prov)
@@ -56,6 +58,7 @@ def run_keywords(question, index, key, image=None, provider="gemini", agent_key=
     terms = [t.strip() for t in terms if isinstance(t, str) and t.strip()][:MAX_TERMS]
     yield "step", {"tool": "terms", "terms": terms, "ms": (time.perf_counter() - t0) * 1000}
 
+    yield "stage", "Searching the PDF for " + ", ".join(f"“{t}”" for t in terms) + "…"
     t0 = time.perf_counter()
     queries = list(dict.fromkeys([question] + terms))
     vecs, _, usage = embed(queries, key)  # one request for every query
@@ -75,6 +78,7 @@ def run_keywords(question, index, key, image=None, provider="gemini", agent_key=
     yield "step", {"tool": "pool", "queries": len(queries), "found": len(pool),
                    "ms": (time.perf_counter() - t0) * 1000}
 
+    yield "stage", f"Picking the best of {len(pool)} passages…"
     t0 = time.perf_counter()
     jev = {"model": JEV_MODEL, "state": {"question": question, "search_terms": terms},
            "questions": {"pick": {"type": "choice",
@@ -94,6 +98,7 @@ def run_keywords(question, index, key, image=None, provider="gemini", agent_key=
                                 "relevance": round(probs.get(c["id"], 0), 2),
                                 "text": body_text(c)} for c in passages]}
 
+    yield "stage", "Writing the answer…"
     t0 = time.perf_counter()
     answer, sources, c, r = answer_from(question, passages, image, prov, agent_key or key)
     yield "done", {"answer": answer, "sources": sources, "cost": cost + c,

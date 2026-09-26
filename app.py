@@ -357,11 +357,12 @@ def ask(box, method, model, pdf_path, saved, saved_cb, history):
         runner = METHODS.get(method, METHODS["keywords"])[2]
         for kind, event in runner(question, index, key, image=image, provider=model,
                                   agent_key=agent_key):
-            if kind == "step":
+            if kind == "stage":  # what the search is doing right now, by name
+                yield (f"### Answer\n*{md_escape(event)}*", gr.update(label=f"{HOW} · working…"),
+                       gr.skip(), gr.skip(), gr.skip())
+            elif kind == "step":
                 steps.append(event)
-                yield (f"### Answer\n*Searching the PDF… step {len(steps)}*",
-                       gr.update(label=f"{HOW} · working… {plural(len(steps), 'step')} so far"),
-                       steps_md(steps), gr.skip(), gr.skip())
+                yield gr.skip(), gr.skip(), steps_md(steps), gr.skip(), gr.skip()
             else:
                 done = event
     except Exception as e:
@@ -383,14 +384,17 @@ def ask(box, method, model, pdf_path, saved, saved_cb, history):
     estimate = " (estimated)" if PROVIDERS[model]["price"] else ""
     cost = done["cost"]
     cost = f"${cost:.4f}" if cost >= 0.0001 else "<$0.0001" if cost > 0 else "$0"
-    meta = (f'<span class="meta">{plural(len(steps), "step")} · {done["seconds"]:.1f} s · '
+    # Only Thorough varies its number of steps; Fast and Standard always run the same stages.
+    count = f'{plural(len(steps), "step")} · ' if method == "agent" else ""
+    meta = (f'<span class="meta">{count}{done["seconds"]:.1f} s · '
             f"{cost}{estimate} · {PROVIDERS[model]['label']}"
             f"{' · with your image' if image else ''} · "
             + METHODS.get(method, METHODS["keywords"])[0] + " search</span>")
     pages = ", ".join(f"p. {p}" for p in dict.fromkeys(c["page"] for c in sources)) or "no source"
     earlier = history_md(history)
     history = [{"q": question + (" (with image)" if image else ""), "pages": pages}] + history
-    yield (f"### Answer\n{meta}\n\n{text}{sources_md}", gr.update(label=f"{HOW} · {plural(len(steps), 'step')}"),
+    how_label = f"{HOW} · {plural(len(steps), 'step')}" if method == "agent" else HOW
+    yield (f"### Answer\n{meta}\n\n{text}{sources_md}", gr.update(label=how_label),
            steps_md(steps), history, earlier)
 
 
@@ -558,7 +562,7 @@ with gr.Blocks(title="Ask a large PDF") as demo:
                               value="keywords", label="Search", elem_classes="seg")
             with gr.Column() as model_box:
                 model = gr.Radio(model_choices(), value="gemini", label="Model", elem_classes="seg")
-            model_note = gr.Markdown("**Model:** Gemini 3.7 Flash. Add a Cerebras key in step 1 "
+            model_note = gr.Markdown("**Model:** Gemini 3.8 Flash. Add a Cerebras key in step 1 "
                                      "to use Qwen.", visible=False, elem_classes="model-note")
         # Below both switches: a help line that wraps must not move the Model switch.
         help_line = gr.Markdown(method_help("keywords"), elem_classes="help")
