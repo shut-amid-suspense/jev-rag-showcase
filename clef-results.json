@@ -1,7 +1,8 @@
 {
   "models": {
     "jev": "~typesafe/jev-latest",
-    "clef": "cloudflare/clef"
+    "clef": "cloudflare/clef",
+    "flash": "cloudflare/clef-flash"
   },
   "tasks": {
     "intent": {
@@ -10,21 +11,31 @@
           "correct": 38,
           "of": 40,
           "errors": 0,
-          "median_ms": 329.43283299391624,
-          "p90_ms": 413.30120799830183,
+          "median_ms": 420.98949999490287,
+          "p90_ms": 583.9440840063617,
           "cost_usd": 0.000738612,
-          "mean_conf_right": 0.988,
-          "mean_conf_wrong": 0.695
+          "mean_conf_right": 0.987,
+          "mean_conf_wrong": 0.71
         },
         "clef": {
-          "correct": 39,
+          "correct": 38,
+          "of": 40,
+          "errors": 1,
+          "median_ms": 996.9959580048453,
+          "p90_ms": 2120.671750002657,
+          "cost_usd": 0.00255144,
+          "mean_conf_right": 0.808,
+          "mean_conf_wrong": 0.735
+        },
+        "flash": {
+          "correct": 37,
           "of": 40,
           "errors": 0,
-          "median_ms": 554.5906659972388,
-          "p90_ms": 701.241791000939,
-          "cost_usd": 0.0026172,
-          "mean_conf_right": 0.812,
-          "mean_conf_wrong": 0.735
+          "median_ms": 539.2171669955133,
+          "p90_ms": 807.4337919970276,
+          "cost_usd": 0.00098145,
+          "mean_conf_right": 0.814,
+          "mean_conf_wrong": 0.432
         }
       },
       "rows": [
@@ -34,15 +45,22 @@
           "jev": {
             "pick": "billing",
             "conf": 1,
-            "ms": 470.82291699189227,
+            "ms": 430.7534589897841,
             "cost": 1.8564e-05,
             "in_tokens": 442
           },
           "clef": {
             "pick": "billing",
             "conf": 0.7189,
-            "ms": 487.59104100463446,
+            "ms": 1057.42895900039,
             "cost": 6.6e-05,
+            "in_tokens": 275
+          },
+          "flash": {
+            "pick": "billing",
+            "conf": 0.828,
+            "ms": 480.7282080000732,
+            "cost": 2.475e-05,
             "in_tokens": 275
           }
         },
@@ -52,14 +70,21 @@
           "clef": {
             "pick": "billing",
             "conf": 0.9336,
-            "ms": 788.8248339877464,
+            "ms": 1554.301584008499,
             "cost": 6.528e-05,
+            "in_tokens": 272
+          },
+          "flash": {
+            "pick": "billing",
+            "conf": 0.7996,
+            "ms": 763.8014170079259,
+            "cost": 2.448e-05,
             "in_tokens": 272
           },
           "jev": {
             "pick": "billing",
             "conf": 1,
-            "ms": 303.4159999951953,
+            "ms": 1091.638874990167,
             "cost": 1.8438e-05,
             "in_tokens": 439
           }
@@ -67,17 +92,24 @@
         {
           "item": "Your invoice is missing our VAT number.",
           "gold": "billing",
+          "flash": {
+            "pick": "billing",
+            "conf": 0.7129,
+            "ms": 602.4424159986665,
+            "cost": 2.43e-05,
+            "in_tokens": 270
+          },
           "jev": {
             "pick": "billing",
             "conf": 1,
-            "ms": 339.65283299039584,
+            "ms": 742.7818339929217,
             "cost": 1.8354e-05,
             "in_tokens": 437
           },
           "clef": {
             "pick": "billing",
             "conf": 0.8719,
-            "ms": 397.91866700397804,
+            "ms": 1031.4908340078546,
             "cost": 6.48e-05,
             "in_tokens": 270
           }
@@ -85,55 +117,76 @@
         {
           "item": "I cancelled last week but still got billed. Refund please.",
           "gold": "billing",
-          "clef": {
-            "pick": "billing",
-            "conf": 0.8981,
-            "ms": 571.7854999966221,
-            "cost": 6.6e-05,
-            "in_tokens": 275
-          },
           "jev": {
             "pick": "billing",
             "conf": 1,
-            "ms": 379.6661249944009,
+            "ms": 560.7484580104938,
             "cost": 1.8564e-05,
             "in_tokens": 442
+          },
+          "clef": {
+            "pick": "billing",
+            "conf": 0.8981,
+            "ms": 1392.719750001561,
+            "cost": 6.6e-05,
+            "in_tokens": 275
+          },
+          "flash": {
+            "pick": "billing",
+            "conf": 0.9075,
+            "ms": 658.1320830009645,
+            "cost": 2.475e-05,
+            "in_tokens": 275
           }
         },
         {
           "item": "Why did my plan price go up from 9 to 12 euros?",
           "gold": "billing",
-          "jev": {
-            "pick": "billing",
-            "conf": 1,
-            "ms": 684.0778330079047,
-            "cost": 1.869e-05,
-            "in_tokens": 445
-          },
           "clef": {
             "pick": "billing",
             "conf": 0.8909,
-            "ms": 670.0104159972398,
+            "ms": 2120.671750002657,
             "cost": 6.672e-05,
             "in_tokens": 278
+          },
+          "flash": {
+            "pick": "billing",
+            "conf": 0.8672,
+            "ms": 631.9249589869287,
+            "cost": 2.502e-05,
+            "in_tokens": 278
+          },
+          "jev": {
+            "pick": "billing",
+            "conf": 1,
+            "ms": 363.87675000878517,
+            "cost": 1.869e-05,
+            "in_tokens": 445
           }
         },
         {
           "item": "The app crashes every time I open the settings page.",
           "gold": "bug",
-          "clef": {
+          "flash": {
             "pick": "bug",
-            "conf": 0.9767,
-            "ms": 617.960999996285,
-            "cost": 6.552e-05,
+            "conf": 0.9486,
+            "ms": 516.3547920092242,
+            "cost": 2.457e-05,
             "in_tokens": 273
           },
           "jev": {
             "pick": "bug",
             "conf": 1,
-            "ms": 292.2742500086315,
+            "ms": 387.0467499946244,
             "cost": 1.848e-05,
             "in_tokens": 440
+          },
+          "clef": {
+            "pick": "bug",
+            "conf": 0.9767,
+            "ms": 6001.862791003077,
+            "cost": 6.552e-05,
+            "in_tokens": 273
           }
         },
         {
@@ -142,15 +195,22 @@
           "jev": {
             "pick": "bug",
             "conf": 1,
-            "ms": 319.1461660026107,
+            "ms": 452.4148329946911,
             "cost": 1.8354e-05,
             "in_tokens": 437
           },
           "clef": {
             "pick": "bug",
             "conf": 0.9124,
-            "ms": 602.848875001655,
+            "ms": 6988.669375001336,
             "cost": 6.48e-05,
+            "in_tokens": 270
+          },
+          "flash": {
+            "pick": "bug",
+            "conf": 0.8697,
+            "ms": 1625.6599579937756,
+            "cost": 2.43e-05,
             "in_tokens": 270
           }
         },
@@ -160,14 +220,21 @@
           "clef": {
             "pick": "bug",
             "conf": 0.9311,
-            "ms": 481.0342499986291,
+            "ms": 904.9325410014717,
             "cost": 6.504e-05,
+            "in_tokens": 271
+          },
+          "flash": {
+            "pick": "bug",
+            "conf": 0.8889,
+            "ms": 437.12191699887626,
+            "cost": 2.439e-05,
             "in_tokens": 271
           },
           "jev": {
             "pick": "bug",
             "conf": 1,
-            "ms": 440.44074999692384,
+            "ms": 431.300915995962,
             "cost": 1.8396e-05,
             "in_tokens": 438
           }
@@ -175,17 +242,24 @@
         {
           "item": "Since the update, notifications arrive twice.",
           "gold": "bug",
+          "flash": {
+            "pick": "bug",
+            "conf": 0.8805,
+            "ms": 529.7011249931529,
+            "cost": 2.43e-05,
+            "in_tokens": 270
+          },
           "jev": {
             "pick": "bug",
             "conf": 1,
-            "ms": 372.5688330014236,
+            "ms": 424.4192079931963,
             "cost": 1.8354e-05,
             "in_tokens": 437
           },
           "clef": {
             "pick": "bug",
             "conf": 0.9554,
-            "ms": 525.8037500025239,
+            "ms": 977.567124995403,
             "cost": 6.48e-05,
             "in_tokens": 270
           }
@@ -193,55 +267,76 @@
         {
           "item": "Search returns results from other workspaces, that looks wrong.",
           "gold": "bug",
-          "clef": {
-            "pick": "bug",
-            "conf": 0.9583,
-            "ms": 606.567917013308,
-            "cost": 6.576e-05,
-            "in_tokens": 274
-          },
           "jev": {
             "pick": "bug",
             "conf": 1,
-            "ms": 350.229625008069,
+            "ms": 406.13137499894947,
             "cost": 1.8564e-05,
             "in_tokens": 442
+          },
+          "clef": {
+            "pick": "bug",
+            "conf": 0.9583,
+            "ms": 975.0358750025043,
+            "cost": 6.576e-05,
+            "in_tokens": 274
+          },
+          "flash": {
+            "pick": "bug",
+            "conf": 0.9071,
+            "ms": 425.8922079898184,
+            "cost": 2.466e-05,
+            "in_tokens": 274
           }
         },
         {
           "item": "I can't log in, it says my password is wrong but I just reset it.",
           "gold": "account",
-          "jev": {
-            "pick": "account",
-            "conf": 1,
-            "ms": 295.1719169941498,
-            "cost": 1.8774e-05,
-            "in_tokens": 447
-          },
           "clef": {
             "pick": "account",
             "conf": 0.7727,
-            "ms": 701.241791000939,
+            "ms": 785.2311669994378,
             "cost": 6.72e-05,
             "in_tokens": 280
+          },
+          "flash": {
+            "pick": "account",
+            "conf": 0.5537,
+            "ms": 812.7387499989709,
+            "cost": 2.52e-05,
+            "in_tokens": 280
+          },
+          "jev": {
+            "pick": "account",
+            "conf": 1,
+            "ms": 486.61266699491534,
+            "cost": 1.8774e-05,
+            "in_tokens": 447
           }
         },
         {
           "item": "How do I turn on two-factor authentication?",
           "gold": "account",
-          "clef": {
+          "flash": {
             "pick": "account",
-            "conf": 0.9671,
-            "ms": 624.4377080001868,
-            "cost": 6.504e-05,
+            "conf": 0.9136,
+            "ms": 370.4814999946393,
+            "cost": 2.439e-05,
             "in_tokens": 271
           },
           "jev": {
             "pick": "account",
             "conf": 1,
-            "ms": 334.11850000265986,
+            "ms": 380.0337499997113,
             "cost": 1.8396e-05,
             "in_tokens": 438
+          },
+          "clef": {
+            "pick": "account",
+            "conf": 0.9671,
+            "ms": 745.835084002465,
+            "cost": 6.504e-05,
+            "in_tokens": 271
           }
         },
         {
@@ -250,15 +345,22 @@
           "jev": {
             "pick": "account",
             "conf": 1,
-            "ms": 320.3731249959674,
+            "ms": 426.4253750006901,
             "cost": 1.8396e-05,
             "in_tokens": 438
           },
           "clef": {
             "pick": "account",
             "conf": 0.7859,
-            "ms": 392.003000000841,
+            "ms": 1697.437542010448,
             "cost": 6.504e-05,
+            "in_tokens": 271
+          },
+          "flash": {
+            "pick": "account",
+            "conf": 0.8992,
+            "ms": 376.20787500054576,
+            "cost": 2.439e-05,
             "in_tokens": 271
           }
         },
@@ -268,14 +370,21 @@
           "clef": {
             "pick": "account",
             "conf": 0.9683,
-            "ms": 667.7254999958677,
+            "ms": 708.9153749984689,
             "cost": 6.552e-05,
+            "in_tokens": 273
+          },
+          "flash": {
+            "pick": "account",
+            "conf": 0.9344,
+            "ms": 751.1382499942556,
+            "cost": 2.457e-05,
             "in_tokens": 273
           },
           "jev": {
             "pick": "account",
             "conf": 1,
-            "ms": 395.66275000106543,
+            "ms": 407.3135420039762,
             "cost": 1.848e-05,
             "in_tokens": 440
           }
@@ -283,17 +392,24 @@
         {
           "item": "My account got locked after too many attempts.",
           "gold": "account",
+          "flash": {
+            "pick": "account",
+            "conf": 0.8367,
+            "ms": 624.152625008719,
+            "cost": 2.439e-05,
+            "in_tokens": 271
+          },
           "jev": {
             "pick": "account",
             "conf": 1,
-            "ms": 281.8828330055112,
+            "ms": 472.339790998376,
             "cost": 1.8396e-05,
             "in_tokens": 438
           },
           "clef": {
             "pick": "account",
             "conf": 0.9106,
-            "ms": 687.1616669959622,
+            "ms": 1018.0302499938989,
             "cost": 6.504e-05,
             "in_tokens": 271
           }
@@ -301,55 +417,76 @@
         {
           "item": "It would be great if you supported Markdown in comments.",
           "gold": "feature",
-          "clef": {
-            "pick": "feature",
-            "conf": 0.933,
-            "ms": 404.89054199133534,
-            "cost": 6.552e-05,
-            "in_tokens": 273
-          },
           "jev": {
             "pick": "feature",
             "conf": 1,
-            "ms": 279.93775000504684,
+            "ms": 406.7677499988349,
             "cost": 1.848e-05,
             "in_tokens": 440
+          },
+          "clef": {
+            "pick": "feature",
+            "conf": 0.933,
+            "ms": 1628.6708330007968,
+            "cost": 6.552e-05,
+            "in_tokens": 273
+          },
+          "flash": {
+            "pick": "feature",
+            "conf": 0.8889,
+            "ms": 389.6872089972021,
+            "cost": 2.457e-05,
+            "in_tokens": 273
           }
         },
         {
           "item": "Any plans for a Linux desktop app?",
           "gold": "feature",
-          "jev": {
-            "pick": "feature",
-            "conf": 1,
-            "ms": 307.2763749951264,
-            "cost": 1.8354e-05,
-            "in_tokens": 437
-          },
           "clef": {
             "pick": "feature",
             "conf": 0.9546,
-            "ms": 473.27795800811145,
+            "ms": 848.4198329970241,
             "cost": 6.48e-05,
             "in_tokens": 270
+          },
+          "flash": {
+            "pick": "feature",
+            "conf": 0.9276,
+            "ms": 807.4337919970276,
+            "cost": 2.43e-05,
+            "in_tokens": 270
+          },
+          "jev": {
+            "pick": "feature",
+            "conf": 1,
+            "ms": 375.967917003436,
+            "cost": 1.8354e-05,
+            "in_tokens": 437
           }
         },
         {
           "item": "Please add an option to schedule reports weekly.",
           "gold": "feature",
-          "clef": {
+          "flash": {
             "pick": "feature",
-            "conf": 0.9394,
-            "ms": 751.8368329911027,
-            "cost": 6.504e-05,
+            "conf": 0.8297,
+            "ms": 1162.9234160063788,
+            "cost": 2.439e-05,
             "in_tokens": 271
           },
           "jev": {
             "pick": "feature",
             "conf": 1,
-            "ms": 308.18791600177065,
+            "ms": 482.250709013897,
             "cost": 1.8396e-05,
             "in_tokens": 438
+          },
+          "clef": {
+            "pick": "feature",
+            "conf": 0.9394,
+            "ms": 783.6783340026159,
+            "cost": 6.504e-05,
+            "in_tokens": 271
           }
         },
         {
@@ -358,15 +495,22 @@
           "jev": {
             "pick": "feature",
             "conf": 1,
-            "ms": 587.3389579937793,
+            "ms": 365.15887500718236,
             "cost": 1.8312e-05,
             "in_tokens": 436
           },
           "clef": {
             "pick": "feature",
             "conf": 0.9579,
-            "ms": 451.541874994291,
+            "ms": 996.9959580048453,
             "cost": 6.456e-05,
+            "in_tokens": 269
+          },
+          "flash": {
+            "pick": "feature",
+            "conf": 0.9148,
+            "ms": 364.090833987575,
+            "cost": 2.421e-05,
             "in_tokens": 269
           }
         },
@@ -376,14 +520,21 @@
           "clef": {
             "pick": "feature",
             "conf": 0.9429,
-            "ms": 648.0213750037365,
+            "ms": 1685.4341669968562,
             "cost": 6.576e-05,
+            "in_tokens": 274
+          },
+          "flash": {
+            "pick": "feature",
+            "conf": 0.8875,
+            "ms": 419.9688330118079,
+            "cost": 2.466e-05,
             "in_tokens": 274
           },
           "jev": {
             "pick": "feature",
             "conf": 1,
-            "ms": 300.9002920007333,
+            "ms": 400.7865840103477,
             "cost": 1.8522e-05,
             "in_tokens": 441
           }
@@ -391,17 +542,24 @@
         {
           "item": "My package was supposed to arrive Monday and it's Thursday.",
           "gold": "shipping",
+          "flash": {
+            "pick": "shipping",
+            "conf": 0.8841,
+            "ms": 621.8127500033006,
+            "cost": 2.466e-05,
+            "in_tokens": 274
+          },
           "jev": {
             "pick": "shipping",
             "conf": 1,
-            "ms": 370.31937499705236,
+            "ms": 363.4625410049921,
             "cost": 1.8522e-05,
             "in_tokens": 441
           },
           "clef": {
             "pick": "shipping",
             "conf": 0.9517,
-            "ms": 612.0072080084356,
+            "ms": 598.4826670028269,
             "cost": 6.576e-05,
             "in_tokens": 274
           }
@@ -409,55 +567,76 @@
         {
           "item": "Tracking hasn't updated in five days.",
           "gold": "shipping",
-          "clef": {
-            "pick": "shipping",
-            "conf": 0.8038,
-            "ms": 565.4118340025889,
-            "cost": 6.48e-05,
-            "in_tokens": 270
-          },
           "jev": {
             "pick": "shipping",
             "conf": 1,
-            "ms": 413.30120799830183,
+            "ms": 451.3610419962788,
             "cost": 1.8354e-05,
             "in_tokens": 437
+          },
+          "clef": {
+            "pick": "shipping",
+            "conf": 0.8038,
+            "ms": 898.2781669910764,
+            "cost": 6.48e-05,
+            "in_tokens": 270
+          },
+          "flash": {
+            "pick": "shipping",
+            "conf": 0.8096,
+            "ms": 329.1298340045614,
+            "cost": 2.43e-05,
+            "in_tokens": 270
           }
         },
         {
           "item": "I typed the wrong street, can you redirect the parcel?",
           "gold": "shipping",
-          "jev": {
-            "pick": "shipping",
-            "conf": 1,
-            "ms": 314.98545900103636,
-            "cost": 1.8522e-05,
-            "in_tokens": 441
-          },
           "clef": {
             "pick": "shipping",
             "conf": 0.9095,
-            "ms": 431.48729199310765,
+            "ms": 1023.7691249931231,
             "cost": 6.576e-05,
             "in_tokens": 274
+          },
+          "flash": {
+            "pick": "shipping",
+            "conf": 0.819,
+            "ms": 350.3219580015866,
+            "cost": 2.466e-05,
+            "in_tokens": 274
+          },
+          "jev": {
+            "pick": "shipping",
+            "conf": 1,
+            "ms": 370.86700000509154,
+            "cost": 1.8522e-05,
+            "in_tokens": 441
           }
         },
         {
           "item": "The box arrived crushed, how do I send it back?",
           "gold": "shipping",
-          "clef": {
+          "flash": {
             "pick": "shipping",
-            "conf": 0.6155,
-            "ms": 392.2410410013981,
-            "cost": 6.576e-05,
+            "conf": 0.532,
+            "ms": 408.6886669974774,
+            "cost": 2.466e-05,
             "in_tokens": 274
           },
           "jev": {
             "pick": "shipping",
             "conf": 1,
-            "ms": 339.6590830088826,
+            "ms": 379.6020839945413,
             "cost": 1.8522e-05,
             "in_tokens": 441
+          },
+          "clef": {
+            "pick": "shipping",
+            "conf": 0.6155,
+            "ms": 1014.9326660030056,
+            "cost": 6.576e-05,
+            "in_tokens": 274
           }
         },
         {
@@ -466,15 +645,22 @@
           "jev": {
             "pick": "shipping",
             "conf": 1,
-            "ms": 268.28024999122135,
+            "ms": 406.3501670025289,
             "cost": 1.827e-05,
             "in_tokens": 435
           },
           "clef": {
             "pick": "shipping",
             "conf": 0.5993,
-            "ms": 464.825250004651,
+            "ms": 718.4611660049995,
             "cost": 6.432e-05,
+            "in_tokens": 268
+          },
+          "flash": {
+            "pick": "shipping",
+            "conf": 0.3292,
+            "ms": 402.90216701396275,
+            "cost": 2.412e-05,
             "in_tokens": 268
           }
         },
@@ -484,14 +670,21 @@
           "clef": {
             "pick": "praise",
             "conf": 0.9756,
-            "ms": 856.341082995641,
+            "ms": 560.3058330016211,
             "cost": 6.528e-05,
+            "in_tokens": 272
+          },
+          "flash": {
+            "pick": "praise",
+            "conf": 0.9494,
+            "ms": 625.1929579884745,
+            "cost": 2.448e-05,
             "in_tokens": 272
           },
           "jev": {
             "pick": "praise",
             "conf": 1,
-            "ms": 285.33558300114237,
+            "ms": 1052.0248339889804,
             "cost": 1.8438e-05,
             "in_tokens": 439
           }
@@ -499,17 +692,24 @@
         {
           "item": "Love the new design, great work!",
           "gold": "praise",
+          "flash": {
+            "pick": "praise",
+            "conf": 0.9252,
+            "ms": 428.1693330121925,
+            "cost": 2.43e-05,
+            "in_tokens": 270
+          },
           "jev": {
             "pick": "praise",
             "conf": 1,
-            "ms": 360.56954199739266,
+            "ms": 606.9172919960693,
             "cost": 1.8354e-05,
             "in_tokens": 437
           },
           "clef": {
             "pick": "praise",
             "conf": 0.9733,
-            "ms": 841.0505409992766,
+            "ms": 1951.7989169980865,
             "cost": 6.48e-05,
             "in_tokens": 270
           }
@@ -517,55 +717,72 @@
         {
           "item": "Thanks, that fixed it. You're the best.",
           "gold": "praise",
-          "clef": {
-            "pick": "praise",
-            "conf": 0.9778,
-            "ms": 444.9479580071056,
-            "cost": 6.552e-05,
-            "in_tokens": 273
-          },
           "jev": {
             "pick": "praise",
             "conf": 1,
-            "ms": 316.8841250007972,
+            "ms": 339.99354200204834,
             "cost": 1.848e-05,
             "in_tokens": 440
+          },
+          "clef": {
+            "pick": "praise",
+            "conf": 0.9778,
+            "ms": 2124.890624996624,
+            "cost": 6.552e-05,
+            "in_tokens": 273
+          },
+          "flash": {
+            "pick": "praise",
+            "conf": 0.9163,
+            "ms": 776.9596659927629,
+            "cost": 2.457e-05,
+            "in_tokens": 273
           }
         },
         {
           "item": "Been using this for three years, still my favourite tool.",
           "gold": "praise",
+          "clef": {
+            "error": "https://openrouter.ai/api/alpha/decisions -> HTTP 429: b'{\"error\":{\"message\":\"HTTP 429: {\\\\\"errors\\\\\":[{\\\\\"message\\\\\":\\\\\"AiError: AiError: Capacity temporarily exceeded, please try again. (769189fe-5921-41d0-92c7-ea729012c5e4)\\\\\",\\\\\"code\\\\\":3040}],\\\\\"success\\\\\":false,\\\\\"result\\\\\":{},\\\\\"messages\\\\\":["
+          },
+          "flash": {
+            "pick": "praise",
+            "conf": 0.8783,
+            "ms": 684.4325419951929,
+            "cost": 2.466e-05,
+            "in_tokens": 274
+          },
           "jev": {
             "pick": "praise",
             "conf": 1,
-            "ms": 361.3182919943938,
+            "ms": 436.0787500045262,
             "cost": 1.8522e-05,
             "in_tokens": 441
-          },
-          "clef": {
-            "pick": "praise",
-            "conf": 0.9567,
-            "ms": 474.24100000353064,
-            "cost": 6.576e-05,
-            "in_tokens": 274
           }
         },
         {
           "item": "Huge thanks to Maria for the quick help yesterday.",
           "gold": "praise",
-          "clef": {
+          "flash": {
             "pick": "praise",
-            "conf": 0.9781,
-            "ms": 421.76145799749065,
-            "cost": 6.552e-05,
+            "conf": 0.9653,
+            "ms": 564.1755830001784,
+            "cost": 2.457e-05,
             "in_tokens": 273
           },
           "jev": {
             "pick": "praise",
             "conf": 1,
-            "ms": 365.952833002666,
+            "ms": 401.65254099701997,
             "cost": 1.848e-05,
             "in_tokens": 440
+          },
+          "clef": {
+            "pick": "praise",
+            "conf": 0.9781,
+            "ms": 1006.5238749957643,
+            "cost": 6.552e-05,
+            "in_tokens": 273
           }
         },
         {
@@ -574,15 +791,22 @@
           "jev": {
             "pick": "billing",
             "conf": 1,
-            "ms": 297.96404199441895,
+            "ms": 471.34483300033025,
             "cost": 1.8606e-05,
             "in_tokens": 443
           },
           "clef": {
             "pick": "billing",
             "conf": 0.518,
-            "ms": 491.39312500483356,
+            "ms": 738.432083002408,
             "cost": 6.624e-05,
+            "in_tokens": 276
+          },
+          "flash": {
+            "pick": "billing",
+            "conf": 0.3405,
+            "ms": 510.6477079971228,
+            "cost": 2.484e-05,
             "in_tokens": 276
           }
         },
@@ -592,14 +816,21 @@
           "clef": {
             "pick": "feature",
             "conf": 0.4437,
-            "ms": 460.1732919982169,
+            "ms": 989.2861249973066,
             "cost": 6.552e-05,
+            "in_tokens": 273
+          },
+          "flash": {
+            "pick": "feature",
+            "conf": 0.8302,
+            "ms": 671.1093330086442,
+            "cost": 2.457e-05,
             "in_tokens": 273
           },
           "jev": {
             "pick": "feature",
             "conf": 1,
-            "ms": 312.8136660088785,
+            "ms": 452.889292006148,
             "cost": 1.848e-05,
             "in_tokens": 440
           }
@@ -607,17 +838,24 @@
         {
           "item": "After I changed my password the mobile app keeps crashing on start.",
           "gold": "bug",
+          "flash": {
+            "pick": "bug",
+            "conf": 0.8889,
+            "ms": 481.24758299672976,
+            "cost": 2.475e-05,
+            "in_tokens": 275
+          },
           "jev": {
             "pick": "bug",
-            "conf": 0.97,
-            "ms": 349.0152080048574,
+            "conf": 0.96,
+            "ms": 406.18962499138433,
             "cost": 1.8564e-05,
             "in_tokens": 442
           },
           "clef": {
             "pick": "bug",
             "conf": 0.8728,
-            "ms": 526.5703330078395,
+            "ms": 787.5296660058666,
             "cost": 6.6e-05,
             "in_tokens": 275
           }
@@ -625,55 +863,76 @@
         {
           "item": "The order confirmation email never came, but the card was charged and nothing shipped.",
           "gold": "shipping",
+          "jev": {
+            "pick": "billing",
+            "conf": 0.49,
+            "ms": 407.1263339865254,
+            "cost": 1.869e-05,
+            "in_tokens": 445
+          },
           "clef": {
             "pick": "shipping",
             "conf": 0.3279,
-            "ms": 636.7633339978056,
+            "ms": 4763.336000003619,
             "cost": 6.672e-05,
             "in_tokens": 278
           },
-          "jev": {
+          "flash": {
             "pick": "billing",
-            "conf": 0.47,
-            "ms": 317.3857919900911,
-            "cost": 1.869e-05,
-            "in_tokens": 445
+            "conf": 0.3439,
+            "ms": 376.34995800908655,
+            "cost": 2.502e-05,
+            "in_tokens": 278
           }
         },
         {
           "item": "I can't find where to download my receipts.",
           "gold": "billing",
-          "jev": {
-            "pick": "billing",
-            "conf": 1,
-            "ms": 273.68275000480935,
-            "cost": 1.8438e-05,
-            "in_tokens": 439
-          },
           "clef": {
             "pick": "billing",
             "conf": 0.3429,
-            "ms": 371.33300000277814,
+            "ms": 577.5739590026205,
             "cost": 6.528e-05,
             "in_tokens": 272
+          },
+          "flash": {
+            "pick": "billing",
+            "conf": 0.4989,
+            "ms": 349.4455000036396,
+            "cost": 2.448e-05,
+            "in_tokens": 272
+          },
+          "jev": {
+            "pick": "billing",
+            "conf": 1,
+            "ms": 384.34449999476783,
+            "cost": 1.8438e-05,
+            "in_tokens": 439
           }
         },
         {
           "item": "Password reset link gives a 404 page.",
           "gold": "bug",
-          "clef": {
+          "flash": {
             "pick": "bug",
-            "conf": 0.4804,
-            "ms": 554.5906659972388,
-            "cost": 6.552e-05,
+            "conf": 0.8146,
+            "ms": 539.2171669955133,
+            "cost": 2.457e-05,
             "in_tokens": 273
           },
           "jev": {
             "pick": "bug",
-            "conf": 0.58,
-            "ms": 284.9579579924466,
+            "conf": 0.55,
+            "ms": 420.98949999490287,
             "cost": 1.848e-05,
             "in_tokens": 440
+          },
+          "clef": {
+            "pick": "bug",
+            "conf": 0.4804,
+            "ms": 721.7167079943465,
+            "cost": 6.552e-05,
+            "in_tokens": 273
           }
         },
         {
@@ -682,15 +941,22 @@
           "jev": {
             "pick": "billing",
             "conf": 1,
-            "ms": 307.1156669902848,
+            "ms": 382.8939579980215,
             "cost": 1.8312e-05,
             "in_tokens": 436
           },
           "clef": {
             "pick": "billing",
             "conf": 0.3815,
-            "ms": 432.3069589881925,
+            "ms": 1224.828250007704,
             "cost": 6.456e-05,
+            "in_tokens": 269
+          },
+          "flash": {
+            "pick": "billing",
+            "conf": 0.6462,
+            "ms": 1495.0893329951214,
+            "cost": 2.421e-05,
             "in_tokens": 269
           }
         },
@@ -700,14 +966,21 @@
           "clef": {
             "pick": "account",
             "conf": 0.7353,
-            "ms": 564.749875004054,
+            "ms": 670.8854170137784,
             "cost": 6.528e-05,
+            "in_tokens": 272
+          },
+          "flash": {
+            "pick": "account",
+            "conf": 0.4114,
+            "ms": 586.0245000076247,
+            "cost": 2.448e-05,
             "in_tokens": 272
           },
           "jev": {
             "pick": "account",
-            "conf": 0.92,
-            "ms": 348.6816660006298,
+            "conf": 0.93,
+            "ms": 583.9440840063617,
             "cost": 1.8438e-05,
             "in_tokens": 439
           }
@@ -715,17 +988,24 @@
         {
           "item": "Can you merge my two accounts into one?",
           "gold": "account",
+          "flash": {
+            "pick": "feature",
+            "conf": 0.54,
+            "ms": 594.1030419926392,
+            "cost": 2.439e-05,
+            "in_tokens": 271
+          },
           "jev": {
             "pick": "account",
             "conf": 0.99,
-            "ms": 329.43283299391624,
+            "ms": 422.6030000136234,
             "cost": 1.8396e-05,
             "in_tokens": 438
           },
           "clef": {
             "pick": "account",
             "conf": 0.4533,
-            "ms": 658.2755420095054,
+            "ms": 1354.7338339994894,
             "cost": 6.504e-05,
             "in_tokens": 271
           }
@@ -733,19 +1013,26 @@
         {
           "item": "Thanks for the fast delivery, arrived a day early!",
           "gold": "praise",
-          "clef": {
-            "pick": "praise",
-            "conf": 0.9111,
-            "ms": 324.4187500094995,
-            "cost": 6.552e-05,
-            "in_tokens": 273
-          },
           "jev": {
             "pick": "praise",
             "conf": 1,
-            "ms": 350.54495801159646,
+            "ms": 403.0096670030616,
             "cost": 1.848e-05,
             "in_tokens": 440
+          },
+          "clef": {
+            "pick": "praise",
+            "conf": 0.9111,
+            "ms": 770.942749993992,
+            "cost": 6.552e-05,
+            "in_tokens": 273
+          },
+          "flash": {
+            "pick": "praise",
+            "conf": 0.8909,
+            "ms": 410.3718749975087,
+            "cost": 2.457e-05,
+            "in_tokens": 273
           }
         }
       ]
@@ -756,21 +1043,31 @@
           "correct": 30,
           "of": 30,
           "errors": 0,
-          "median_ms": 317.84800000605173,
-          "p90_ms": 376.41849998908583,
+          "median_ms": 454.7335420065792,
+          "p90_ms": 577.0118750078836,
           "cost_usd": 0.000821772,
-          "mean_conf_right": 0.991,
+          "mean_conf_right": 0.99,
           "mean_conf_wrong": null
         },
         "clef": {
-          "correct": 30,
+          "correct": 29,
+          "of": 30,
+          "errors": 1,
+          "median_ms": 847.0021670073038,
+          "p90_ms": 1774.7651659883559,
+          "cost_usd": 0.00338256,
+          "mean_conf_right": 0.714,
+          "mean_conf_wrong": null
+        },
+        "flash": {
+          "correct": 27,
           "of": 30,
           "errors": 0,
-          "median_ms": 618.7161249981727,
-          "p90_ms": 780.0458330020774,
-          "cost_usd": 0.00350112,
-          "mean_conf_right": 0.702,
-          "mean_conf_wrong": null
+          "median_ms": 562.1801249944838,
+          "p90_ms": 1293.4809589933138,
+          "cost_usd": 0.00131292,
+          "mean_conf_right": 0.643,
+          "mean_conf_wrong": 0.429
         }
       },
       "rows": [
@@ -779,16 +1076,23 @@
           "gold": "c79",
           "jev": {
             "pick": "c79",
-            "conf": 1,
-            "ms": 290.27845899690874,
+            "conf": 0.99,
+            "ms": 436.1731669923756,
             "cost": 2.7384e-05,
             "in_tokens": 652
           },
           "clef": {
             "pick": "c79",
             "conf": 0.8952,
-            "ms": 361.123916998622,
+            "ms": 949.2531659925589,
             "cost": 0.00011664,
+            "in_tokens": 486
+          },
+          "flash": {
+            "pick": "c79",
+            "conf": 0.8744,
+            "ms": 399.7229999949923,
+            "cost": 4.374e-05,
             "in_tokens": 486
           }
         },
@@ -798,14 +1102,21 @@
           "clef": {
             "pick": "c32",
             "conf": 0.8314,
-            "ms": 627.2139579959912,
+            "ms": 1578.328582996619,
             "cost": 0.00011592,
+            "in_tokens": 483
+          },
+          "flash": {
+            "pick": "c32",
+            "conf": 0.8157,
+            "ms": 2443.7775410042377,
+            "cost": 4.347e-05,
             "in_tokens": 483
           },
           "jev": {
             "pick": "c32",
-            "conf": 0.99,
-            "ms": 317.16187500569504,
+            "conf": 1,
+            "ms": 409.67079100664705,
             "cost": 2.7636e-05,
             "in_tokens": 658
           }
@@ -813,17 +1124,24 @@
         {
           "item": "What is Rowan Systems best known for making?",
           "gold": "c94",
+          "flash": {
+            "pick": "c91",
+            "conf": 0.5885,
+            "ms": 1293.4809589933138,
+            "cost": 4.383e-05,
+            "in_tokens": 487
+          },
           "jev": {
             "pick": "c94",
             "conf": 1,
-            "ms": 266.00483400397934,
+            "ms": 454.7335420065792,
             "cost": 2.7468e-05,
             "in_tokens": 654
           },
           "clef": {
             "pick": "c94",
             "conf": 0.8493,
-            "ms": 489.9166660034098,
+            "ms": 847.0021670073038,
             "cost": 0.00011688,
             "in_tokens": 487
           }
@@ -831,55 +1149,76 @@
         {
           "item": "Who started Marrow Systems?",
           "gold": "c45",
+          "jev": {
+            "pick": "c45",
+            "conf": 0.97,
+            "ms": 414.3040830094833,
+            "cost": 2.7006e-05,
+            "in_tokens": 643
+          },
           "clef": {
             "pick": "c45",
             "conf": 0.707,
-            "ms": 705.6730420008535,
+            "ms": 2868.654959005653,
             "cost": 0.00011472,
             "in_tokens": 478
           },
-          "jev": {
+          "flash": {
             "pick": "c45",
-            "conf": 0.96,
-            "ms": 323.58445900899824,
-            "cost": 2.7006e-05,
-            "in_tokens": 643
+            "conf": 0.2167,
+            "ms": 394.54629200918134,
+            "cost": 4.302e-05,
+            "in_tokens": 478
           }
         },
         {
           "item": "How large is the workforce at Estrel Systems?",
           "gold": "c101",
-          "jev": {
-            "pick": "c101",
-            "conf": 1,
-            "ms": 311.46312499186024,
-            "cost": 2.6922e-05,
-            "in_tokens": 641
-          },
           "clef": {
             "pick": "c101",
             "conf": 0.6254,
-            "ms": 780.0458330020774,
+            "ms": 647.5757919979515,
             "cost": 0.00011568,
             "in_tokens": 482
+          },
+          "flash": {
+            "pick": "c101",
+            "conf": 0.6483,
+            "ms": 517.801915993914,
+            "cost": 4.338e-05,
+            "in_tokens": 482
+          },
+          "jev": {
+            "pick": "c101",
+            "conf": 1,
+            "ms": 403.8687080028467,
+            "cost": 2.6922e-05,
+            "in_tokens": 641
           }
         },
         {
           "item": "What does Lindqvist Systems sell?",
           "gold": "c88",
-          "clef": {
+          "flash": {
             "pick": "c88",
-            "conf": 0.9393,
-            "ms": 550.5179159954423,
-            "cost": 0.00011784,
+            "conf": 0.9267,
+            "ms": 608.6132080090465,
+            "cost": 4.419e-05,
             "in_tokens": 491
           },
           "jev": {
             "pick": "c88",
             "conf": 1,
-            "ms": 477.44704199431,
+            "ms": 1598.7646249996033,
             "cost": 2.7426e-05,
             "in_tokens": 653
+          },
+          "clef": {
+            "pick": "c88",
+            "conf": 0.9393,
+            "ms": 624.7397499973886,
+            "cost": 0.00011784,
+            "in_tokens": 491
           }
         },
         {
@@ -887,16 +1226,23 @@
           "gold": "c107",
           "jev": {
             "pick": "c107",
-            "conf": 0.97,
-            "ms": 445.11491600133013,
+            "conf": 0.96,
+            "ms": 397.68991600431036,
             "cost": 2.7552e-05,
             "in_tokens": 656
           },
           "clef": {
             "pick": "c107",
             "conf": 0.4847,
-            "ms": 711.5334999980405,
+            "ms": 1270.6175000057556,
             "cost": 0.0001188,
+            "in_tokens": 495
+          },
+          "flash": {
+            "pick": "c107",
+            "conf": 0.4956,
+            "ms": 1027.3782080039382,
+            "cost": 4.455e-05,
             "in_tokens": 495
           }
         },
@@ -904,16 +1250,19 @@
           "item": "Who started Irongate Systems?",
           "gold": "c117",
           "clef": {
-            "pick": "c117",
-            "conf": 0.3472,
-            "ms": 618.7161249981727,
-            "cost": 0.00011856,
+            "error": "https://openrouter.ai/api/alpha/decisions -> HTTP 429: b'{\"error\":{\"message\":\"HTTP 429: {\\\\\"errors\\\\\":[{\\\\\"message\\\\\":\\\\\"AiError: AiError: Capacity temporarily exceeded, please try again. (27647ce0-af09-4f33-b1a6-e15f6154d4d4)\\\\\",\\\\\"code\\\\\":3040}],\\\\\"success\\\\\":false,\\\\\"result\\\\\":{},\\\\\"messages\\\\\":["
+          },
+          "flash": {
+            "pick": "c114",
+            "conf": 0.1308,
+            "ms": 450.78262500464916,
+            "cost": 4.446e-05,
             "in_tokens": 494
           },
           "jev": {
             "pick": "c117",
             "conf": 0.99,
-            "ms": 367.9427090100944,
+            "ms": 522.3518330021761,
             "cost": 2.772e-05,
             "in_tokens": 660
           }
@@ -921,17 +1270,24 @@
         {
           "item": "How large is the workforce at Corvid Systems?",
           "gold": "c83",
+          "flash": {
+            "pick": "c83",
+            "conf": 0.839,
+            "ms": 379.05758299166337,
+            "cost": 4.455e-05,
+            "in_tokens": 495
+          },
           "jev": {
             "pick": "c83",
-            "conf": 0.98,
-            "ms": 366.82104200008325,
+            "conf": 0.97,
+            "ms": 421.93708299600985,
             "cost": 2.772e-05,
             "in_tokens": 660
           },
           "clef": {
             "pick": "c83",
             "conf": 0.778,
-            "ms": 578.2069169945316,
+            "ms": 737.4437910038978,
             "cost": 0.0001188,
             "in_tokens": 495
           }
@@ -939,55 +1295,76 @@
         {
           "item": "What does Dunmere Labs sell?",
           "gold": "c67",
-          "clef": {
-            "pick": "c67",
-            "conf": 0.9339,
-            "ms": 519.0879169967957,
-            "cost": 0.00011472,
-            "in_tokens": 478
-          },
           "jev": {
             "pick": "c67",
             "conf": 1,
-            "ms": 337.0017499983078,
+            "ms": 869.2359160049818,
             "cost": 2.709e-05,
             "in_tokens": 645
+          },
+          "clef": {
+            "pick": "c67",
+            "conf": 0.9339,
+            "ms": 793.2539580069715,
+            "cost": 0.00011472,
+            "in_tokens": 478
+          },
+          "flash": {
+            "pick": "c67",
+            "conf": 0.9219,
+            "ms": 507.51816599222366,
+            "cost": 4.302e-05,
+            "in_tokens": 478
           }
         },
         {
           "item": "Who started Norvale Systems?",
           "gold": "c3",
-          "jev": {
-            "pick": "c3",
-            "conf": 1,
-            "ms": 354.2498750030063,
-            "cost": 2.7216e-05,
-            "in_tokens": 648
-          },
           "clef": {
             "pick": "c3",
             "conf": 0.2837,
-            "ms": 914.2798750108341,
+            "ms": 681.2061669916147,
             "cost": 0.0001152,
             "in_tokens": 480
+          },
+          "flash": {
+            "pick": "c3",
+            "conf": 0.3466,
+            "ms": 384.0859170013573,
+            "cost": 4.32e-05,
+            "in_tokens": 480
+          },
+          "jev": {
+            "pick": "c3",
+            "conf": 1,
+            "ms": 336.43466600915417,
+            "cost": 2.7216e-05,
+            "in_tokens": 648
           }
         },
         {
           "item": "How large is the workforce at Fenwick Systems?",
           "gold": "c113",
-          "clef": {
+          "flash": {
             "pick": "c113",
-            "conf": 0.5566,
-            "ms": 350.0944170082221,
-            "cost": 0.00011736,
+            "conf": 0.7666,
+            "ms": 709.0040000039153,
+            "cost": 4.401e-05,
             "in_tokens": 489
           },
           "jev": {
             "pick": "c113",
             "conf": 1,
-            "ms": 376.41849998908583,
+            "ms": 457.0975829992676,
             "cost": 2.7258e-05,
             "in_tokens": 649
+          },
+          "clef": {
+            "pick": "c113",
+            "conf": 0.5566,
+            "ms": 786.9094169873279,
+            "cost": 0.00011736,
+            "in_tokens": 489
           }
         },
         {
@@ -996,15 +1373,22 @@
           "jev": {
             "pick": "c59",
             "conf": 1,
-            "ms": 291.0472500079777,
+            "ms": 494.0580830007093,
             "cost": 2.7552e-05,
             "in_tokens": 656
           },
           "clef": {
             "pick": "c59",
             "conf": 0.6175,
-            "ms": 523.4028340055374,
+            "ms": 960.3042079979787,
             "cost": 0.00011592,
+            "in_tokens": 483
+          },
+          "flash": {
+            "pick": "c59",
+            "conf": 0.7836,
+            "ms": 780.9580839966657,
+            "cost": 4.347e-05,
             "in_tokens": 483
           }
         },
@@ -1014,14 +1398,21 @@
           "clef": {
             "pick": "c99",
             "conf": 0.7676,
-            "ms": 474.5210419932846,
+            "ms": 650.9383340016939,
             "cost": 0.00011568,
+            "in_tokens": 482
+          },
+          "flash": {
+            "pick": "c99",
+            "conf": 0.8251,
+            "ms": 425.76800000097137,
+            "cost": 4.338e-05,
             "in_tokens": 482
           },
           "jev": {
             "pick": "c99",
             "conf": 0.99,
-            "ms": 357.5041250005597,
+            "ms": 381.1520000017481,
             "cost": 2.7048e-05,
             "in_tokens": 644
           }
@@ -1029,17 +1420,24 @@
         {
           "item": "What does Oberlin Labs sell?",
           "gold": "c31",
+          "flash": {
+            "pick": "c31",
+            "conf": 0.7874,
+            "ms": 691.8581670033745,
+            "cost": 4.329e-05,
+            "in_tokens": 481
+          },
           "jev": {
             "pick": "c31",
             "conf": 0.91,
-            "ms": 335.7762079976965,
+            "ms": 547.9597079975065,
             "cost": 2.7594e-05,
             "in_tokens": 657
           },
           "clef": {
             "pick": "c31",
             "conf": 0.893,
-            "ms": 822.0104579959298,
+            "ms": 789.6544160030317,
             "cost": 0.00011544,
             "in_tokens": 481
           }
@@ -1047,55 +1445,76 @@
         {
           "item": "When did Fenwick Systems come into existence?",
           "gold": "c111",
-          "clef": {
-            "pick": "c111",
-            "conf": 0.6156,
-            "ms": 732.8444169979775,
-            "cost": 0.00011784,
-            "in_tokens": 491
-          },
           "jev": {
             "pick": "c111",
             "conf": 0.99,
-            "ms": 314.6262499940349,
+            "ms": 370.1053339900682,
             "cost": 2.7384e-05,
             "in_tokens": 652
+          },
+          "clef": {
+            "pick": "c111",
+            "conf": 0.6156,
+            "ms": 1209.209375010687,
+            "cost": 0.00011784,
+            "in_tokens": 491
+          },
+          "flash": {
+            "pick": "c111",
+            "conf": 0.1532,
+            "ms": 409.08541600219905,
+            "cost": 4.419e-05,
+            "in_tokens": 491
           }
         },
         {
           "item": "When did Brightwater Labs come into existence?",
           "gold": "c6",
-          "jev": {
-            "pick": "c6",
-            "conf": 1,
-            "ms": 477.8516660007881,
-            "cost": 2.7636e-05,
-            "in_tokens": 658
-          },
           "clef": {
             "pick": "c6",
             "conf": 0.7785,
-            "ms": 643.6656669975491,
+            "ms": 1774.7651659883559,
             "cost": 0.00011544,
             "in_tokens": 481
+          },
+          "flash": {
+            "pick": "c6",
+            "conf": 0.4254,
+            "ms": 446.14300000830553,
+            "cost": 4.329e-05,
+            "in_tokens": 481
+          },
+          "jev": {
+            "pick": "c6",
+            "conf": 1,
+            "ms": 470.38829200027976,
+            "cost": 2.7636e-05,
+            "in_tokens": 658
           }
         },
         {
           "item": "How large is the workforce at Ashgrove Labs?",
           "gold": "c20",
-          "clef": {
+          "flash": {
             "pick": "c20",
-            "conf": 0.7312,
-            "ms": 363.46058300114237,
-            "cost": 0.00011616,
+            "conf": 0.796,
+            "ms": 639.617459004512,
+            "cost": 4.356e-05,
             "in_tokens": 484
           },
           "jev": {
             "pick": "c20",
             "conf": 1,
-            "ms": 363.11887500050943,
+            "ms": 478.75145899888594,
             "cost": 2.7132e-05,
             "in_tokens": 646
+          },
+          "clef": {
+            "pick": "c20",
+            "conf": 0.7312,
+            "ms": 873.8787500042235,
+            "cost": 0.00011616,
+            "in_tokens": 484
           }
         },
         {
@@ -1104,15 +1523,22 @@
           "jev": {
             "pick": "c14",
             "conf": 1,
-            "ms": 369.9275410035625,
+            "ms": 446.43362499482464,
             "cost": 2.772e-05,
             "in_tokens": 660
           },
           "clef": {
             "pick": "c14",
             "conf": 0.7196,
-            "ms": 537.9658330057282,
+            "ms": 651.6075410036137,
             "cost": 0.0001188,
+            "in_tokens": 495
+          },
+          "flash": {
+            "pick": "c14",
+            "conf": 0.7126,
+            "ms": 962.0715829951223,
+            "cost": 4.455e-05,
             "in_tokens": 495
           }
         },
@@ -1122,14 +1548,21 @@
           "clef": {
             "pick": "c47",
             "conf": 0.7212,
-            "ms": 522.7907090011286,
+            "ms": 829.987125005573,
             "cost": 0.00011496,
+            "in_tokens": 479
+          },
+          "flash": {
+            "pick": "c47",
+            "conf": 0.6521,
+            "ms": 1579.065999991144,
+            "cost": 4.311e-05,
             "in_tokens": 479
           },
           "jev": {
             "pick": "c47",
             "conf": 1,
-            "ms": 292.88049999740906,
+            "ms": 501.81891600368544,
             "cost": 2.7048e-05,
             "in_tokens": 644
           }
@@ -1137,17 +1570,24 @@
         {
           "item": "Who started Hollis Labs?",
           "gold": "c60",
+          "flash": {
+            "pick": "c60",
+            "conf": 0.1936,
+            "ms": 1083.1282090075547,
+            "cost": 4.302e-05,
+            "in_tokens": 478
+          },
           "jev": {
             "pick": "c60",
             "conf": 1,
-            "ms": 297.5636659975862,
+            "ms": 427.80187500466127,
             "cost": 2.6922e-05,
             "in_tokens": 641
           },
           "clef": {
             "pick": "c60",
             "conf": 0.6545,
-            "ms": 675.8795420028036,
+            "ms": 651.2526250007795,
             "cost": 0.00011472,
             "in_tokens": 478
           }
@@ -1155,55 +1595,76 @@
         {
           "item": "When did Galloway Systems come into existence?",
           "gold": "c105",
-          "clef": {
-            "pick": "c105",
-            "conf": 0.3728,
-            "ms": 719.1960000054678,
-            "cost": 0.00011856,
-            "in_tokens": 494
-          },
           "jev": {
             "pick": "c105",
             "conf": 1,
-            "ms": 317.84800000605173,
+            "ms": 592.1986250032205,
             "cost": 2.7636e-05,
             "in_tokens": 658
+          },
+          "clef": {
+            "pick": "c105",
+            "conf": 0.3728,
+            "ms": 653.17629200581,
+            "cost": 0.00011856,
+            "in_tokens": 494
+          },
+          "flash": {
+            "pick": "c105",
+            "conf": 0.3012,
+            "ms": 325.3111250087386,
+            "cost": 4.446e-05,
+            "in_tokens": 494
           }
         },
         {
           "item": "When did Selby Labs come into existence?",
           "gold": "c48",
-          "jev": {
-            "pick": "c48",
-            "conf": 1,
-            "ms": 273.14358299190644,
-            "cost": 2.793e-05,
-            "in_tokens": 665
-          },
           "clef": {
             "pick": "c48",
             "conf": 0.5873,
-            "ms": 690.8750000002328,
+            "ms": 1040.9745420038234,
             "cost": 0.00011952,
             "in_tokens": 498
+          },
+          "flash": {
+            "pick": "c48",
+            "conf": 0.3195,
+            "ms": 866.1419169948203,
+            "cost": 4.482e-05,
+            "in_tokens": 498
+          },
+          "jev": {
+            "pick": "c48",
+            "conf": 1,
+            "ms": 380.63595799030736,
+            "cost": 2.793e-05,
+            "in_tokens": 665
           }
         },
         {
           "item": "Who started Dunmere Systems?",
           "gold": "c69",
-          "clef": {
+          "flash": {
             "pick": "c69",
-            "conf": 0.7391,
-            "ms": 626.5367500018328,
-            "cost": 0.00011592,
+            "conf": 0.7068,
+            "ms": 536.0424169921316,
+            "cost": 4.347e-05,
             "in_tokens": 483
           },
           "jev": {
             "pick": "c69",
             "conf": 0.99,
-            "ms": 298.8984999974491,
+            "ms": 396.8715829978464,
             "cost": 2.73e-05,
             "in_tokens": 650
+          },
+          "clef": {
+            "pick": "c69",
+            "conf": 0.7391,
+            "ms": 852.6568329980364,
+            "cost": 0.00011592,
+            "in_tokens": 483
           }
         },
         {
@@ -1211,16 +1672,23 @@
           "gold": "c13",
           "jev": {
             "pick": "c13",
-            "conf": 0.97,
-            "ms": 288.1444590020692,
+            "conf": 0.95,
+            "ms": 577.0118750078836,
             "cost": 2.7342e-05,
             "in_tokens": 651
           },
           "clef": {
             "pick": "c13",
             "conf": 0.861,
-            "ms": 929.1533329960657,
+            "ms": 120168.8041669986,
             "cost": 0.00011736,
+            "in_tokens": 489
+          },
+          "flash": {
+            "pick": "c13",
+            "conf": 0.7875,
+            "ms": 490.9878330072388,
+            "cost": 4.401e-05,
             "in_tokens": 489
           }
         },
@@ -1230,14 +1698,21 @@
           "clef": {
             "pick": "c73",
             "conf": 0.9528,
-            "ms": 703.5221670084866,
+            "ms": 690.6582500087097,
             "cost": 0.0001176,
+            "in_tokens": 490
+          },
+          "flash": {
+            "pick": "c73",
+            "conf": 0.9218,
+            "ms": 1451.9069579982897,
+            "cost": 4.41e-05,
             "in_tokens": 490
           },
           "jev": {
             "pick": "c73",
             "conf": 1,
-            "ms": 275.1258750067791,
+            "ms": 466.6455000115093,
             "cost": 2.7678e-05,
             "in_tokens": 659
           }
@@ -1245,17 +1720,24 @@
         {
           "item": "How large is the workforce at Estrel Labs?",
           "gold": "c98",
+          "flash": {
+            "pick": "c101",
+            "conf": 0.5678,
+            "ms": 713.5668749979232,
+            "cost": 4.383e-05,
+            "in_tokens": 487
+          },
           "jev": {
             "pick": "c98",
             "conf": 1,
-            "ms": 275.40887499344535,
+            "ms": 512.0669169991743,
             "cost": 2.7258e-05,
             "in_tokens": 649
           },
           "clef": {
             "pick": "c98",
             "conf": 0.3495,
-            "ms": 353.8432089990238,
+            "ms": 931.385208008578,
             "cost": 0.00011688,
             "in_tokens": 487
           }
@@ -1263,55 +1745,76 @@
         {
           "item": "What does Norvale Labs sell?",
           "gold": "c1",
-          "clef": {
-            "pick": "c1",
-            "conf": 0.8904,
-            "ms": 448.14112498715986,
-            "cost": 0.0001164,
-            "in_tokens": 485
-          },
           "jev": {
             "pick": "c1",
             "conf": 1,
-            "ms": 306.9722920045024,
+            "ms": 528.3858749899082,
             "cost": 2.7468e-05,
             "in_tokens": 654
+          },
+          "clef": {
+            "pick": "c1",
+            "conf": 0.8904,
+            "ms": 1979.4672919961158,
+            "cost": 0.0001164,
+            "in_tokens": 485
+          },
+          "flash": {
+            "pick": "c1",
+            "conf": 0.8391,
+            "ms": 506.4731250022305,
+            "cost": 4.365e-05,
+            "in_tokens": 485
           }
         },
         {
           "item": "When did Tamsin Systems come into existence?",
           "gold": "c27",
-          "jev": {
-            "pick": "c27",
-            "conf": 1,
-            "ms": 327.6901670033112,
-            "cost": 2.7342e-05,
-            "in_tokens": 651
-          },
           "clef": {
             "pick": "c27",
             "conf": 0.6854,
-            "ms": 657.7641250041779,
+            "ms": 776.8237919954117,
             "cost": 0.00011712,
             "in_tokens": 488
+          },
+          "flash": {
+            "pick": "c27",
+            "conf": 0.4032,
+            "ms": 842.3224589932943,
+            "cost": 4.392e-05,
+            "in_tokens": 488
+          },
+          "jev": {
+            "pick": "c27",
+            "conf": 1,
+            "ms": 481.9991249969462,
+            "cost": 2.7342e-05,
+            "in_tokens": 651
           }
         },
         {
           "item": "What does Selby Systems sell?",
           "gold": "c52",
-          "clef": {
+          "flash": {
             "pick": "c52",
-            "conf": 0.8785,
-            "ms": 506.9315830041887,
-            "cost": 0.00011568,
+            "conf": 0.9091,
+            "ms": 562.1801249944838,
+            "cost": 4.338e-05,
             "in_tokens": 482
           },
           "jev": {
             "pick": "c52",
             "conf": 1,
-            "ms": 319.8442499997327,
+            "ms": 392.9570840118686,
             "cost": 2.7384e-05,
             "in_tokens": 652
+          },
+          "clef": {
+            "pick": "c52",
+            "conf": 0.8785,
+            "ms": 1202.395542000886,
+            "cost": 0.00011568,
+            "in_tokens": 482
           }
         }
       ]
@@ -1322,21 +1825,31 @@
           "correct": 12,
           "of": 12,
           "errors": 0,
-          "median_ms": 334.52258400211576,
-          "p90_ms": 366.5618329978315,
+          "median_ms": 554.8485420003999,
+          "p90_ms": 797.7053749928018,
           "cost_usd": 0.002281398,
-          "mean_conf_right": 0.973,
+          "mean_conf_right": 0.972,
           "mean_conf_wrong": null
         },
         "clef": {
-          "correct": 12,
+          "correct": 11,
+          "of": 12,
+          "errors": 1,
+          "median_ms": 1892.8023330081487,
+          "p90_ms": 3347.1159170003375,
+          "cost_usd": 0.0125388,
+          "mean_conf_right": 0.409,
+          "mean_conf_wrong": null
+        },
+        "flash": {
+          "correct": 10,
           "of": 12,
           "errors": 0,
-          "median_ms": 1148.1977500079665,
-          "p90_ms": 1472.9091250046622,
-          "cost_usd": 0.013678319999999999,
-          "mean_conf_right": 0.43,
-          "mean_conf_wrong": null
+          "median_ms": 1197.7045829989947,
+          "p90_ms": 1909.0428329946008,
+          "cost_usd": 0.00512937,
+          "mean_conf_right": 0.186,
+          "mean_conf_wrong": 0.224
         }
       },
       "rows": [
@@ -1346,15 +1859,22 @@
           "jev": {
             "pick": "c79",
             "conf": 0.99,
-            "ms": 304.5877499971539,
+            "ms": 411.45987500203773,
             "cost": 0.00019005,
             "in_tokens": 4525
           },
           "clef": {
             "pick": "c79",
             "conf": 0.6084,
-            "ms": 986.9007089873776,
+            "ms": 2546.3337090041023,
             "cost": 0.00113952,
+            "in_tokens": 4748
+          },
+          "flash": {
+            "pick": "c79",
+            "conf": 0.2485,
+            "ms": 1714.920667000115,
+            "cost": 0.00042732,
             "in_tokens": 4748
           }
         },
@@ -1364,14 +1884,21 @@
           "clef": {
             "pick": "c32",
             "conf": 0.5203,
-            "ms": 1092.6131250016624,
+            "ms": 1626.7295840079896,
             "cost": 0.00114024,
+            "in_tokens": 4751
+          },
+          "flash": {
+            "pick": "c32",
+            "conf": 0.4604,
+            "ms": 1273.2676659943536,
+            "cost": 0.00042759,
             "in_tokens": 4751
           },
           "jev": {
             "pick": "c32",
-            "conf": 1,
-            "ms": 311.8235000001732,
+            "conf": 0.99,
+            "ms": 682.2751250001602,
             "cost": 0.000190218,
             "in_tokens": 4529
           }
@@ -1379,17 +1906,24 @@
         {
           "item": "What does Rowan Systems sell?",
           "gold": "c94",
+          "flash": {
+            "pick": "c4",
+            "conf": 0.2808,
+            "ms": 1157.8673340118257,
+            "cost": 0.00042732,
+            "in_tokens": 4748
+          },
           "jev": {
             "pick": "c94",
-            "conf": 0.97,
-            "ms": 568.3403750008438,
+            "conf": 0.98,
+            "ms": 543.2313330093166,
             "cost": 0.00019005,
             "in_tokens": 4525
           },
           "clef": {
             "pick": "c94",
             "conf": 0.6421,
-            "ms": 1472.9091250046622,
+            "ms": 1892.8023330081487,
             "cost": 0.00113952,
             "in_tokens": 4748
           }
@@ -1397,55 +1931,76 @@
         {
           "item": "Who started Marrow Systems?",
           "gold": "c45",
-          "clef": {
-            "pick": "c45",
-            "conf": 0.3372,
-            "ms": 1252.3630829964532,
-            "cost": 0.00113928,
-            "in_tokens": 4747
-          },
           "jev": {
             "pick": "c45",
             "conf": 0.99,
-            "ms": 334.52258400211576,
+            "ms": 438.14320900128223,
             "cost": 0.000190008,
             "in_tokens": 4524
+          },
+          "clef": {
+            "pick": "c45",
+            "conf": 0.3372,
+            "ms": 1332.3206670029322,
+            "cost": 0.00113928,
+            "in_tokens": 4747
+          },
+          "flash": {
+            "pick": "c45",
+            "conf": 0.0583,
+            "ms": 1197.7045829989947,
+            "cost": 0.00042723,
+            "in_tokens": 4747
           }
         },
         {
           "item": "Where is Estrel Systems's main office?",
           "gold": "c101",
-          "jev": {
-            "pick": "c101",
-            "conf": 0.95,
-            "ms": 347.95437499997206,
-            "cost": 0.000190134,
-            "in_tokens": 4527
-          },
           "clef": {
             "pick": "c101",
             "conf": 0.1496,
-            "ms": 935.2622500009602,
+            "ms": 2069.621709000785,
             "cost": 0.00114,
             "in_tokens": 4750
+          },
+          "flash": {
+            "pick": "c101",
+            "conf": 0.1237,
+            "ms": 792.4115829955554,
+            "cost": 0.0004275,
+            "in_tokens": 4750
+          },
+          "jev": {
+            "pick": "c101",
+            "conf": 0.9,
+            "ms": 607.8788749873638,
+            "cost": 0.000190134,
+            "in_tokens": 4527
           }
         },
         {
           "item": "What is Lindqvist Systems best known for making?",
           "gold": "c88",
-          "clef": {
+          "flash": {
             "pick": "c88",
-            "conf": 0.6727,
-            "ms": 1148.1977500079665,
-            "cost": 0.00114048,
+            "conf": 0.1311,
+            "ms": 1001.6259160038317,
+            "cost": 0.00042768,
             "in_tokens": 4752
           },
           "jev": {
             "pick": "c88",
-            "conf": 0.94,
-            "ms": 301.4489589986624,
+            "conf": 0.95,
+            "ms": 554.8485420003999,
             "cost": 0.000190218,
             "in_tokens": 4529
+          },
+          "clef": {
+            "pick": "c88",
+            "conf": 0.6727,
+            "ms": 1953.6531669873511,
+            "cost": 0.00114048,
+            "in_tokens": 4752
           }
         },
         {
@@ -1454,15 +2009,22 @@
           "jev": {
             "pick": "c107",
             "conf": 0.97,
-            "ms": 366.5618329978315,
+            "ms": 797.7053749928018,
             "cost": 0.000190218,
             "in_tokens": 4529
           },
           "clef": {
             "pick": "c107",
             "conf": 0.1396,
-            "ms": 1201.6311659972416,
+            "ms": 3347.1159170003375,
             "cost": 0.00114048,
+            "in_tokens": 4752
+          },
+          "flash": {
+            "pick": "c104",
+            "conf": 0.168,
+            "ms": 1909.0428329946008,
+            "cost": 0.00042768,
             "in_tokens": 4752
           }
         },
@@ -1472,14 +2034,21 @@
           "clef": {
             "pick": "c83",
             "conf": 0.4577,
-            "ms": 1006.0737080057152,
+            "ms": 35855.03558300843,
             "cost": 0.00114,
+            "in_tokens": 4750
+          },
+          "flash": {
+            "pick": "c83",
+            "conf": 0.0432,
+            "ms": 1162.5423749937909,
+            "cost": 0.0004275,
             "in_tokens": 4750
           },
           "jev": {
             "pick": "c83",
-            "conf": 0.96,
-            "ms": 325.2448330022162,
+            "conf": 0.97,
+            "ms": 1120.9340839996003,
             "cost": 0.000190134,
             "in_tokens": 4527
           }
@@ -1487,17 +2056,24 @@
         {
           "item": "What does Irongate Systems sell?",
           "gold": "c118",
+          "flash": {
+            "pick": "c118",
+            "conf": 0.1871,
+            "ms": 7854.421333002392,
+            "cost": 0.00042741,
+            "in_tokens": 4749
+          },
           "jev": {
             "pick": "c118",
             "conf": 0.95,
-            "ms": 364.36558299465105,
+            "ms": 448.652334001963,
             "cost": 0.000190092,
             "in_tokens": 4526
           },
           "clef": {
             "pick": "c118",
             "conf": 0.3254,
-            "ms": 1155.5027499998687,
+            "ms": 1480.1229580043582,
             "cost": 0.00113976,
             "in_tokens": 4749
           }
@@ -1505,55 +2081,72 @@
         {
           "item": "What does Dunmere Labs sell?",
           "gold": "c67",
-          "clef": {
-            "pick": "c67",
-            "conf": 0.6622,
-            "ms": 1101.3212499965448,
-            "cost": 0.00113952,
-            "in_tokens": 4748
-          },
           "jev": {
             "pick": "c67",
             "conf": 0.99,
-            "ms": 340.53358300297987,
+            "ms": 481.76745799719356,
             "cost": 0.00019005,
             "in_tokens": 4525
+          },
+          "clef": {
+            "error": "https://openrouter.ai/api/alpha/decisions -> HTTP 429: b'{\"error\":{\"message\":\"HTTP 429: {\\\\\"errors\\\\\":[{\\\\\"message\\\\\":\\\\\"AiError: AiError: Capacity temporarily exceeded, please try again. (1406183e-dc6e-44d7-99a1-6a36c47b3ecc)\\\\\",\\\\\"code\\\\\":3040}],\\\\\"success\\\\\":false,\\\\\"result\\\\\":{},\\\\\"messages\\\\\":["
+          },
+          "flash": {
+            "pick": "c67",
+            "conf": 0.4129,
+            "ms": 882.9077080008574,
+            "cost": 0.00042732,
+            "in_tokens": 4748
           }
         },
         {
           "item": "Who started Norvale Systems?",
           "gold": "c3",
-          "jev": {
-            "pick": "c3",
-            "conf": 0.99,
-            "ms": 324.0292499976931,
-            "cost": 0.000190008,
-            "in_tokens": 4524
-          },
           "clef": {
             "pick": "c3",
             "conf": 0.4489,
-            "ms": 1013.9747080102097,
+            "ms": 1755.4492090130225,
             "cost": 0.00113928,
             "in_tokens": 4747
+          },
+          "flash": {
+            "pick": "c3",
+            "conf": 0.1611,
+            "ms": 915.3425419935957,
+            "cost": 0.00042723,
+            "in_tokens": 4747
+          },
+          "jev": {
+            "pick": "c3",
+            "conf": 0.99,
+            "ms": 473.79504100535996,
+            "cost": 0.000190008,
+            "in_tokens": 4524
           }
         },
         {
           "item": "How large is the workforce at Vantor Systems?",
           "gold": "c59",
-          "clef": {
+          "flash": {
             "pick": "c59",
-            "conf": 0.1943,
-            "ms": 1638.0832499999087,
-            "cost": 0.00114024,
+            "conf": 0.0296,
+            "ms": 1269.3610409914982,
+            "cost": 0.00042759,
             "in_tokens": 4751
           },
           "jev": {
             "pick": "c59",
-            "conf": 0.98,
-            "ms": 324.2837080033496,
+            "conf": 0.99,
+            "ms": 556.7754169896943,
             "cost": 0.000190218,
             "in_tokens": 4529
+          },
+          "clef": {
+            "pick": "c59",
+            "conf": 0.1943,
+            "ms": 1508.2607499934966,
+            "cost": 0.00114024,
+            "in_tokens": 4751
           }
         }
       ]

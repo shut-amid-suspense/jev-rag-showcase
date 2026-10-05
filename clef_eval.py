@@ -1,7 +1,7 @@
-"""Cloudflare Clef vs. Jev on the Decisions API — accuracy and speed, nothing else.
+"""Cloudflare Clef and Clef-flash vs. Jev on the Decisions API — accuracy and speed.
 
 Both models take the same request on /api/alpha/decisions, so every item is sent
-to both, interleaved (Jev, Clef, Jev, Clef...) so network drift hits both alike.
+to every model, rotating who goes first, so network drift hits all alike.
 The first call to each model is a warm-up and is not counted.
 
 Tasks
@@ -21,7 +21,8 @@ import time
 
 import poc
 
-MODELS = {"jev": "~typesafe/jev-latest", "clef": "cloudflare/clef"}
+MODELS = {"jev": "~typesafe/jev-latest", "clef": "cloudflare/clef",
+          "flash": "cloudflare/clef-flash"}
 
 INTENTS = {
     "billing": "Charges, invoices, refunds, payment methods, pricing",
@@ -134,7 +135,8 @@ def run_task(name, key):
         decide(model, cases[0]["state"], qname, instructions, cases[0]["criteria"], key)
     for i, c in enumerate(cases):
         row = {"item": c["label"], "gold": c["gold"]}
-        order = list(MODELS.items()) if i % 2 == 0 else list(MODELS.items())[::-1]
+        items = list(MODELS.items())
+        order = items[i % len(items):] + items[:i % len(items)]  # rotate who goes first
         for short, model in order:
             try:
                 pick, conf, ms, usage = decide(model, c["state"], qname, instructions,
