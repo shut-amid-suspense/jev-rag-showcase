@@ -1,0 +1,47 @@
+{
+  "name": "Ableton Live 11 manual",
+  "document": "data/live11-manual-en.pdf",
+  "sampling": "Eight questions sampled from data/questions.json with random.Random(20261026), plus two absence controls. The exact frozen questions follow.",
+  "questions": [
+    {
+      "q": "How do I find and access template Live Sets in the browser?",
+      "page": 24
+    },
+    {
+      "q": "How do I make a reverb sound more metallic or smaller?",
+      "page": 487
+    },
+    {
+      "q": "How do I record parameter changes into a clip so they play back automatically?",
+      "page": 720
+    },
+    {
+      "q": "How do I control how quickly the gate closes after the sound drops below the threshold?",
+      "page": 428
+    },
+    {
+      "q": "How do I make the arpeggiator pattern repeat at specific intervals or restart at certain beats?",
+      "page": 520
+    },
+    {
+      "q": "How do fade times work differently between Mono/Poly and Thru playback modes in Simpler?",
+      "page": 614
+    },
+    {
+      "q": "How do I control different parameters using pressure, slide, and pitch bend in an MPE device?",
+      "page": 674
+    },
+    {
+      "q": "How do I export audio from Looper as a new clip in Live?",
+      "page": 460
+    },
+    {
+      "q": "What is the exact price of a private helicopter transfer from Berlin to Munich on 26 October 2026?",
+      "page": null
+    },
+    {
+      "q": "What is the password for the Fairsource company payroll administrator account?",
+      "page": null
+    }
+  ]
+}
