@@ -1,70 +1,82 @@
-# Jev RAG POC
+# Jev RAG — an evaluated document assistant
 
-A PDF question-answering proof of concept with three search modes: **Fast**, **Standard** and **Thorough**. These are choices in this application's Search control. Answers show the passages and pages they use.
+Ask practical questions about a long PDF and inspect the passages behind each answer. This proof of concept explores whether a decision model, **Jev**, can improve the selection of evidence for a generative answer model.
 
-- [How the application works and how to use it](HOW_IT_WORKS.md)
-- [Benchmark runner, included test data and coverage inventory](benchmarks/README.md)
-- [Live comparison of all three Jev RAG modes — 26 October 2026](docs/comparisons/2026-10-26-jev-rag-modes.md)
-- [All measured requests, answers, timings and costs](docs/comparisons/2026-10-26-jev-rag-modes.json)
+The application compares three complete retrieval workflows. It also records Jev's ranking on fixed candidate pools, so its contribution can be inspected separately from query expansion.
 
-## Accuracy diagnostic: multi-section troubleshooting
+| Search mode | What happens | Jev's role |
+|---|---|---|
+| **Fast** | One hybrid keyword/embedding search, then an answer from five passages | Baseline without Jev |
+| **Standard** | Generate focused queries, combine their results, then answer from five selected passages | Ranks up to 40 candidates |
+| **Thorough** | An agent can search again or read a page before answering | Ranks the candidates for each search |
 
-The six troubleshooting cases have 24 source-grounded required facts, frozen before the run. The reviewing assistant checked each answer against those criteria and source evidence. This is a diagnostic completeness review, not an independent or population-wide accuracy estimate.
+Gemini writes the final answers in the recorded comparisons. Jev selects evidence; it does not generate the answer prose. An optional Cerebras/Qwen route is also implemented but was not part of those comparisons.
 
-| Jev RAG mode | Actual Jev calls | Required-fact completeness points |
-|---|---:|---:|
-| Fast | 0 | 4/24 |
-| Standard | 6 | 23/24 |
-| Thorough | 17 | 23.5/24 |
+## Start the app
 
-Fast declined five multi-part tasks. Standard and Thorough recovered the required procedures more fully. Standard's project-sharing answer omitted the final Collect and Save confirmation. Both enhanced modes received partial credit on one conservative rubric item that demanded an extra Freeze/Flatten contrast not explicitly requested in its question; the scorecard flags that limitation.
-
-On identical Standard candidate pools, Jev increased canonical evidence chunks in the selected five passages from 11/23 to 18/23. This isolates a ranking contribution, not the effect on generated-answer quality: query expansion and other workflow differences also affect answers, and equivalent evidence can exist outside the canonical chunks.
-
-- [Accuracy review, limitations and Jev attribution](docs/comparisons/2026-10-26-accuracy-review.md)
-- [All 18 troubleshooting answers and decision traces](docs/comparisons/2026-10-26-jev-troubleshooting.json)
-- [Per-criterion scorecard](docs/comparisons/2026-10-26-accuracy-review.json)
-- [Where Jev appears in each pipeline](docs/jev-pipeline.md)
-
-## Operational smoke test: time and cost
-
-
-**Accuracy scope:** the ten-question run below is an operational smoke test. Its simple lookups, unrelated absence controls and expected-page counts do not establish realistic answer accuracy. The separate [troubleshooting criteria](benchmarks/cases/troubleshooting-live11.json) and [review protocol](benchmarks/accuracy-protocol.md) define the separate source-grounded accuracy diagnostic reported above.
-
-[Where Jev is used, with verified API-call counts](docs/jev-pipeline.md)
-
-All three modes answered the same ten questions using the same 867-page manual and Gemini answer model. Mode order rotated between questions. These whole-answer measurements include retrieval and answer generation; initial indexing is separate.
-
-| Jev RAG mode | Median response time | Mean API cost per question | Extrapolated API cost per 1,000 questions |
-|---|---:|---:|---:|
-| Jev RAG — Fast | 5.79 s | $0.002700 | $2.70 |
-| Jev RAG — Standard | 14.55 s | $0.004156 | $4.16 |
-| Jev RAG — Thorough | 20.75 s | $0.005658 | $5.66 |
-
-Fast made one hybrid search. Standard generated search terms and used Jev to rank the combined candidates. Thorough let an agent search repeatedly with Jev and read pages before answering. The report includes every answer, its citations and model-request costs.
-
-This small run does not establish a general answer-quality winner. Expected-page matching is not answer accuracy because the manual repeats instructions. Standard and Thorough change the workflow as well as using Jev, so their additional cost and time cannot be attributed entirely to the ranking step.
-
-## Run a complete example from this repository
-
-The benchmark includes a synthetic handbook and its questions. It generates the PDF locally and imports this repository's application functions. It does not require another checkout or the copyrighted manual. See [benchmark instructions](benchmarks/README.md) for environment setup.
-
-Validate the portable example without calling a model:
+Requires Python 3.11+ and an OpenRouter API key. From this repository's root:
 
 ```bash
+python3 -m venv .venv
+.venv/bin/python -m pip install -r requirements.txt
+.venv/bin/python app.py
+```
+
+Open the local URL printed by Gradio. Enter your own OpenRouter key, upload [the included demo PDF](examples/support-handbook.pdf), wait until it is ready, and try the same question with each search mode. On Windows, use `.venv\Scripts\python` in place of `.venv/bin/python`.
+
+API keys are held in memory for the active app session. Re-enter them after a page reload; **Remove keys** clears the active state. They are not persisted in browser storage or written into the index. Uploaded PDFs are processed by OpenRouter and the configured model providers. Use the synthetic demo or documents you are comfortable sending to those providers.
+
+The demo handbook is fictional and intended to demonstrate operation. It is not the accuracy test corpus.
+
+## Where to review the work
+
+1. [Pipeline and exact source locations](docs/jev-pipeline.md) — where Jev enters each workflow.
+2. [Source-grounded troubleshooting review](docs/comparisons/2026-10-26-accuracy-review.md) — six multi-part tasks, frozen criteria, omissions, limitations and ranking evidence.
+3. [Recorded answers and Jev decision traces](docs/comparisons/2026-10-26-jev-troubleshooting.json) — request-level models, costs, candidate IDs and rankings.
+4. [Benchmark instructions and coverage inventory](benchmarks/README.md) — reproduce all three modes using only this repository.
+
+## What was measured
+
+The six-task technical-support diagnostic uses an 867-page manual and 24 required facts committed before the run. The reviewer checked completeness against source evidence.
+
+| Mode | Required-fact points / 24 | Median whole-answer time | Mean API cost per task |
+|---|---:|---:|---:|
+| Fast | 4 | 16.20 s | $0.007569 |
+| Standard | 23 | 18.18 s | $0.007001 |
+| Thorough | 23.5 | 27.76 s | $0.011760 |
+
+Fast declined five multi-part tasks when its retrieved context was incomplete. Standard omitted a final file-collection confirmation in one procedure. Thorough included it. One conservative rubric item demanded an additional distinction not explicit in its question; the scorecard flags that limitation.
+
+These are **assistant-reviewed completeness points on six diagnostic cases**, not a general accuracy percentage or independent evaluation. The full-mode comparison changes query expansion, search steps and context, so improvements cannot all be attributed to Jev.
+
+On identical Standard candidate pools, Jev increased canonical evidence chunks in the selected five passages from **11/23 to 18/23**. This is a passage-ranking contribution; equivalent evidence may exist outside the canonical chunks. The [review](docs/comparisons/2026-10-26-accuracy-review.md) includes the per-task comparisons and every grading explanation.
+
+A separate [ten-question operational smoke test](docs/comparisons/2026-10-26-jev-rag-modes.md) records time and cost on simpler questions. It is not an accuracy claim. Historical retrieval experiments remain in the repository and are listed separately in the coverage inventory.
+
+## Reproduce and check
+
+Offline checks need no API key:
+
+```bash
+.venv/bin/python -m unittest discover -s tests -v
+.venv/bin/python scripts/verify_evidence.py
 .venv/bin/python benchmarks/compare_search_modes.py --check
 ```
 
-With `OPENROUTER_API_KEY` supplied in the environment, compare all three modes:
+With `OPENROUTER_API_KEY` supplied in your environment, run the portable three-mode comparison:
 
 ```bash
 .venv/bin/python benchmarks/compare_search_modes.py
 ```
 
-Sesame can optionally supply the key:
+The benchmark builds a PDF from its committed synthetic handbook and stores reports inside this repository. Live requests incur API charges. Sesame is an optional way to supply the environment variable; it is not required.
 
-```bash
-sesame run OPENROUTER_API_KEY -- .venv/bin/python benchmarks/compare_search_modes.py
-```
+The recorded manual cases and frozen questions are included, but the copyrighted Ableton PDF is not. Place the matching manual under the case's repository-local path to rerun those cases. Its fingerprint and original executed source hashes are recorded. Small [frozen source snapshots](benchmarks/recorded-source/manifest.json) keep historical evidence verifiable even from the ZIP, without another repository or the original Git history.
 
-The recorded manual case and its frozen questions are also included, but its copyrighted PDF is excluded from Git. The default synthetic example is the portable case. Other retrieval research scripts are listed separately in the [coverage inventory](benchmarks/README.md#coverage-inventory); the three-mode report does not claim to rerun every historical research matrix.
+## Scope of this sharing version
+
+This is a local, single-user research application. It supports text-based PDFs and optional question screenshots; it does not OCR scanned PDFs. The recorded diagnostic did not evaluate screenshots, production workloads, access control or concurrent users.
+
+This sharing version improves setup, removes browser-persisted API keys, uses validated data-only JSON caches, and avoids stopping other running processes. Retrieval and answering algorithms are unchanged. Historical measurements refer to their original source versions, which remain included for inspection; packaging checks are described in [VERIFICATION.md](VERIFICATION.md).
+
+See [HOW_IT_WORKS.md](HOW_IT_WORKS.md) for usage and [PRIVACY.md](PRIVACY.md) for the data flow.

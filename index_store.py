@@ -1,72 +1,107 @@
-"""Saved indexes: a PDF is indexed once per content, and stays indexed across restarts.
+"""Content-addressed PDF indexes stored as data-only JSON, never pickle.
 
-An index is keyed by the SHA-256 of the PDF's bytes, so the same file is found again
-whatever it is called, and a changed file (different bytes) is indexed fresh. Each
-index is one file in data/indexes/ (git-ignored): the passages and their unit
-embedding vectors. The keyword index is rebuilt from the passages when loading.
-Only the MAX_SAVED most recently used indexes are kept.
-
-The files are pickles written by this app into its own folder; nothing else writes there.
+Only the most recently used indexes are retained. Credentials are not part of
+an index. The sharing copy starts with no indexes or uploaded documents.
 """
-
-import array
 import hashlib
+import json
+import math
 import os
-import pickle
+import re
+import tempfile
 
-from poc import BM25
+from poc import BM25, EMBED_MODEL
 
-# ASK_PDF_INDEX_DIR exists only so a test run against a fake service keeps its (fake)
-# indexes apart from the real ones.
-DIR = os.environ.get("ASK_PDF_INDEX_DIR") or os.path.join(
-    os.path.dirname(os.path.abspath(__file__)), "data", "indexes")
+DIR = os.environ.get('ASK_PDF_INDEX_DIR') or os.path.join(
+    os.path.dirname(os.path.abspath(__file__)), 'data', 'indexes')
 MAX_SAVED = 10
-VERSION = 1  # bump when the chunking or the embedding model changes: old files are ignored
+VERSION = 2
 
 
 def fingerprint(path):
-    """SHA-256 of the file's bytes."""
-    h = hashlib.sha256()
-    with open(path, "rb") as f:
-        for block in iter(lambda: f.read(1 << 20), b""):
-            h.update(block)
-    return h.hexdigest()
+    digest = hashlib.sha256()
+    with open(path, 'rb') as source:
+        for block in iter(lambda: source.read(1 << 20), b''):
+            digest.update(block)
+    return digest.hexdigest()
 
 
 def _path(fp):
-    return os.path.join(DIR, f"{fp}.pkl")
+    if not isinstance(fp, str) or not re.fullmatch(r'[0-9a-f]{64}', fp):
+        raise ValueError('Invalid PDF fingerprint')
+    return os.path.join(DIR, fp + '.json')
+
+
+def _valid(record):
+    if not isinstance(record, dict) or record.get('version') != VERSION:
+        return False
+    if record.get('embedding_model') != EMBED_MODEL:
+        return False
+    if not isinstance(record.get('name'), str) or type(record.get('pages')) is not int or record['pages'] < 1:
+        return False
+    chunks, vectors = record.get('chunks'), record.get('uvecs')
+    if not isinstance(chunks, list) or not chunks or not isinstance(vectors, list) or len(vectors) != len(chunks):
+        return False
+    ids = set()
+    dim = None
+    for chunk, vector in zip(chunks, vectors):
+        if not isinstance(chunk, dict) or not all(isinstance(chunk.get(key), str) for key in ['id', 'text', 'label', 'section']):
+            return False
+        if not chunk['text'].strip() or chunk['id'] in ids or type(chunk.get('page')) is not int or not 1 <= chunk['page'] <= record['pages']:
+            return False
+        ids.add(chunk['id'])
+        if not isinstance(vector, list) or not vector:
+            return False
+        if dim is None:
+            dim = len(vector)
+        try:
+            finite = all(type(value) in (int, float) and math.isfinite(value) for value in vector)
+        except OverflowError:
+            return False
+        if len(vector) != dim or not finite:
+            return False
+    return True
 
 
 def save(fp, index):
-    """Write the index (atomically), then drop the least recently used ones over MAX_SAVED."""
-    os.makedirs(DIR, exist_ok=True)
-    vecs = index["uvecs"]
-    record = {"version": VERSION, "name": index["name"], "pages": index["pages"],
-              "chunks": index["chunks"], "dim": len(vecs[0]) if vecs else 0,
-              "vecs": array.array("d", (x for v in vecs for x in v)).tobytes()}
-    tmp = _path(fp) + ".tmp"
-    with open(tmp, "wb") as f:
-        pickle.dump(record, f, protocol=pickle.HIGHEST_PROTOCOL)
-    os.replace(tmp, _path(fp))
-    saved = sorted((os.path.join(DIR, n) for n in os.listdir(DIR) if n.endswith(".pkl")),
+    target = _path(fp)
+    record = {'version': VERSION, 'embedding_model': EMBED_MODEL,
+              'name': index['name'], 'pages': index['pages'],
+              'chunks': index['chunks'], 'uvecs': index['uvecs']}
+    if not _valid(record):
+        raise ValueError('Invalid PDF index')
+    os.makedirs(DIR, mode=0o700, exist_ok=True)
+    temporary = None
+    try:
+        with tempfile.NamedTemporaryFile(mode='w', encoding='utf-8', dir=DIR,
+                                         prefix=fp + '-', suffix='.tmp', delete=False) as output:
+            temporary = output.name
+            json.dump(record, output, ensure_ascii=False, allow_nan=False)
+        os.replace(temporary, target)
+        temporary = None
+    finally:
+        if temporary is not None:
+            try:
+                os.remove(temporary)
+            except FileNotFoundError:
+                pass
+    saved = sorted((os.path.join(DIR, name) for name in os.listdir(DIR)
+                    if re.fullmatch(r'[0-9a-f]{64}\.json', name)),
                    key=os.path.getmtime, reverse=True)
     for old in saved[MAX_SAVED:]:
         os.remove(old)
 
 
 def load(fp):
-    """The saved index for this fingerprint, or None (missing, old version or unreadable)."""
     try:
-        with open(_path(fp), "rb") as f:
-            record = pickle.load(f)
-    except (OSError, pickle.UnpicklingError, EOFError):
+        path = _path(fp)
+        with open(path, encoding='utf-8') as source:
+            record = json.load(source)
+        if not _valid(record):
+            return None
+        os.utime(path)
+        return {'name': record['name'], 'pages': record['pages'],
+                'chunks': record['chunks'], 'uvecs': record['uvecs'],
+                'bm25': BM25([chunk['text'] for chunk in record['chunks']])}
+    except (OSError, ValueError, TypeError):
         return None
-    if record.get("version") != VERSION:
-        return None
-    os.utime(_path(fp))  # most recently used
-    flat, dim = array.array("d"), record["dim"]
-    flat.frombytes(record["vecs"])
-    uvecs = [flat[i:i + dim].tolist() for i in range(0, len(flat), dim)]
-    chunks = record["chunks"]
-    return {"name": record["name"], "pages": record["pages"], "chunks": chunks,
-            "bm25": BM25([c["text"] for c in chunks]), "uvecs": uvecs}

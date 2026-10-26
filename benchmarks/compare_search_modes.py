@@ -209,7 +209,7 @@ def main() -> None:
         'case_file': relative(case_path), 'case_sha256': sha256(case_path), 'evaluation_scope': case.get('evaluation_scope'), 'document': relative(pdf_path), 'document_sha256': sha256(pdf_path),
         'questions': questions, 'models': {'answer': agent.PROVIDERS['gemini']['model'],
         'embedding': poc.EMBED_MODEL, 'reranker': poc.JEV_MODEL},
-        'source_revision': subprocess.check_output(['git', '-C', str(ROOT), 'rev-parse', 'HEAD'], text=True).strip(),
+        'source_revision': ((subprocess.run(['git', '-C', str(ROOT), 'rev-parse', 'HEAD'], capture_output=True, text=True).stdout.strip() or None) if (ROOT / '.git').exists() else None),
         'application_source_sha256': {path.name: sha256(path) for path in ROOT.glob('*.py')},
         'benchmark_sha256': sha256(Path(__file__)), 'application': []}
 

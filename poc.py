@@ -10,7 +10,7 @@ Pipelines, each scored on top-1 accuracy and per-query latency:
   jev_all       Jev picks one passage from the whole corpus (<=255 choices)
   embed+jev     embeddings shortlist top-K, Jev picks one of them
 
-Stdlib only. Key: $OPENROUTER_API_KEY, else the file /tmp/or.
+Stdlib only. Key: $OPENROUTER_API_KEY supplied in the environment.
 Usage: python3 poc.py --probe     one call per endpoint, then stop
        python3 poc.py             full run, writes results.json
 """
@@ -105,10 +105,8 @@ def build_questions(chunks, n, seed=5):
 
 def api_key():
     key = os.environ.get("OPENROUTER_API_KEY")
-    if not key and os.path.exists("/tmp/or"):
-        key = open("/tmp/or").read().strip()
     if not key:
-        sys.exit("No key: set OPENROUTER_API_KEY or put it in /tmp/or")
+        sys.exit("No key: set OPENROUTER_API_KEY in the environment")
     return key
 
 

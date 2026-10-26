@@ -1,6 +1,6 @@
 """Ask a large PDF — searches the PDF and answers with the pages it used.
 
-Three steps on one page: (1) the keys, kept in the browser; (2) upload a PDF,
+Three steps on one page: (1) session-only API keys; (2) upload a PDF,
 indexed right away (BM25 + embeddings) with live progress; (3) ask, with an
 optional screenshot, by one of three searches: Standard (keywords.py: the model
 writes search terms, Jev keeps the best passages), Fast (classic.py: one search)
@@ -9,7 +9,7 @@ with the passages it relied on, or says the PDF doesn't cover the question.
 Asking is locked until the PDF is ready.
 
 Run:  .venv/bin/python app.py      (then open the printed local URL)
-Keys: only the ones entered in the page, kept in that browser and removable there.
+Keys: entered in the page, held in server-side session memory, and removable there.
       The server never supplies a key of its own.
 """
 
@@ -18,11 +18,14 @@ import collections
 import mimetypes
 import os
 import re
+import secrets
 import time
 import traceback
 import urllib.error
 import urllib.request
 from concurrent.futures import ThreadPoolExecutor, as_completed
+
+os.environ.setdefault("GRADIO_ANALYTICS_ENABLED", "False")
 
 import gradio as gr
 import pymupdf
@@ -71,7 +74,7 @@ CEREBRAS_MODELS_URL = CEREBRAS + "/v1/models"
 
 
 def cerebras_key(saved=None):
-    """The Cerebras key saved in this browser; the server never supplies one."""
+    """The Cerebras key held in session memory; the server never supplies one."""
     return (saved or "").strip()
 
 
@@ -104,7 +107,7 @@ def image_data_url(path):
 
 
 def get_key(saved):
-    """The OpenRouter key saved in this browser; the server never supplies one."""
+    """The OpenRouter key held in session memory; the server never supplies one."""
     return (saved or "").strip()
 
 
@@ -127,8 +130,8 @@ def key_view(saved_or, saved_cb, model_value=None):
     note = (gr.update(visible=len(ids) > 1), gr.update(visible=len(ids) == 1))
     if not (saved_or or "").strip():
         return shown, "", hidden, hidden, hidden, model, *note
-    cb = "saved" if (saved_cb or "").strip() else "not added, so only Gemini is available"
-    line = f"**1 · Keys** (kept in this browser): OpenRouter saved · Cerebras {cb}"
+    cb = "ready" if (saved_cb or "").strip() else "not added, so only Gemini is available"
+    line = f"**1 · Keys** (this session only): OpenRouter ready · Cerebras {cb}"
     return hidden, line, shown, shown, hidden, model, *note
 
 
@@ -167,8 +170,8 @@ def save_keys(or_in, cb_in, saved_or, saved_cb, model_value):
 
 
 def remove_keys(model_value):
-    """Delete both keys from this browser's storage; the page asks for keys again."""
-    gr.Info("Keys removed from this browser.")
+    """Clear both keys from this app session; the page asks for keys again."""
+    gr.Info("Keys cleared from this session.")
     return "", "", "", "", "", *key_view("", "", model_value)
 
 
@@ -556,17 +559,14 @@ with gr.Blocks(title="Ask a large PDF") as demo:
                 "the passages it is based on.")
     with gr.Accordion("How it works", open=False):
         gr.Markdown(GUIDE.split("\n", 1)[1])  # the file's own title is the accordion label
-    # Kept in this browser's storage, so a reload doesn't ask for the keys again.
-    saved_key = gr.BrowserState("", storage_key="ask-large-pdf-openrouter-key",
-                                secret="ask-large-pdf-local")
-    saved_cb = gr.BrowserState("", storage_key="ask-large-pdf-cerebras-key",
-                               secret="ask-large-pdf-local")
+    # Credentials stay in Gradio session memory, never BrowserState/localStorage.
+    saved_key = gr.State("")
+    saved_cb = gr.State("")
     history = gr.State([])
-    # Fingerprint of the PDF this browser used last, so a reload doesn't ask for it again.
-    # A fixed secret, like the keys': without one Gradio picks a new one at every start and
-    # the stored value can't be read after a restart.
+    # This is a document fingerprint, not a credential. A fresh per-process secret
+    # avoids a public shared secret; after server restart, reselect the PDF.
     document = gr.BrowserState("", storage_key="ask-large-pdf-document",
-                               secret="ask-large-pdf-local")
+                               secret=secrets.token_urlsafe(32))
 
     # Step 1 is either this one line or the panel below it, never both.
     with gr.Column(visible=False) as key_row:
@@ -580,13 +580,13 @@ with gr.Blocks(title="Ask a large PDF") as demo:
         gr.Markdown("### 1 · Your keys\nThe app uses OpenRouter to read the PDF and answer. "
                     "Paste an API key from your [OpenRouter keys page]"
                     "(https://openrouter.ai/settings/keys). A [Cerebras](https://cloud.cerebras.ai) "
-                    "key is optional and adds the faster Qwen model. Keys are kept only in this "
-                    "browser; **Remove keys** deletes them.")
+                    "key is optional and adds the Qwen model. Keys are held in memory for this "
+                    "app session; re-enter them after a reload. **Remove keys** clears them.")
         key_in = gr.Textbox(label="OpenRouter key", type="password", placeholder="sk-or-v1-…")
         cb_in = gr.Textbox(label="Cerebras key (optional)", type="password", placeholder="csk-…")
         key_msg = gr.Markdown()
         with gr.Row():
-            save = gr.Button("Save keys", variant="primary", scale=0, min_width=120)
+            save = gr.Button("Use keys", variant="primary", scale=0, min_width=120)
             cancel_key = gr.Button("Cancel", variant="secondary", scale=0, min_width=100,
                                    visible=False)
 
@@ -627,8 +627,8 @@ with gr.Blocks(title="Ask a large PDF") as demo:
     key_in.submit(save_keys, save_inputs, save_outputs)
     cb_in.submit(save_keys, save_inputs, save_outputs)
     change_key.click(open_keys, None, [key_step, key_msg, cancel_key, key_row])
-    # Gradio's BrowserState only writes non-empty values, so setting the keys to "" would
-    # leave the old ones in storage. Delete the stored entries in the browser directly.
+    # Also clear legacy entries if a browser previously used an older build.
+    # This build never writes API keys to browser storage.
     forget_keys.click(remove_keys, [model], save_outputs, js=(
         "(m) => { localStorage.removeItem('ask-large-pdf-openrouter-key'); "
         "localStorage.removeItem('ask-large-pdf-cerebras-key'); return m; }"))
@@ -657,4 +657,4 @@ with gr.Blocks(title="Ask a large PDF") as demo:
     method.change(method_help, method, help_line)
 
 if __name__ == "__main__":
-    demo.launch(css=CSS, head=HEAD, footer_links=[])
+    demo.launch(server_name="127.0.0.1", css=CSS, head=HEAD, footer_links=[])

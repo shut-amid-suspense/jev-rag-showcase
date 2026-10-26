@@ -1,0 +1,226 @@
+{
+  "name": "Source-grounded manual troubleshooting diagnostic",
+  "document": "data/live11-manual-en.pdf",
+  "evaluation_scope": "Six multi-constraint troubleshooting tasks; required facts and source evidence frozen before running. This is a diagnostic sample, not a representative statistical accuracy estimate.",
+  "scoring_protocol": "Each required fact is reviewed as covered, partial, or missing; material unsupported/incorrect claims are recorded separately. Strict task pass requires all required facts and no material factual error. Citation/page hit alone is not an answer score.",
+  "questions": [
+    {
+      "id": "automation-overdub-recovery",
+      "page": 355,
+      "q": "I have existing MIDI clips playing in Session View. I want to overdub knob automation without adding more notes, including clips on tracks that are not armed. Later, moving a control by hand stops the recorded movement from playing. Give me the setup and a recovery procedure that preserves the recorded automation. Also explain why recording with a mouse stops differently from recording with a MIDI knob.",
+      "criteria": [
+        {
+          "id": "A1",
+          "required_fact": "Enable Automation Arm and Session Record; use the Session Automation Recording preference for automation in playing clips independent of track arming.",
+          "support_chunk_ids": [
+            "c411",
+            "c412"
+          ]
+        },
+        {
+          "id": "A2",
+          "required_fact": "The preference permits overdubbing automation into an existing MIDI clip without also recording notes.",
+          "support_chunk_ids": [
+            "c412"
+          ]
+        },
+        {
+          "id": "A3",
+          "required_fact": "Changing an automated control while not recording overrides rather than deletes its automation; use Re-Enable Automation globally or for that parameter, or relaunch its Session clip.",
+          "support_chunk_ids": [
+            "c413"
+          ]
+        },
+        {
+          "id": "A4",
+          "required_fact": "Mouse recording stops on release; a MIDI controller latches until the end of the clip loop after the last adjustment.",
+          "support_chunk_ids": [
+            "c412"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "external-hardware-export",
+      "page": 434,
+      "q": "My Set sends a Return track through an external analog reverb. I need an export of the master and separate tracks, including tracks that never touch the hardware. Explain the send/return setup and wet setting, which exports need real-time processing, how to deal with an old reverb tail before rendering, and what to do if the render keeps restarting after glitches.",
+      "criteria": [
+        {
+          "id": "B1",
+          "required_fact": "External Audio Effect sends using Audio To and receives the processed return using Audio From; use 100 percent wet when the device is on a return track.",
+          "support_chunk_ids": [
+            "c507"
+          ]
+        },
+        {
+          "id": "B2",
+          "required_fact": "The master render is real-time when its signal path uses external hardware; separate unaffected tracks render offline while hardware-dependent paths render in real time.",
+          "support_chunk_ids": [
+            "c98",
+            "c99"
+          ]
+        },
+        {
+          "id": "B3",
+          "required_fact": "Live normally waits ten seconds for external devices to become silent; increase that time for a long tail, or Skip only when the device is already silent.",
+          "support_chunk_ids": [
+            "c99"
+          ]
+        },
+        {
+          "id": "B4",
+          "required_fact": "Auto-Restart on drop-outs starts the render again; close other applications or reduce resource contention if repeated dropouts cause repeated restarts.",
+          "support_chunk_ids": [
+            "c100"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "warp-quality-cpu-and-tails",
+      "page": 189,
+      "q": "I am slowing down and transposing a complete stereo song containing drums, vocals and pads. Re-Pitch is changing the pitch with the speed, and Complex processing is stressing the CPU. Explain the relevant warp-mode tradeoffs and how I can reduce processing while keeping the option to edit later. If I move a frozen Arrangement clip with a long reverb decay, what must move with it? Do not promise a specific quality or CPU improvement on my machine.",
+      "criteria": [
+        {
+          "id": "C1",
+          "required_fact": "Re-Pitch changes playback rate and therefore couples speed with pitch; its Transpose and Detune controls have no effect.",
+          "support_chunk_ids": [
+            "c215"
+          ]
+        },
+        {
+          "id": "C2",
+          "required_fact": "Complex is intended for composite material or whole songs; Complex Pro can improve results but consumes more CPU, not less.",
+          "support_chunk_ids": [
+            "c215",
+            "c216"
+          ]
+        },
+        {
+          "id": "C3",
+          "required_fact": "Freeze creates audio freeze files instead of repeatedly computing the devices; Unfreeze permits later device/clip edits, whereas Flatten replaces original clips and devices with their audible result.",
+          "support_chunk_ids": [
+            "c991",
+            "c992",
+            "c994"
+          ]
+        },
+        {
+          "id": "C4",
+          "required_fact": "A frozen Arrangement effect tail is represented as a separate temporary tail clip; select and move that tail with the main clip.",
+          "support_chunk_ids": [
+            "c993"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "low-latency-monitor-and-resample",
+      "page": 328,
+      "q": "I am playing a monitored input live while the Set contains latency-producing plug-ins and return effects. I want a more responsive monitored performance, and I also want to record the Master output into a new Session audio clip. Explain the monitoring latency/synchronization tradeoff, the resampling routing and recording steps, whether the recording track feeds itself into that recording, and where the audio is stored before and after saving the Set.",
+      "criteria": [
+        {
+          "id": "D1",
+          "required_fact": "With Delay Compensation on, Reduced Latency When Monitoring minimizes monitored-track latency but can put it out of sync with still-compensated tracks such as Returns; disabling reduced-latency monitoring restores sync at potentially higher monitored latency.",
+          "support_chunk_ids": [
+            "c377"
+          ]
+        },
+        {
+          "id": "D2",
+          "required_fact": "Set an audio track Input Type to Resampling to capture the Master, choose the Master-fed mix with mute/solo, then arm and record an empty clip slot.",
+          "support_chunk_ids": [
+            "c298"
+          ]
+        },
+        {
+          "id": "D3",
+          "required_fact": "The recording track own output is suppressed during resampling and is excluded from the recording.",
+          "support_chunk_ids": [
+            "c299"
+          ]
+        },
+        {
+          "id": "D4",
+          "required_fact": "Resampled files live in the Temporary Folder until the Set is saved, then in the project Samples/Recorded folder.",
+          "support_chunk_ids": [
+            "c299"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "portable-editable-project",
+      "page": 107,
+      "q": "I saved my Set under a new name in a different project folder and now want to send it to a collaborator. It still uses samples from another project and a large third-party instrument the collaborator does not own. I want their copy to play, but I want to retain the original instrument and editability in my own copy. Explain why sending only the .als is insufficient, how to collect the sample dependencies, and the difference between freezing and flattening for this handoff.",
+      "criteria": [
+        {
+          "id": "E1",
+          "required_fact": "Saving into a new project can preserve references to samples in the original project, so moving or deleting that source causes missing files; the .als alone does not package those referenced samples.",
+          "support_chunk_ids": [
+            "c114"
+          ]
+        },
+        {
+          "id": "E2",
+          "required_fact": "Collect All and Save copies referenced external files into the current project, or use File Manager collection controls and explicitly Collect and Save; transfer the project and collected audio, not only the .als.",
+          "support_chunk_ids": [
+            "c118",
+            "c119"
+          ]
+        },
+        {
+          "id": "E3",
+          "required_fact": "Freezing device tracks allows playback on a computer that lacks those devices; frozen playback uses rendered freeze audio.",
+          "support_chunk_ids": [
+            "c991",
+            "c994"
+          ]
+        },
+        {
+          "id": "E4",
+          "required_fact": "Freezing supports later Unfreeze and editing of the original device/clip setup; Flatten replaces the original clips and devices with rendered audio, so keep the original if editability is required.",
+          "support_chunk_ids": [
+            "c992",
+            "c994"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hardware-latency-unknown-value",
+      "page": 435,
+      "q": "An External Audio Effect on my return track is late. Sometimes I connect the hardware digitally and sometimes through analog I/O, and I change sample rates between projects. The Hardware Latency control is currently disabled. Tell me what enables that control, which units preserve the intended compensation in each connection type, and how to handle sample-level fine tuning on the analog connection. The processor model and measured round-trip delay are unknown: give the exact compensation value if the manual supports one, otherwise state what still has to be measured.",
+      "criteria": [
+        {
+          "id": "F1",
+          "required_fact": "The Hardware Latency slider is disabled when Delay Compensation in the Options menu is off; enable Delay Compensation.",
+          "support_chunk_ids": [
+            "c508"
+          ]
+        },
+        {
+          "id": "F2",
+          "required_fact": "Use samples for a digital connection so the sample count is retained across sample-rate changes; use milliseconds for an analog connection so elapsed time is retained.",
+          "support_chunk_ids": [
+            "c508"
+          ]
+        },
+        {
+          "id": "F3",
+          "required_fact": "Samples can be used for finer analog adjustment, but switch back to milliseconds before changing the sample rate.",
+          "support_chunk_ids": [
+            "c508"
+          ]
+        },
+        {
+          "id": "F4",
+          "required_fact": "Live cannot automatically detect the hardware-effect delay and the manual provides no exact value for unspecified hardware; do not invent a number, and refer to measurement/setup such as the Driver Error Compensation lesson.",
+          "support_chunk_ids": [
+            "c508"
+          ]
+        }
+      ]
+    }
+  ]
+}
