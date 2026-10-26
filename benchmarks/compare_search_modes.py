@@ -119,7 +119,7 @@ def write_report(data: dict, target: Path, result_path: Path) -> None:
             pages = ', '.join(map(str, row['source_pages'])) or 'none'
             lines += [f"**Jev RAG — {mode}: {row['seconds']:.2f} s; ${row['known_cost_usd']:.6f}; source pages: {pages}; model turns: {row.get('turns', 'unknown')}**", '',
                       row.get('answer') or 'No answer was returned.', '']
-    target.write_text('\n'.join(line.rstrip() for line in lines)+'\n')
+    target.write_text('\n'.join(line.rstrip() for line in lines).rstrip()+'\n')
 
 
 def main() -> None:
