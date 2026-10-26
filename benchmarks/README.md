@@ -62,3 +62,15 @@ There are also separate retrieval research scripts in this repository. They are 
 | [ableton_eval.py](../ableton_eval.py) | BM25, embeddings, hybrid, hybrid plus Jev, hybrid plus a chat-model reranker, table-of-contents navigation with Jev |
 | [section_eval.py](../section_eval.py) | Page-based, section-and-page, and section-based passage boundaries |
 | [clef_eval.py](../clef_eval.py) | Jev, Clef and Clef-flash decision models for intent and passage selection |
+
+## Source-grounded troubleshooting accuracy diagnostic
+
+The portable handbook is an operational example. It does not simulate hard document-support work or establish answer accuracy.
+
+The six cases in [troubleshooting-live11.json](cases/troubleshooting-live11.json) instead require multi-section procedures, constraint handling, recovery steps and calibrated handling of an unknown hardware value. Their criteria and source locations were committed before the live run. [accuracy-protocol.md](accuracy-protocol.md) defines the review labels and Jev attribution method. The assistant's review is transparent but is not independent or blinded.
+
+```bash
+sesame run OPENROUTER_API_KEY -- .venv/bin/python benchmarks/compare_search_modes.py --case benchmarks/cases/troubleshooting-live11.json --output-prefix docs/comparisons/troubleshooting-repeat
+```
+
+The runner records Jev input candidate IDs, its ranking and choice, final citation IDs, time and request costs. A source-grounded review of the final answers is still required; matching the expected page does not automatically grade an answer. The recorded [accuracy review](../docs/comparisons/2026-10-26-accuracy-review.md) includes all criterion labels, methodological caveats, actual Jev-call counts and a before/after comparison on fixed Standard candidate pools.

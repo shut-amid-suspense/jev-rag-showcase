@@ -1,0 +1,1176 @@
+{
+  "review_type": "Assistant source-grounded review; not independent or blinded",
+  "reviewed_at": "2026-10-26T19:55:10.721764+01:00",
+  "results_file": "2026-10-26-jev-troubleshooting.json",
+  "results_sha256": "1a8273f9bd0dabb43be54fc6c1a1ecde9f9a70c10ea736a0abc7ac35986800d4",
+  "protocol_file": "../../benchmarks/accuracy-protocol.md",
+  "protocol_sha256": "52a7548007a48d168c96e6c5523a72ac311979140f7f1f8786418b396c384b3b",
+  "preregistered_protocol_commit": "c34cd3e",
+  "summary": {
+    "Fast": {
+      "criteria_points": 4,
+      "maximum_points": 24,
+      "fully_covered_criteria": 4,
+      "partial_criteria": 0,
+      "missing_criteria": 20,
+      "strict_complete_tasks": 1,
+      "tasks": 6,
+      "confirmed_material_factual_errors": 0
+    },
+    "Standard": {
+      "criteria_points": 23.0,
+      "maximum_points": 24,
+      "fully_covered_criteria": 22,
+      "partial_criteria": 2,
+      "missing_criteria": 0,
+      "strict_complete_tasks": 4,
+      "tasks": 6,
+      "confirmed_material_factual_errors": 0
+    },
+    "Thorough": {
+      "criteria_points": 23.5,
+      "maximum_points": 24,
+      "fully_covered_criteria": 23,
+      "partial_criteria": 1,
+      "missing_criteria": 0,
+      "strict_complete_tasks": 5,
+      "tasks": 6,
+      "confirmed_material_factual_errors": 0
+    }
+  },
+  "reviews": [
+    {
+      "question_number": 1,
+      "question_id": "automation-overdub-recovery",
+      "mode": "Fast",
+      "grades": [
+        {
+          "criterion_id": "A1",
+          "required_fact": "Enable Automation Arm and Session Record; use the Session Automation Recording preference for automation in playing clips independent of track arming.",
+          "status": "missing",
+          "points": 0,
+          "reason": "The answer declines the task and supplies none of this required fact; relevant evidence exists in the manual.",
+          "canonical_support_chunk_ids": [
+            "c411",
+            "c412"
+          ]
+        },
+        {
+          "criterion_id": "A2",
+          "required_fact": "The preference permits overdubbing automation into an existing MIDI clip without also recording notes.",
+          "status": "missing",
+          "points": 0,
+          "reason": "The answer declines the task and supplies none of this required fact; relevant evidence exists in the manual.",
+          "canonical_support_chunk_ids": [
+            "c412"
+          ]
+        },
+        {
+          "criterion_id": "A3",
+          "required_fact": "Changing an automated control while not recording overrides rather than deletes its automation; use Re-Enable Automation globally or for that parameter, or relaunch its Session clip.",
+          "status": "missing",
+          "points": 0,
+          "reason": "The answer declines the task and supplies none of this required fact; relevant evidence exists in the manual.",
+          "canonical_support_chunk_ids": [
+            "c413"
+          ]
+        },
+        {
+          "criterion_id": "A4",
+          "required_fact": "Mouse recording stops on release; a MIDI controller latches until the end of the clip loop after the last adjustment.",
+          "status": "missing",
+          "points": 0,
+          "reason": "The answer declines the task and supplies none of this required fact; relevant evidence exists in the manual.",
+          "canonical_support_chunk_ids": [
+            "c412"
+          ]
+        }
+      ],
+      "points": 0,
+      "maximum_points": 4,
+      "material_factual_errors_confirmed": [],
+      "strict_pass": false,
+      "notes": []
+    },
+    {
+      "question_number": 1,
+      "question_id": "automation-overdub-recovery",
+      "mode": "Standard",
+      "grades": [
+        {
+          "criterion_id": "A1",
+          "required_fact": "Enable Automation Arm and Session Record; use the Session Automation Recording preference for automation in playing clips independent of track arming.",
+          "status": "covered",
+          "points": 1,
+          "reason": "The final answer supplies the required fact, consistent with the cited document evidence.",
+          "canonical_support_chunk_ids": [
+            "c411",
+            "c412"
+          ]
+        },
+        {
+          "criterion_id": "A2",
+          "required_fact": "The preference permits overdubbing automation into an existing MIDI clip without also recording notes.",
+          "status": "covered",
+          "points": 1,
+          "reason": "The final answer supplies the required fact, consistent with the cited document evidence.",
+          "canonical_support_chunk_ids": [
+            "c412"
+          ]
+        },
+        {
+          "criterion_id": "A3",
+          "required_fact": "Changing an automated control while not recording overrides rather than deletes its automation; use Re-Enable Automation globally or for that parameter, or relaunch its Session clip.",
+          "status": "covered",
+          "points": 1,
+          "reason": "The final answer supplies the required fact, consistent with the cited document evidence.",
+          "canonical_support_chunk_ids": [
+            "c413"
+          ]
+        },
+        {
+          "criterion_id": "A4",
+          "required_fact": "Mouse recording stops on release; a MIDI controller latches until the end of the clip loop after the last adjustment.",
+          "status": "covered",
+          "points": 1,
+          "reason": "The final answer supplies the required fact, consistent with the cited document evidence.",
+          "canonical_support_chunk_ids": [
+            "c412"
+          ]
+        }
+      ],
+      "points": 4,
+      "maximum_points": 4,
+      "material_factual_errors_confirmed": [],
+      "strict_pass": true,
+      "notes": []
+    },
+    {
+      "question_number": 1,
+      "question_id": "automation-overdub-recovery",
+      "mode": "Thorough",
+      "grades": [
+        {
+          "criterion_id": "A1",
+          "required_fact": "Enable Automation Arm and Session Record; use the Session Automation Recording preference for automation in playing clips independent of track arming.",
+          "status": "covered",
+          "points": 1,
+          "reason": "The final answer supplies the required fact, consistent with the cited document evidence.",
+          "canonical_support_chunk_ids": [
+            "c411",
+            "c412"
+          ]
+        },
+        {
+          "criterion_id": "A2",
+          "required_fact": "The preference permits overdubbing automation into an existing MIDI clip without also recording notes.",
+          "status": "covered",
+          "points": 1,
+          "reason": "The final answer supplies the required fact, consistent with the cited document evidence.",
+          "canonical_support_chunk_ids": [
+            "c412"
+          ]
+        },
+        {
+          "criterion_id": "A3",
+          "required_fact": "Changing an automated control while not recording overrides rather than deletes its automation; use Re-Enable Automation globally or for that parameter, or relaunch its Session clip.",
+          "status": "covered",
+          "points": 1,
+          "reason": "The final answer supplies the required fact, consistent with the cited document evidence.",
+          "canonical_support_chunk_ids": [
+            "c413"
+          ]
+        },
+        {
+          "criterion_id": "A4",
+          "required_fact": "Mouse recording stops on release; a MIDI controller latches until the end of the clip loop after the last adjustment.",
+          "status": "covered",
+          "points": 1,
+          "reason": "The final answer supplies the required fact, consistent with the cited document evidence.",
+          "canonical_support_chunk_ids": [
+            "c412"
+          ]
+        }
+      ],
+      "points": 4,
+      "maximum_points": 4,
+      "material_factual_errors_confirmed": [],
+      "strict_pass": true,
+      "notes": []
+    },
+    {
+      "question_number": 2,
+      "question_id": "external-hardware-export",
+      "mode": "Standard",
+      "grades": [
+        {
+          "criterion_id": "B1",
+          "required_fact": "External Audio Effect sends using Audio To and receives the processed return using Audio From; use 100 percent wet when the device is on a return track.",
+          "status": "covered",
+          "points": 1,
+          "reason": "The final answer supplies the required fact, consistent with the cited document evidence.",
+          "canonical_support_chunk_ids": [
+            "c507"
+          ]
+        },
+        {
+          "criterion_id": "B2",
+          "required_fact": "The master render is real-time when its signal path uses external hardware; separate unaffected tracks render offline while hardware-dependent paths render in real time.",
+          "status": "covered",
+          "points": 1,
+          "reason": "The final answer supplies the required fact, consistent with the cited document evidence.",
+          "canonical_support_chunk_ids": [
+            "c98",
+            "c99"
+          ]
+        },
+        {
+          "criterion_id": "B3",
+          "required_fact": "Live normally waits ten seconds for external devices to become silent; increase that time for a long tail, or Skip only when the device is already silent.",
+          "status": "covered",
+          "points": 1,
+          "reason": "The final answer supplies the required fact, consistent with the cited document evidence.",
+          "canonical_support_chunk_ids": [
+            "c99"
+          ]
+        },
+        {
+          "criterion_id": "B4",
+          "required_fact": "Auto-Restart on drop-outs starts the render again; close other applications or reduce resource contention if repeated dropouts cause repeated restarts.",
+          "status": "covered",
+          "points": 1,
+          "reason": "The final answer supplies the required fact, consistent with the cited document evidence.",
+          "canonical_support_chunk_ids": [
+            "c100"
+          ]
+        }
+      ],
+      "points": 4,
+      "maximum_points": 4,
+      "material_factual_errors_confirmed": [],
+      "strict_pass": true,
+      "notes": []
+    },
+    {
+      "question_number": 2,
+      "question_id": "external-hardware-export",
+      "mode": "Thorough",
+      "grades": [
+        {
+          "criterion_id": "B1",
+          "required_fact": "External Audio Effect sends using Audio To and receives the processed return using Audio From; use 100 percent wet when the device is on a return track.",
+          "status": "covered",
+          "points": 1,
+          "reason": "The final answer supplies the required fact, consistent with the cited document evidence.",
+          "canonical_support_chunk_ids": [
+            "c507"
+          ]
+        },
+        {
+          "criterion_id": "B2",
+          "required_fact": "The master render is real-time when its signal path uses external hardware; separate unaffected tracks render offline while hardware-dependent paths render in real time.",
+          "status": "covered",
+          "points": 1,
+          "reason": "The final answer supplies the required fact, consistent with the cited document evidence.",
+          "canonical_support_chunk_ids": [
+            "c98",
+            "c99"
+          ]
+        },
+        {
+          "criterion_id": "B3",
+          "required_fact": "Live normally waits ten seconds for external devices to become silent; increase that time for a long tail, or Skip only when the device is already silent.",
+          "status": "covered",
+          "points": 1,
+          "reason": "The final answer supplies the required fact, consistent with the cited document evidence.",
+          "canonical_support_chunk_ids": [
+            "c99"
+          ]
+        },
+        {
+          "criterion_id": "B4",
+          "required_fact": "Auto-Restart on drop-outs starts the render again; close other applications or reduce resource contention if repeated dropouts cause repeated restarts.",
+          "status": "covered",
+          "points": 1,
+          "reason": "The final answer supplies the required fact, consistent with the cited document evidence.",
+          "canonical_support_chunk_ids": [
+            "c100"
+          ]
+        }
+      ],
+      "points": 4,
+      "maximum_points": 4,
+      "material_factual_errors_confirmed": [],
+      "strict_pass": true,
+      "notes": []
+    },
+    {
+      "question_number": 2,
+      "question_id": "external-hardware-export",
+      "mode": "Fast",
+      "grades": [
+        {
+          "criterion_id": "B1",
+          "required_fact": "External Audio Effect sends using Audio To and receives the processed return using Audio From; use 100 percent wet when the device is on a return track.",
+          "status": "missing",
+          "points": 0,
+          "reason": "The answer declines the task and supplies none of this required fact; relevant evidence exists in the manual.",
+          "canonical_support_chunk_ids": [
+            "c507"
+          ]
+        },
+        {
+          "criterion_id": "B2",
+          "required_fact": "The master render is real-time when its signal path uses external hardware; separate unaffected tracks render offline while hardware-dependent paths render in real time.",
+          "status": "missing",
+          "points": 0,
+          "reason": "The answer declines the task and supplies none of this required fact; relevant evidence exists in the manual.",
+          "canonical_support_chunk_ids": [
+            "c98",
+            "c99"
+          ]
+        },
+        {
+          "criterion_id": "B3",
+          "required_fact": "Live normally waits ten seconds for external devices to become silent; increase that time for a long tail, or Skip only when the device is already silent.",
+          "status": "missing",
+          "points": 0,
+          "reason": "The answer declines the task and supplies none of this required fact; relevant evidence exists in the manual.",
+          "canonical_support_chunk_ids": [
+            "c99"
+          ]
+        },
+        {
+          "criterion_id": "B4",
+          "required_fact": "Auto-Restart on drop-outs starts the render again; close other applications or reduce resource contention if repeated dropouts cause repeated restarts.",
+          "status": "missing",
+          "points": 0,
+          "reason": "The answer declines the task and supplies none of this required fact; relevant evidence exists in the manual.",
+          "canonical_support_chunk_ids": [
+            "c100"
+          ]
+        }
+      ],
+      "points": 0,
+      "maximum_points": 4,
+      "material_factual_errors_confirmed": [],
+      "strict_pass": false,
+      "notes": []
+    },
+    {
+      "question_number": 3,
+      "question_id": "warp-quality-cpu-and-tails",
+      "mode": "Thorough",
+      "grades": [
+        {
+          "criterion_id": "C1",
+          "required_fact": "Re-Pitch changes playback rate and therefore couples speed with pitch; its Transpose and Detune controls have no effect.",
+          "status": "covered",
+          "points": 1,
+          "reason": "The final answer supplies the required fact, consistent with the cited document evidence.",
+          "canonical_support_chunk_ids": [
+            "c215"
+          ]
+        },
+        {
+          "criterion_id": "C2",
+          "required_fact": "Complex is intended for composite material or whole songs; Complex Pro can improve results but consumes more CPU, not less.",
+          "status": "covered",
+          "points": 1,
+          "reason": "The final answer supplies the required fact, consistent with the cited document evidence.",
+          "canonical_support_chunk_ids": [
+            "c215",
+            "c216"
+          ]
+        },
+        {
+          "criterion_id": "C3",
+          "required_fact": "Freeze creates audio freeze files instead of repeatedly computing the devices; Unfreeze permits later device/clip edits, whereas Flatten replaces original clips and devices with their audible result.",
+          "status": "partial",
+          "points": 0.5,
+          "reason": "Correctly recommends Freeze and Unfreeze to retain editability, but omits the full freeze-file/Flatten contrast in the frozen rubric. That contrast was not explicitly requested in the question, so this is an over-demanding rubric item rather than a demonstrated factual error.",
+          "canonical_support_chunk_ids": [
+            "c991",
+            "c992",
+            "c994"
+          ]
+        },
+        {
+          "criterion_id": "C4",
+          "required_fact": "A frozen Arrangement effect tail is represented as a separate temporary tail clip; select and move that tail with the main clip.",
+          "status": "covered",
+          "points": 1,
+          "reason": "The final answer supplies the required fact, consistent with the cited document evidence.",
+          "canonical_support_chunk_ids": [
+            "c993"
+          ]
+        }
+      ],
+      "points": 3.5,
+      "maximum_points": 4,
+      "material_factual_errors_confirmed": [],
+      "strict_pass": false,
+      "notes": [
+        "C3 is conservative and over-demanding: the question asks to retain editability but does not explicitly ask for a Flatten comparison. Do not interpret this partial grade as an incorrect answer."
+      ]
+    },
+    {
+      "question_number": 3,
+      "question_id": "warp-quality-cpu-and-tails",
+      "mode": "Fast",
+      "grades": [
+        {
+          "criterion_id": "C1",
+          "required_fact": "Re-Pitch changes playback rate and therefore couples speed with pitch; its Transpose and Detune controls have no effect.",
+          "status": "missing",
+          "points": 0,
+          "reason": "The answer declines the task and supplies none of this required fact; relevant evidence exists in the manual.",
+          "canonical_support_chunk_ids": [
+            "c215"
+          ]
+        },
+        {
+          "criterion_id": "C2",
+          "required_fact": "Complex is intended for composite material or whole songs; Complex Pro can improve results but consumes more CPU, not less.",
+          "status": "missing",
+          "points": 0,
+          "reason": "The answer declines the task and supplies none of this required fact; relevant evidence exists in the manual.",
+          "canonical_support_chunk_ids": [
+            "c215",
+            "c216"
+          ]
+        },
+        {
+          "criterion_id": "C3",
+          "required_fact": "Freeze creates audio freeze files instead of repeatedly computing the devices; Unfreeze permits later device/clip edits, whereas Flatten replaces original clips and devices with their audible result.",
+          "status": "missing",
+          "points": 0,
+          "reason": "The answer declines the task and supplies none of this required fact; relevant evidence exists in the manual.",
+          "canonical_support_chunk_ids": [
+            "c991",
+            "c992",
+            "c994"
+          ]
+        },
+        {
+          "criterion_id": "C4",
+          "required_fact": "A frozen Arrangement effect tail is represented as a separate temporary tail clip; select and move that tail with the main clip.",
+          "status": "missing",
+          "points": 0,
+          "reason": "The answer declines the task and supplies none of this required fact; relevant evidence exists in the manual.",
+          "canonical_support_chunk_ids": [
+            "c993"
+          ]
+        }
+      ],
+      "points": 0,
+      "maximum_points": 4,
+      "material_factual_errors_confirmed": [],
+      "strict_pass": false,
+      "notes": []
+    },
+    {
+      "question_number": 3,
+      "question_id": "warp-quality-cpu-and-tails",
+      "mode": "Standard",
+      "grades": [
+        {
+          "criterion_id": "C1",
+          "required_fact": "Re-Pitch changes playback rate and therefore couples speed with pitch; its Transpose and Detune controls have no effect.",
+          "status": "covered",
+          "points": 1,
+          "reason": "The final answer supplies the required fact, consistent with the cited document evidence.",
+          "canonical_support_chunk_ids": [
+            "c215"
+          ]
+        },
+        {
+          "criterion_id": "C2",
+          "required_fact": "Complex is intended for composite material or whole songs; Complex Pro can improve results but consumes more CPU, not less.",
+          "status": "covered",
+          "points": 1,
+          "reason": "The final answer supplies the required fact, consistent with the cited document evidence.",
+          "canonical_support_chunk_ids": [
+            "c215",
+            "c216"
+          ]
+        },
+        {
+          "criterion_id": "C3",
+          "required_fact": "Freeze creates audio freeze files instead of repeatedly computing the devices; Unfreeze permits later device/clip edits, whereas Flatten replaces original clips and devices with their audible result.",
+          "status": "partial",
+          "points": 0.5,
+          "reason": "Correctly recommends Freeze and Unfreeze to retain editability, but omits the full freeze-file/Flatten contrast in the frozen rubric. That contrast was not explicitly requested in the question, so this is an over-demanding rubric item rather than a demonstrated factual error.",
+          "canonical_support_chunk_ids": [
+            "c991",
+            "c992",
+            "c994"
+          ]
+        },
+        {
+          "criterion_id": "C4",
+          "required_fact": "A frozen Arrangement effect tail is represented as a separate temporary tail clip; select and move that tail with the main clip.",
+          "status": "covered",
+          "points": 1,
+          "reason": "The final answer supplies the required fact, consistent with the cited document evidence.",
+          "canonical_support_chunk_ids": [
+            "c993"
+          ]
+        }
+      ],
+      "points": 3.5,
+      "maximum_points": 4,
+      "material_factual_errors_confirmed": [],
+      "strict_pass": false,
+      "notes": [
+        "C3 is conservative and over-demanding: the question asks to retain editability but does not explicitly ask for a Flatten comparison. Do not interpret this partial grade as an incorrect answer."
+      ]
+    },
+    {
+      "question_number": 4,
+      "question_id": "low-latency-monitor-and-resample",
+      "mode": "Fast",
+      "grades": [
+        {
+          "criterion_id": "D1",
+          "required_fact": "With Delay Compensation on, Reduced Latency When Monitoring minimizes monitored-track latency but can put it out of sync with still-compensated tracks such as Returns; disabling reduced-latency monitoring restores sync at potentially higher monitored latency.",
+          "status": "missing",
+          "points": 0,
+          "reason": "The answer declines the task and supplies none of this required fact; relevant evidence exists in the manual.",
+          "canonical_support_chunk_ids": [
+            "c377"
+          ]
+        },
+        {
+          "criterion_id": "D2",
+          "required_fact": "Set an audio track Input Type to Resampling to capture the Master, choose the Master-fed mix with mute/solo, then arm and record an empty clip slot.",
+          "status": "missing",
+          "points": 0,
+          "reason": "The answer declines the task and supplies none of this required fact; relevant evidence exists in the manual.",
+          "canonical_support_chunk_ids": [
+            "c298"
+          ]
+        },
+        {
+          "criterion_id": "D3",
+          "required_fact": "The recording track own output is suppressed during resampling and is excluded from the recording.",
+          "status": "missing",
+          "points": 0,
+          "reason": "The answer declines the task and supplies none of this required fact; relevant evidence exists in the manual.",
+          "canonical_support_chunk_ids": [
+            "c299"
+          ]
+        },
+        {
+          "criterion_id": "D4",
+          "required_fact": "Resampled files live in the Temporary Folder until the Set is saved, then in the project Samples/Recorded folder.",
+          "status": "missing",
+          "points": 0,
+          "reason": "The answer declines the task and supplies none of this required fact; relevant evidence exists in the manual.",
+          "canonical_support_chunk_ids": [
+            "c299"
+          ]
+        }
+      ],
+      "points": 0,
+      "maximum_points": 4,
+      "material_factual_errors_confirmed": [],
+      "strict_pass": false,
+      "notes": []
+    },
+    {
+      "question_number": 4,
+      "question_id": "low-latency-monitor-and-resample",
+      "mode": "Standard",
+      "grades": [
+        {
+          "criterion_id": "D1",
+          "required_fact": "With Delay Compensation on, Reduced Latency When Monitoring minimizes monitored-track latency but can put it out of sync with still-compensated tracks such as Returns; disabling reduced-latency monitoring restores sync at potentially higher monitored latency.",
+          "status": "covered",
+          "points": 1,
+          "reason": "The final answer supplies the required fact, consistent with the cited document evidence.",
+          "canonical_support_chunk_ids": [
+            "c377"
+          ]
+        },
+        {
+          "criterion_id": "D2",
+          "required_fact": "Set an audio track Input Type to Resampling to capture the Master, choose the Master-fed mix with mute/solo, then arm and record an empty clip slot.",
+          "status": "covered",
+          "points": 1,
+          "reason": "The final answer supplies the required fact, consistent with the cited document evidence.",
+          "canonical_support_chunk_ids": [
+            "c298"
+          ]
+        },
+        {
+          "criterion_id": "D3",
+          "required_fact": "The recording track own output is suppressed during resampling and is excluded from the recording.",
+          "status": "covered",
+          "points": 1,
+          "reason": "The final answer supplies the required fact, consistent with the cited document evidence.",
+          "canonical_support_chunk_ids": [
+            "c299"
+          ]
+        },
+        {
+          "criterion_id": "D4",
+          "required_fact": "Resampled files live in the Temporary Folder until the Set is saved, then in the project Samples/Recorded folder.",
+          "status": "covered",
+          "points": 1,
+          "reason": "The final answer supplies the required fact, consistent with the cited document evidence.",
+          "canonical_support_chunk_ids": [
+            "c299"
+          ]
+        }
+      ],
+      "points": 4,
+      "maximum_points": 4,
+      "material_factual_errors_confirmed": [],
+      "strict_pass": true,
+      "notes": []
+    },
+    {
+      "question_number": 4,
+      "question_id": "low-latency-monitor-and-resample",
+      "mode": "Thorough",
+      "grades": [
+        {
+          "criterion_id": "D1",
+          "required_fact": "With Delay Compensation on, Reduced Latency When Monitoring minimizes monitored-track latency but can put it out of sync with still-compensated tracks such as Returns; disabling reduced-latency monitoring restores sync at potentially higher monitored latency.",
+          "status": "covered",
+          "points": 1,
+          "reason": "The final answer supplies the required fact, consistent with the cited document evidence.",
+          "canonical_support_chunk_ids": [
+            "c377"
+          ]
+        },
+        {
+          "criterion_id": "D2",
+          "required_fact": "Set an audio track Input Type to Resampling to capture the Master, choose the Master-fed mix with mute/solo, then arm and record an empty clip slot.",
+          "status": "covered",
+          "points": 1,
+          "reason": "The final answer supplies the required fact, consistent with the cited document evidence.",
+          "canonical_support_chunk_ids": [
+            "c298"
+          ]
+        },
+        {
+          "criterion_id": "D3",
+          "required_fact": "The recording track own output is suppressed during resampling and is excluded from the recording.",
+          "status": "covered",
+          "points": 1,
+          "reason": "The final answer supplies the required fact, consistent with the cited document evidence.",
+          "canonical_support_chunk_ids": [
+            "c299"
+          ]
+        },
+        {
+          "criterion_id": "D4",
+          "required_fact": "Resampled files live in the Temporary Folder until the Set is saved, then in the project Samples/Recorded folder.",
+          "status": "covered",
+          "points": 1,
+          "reason": "The final answer supplies the required fact, consistent with the cited document evidence.",
+          "canonical_support_chunk_ids": [
+            "c299"
+          ]
+        }
+      ],
+      "points": 4,
+      "maximum_points": 4,
+      "material_factual_errors_confirmed": [],
+      "strict_pass": true,
+      "notes": []
+    },
+    {
+      "question_number": 5,
+      "question_id": "portable-editable-project",
+      "mode": "Standard",
+      "grades": [
+        {
+          "criterion_id": "E1",
+          "required_fact": "Saving into a new project can preserve references to samples in the original project, so moving or deleting that source causes missing files; the .als alone does not package those referenced samples.",
+          "status": "covered",
+          "points": 1,
+          "reason": "The final answer supplies the required fact, consistent with the cited document evidence.",
+          "canonical_support_chunk_ids": [
+            "c114"
+          ]
+        },
+        {
+          "criterion_id": "E2",
+          "required_fact": "Collect All and Save copies referenced external files into the current project, or use File Manager collection controls and explicitly Collect and Save; transfer the project and collected audio, not only the .als.",
+          "status": "partial",
+          "points": 0.5,
+          "reason": "Lists Manage Files, Manage Set and External Files, but omits the required Collect and Save confirmation or Collect All and Save command. Opening the panel alone does not complete collection.",
+          "canonical_support_chunk_ids": [
+            "c118",
+            "c119"
+          ]
+        },
+        {
+          "criterion_id": "E3",
+          "required_fact": "Freezing device tracks allows playback on a computer that lacks those devices; frozen playback uses rendered freeze audio.",
+          "status": "covered",
+          "points": 1,
+          "reason": "The final answer supplies the required fact, consistent with the cited document evidence.",
+          "canonical_support_chunk_ids": [
+            "c991",
+            "c994"
+          ]
+        },
+        {
+          "criterion_id": "E4",
+          "required_fact": "Freezing supports later Unfreeze and editing of the original device/clip setup; Flatten replaces the original clips and devices with rendered audio, so keep the original if editability is required.",
+          "status": "covered",
+          "points": 1,
+          "reason": "The final answer supplies the required fact, consistent with the cited document evidence.",
+          "canonical_support_chunk_ids": [
+            "c992",
+            "c994"
+          ]
+        }
+      ],
+      "points": 3.5,
+      "maximum_points": 4,
+      "material_factual_errors_confirmed": [],
+      "strict_pass": false,
+      "notes": [
+        "The answer describes Flatten as permanent. The cited source establishes replacement of clips/devices; this review did not establish an absolute inability to use Undo or restore a prior saved version. No factual-error penalty was assigned for that wording."
+      ]
+    },
+    {
+      "question_number": 5,
+      "question_id": "portable-editable-project",
+      "mode": "Thorough",
+      "grades": [
+        {
+          "criterion_id": "E1",
+          "required_fact": "Saving into a new project can preserve references to samples in the original project, so moving or deleting that source causes missing files; the .als alone does not package those referenced samples.",
+          "status": "covered",
+          "points": 1,
+          "reason": "The final answer supplies the required fact, consistent with the cited document evidence.",
+          "canonical_support_chunk_ids": [
+            "c114"
+          ]
+        },
+        {
+          "criterion_id": "E2",
+          "required_fact": "Collect All and Save copies referenced external files into the current project, or use File Manager collection controls and explicitly Collect and Save; transfer the project and collected audio, not only the .als.",
+          "status": "covered",
+          "points": 1,
+          "reason": "The final answer supplies the required fact, consistent with the cited document evidence.",
+          "canonical_support_chunk_ids": [
+            "c118",
+            "c119"
+          ]
+        },
+        {
+          "criterion_id": "E3",
+          "required_fact": "Freezing device tracks allows playback on a computer that lacks those devices; frozen playback uses rendered freeze audio.",
+          "status": "covered",
+          "points": 1,
+          "reason": "The final answer supplies the required fact, consistent with the cited document evidence.",
+          "canonical_support_chunk_ids": [
+            "c991",
+            "c994"
+          ]
+        },
+        {
+          "criterion_id": "E4",
+          "required_fact": "Freezing supports later Unfreeze and editing of the original device/clip setup; Flatten replaces the original clips and devices with rendered audio, so keep the original if editability is required.",
+          "status": "covered",
+          "points": 1,
+          "reason": "The final answer supplies the required fact, consistent with the cited document evidence.",
+          "canonical_support_chunk_ids": [
+            "c992",
+            "c994"
+          ]
+        }
+      ],
+      "points": 4,
+      "maximum_points": 4,
+      "material_factual_errors_confirmed": [],
+      "strict_pass": true,
+      "notes": [
+        "The answer describes Flatten as permanent. The cited source establishes replacement of clips/devices; this review did not establish an absolute inability to use Undo or restore a prior saved version. No factual-error penalty was assigned for that wording."
+      ]
+    },
+    {
+      "question_number": 5,
+      "question_id": "portable-editable-project",
+      "mode": "Fast",
+      "grades": [
+        {
+          "criterion_id": "E1",
+          "required_fact": "Saving into a new project can preserve references to samples in the original project, so moving or deleting that source causes missing files; the .als alone does not package those referenced samples.",
+          "status": "missing",
+          "points": 0,
+          "reason": "The answer declines the task and supplies none of this required fact; relevant evidence exists in the manual.",
+          "canonical_support_chunk_ids": [
+            "c114"
+          ]
+        },
+        {
+          "criterion_id": "E2",
+          "required_fact": "Collect All and Save copies referenced external files into the current project, or use File Manager collection controls and explicitly Collect and Save; transfer the project and collected audio, not only the .als.",
+          "status": "missing",
+          "points": 0,
+          "reason": "The answer declines the task and supplies none of this required fact; relevant evidence exists in the manual.",
+          "canonical_support_chunk_ids": [
+            "c118",
+            "c119"
+          ]
+        },
+        {
+          "criterion_id": "E3",
+          "required_fact": "Freezing device tracks allows playback on a computer that lacks those devices; frozen playback uses rendered freeze audio.",
+          "status": "missing",
+          "points": 0,
+          "reason": "The answer declines the task and supplies none of this required fact; relevant evidence exists in the manual.",
+          "canonical_support_chunk_ids": [
+            "c991",
+            "c994"
+          ]
+        },
+        {
+          "criterion_id": "E4",
+          "required_fact": "Freezing supports later Unfreeze and editing of the original device/clip setup; Flatten replaces the original clips and devices with rendered audio, so keep the original if editability is required.",
+          "status": "missing",
+          "points": 0,
+          "reason": "The answer declines the task and supplies none of this required fact; relevant evidence exists in the manual.",
+          "canonical_support_chunk_ids": [
+            "c992",
+            "c994"
+          ]
+        }
+      ],
+      "points": 0,
+      "maximum_points": 4,
+      "material_factual_errors_confirmed": [],
+      "strict_pass": false,
+      "notes": []
+    },
+    {
+      "question_number": 6,
+      "question_id": "hardware-latency-unknown-value",
+      "mode": "Thorough",
+      "grades": [
+        {
+          "criterion_id": "F1",
+          "required_fact": "The Hardware Latency slider is disabled when Delay Compensation in the Options menu is off; enable Delay Compensation.",
+          "status": "covered",
+          "points": 1,
+          "reason": "The final answer supplies the required fact, consistent with the cited document evidence.",
+          "canonical_support_chunk_ids": [
+            "c508"
+          ]
+        },
+        {
+          "criterion_id": "F2",
+          "required_fact": "Use samples for a digital connection so the sample count is retained across sample-rate changes; use milliseconds for an analog connection so elapsed time is retained.",
+          "status": "covered",
+          "points": 1,
+          "reason": "The final answer supplies the required fact, consistent with the cited document evidence.",
+          "canonical_support_chunk_ids": [
+            "c508"
+          ]
+        },
+        {
+          "criterion_id": "F3",
+          "required_fact": "Samples can be used for finer analog adjustment, but switch back to milliseconds before changing the sample rate.",
+          "status": "covered",
+          "points": 1,
+          "reason": "The final answer supplies the required fact, consistent with the cited document evidence.",
+          "canonical_support_chunk_ids": [
+            "c508"
+          ]
+        },
+        {
+          "criterion_id": "F4",
+          "required_fact": "Live cannot automatically detect the hardware-effect delay and the manual provides no exact value for unspecified hardware; do not invent a number, and refer to measurement/setup such as the Driver Error Compensation lesson.",
+          "status": "covered",
+          "points": 1,
+          "reason": "The final answer supplies the required fact, consistent with the cited document evidence.",
+          "canonical_support_chunk_ids": [
+            "c508"
+          ]
+        }
+      ],
+      "points": 4,
+      "maximum_points": 4,
+      "material_factual_errors_confirmed": [],
+      "strict_pass": true,
+      "notes": []
+    },
+    {
+      "question_number": 6,
+      "question_id": "hardware-latency-unknown-value",
+      "mode": "Fast",
+      "grades": [
+        {
+          "criterion_id": "F1",
+          "required_fact": "The Hardware Latency slider is disabled when Delay Compensation in the Options menu is off; enable Delay Compensation.",
+          "status": "covered",
+          "points": 1,
+          "reason": "The final answer supplies the required fact, consistent with the cited document evidence.",
+          "canonical_support_chunk_ids": [
+            "c508"
+          ]
+        },
+        {
+          "criterion_id": "F2",
+          "required_fact": "Use samples for a digital connection so the sample count is retained across sample-rate changes; use milliseconds for an analog connection so elapsed time is retained.",
+          "status": "covered",
+          "points": 1,
+          "reason": "The final answer supplies the required fact, consistent with the cited document evidence.",
+          "canonical_support_chunk_ids": [
+            "c508"
+          ]
+        },
+        {
+          "criterion_id": "F3",
+          "required_fact": "Samples can be used for finer analog adjustment, but switch back to milliseconds before changing the sample rate.",
+          "status": "covered",
+          "points": 1,
+          "reason": "The final answer supplies the required fact, consistent with the cited document evidence.",
+          "canonical_support_chunk_ids": [
+            "c508"
+          ]
+        },
+        {
+          "criterion_id": "F4",
+          "required_fact": "Live cannot automatically detect the hardware-effect delay and the manual provides no exact value for unspecified hardware; do not invent a number, and refer to measurement/setup such as the Driver Error Compensation lesson.",
+          "status": "covered",
+          "points": 1,
+          "reason": "The final answer supplies the required fact, consistent with the cited document evidence.",
+          "canonical_support_chunk_ids": [
+            "c508"
+          ]
+        }
+      ],
+      "points": 4,
+      "maximum_points": 4,
+      "material_factual_errors_confirmed": [],
+      "strict_pass": true,
+      "notes": []
+    },
+    {
+      "question_number": 6,
+      "question_id": "hardware-latency-unknown-value",
+      "mode": "Standard",
+      "grades": [
+        {
+          "criterion_id": "F1",
+          "required_fact": "The Hardware Latency slider is disabled when Delay Compensation in the Options menu is off; enable Delay Compensation.",
+          "status": "covered",
+          "points": 1,
+          "reason": "The final answer supplies the required fact, consistent with the cited document evidence.",
+          "canonical_support_chunk_ids": [
+            "c508"
+          ]
+        },
+        {
+          "criterion_id": "F2",
+          "required_fact": "Use samples for a digital connection so the sample count is retained across sample-rate changes; use milliseconds for an analog connection so elapsed time is retained.",
+          "status": "covered",
+          "points": 1,
+          "reason": "The final answer supplies the required fact, consistent with the cited document evidence.",
+          "canonical_support_chunk_ids": [
+            "c508"
+          ]
+        },
+        {
+          "criterion_id": "F3",
+          "required_fact": "Samples can be used for finer analog adjustment, but switch back to milliseconds before changing the sample rate.",
+          "status": "covered",
+          "points": 1,
+          "reason": "The final answer supplies the required fact, consistent with the cited document evidence.",
+          "canonical_support_chunk_ids": [
+            "c508"
+          ]
+        },
+        {
+          "criterion_id": "F4",
+          "required_fact": "Live cannot automatically detect the hardware-effect delay and the manual provides no exact value for unspecified hardware; do not invent a number, and refer to measurement/setup such as the Driver Error Compensation lesson.",
+          "status": "covered",
+          "points": 1,
+          "reason": "The final answer supplies the required fact, consistent with the cited document evidence.",
+          "canonical_support_chunk_ids": [
+            "c508"
+          ]
+        }
+      ],
+      "points": 4,
+      "maximum_points": 4,
+      "material_factual_errors_confirmed": [],
+      "strict_pass": true,
+      "notes": []
+    }
+  ],
+  "fixed_pool_jev_ranking": [
+    {
+      "question_id": "automation-overdub-recovery",
+      "canonical_evidence_ids": [
+        "c411",
+        "c412",
+        "c413"
+      ],
+      "before_first_five_ids": [
+        "c412",
+        "c411",
+        "c413",
+        "c825",
+        "c409"
+      ],
+      "jev_selected_five_ids": [
+        "c412",
+        "c413",
+        "c411",
+        "c67",
+        "c825"
+      ],
+      "canonical_chunks_before": 3,
+      "canonical_chunks_after": 3,
+      "canonical_chunks_total": 3
+    },
+    {
+      "question_id": "external-hardware-export",
+      "canonical_evidence_ids": [
+        "c100",
+        "c507",
+        "c98",
+        "c99"
+      ],
+      "before_first_five_ids": [
+        "c95",
+        "c507",
+        "c99",
+        "c97",
+        "c911"
+      ],
+      "jev_selected_five_ids": [
+        "c99",
+        "c100",
+        "c507",
+        "c98",
+        "c95"
+      ],
+      "canonical_chunks_before": 2,
+      "canonical_chunks_after": 4,
+      "canonical_chunks_total": 4
+    },
+    {
+      "question_id": "warp-quality-cpu-and-tails",
+      "canonical_evidence_ids": [
+        "c215",
+        "c216",
+        "c991",
+        "c992",
+        "c993",
+        "c994"
+      ],
+      "before_first_five_ids": [
+        "c759",
+        "c936",
+        "c216",
+        "c990",
+        "c1002"
+      ],
+      "jev_selected_five_ids": [
+        "c993",
+        "c215",
+        "c216",
+        "c759",
+        "c992"
+      ],
+      "canonical_chunks_before": 1,
+      "canonical_chunks_after": 4,
+      "canonical_chunks_total": 6
+    },
+    {
+      "question_id": "low-latency-monitor-and-resample",
+      "canonical_evidence_ids": [
+        "c298",
+        "c299",
+        "c377"
+      ],
+      "before_first_five_ids": [
+        "c303",
+        "c377",
+        "c298",
+        "c341",
+        "c994"
+      ],
+      "jev_selected_five_ids": [
+        "c377",
+        "c299",
+        "c341",
+        "c298",
+        "c289"
+      ],
+      "canonical_chunks_before": 2,
+      "canonical_chunks_after": 3,
+      "canonical_chunks_total": 3
+    },
+    {
+      "question_id": "portable-editable-project",
+      "canonical_evidence_ids": [
+        "c114",
+        "c118",
+        "c119",
+        "c991",
+        "c992",
+        "c994"
+      ],
+      "before_first_five_ids": [
+        "c124",
+        "c119",
+        "c991",
+        "c1002",
+        "c113"
+      ],
+      "jev_selected_five_ids": [
+        "c994",
+        "c114",
+        "c118",
+        "c1003",
+        "c1002"
+      ],
+      "canonical_chunks_before": 2,
+      "canonical_chunks_after": 3,
+      "canonical_chunks_total": 6
+    },
+    {
+      "question_id": "hardware-latency-unknown-value",
+      "canonical_evidence_ids": [
+        "c508"
+      ],
+      "before_first_five_ids": [
+        "c668",
+        "c507",
+        "c508",
+        "c322",
+        "c310"
+      ],
+      "jev_selected_five_ids": [
+        "c508",
+        "c668",
+        "c377",
+        "c507",
+        "c667"
+      ],
+      "canonical_chunks_before": 1,
+      "canonical_chunks_after": 1,
+      "canonical_chunks_total": 1
+    }
+  ],
+  "limitations": [
+    "Six diagnostic scenarios are not a representative production test set.",
+    "Review was performed by the assistant and was not blinded or independently verified.",
+    "C3 includes an unrequested Flatten contrast and is therefore conservative/over-demanding; strict task success is sensitive to that item.",
+    "Canonical evidence IDs are not the only possible supporting passages in this repetitive manual.",
+    "Full application mode differences include query expansion, search strategy and context as well as Jev ranking.",
+    "No screenshot or multimodal task was tested."
+  ]
+}

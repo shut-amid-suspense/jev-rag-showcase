@@ -1,6 +1,6 @@
-# Jev RAG POC: Fast, Standard and Thorough
+# Jev RAG POC: three-mode operational smoke test
 
-This benchmark compares the three search modes exposed by this application. All application code, test questions, the benchmark runner and the recorded results belong to this repository.
+This run measures operation, time and cost for the three search modes exposed by this application. Its simple questions do not establish realistic answer accuracy. All application code, test questions, the benchmark runner and the recorded results belong to this repository.
 
 ## Scope and method
 
