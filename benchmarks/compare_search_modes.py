@@ -63,6 +63,7 @@ def summary(rows: list[dict]) -> dict:
             'total_known_cost_usd': sum(row['known_cost_usd'] for row in group),
             'mean_requests': statistics.mean(len(row['requests']) for row in group),
             'unknown_cost_requests': sum(row['unknown_cost_requests'] for row in group),
+            'jev_calls': sum('/decisions' in call['endpoint'] for row in group for call in row['requests']),
             'expected_page_cited': sum(row.get('expected_page_cited', False) for row in group),
             'answerable_questions': sum(row['expected_page'] is not None for row in group),
             'empty_answers': sum(not row.get('answer') for row in group),
@@ -95,6 +96,10 @@ def write_report(data: dict, target: Path, result_path: Path) -> None:
         'Costs are provider-reported `usage.cost` for the complete answer pipeline: query embeddings, query expansion where used, reranking where used and answer generation. Initial indexing is separate. Per-1,000 figures extrapolate this small sample; they are not a bulk run or guaranteed prices.', '',
         f"Index preparation: {data['indexing']['seconds']:.2f} s, ${data['indexing']['known_cost_usd']:.6f}, {data['indexing']['passages']} passages. Saved index reused: {data['indexing']['reused']}.", '',
         f"Total known API cost for this run, including any indexing calls: ${data['total_known_cost_usd']:.6f}.", '',
+        '## Where Jev was used', '',
+        'Jev is the passage decision/ranking model. Gemini generates the final answer. The recorded requests show the following actual Jev API calls:', '',
+        '| Jev RAG mode | Jev decision API calls in this run |', '|---|---:|',
+        *[f"| Jev RAG — {mode} | {values['jev_calls']} |" for mode, values in data['summary'].items()], '',
         '## Answer-quality limits', '',
         'Expected-page matching is a retrieval/citation check, not an answer-correctness score. A document may contain the same instruction on several pages. No blinded answer-quality judging was performed. The sample and one timing run per question do not establish a general accuracy winner. Standard and Thorough change the retrieval workflow as well as using Jev, so their differences cannot be attributed entirely to the ranking model.', '',
         '| Jev RAG mode | Answers returned | Expected page cited on answerable questions | Empty answers |',
@@ -102,7 +107,7 @@ def write_report(data: dict, target: Path, result_path: Path) -> None:
     for mode, values in data['summary'].items():
         lines.append(f"| Jev RAG — {mode} | {values['completed_answers']}/{values['queries']} | {values['expected_page_cited']}/{values['answerable_questions']} | {values['empty_answers']} |")
     lines += ['',
-        'The two questions marked with no expected page are deliberate absence controls. Their full answers and source lists are preserved below; empty citations by themselves do not prove a correct refusal.', '',
+        'Questions marked with no expected page are absence controls when present. Their full answers and source lists are preserved below; empty citations by themselves do not prove a correct refusal. If the case includes required-fact criteria, these need a separate source-grounded review; the timing runner does not automatically establish answer accuracy.', '',
         '## Reproduce from this repository', '',
         '[Benchmark instructions](../../benchmarks/README.md) include a synthetic handbook and questions that are committed in this repository. The default run builds its own PDF from that fixture, so it does not require a downloaded manual or another checkout.', '',
         'Run this exact case from the repository root after making its PDF available at the recorded repository-local path:', '',
@@ -179,18 +184,29 @@ def main() -> None:
         start = time.perf_counter()
         response, elapsed_ms = original_post(url, body, supplied_key, attempts)
         usage = response.get('usage', {})
-        requests.append({'endpoint': url, 'requested_model': body.get('model'),
+        record = {'endpoint': url, 'requested_model': body.get('model'),
             'returned_model': response.get('model'), 'seconds': time.perf_counter()-start,
             'cost_usd': usage.get('cost'),
             'input_tokens': usage.get('prompt_tokens', usage.get('input_tokens')),
-            'output_tokens': usage.get('completion_tokens', usage.get('output_tokens'))})
+            'output_tokens': usage.get('completion_tokens', usage.get('output_tokens'))}
+        if '/decisions' in url:
+            decisions = {}
+            for name, question in body.get('questions', {}).items():
+                candidates = list(question.get('criteria', {}))
+                answer = response.get('answers', {}).get(name, {})
+                probabilities = answer.get('probabilities') or {answer.get('choice'): 1}
+                decisions[name] = {'candidate_ids': candidates,
+                    'ranked_ids': sorted(candidates, key=lambda item: -probabilities.get(item, 0)),
+                    'choice': answer.get('choice'), 'confidence': answer.get('confidence')}
+            record['decisions'] = decisions
+        requests.append(record)
         return response, elapsed_ms
 
     for module in [poc, agent, classic, keywords]:
         module.post = measured_post
     data = {'project': 'Jev RAG POC', 'status': 'running',
         'started_at': datetime.now(ZoneInfo('Europe/Berlin')).isoformat(),
-        'case_file': relative(case_path), 'document': relative(pdf_path), 'document_sha256': sha256(pdf_path),
+        'case_file': relative(case_path), 'case_sha256': sha256(case_path), 'evaluation_scope': case.get('evaluation_scope'), 'document': relative(pdf_path), 'document_sha256': sha256(pdf_path),
         'questions': questions, 'models': {'answer': agent.PROVIDERS['gemini']['model'],
         'embedding': poc.EMBED_MODEL, 'reranker': poc.JEV_MODEL},
         'source_revision': subprocess.check_output(['git', '-C', str(ROOT), 'rev-parse', 'HEAD'], text=True).strip(),
@@ -236,6 +252,7 @@ def main() -> None:
                 row = {'question_number': number, 'question': question['q'],
                     'expected_page': question['page'], 'mode': mode, 'answer': done['answer'],
                     'source_pages': sorted({source['page'] for source in done['sources']}),
+                    'source_ids': list(dict.fromkeys(source['id'] for source in done['sources'])),
                     'seconds': time.perf_counter()-start,
                     'known_cost_usd': sum(call['cost_usd'] for call in calls if call['cost_usd'] is not None),
                     'unknown_cost_requests': sum(call['cost_usd'] is None for call in calls),
