@@ -10,10 +10,10 @@ Jev is a decision model used for passage selection and ranking. It does not gene
 
 ## Decision API and source locations
 
-- [poc.py](../poc.py) defines `JEV_MODEL` and the `/api/alpha/decisions` endpoint.
-- [keywords.py](../keywords.py) builds the Standard candidate pool and calls Jev before `answer_from`.
-- [agent.py](../agent.py) calls Jev inside `search`, then returns ranked passages to the agent.
-- [classic.py](../classic.py) implements the Fast baseline without Jev.
+- [api.py](../jev_rag/api.py) defines `JEV_MODEL` and the `/api/alpha/decisions` endpoint.
+- [keywords.py](../jev_rag/keywords.py) builds the Standard candidate pool and calls Jev before `answer_from`.
+- [agent.py](../jev_rag/agent.py) calls Jev inside `search`, then returns ranked passages to the agent.
+- [classic.py](../jev_rag/classic.py) implements the Fast baseline without Jev.
 
 The Jev request contains candidate passage IDs and text plus the question. Its selected choice and probabilities determine the ranking. The confidence/probability is a model output, not a measured correctness guarantee.
 

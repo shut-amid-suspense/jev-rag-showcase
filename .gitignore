@@ -9,4 +9,4 @@ __pycache__/
 .pytest_cache/
 # Uploaded documents, private session data and generated indexes stay local.
 data/*
-!data/questions.json
+!data/README.md

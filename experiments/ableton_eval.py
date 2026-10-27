@@ -7,7 +7,7 @@ Steps (each writes a file in data/, so later steps are repeatable and cheap):
   ingest     pdftotext per page -> chunks of <=300 words, each prefixed with its
              table-of-contents section; outline from pdftohtml -> data/chunks.json
   questions  a model writes one question per sampled chunk, told not to reuse
-             the chunk's wording; that chunk is the gold -> data/questions.json
+             the chunk's wording; that chunk is the gold -> experiments/fixtures/ableton-questions.json
   probe      one question through every method
   run        every question through every method, sequentially (one request
              at a time, so latencies are not inflated) -> ableton-results.json
@@ -25,14 +25,16 @@ import sys
 import time
 import xml.etree.ElementTree as ET
 
-from poc import BM25, DECISIONS_URL, EMBED_MODEL, JEV_MODEL, RETRIES, api_key, embed, post
-from squad_eval import CHAT_URL, LLM_MODEL, pct, top_k, unit
+from jev_rag.api import CHAT_URL, DECISIONS_URL, EMBED_MODEL, JEV_MODEL, RETRIES, api_key, embed, post
+from .squad_eval import LLM_MODEL, pct
+from jev_rag.retrieval import BM25, rrf, top_k, unit
+from jev_rag.paths import ROOT, EXPERIMENT_RESULTS
 
-HERE = os.path.dirname(os.path.abspath(__file__))
+HERE = str(ROOT)
 D = os.path.join(HERE, "data")
 PDF = os.path.join(D, "live11-manual-en.pdf")
 CHUNKS = os.path.join(D, "chunks.json")
-QUESTIONS = os.path.join(D, "questions.json")
+QUESTIONS = str(ROOT / "experiments/fixtures/ableton-questions.json")
 EMB_CACHE = os.path.join(D, "ableton-embeddings.json")
 FIRST_PAGE, LAST_PAGE = 23, 856
 MAX_WORDS, MIN_WORDS = 300, 25
@@ -142,12 +144,6 @@ def llm_pick(q, cands, key):
     return (m.group(0) if m else f"unparsed:{text[:30]}"), ms, data.get("usage", {}).get("cost", 0)
 
 
-def rrf(*rankings, k=60):
-    score = {}
-    for ranking in rankings:
-        for r, i in enumerate(ranking):
-            score[i] = score.get(i, 0) + 1 / (k + r + 1)
-    return sorted(score, key=lambda i: -score[i])
 
 
 class Toc:
@@ -282,7 +278,7 @@ def run(probe=False):
           f"{pct([r['embed']['search_ms'] for r in rows], .5):.0f} ms, not counted above")
     print(f"llm unparsed replies: {sum(r['hybrid>llm']['pick'].startswith('unparsed') for r in rows)}")
     print(f"dropped connections retried: {dict(RETRIES) or 0}")
-    out = os.path.join(HERE, "ableton-results.json")
+    out = str(EXPERIMENT_RESULTS / "ableton-results.json")
     json.dump({"config": {"K": K, "pool": POOL, "jev": JEV_MODEL, "llm": LLM_MODEL,
                           "embed": EMBED_MODEL, "qgen": QGEN_MODEL},
                "summary": summary, "rows": rows}, open(out, "w"), indent=1)

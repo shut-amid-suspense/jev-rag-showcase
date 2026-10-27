@@ -12,20 +12,21 @@ All are scored the same way, by page: a pick is a hit when the piece covers the
 page the question was written from. "section" pieces can span two pages, an
 advantage under this scoring; "section+page" removes it and is the fair comparison.
 
-Run: .venv/bin/python section_eval.py      (writes section-results.json)
+Run: .venv/bin/python -m experiments.section_eval      (writes section-results.json)
 """
 
 import json
 import os
-import re
 import subprocess
 import time
 
-from ableton_eval import FIRST_PAGE, LAST_PAGE, MAX_WORDS, MIN_WORDS, PDF, QUESTIONS, jev_choice, outline, rrf
-from poc import BM25, api_key, embed
-from squad_eval import pct, top_k, unit
+from .ableton_eval import FIRST_PAGE, LAST_PAGE, MAX_WORDS, MIN_WORDS, PDF, QUESTIONS, jev_choice, outline
+from jev_rag.api import api_key, embed
+from .squad_eval import pct
+from jev_rag.retrieval import BM25, rrf, top_k, unit
+from jev_rag.paths import ROOT, EXPERIMENT_RESULTS
 
-HERE = os.path.dirname(os.path.abspath(__file__))
+HERE = str(ROOT)
 CACHE = os.path.join(HERE, "data", "section-embeddings.json")
 CACHE_SP = os.path.join(HERE, "data", "section-page-embeddings.json")
 PAGE_CACHE = os.path.join(HERE, "data", "ableton-embeddings.json")
@@ -174,7 +175,7 @@ def main():
     row("Jev median ms", lambda r: r["jev_median_ms"])
     row("cost $", lambda r: r["cost_usd"])
     json.dump({"headings_found": found, "headings_total": total, "results": results},
-              open(os.path.join(HERE, "section-results.json"), "w"), indent=1)
+              open(str(EXPERIMENT_RESULTS / "section-results.json"), "w"), indent=1)
 
 
 if __name__ == "__main__":

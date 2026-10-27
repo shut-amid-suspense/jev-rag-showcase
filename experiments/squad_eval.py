@@ -17,13 +17,12 @@ Pipelines, all scored top-1 against the gold paragraph:
 Jev cannot take the whole corpus: a choice question caps at 255 options and
 the model's context is ~32k tokens, so it always needs a shortlist here.
 
-Usage: python3 squad_eval.py --probe       one question through every pipeline
-       python3 squad_eval.py               full run, writes squad-results.json
+Usage: python3 -m experiments.squad_eval --probe       one question through every pipeline
+       python3 -m experiments.squad_eval               full run, writes squad-results.json
 Data:  data/squad-dev-v2.0.json from rajpurkar.github.io/SQuAD-explorer
 """
 
 import json
-import math
 import os
 import random
 import re
@@ -31,12 +30,14 @@ import sys
 import time
 from concurrent.futures import ThreadPoolExecutor
 
-from poc import BM25, JEV_MODEL, DECISIONS_URL, EMBED_MODEL, RETRIES, api_key, embed, post
+from jev_rag.api import CHAT_URL, JEV_MODEL, DECISIONS_URL, EMBED_MODEL, RETRIES, api_key, embed, post
 
-HERE = os.path.dirname(os.path.abspath(__file__))
+from jev_rag.retrieval import BM25, unit, top_k
+from jev_rag.paths import ROOT, EXPERIMENT_RESULTS
+
+HERE = str(ROOT)
 DATA = os.path.join(HERE, "data", "squad-dev-v2.0.json")
 EMB_CACHE = os.path.join(HERE, "data", "corpus-embeddings.json")
-CHAT_URL = os.environ.get("OPENROUTER_BASE_URL", "https://openrouter.ai") + "/api/v1/chat/completions"
 LLM_MODEL = "google/gemini-3.5-flash-lite"
 K = 20
 N_ANSWERABLE = 200
@@ -73,15 +74,8 @@ def corpus_vectors(key, paras):
     return vecs
 
 
-def unit(v):
-    n = math.sqrt(sum(x * x for x in v))
-    return [x / n for x in v]
 
 
-def top_k(qv, unit_vecs, k):
-    qv = unit(qv)
-    scores = [sum(a * b for a, b in zip(qv, v)) for v in unit_vecs]
-    return sorted(range(len(scores)), key=lambda i: -scores[i])[:k]
 
 
 def jev_pick(q, cands, key):
@@ -189,7 +183,7 @@ def main():
     print(f"llm replies that were not an id or none: {unparsed}")
     print(f"dropped connections retried: {dict(RETRIES) or 0}")
 
-    out = os.path.join(HERE, "squad-results.json")
+    out = str(EXPERIMENT_RESULTS / "squad-results.json")
     json.dump({"config": {"K": K, "llm": LLM_MODEL, "jev": JEV_MODEL, "embed": EMBED_MODEL,
                           "workers": WORKERS}, "summary": summary, "rows": rows},
               open(out, "w"), indent=2)

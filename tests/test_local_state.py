@@ -12,16 +12,17 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 os.environ['GRADIO_ANALYTICS_ENABLED'] = 'False'
 
-import app
-import index_store
-import poc
+from jev_rag import ui as app
+from jev_rag import index_store
+from jev_rag.retrieval import BM25
+from jev_rag import api
 
 
 def sample_index():
     chunks = [{'id': 'c0', 'page': 1, 'section': 'Support', 'label': '[Support, p. 1] ',
                'text': '[Support, p. 1] Atlas handover owner is Nora Chen.'}]
     return {'name': 'sample.pdf', 'pages': 1, 'chunks': chunks,
-            'uvecs': [[1.0, 0.0, 0.0]], 'bm25': poc.BM25([c['text'] for c in chunks])}
+            'uvecs': [[1.0, 0.0, 0.0]], 'bm25': BM25([c['text'] for c in chunks])}
 
 
 class CacheTests(unittest.TestCase):
@@ -123,10 +124,10 @@ class CredentialTests(unittest.TestCase):
 
     def test_cli_key_only_comes_from_environment(self):
         with patch.dict(os.environ, {'OPENROUTER_API_KEY': 'test-env-key'}):
-            self.assertEqual(poc.api_key(), 'test-env-key')
+            self.assertEqual(api.api_key(), 'test-env-key')
         with patch.dict(os.environ, {}, clear=True):
             with self.assertRaises(SystemExit):
-                poc.api_key()
+                api.api_key()
 
 
 class WiringTests(unittest.TestCase):

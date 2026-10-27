@@ -16,11 +16,10 @@ stage, ("step", dict) after it, then ("done", dict).
 import json
 import time
 
-from ableton_eval import rrf
-from agent import PROVIDERS, body_text, turn_cost
-from classic import answer_from, call_model
-from poc import DECISIONS_URL, JEV_MODEL, embed, post
-from squad_eval import top_k
+from .retrieval import rrf, top_k
+from .agent import PROVIDERS, body_text, turn_cost
+from .classic import answer_from, call_model
+from .api import DECISIONS_URL, JEV_MODEL, embed, post
 
 MAX_TERMS, PER_TERM, POOL, TOP = 6, 20, 40, 5
 

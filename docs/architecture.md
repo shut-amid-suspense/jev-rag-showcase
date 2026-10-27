@@ -2,7 +2,7 @@
 
 This document describes the implemented system. Proposed improvements are identified as such. It does not imply a vector-database service, automatic model router or production deployment that the code does not implement.
 
-![Jev RAG's three implemented retrieval workflows](docs/diagrams/search-modes.png)
+![Jev RAG's three implemented retrieval workflows](diagrams/search-modes.png)
 
 ## 1. System boundaries and data flow
 
@@ -45,7 +45,7 @@ flowchart LR
     A -->|Answer, passages and progress| B
 ```
 
-The browser sends its entered keys to the local server. The application holds them in per-session memory, not browser persistence or the index. Provider requests authenticate with the relevant key. Document text and optional images cross the provider boundary; a local UI does not mean local inference. See [PRIVACY.md](PRIVACY.md).
+The browser sends its entered keys to the local server. The application holds them in per-session memory, not browser persistence or the index. Provider requests authenticate with the relevant key. Document text and optional images cross the provider boundary; a local UI does not mean local inference. See [the data-flow notes](privacy.md).
 
 The document index is shared process state, not a tenant-isolated database. The app binds to loopback and assumes one trusted user. Uploaded files are managed by Gradio; clearing the UI selection does not promise removal of every cached or temporary file.
 
@@ -159,21 +159,26 @@ Two different questions are measured:
 
 The raw measurements, fixed criteria, individual grades and original source snapshots are included. One rubric item was overly demanding relative to its question; the review explicitly flags it. The synthetic handbook tests operation and is separate from the harder diagnostic. No screenshots, broad enterprise test set, repeated-run confidence interval or independent blinded grading were evaluated.
 
-See [the accuracy review](docs/comparisons/2026-10-26-accuracy-review.md), [protocol](benchmarks/accuracy-protocol.md) and [evidence verifier](scripts/verify_evidence.py).
+See [the accuracy review](comparisons/2026-10-26-accuracy-review.md), [protocol](../benchmarks/accuracy-protocol.md) and [evidence verifier](../scripts/verify_evidence.py).
 
 ## 6. Source map and maintainability
 
 | Responsibility | Implemented source |
 |---|---|
-| UI, PDF ingestion, progress events and in-memory document cache | [app.py](app.py) |
-| Data-only persistent index and compatibility validation | [index_store.py](index_store.py) |
-| Fast baseline and shared final-answer call | [classic.py](classic.py) |
-| Focused query generation, pooling and Standard Jev ranking | [keywords.py](keywords.py) |
-| Agent tools, repeated searches and per-search Jev ranking | [agent.py](agent.py) |
-| Embedding/decision HTTP helpers and BM25 | [poc.py](poc.py) |
-| Rank fusion and cosine-search helpers reused from research | [ableton_eval.py](ableton_eval.py), [squad_eval.py](squad_eval.py) |
-| Mode comparison, request instrumentation and report generation | [benchmarks/compare_search_modes.py](benchmarks/compare_search_modes.py) |
+| Local entry point | [app.py](../app.py) |
+| UI, PDF ingestion, progress events and in-memory document cache | [ui.py](../jev_rag/ui.py) |
+| Data-only persistent index and compatibility validation | [index_store.py](../jev_rag/index_store.py) |
+| Fast baseline and shared final-answer call | [classic.py](../jev_rag/classic.py) |
+| Focused query generation, pooling and Standard Jev ranking | [keywords.py](../jev_rag/keywords.py) |
+| Agent tools, repeated searches and per-search Jev ranking | [agent.py](../jev_rag/agent.py) |
+| Embedding/decision HTTP helpers and endpoints | [api.py](../jev_rag/api.py) |
+| BM25, vector normalization, cosine ranking and rank fusion | [retrieval.py](../jev_rag/retrieval.py) |
+| Repository-local storage paths | [paths.py](../jev_rag/paths.py) |
+| Mode comparison, instrumentation and report generation | [compare_search_modes.py](../benchmarks/compare_search_modes.py) |
+| Historical retrieval studies and their saved results | [experiments/](../experiments/README.md) |
 
-The flat modules reuse research helpers to avoid duplicating algorithms. That keeps a small experiment inspectable, but it couples runtime code to experiment modules. A larger application should extract common retrieval primitives and a provider-client interface before adding more modes; the current diagrams do not pretend that refactor has already happened.
+The application package depends on shared retrieval and provider primitives. Experiments reuse those primitives, while application imports never load experiment modules. Tests enforce this dependency direction. The top-level `app.py` is a small launcher; UI code stays inside the application package. This keeps the runnable system separate from the research scripts while preserving their algorithms and recorded evidence.
 
-The overview image is reproducible with `python scripts/render_architecture.py --png`. Its [SVG](docs/diagrams/search-modes.svg) is included; the detailed diagrams above use editable Mermaid syntax directly in this document.
+The source snapshots retain the original flat layout because they identify the code that actually produced the historical measurements. They are evidence, not alternate application entry points. New benchmark runs record the launcher and every Python module in the application package.
+
+The overview image is reproducible with `python scripts/render_architecture.py --png`. Its [SVG](diagrams/search-modes.svg) is included; the detailed diagrams above use editable Mermaid syntax directly in this document.

@@ -13,13 +13,13 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from benchmarks import compare_search_modes as benchmark
 from scripts import verify_evidence as evidence
-from test_search_modes import FakeProvider
-import app
-import agent
-import classic
-import index_store
-import keywords
-import poc
+from tests.fakes import FakeProvider
+from jev_rag import ui as app
+from jev_rag import agent
+from jev_rag import classic
+from jev_rag import index_store
+from jev_rag import keywords
+from jev_rag import api
 
 
 class EvidenceIntegrityTests(unittest.TestCase):
@@ -90,7 +90,7 @@ class BenchmarkTests(unittest.TestCase):
             case_path.write_text(json.dumps(case))
             argv = ['compare_search_modes.py', '--case', str(case_path.relative_to(ROOT)),
                     '--output-prefix', str(relative / 'measured')]
-            for module in [poc, agent, classic, keywords]:
+            for module in [api, agent, classic, keywords]:
                 stack.enter_context(patch.object(module, 'post', fake.post))
             stack.enter_context(patch.object(index_store, 'DIR', str(directory / 'indexes')))
             stack.enter_context(patch.dict('os.environ', {'OPENROUTER_API_KEY': 'offline-test-key'}))
@@ -101,6 +101,9 @@ class BenchmarkTests(unittest.TestCase):
                     benchmark.main()
                 result_path = directory / 'measured.json'
                 result = json.loads(result_path.read_text())
+                self.assertIn('jev_rag/retrieval.py', result['application_source_sha256'])
+                self.assertIn('jev_rag/ui.py', result['application_source_sha256'])
+                self.assertFalse(any(name.startswith('experiments/') for name in result['application_source_sha256']))
                 evidence.verify_run(result)
                 self.assertEqual({row['mode'] for row in result['application']}, set(evidence.MODES))
                 self.assertEqual([result['summary'][mode]['jev_calls'] for mode in evidence.MODES], [0, 1, 1])
@@ -121,7 +124,7 @@ class BenchmarkTests(unittest.TestCase):
 class ErrorPrivacyTests(unittest.TestCase):
     def test_provider_error_body_is_not_exposed_in_exception_or_server_log(self):
         body = b'sensitive-document-fragment test-private-key'
-        error = poc.HTTPStatusError('https://provider.example/request', 400, body)
+        error = api.HTTPStatusError('https://provider.example/request', 400, body)
         self.assertNotIn('sensitive-document-fragment', str(error))
         self.assertNotIn('test-private-key', str(error))
         log = io.StringIO()

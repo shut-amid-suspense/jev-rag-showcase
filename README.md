@@ -2,7 +2,7 @@
 
 Ask practical questions about a long PDF and inspect the passages behind each answer. This proof of concept explores whether a decision model, **Jev**, can improve the selection of evidence for a generative answer model.
 
-[Run locally](#start-the-app) · [Architecture](ARCHITECTURE.md) · [Evaluation](#evaluation)
+[Run locally](#start-the-app) · [Architecture](docs/architecture.md) · [Evaluation](#evaluation)
 
 The application offers three retrieval workflows. The benchmark records Jev's ranking on fixed candidate pools, so its contribution can be inspected separately from query expansion.
 
@@ -10,7 +10,7 @@ The application offers three retrieval workflows. The benchmark records Jev's ra
 
 **Read the diagram:** gray is local retrieval, green is Jev selecting evidence, and blue is the generative model. All three modes reuse the same document index. Jev is a decision layer in Standard and Thorough; Fast is the control without it.
 
-[Architecture, data flow and engineering tradeoffs](ARCHITECTURE.md) · [Editable SVG](docs/diagrams/search-modes.svg)
+[Architecture, data flow and engineering tradeoffs](docs/architecture.md) · [Editable SVG](docs/diagrams/search-modes.svg)
 
 | Search mode | What happens | Jev's role |
 |---|---|---|
@@ -30,7 +30,7 @@ Gemini writes the final answers in the recorded comparisons. Jev selects evidenc
 | How do we avoid overstating grounded answers? | Show source passages and evaluate required facts separately from page hits. | Valid citation IDs do not prove semantic support; the agent's citation check is weaker than the fixed-context modes. |
 | Why keep storage local? | Inspectable JSON caches and local ranking make the experiment easy to reproduce. | Linear similarity search and shared process state are single-user choices, not a large-scale hosted architecture. |
 
-The [architecture document](ARCHITECTURE.md) includes the provider boundary, agent sequence, evaluation design, source map and the limits of each decision. Proposed improvements are separated from implemented behavior.
+The [architecture document](docs/architecture.md) includes the provider boundary, agent sequence, evaluation design, source map and the limits of each decision. Proposed improvements are separated from implemented behavior.
 
 ## Start the app
 
@@ -48,9 +48,25 @@ API keys are held in memory for the active app session. Re-enter them after a pa
 
 The demo handbook is fictional and intended to demonstrate operation. It is not the accuracy test corpus.
 
+## Repository layout
+
+```text
+app.py                 Local app launcher
+jev_rag/               UI, search modes, provider client and shared retrieval
+benchmarks/            Three-mode runner, frozen cases and executed-source evidence
+experiments/           Historical retrieval studies, fixtures and saved results
+docs/                  Architecture, usage, privacy, diagrams and diagnostic reports
+examples/              Synthetic demo PDF
+tests/                 Offline regression tests
+scripts/               Evidence verification and architecture rendering
+data/                  Ignored uploads, generated documents and index caches
+```
+
+The application has no dependency on the experiment modules. BM25, vector ranking and rank fusion live in `jev_rag/retrieval.py`; provider requests live in `jev_rag/api.py`. See [the experiment guide](experiments/README.md) for the older research commands and result files.
+
 ## Documentation
 
-- [Architecture](ARCHITECTURE.md) — data flow, design decisions and engineering tradeoffs.
+- [Architecture](docs/architecture.md) — data flow, design decisions and engineering tradeoffs.
 - [Retrieval pipelines](docs/jev-pipeline.md) — the three search modes and their implementation.
 - [Evaluation methodology and results](docs/comparisons/2026-10-26-accuracy-review.md) — diagnostic tasks, scoring criteria and limitations.
 - [Recorded benchmark data](docs/comparisons/2026-10-26-jev-troubleshooting.json) — answers, provider usage and Jev ranking traces.
@@ -98,6 +114,6 @@ The recorded manual cases and frozen questions are included, but the copyrighted
 
 This is a local, single-user research application. It supports text-based PDFs and optional question screenshots; it does not OCR scanned PDFs. The recorded diagnostic did not evaluate screenshots, production workloads, access control or concurrent users.
 
-API keys live in session memory, and document indexes use validated JSON caches. Historical measurements refer to the source versions preserved with each experiment; the current retrieval and answering algorithms match those versions. Setup, storage and credential-handling checks are documented in [VERIFICATION.md](VERIFICATION.md).
+API keys live in session memory, and document indexes use validated JSON caches. Historical measurements refer to the source versions preserved with each experiment; the current retrieval and answering algorithms match those versions. Setup, storage and credential-handling checks are documented in [verification notes](docs/verification.md).
 
-See [HOW_IT_WORKS.md](HOW_IT_WORKS.md) for usage and [PRIVACY.md](PRIVACY.md) for the data flow.
+See [the usage guide](docs/usage.md) and [data-flow notes](docs/privacy.md).

@@ -41,23 +41,23 @@ Recorded request costs cover successful responses; failed or retried requests ca
 
 ## Coverage inventory
 
-The main benchmark covers every mode in the application's `app.METHODS` search control and fails its coverage check if that control changes.
+The main benchmark covers every mode in the application's `jev_rag.ui.METHODS` search control and fails its coverage check if that control changes.
 
 | Application mode | Implementation in this repository |
 |---|---|
-| Jev RAG — Fast | `classic.run_classic` in [classic.py](../classic.py) |
-| Jev RAG — Standard | `keywords.run_keywords` in [keywords.py](../keywords.py) |
-| Jev RAG — Thorough | `agent.run_agent` in [agent.py](../agent.py) |
+| Jev RAG — Fast | `jev_rag.classic.run_classic` in [classic.py](../jev_rag/classic.py) |
+| Jev RAG — Standard | `jev_rag.keywords.run_keywords` in [keywords.py](../jev_rag/keywords.py) |
+| Jev RAG — Thorough | `jev_rag.agent.run_agent` in [agent.py](../jev_rag/agent.py) |
 
 There are also separate retrieval research scripts in this repository. They are not additional choices in the application's search control, and the three-mode report does not claim to have rerun every historical research matrix.
 
 | Research script | Alternatives it compares |
 |---|---|
-| [poc.py](../poc.py) | BM25, embeddings, Jev over the whole small corpus, embeddings plus Jev |
-| [squad_eval.py](../squad_eval.py) | BM25, embeddings, embeddings plus Jev, embeddings plus a chat-model reranker |
-| [ableton_eval.py](../ableton_eval.py) | BM25, embeddings, hybrid, hybrid plus Jev, hybrid plus a chat-model reranker, table-of-contents navigation with Jev |
-| [section_eval.py](../section_eval.py) | Page-based, section-and-page, and section-based passage boundaries |
-| [clef_eval.py](../clef_eval.py) | Jev, Clef and Clef-flash decision models for intent and passage selection |
+| [poc.py](../experiments/poc.py) | BM25, embeddings, Jev over the whole small corpus, embeddings plus Jev |
+| [squad_eval.py](../experiments/squad_eval.py) | BM25, embeddings, embeddings plus Jev, embeddings plus a chat-model reranker |
+| [ableton_eval.py](../experiments/ableton_eval.py) | BM25, embeddings, hybrid, hybrid plus Jev, hybrid plus a chat-model reranker, table-of-contents navigation with Jev |
+| [section_eval.py](../experiments/section_eval.py) | Page-based, section-and-page, and section-based passage boundaries |
+| [clef_eval.py](../experiments/clef_eval.py) | Jev, Clef and Clef-flash decision models for intent and passage selection |
 
 ## Historical research limitations
 
@@ -65,7 +65,7 @@ The older research scripts and saved JSON files measure passage selection, not c
 
 The SQuAD experiment treats `is_impossible` as an abstention label. That label belongs to a question's associated paragraph; the script does not establish that every other paragraph in its shared corpus lacks an answer. Its unanswerable-item scores therefore have an additional limitation.
 
-`ableton_eval.py` and `section_eval.py` require the matching manual and Poppler's `pdftotext` and `pdftohtml` commands. `ableton_eval.py ingest` creates `data/chunks.json`; the committed `data/questions.json` belongs to that historical chunking scheme. The SQuAD experiment requires `data/squad-dev-v2.0.json`. These external corpora and tools are unnecessary for the application or portable benchmark. Older research commands overwrite their fixed result filenames; preserve saved results before rerunning them.
+`experiments/ableton_eval.py` and `experiments/section_eval.py` require the matching manual and Poppler's `pdftotext` and `pdftohtml` commands. `python -m experiments.ableton_eval ingest` creates `data/chunks.json`; the committed `experiments/fixtures/ableton-questions.json` belongs to that historical chunking scheme. The SQuAD experiment requires `data/squad-dev-v2.0.json`. These external corpora and tools are unnecessary for the application or portable benchmark. Older research commands write into `experiments/results/` and overwrite fixed result filenames; preserve saved results before rerunning them. [Experiment commands and saved outputs](../experiments/README.md) are documented separately.
 
 ## Source-grounded troubleshooting accuracy diagnostic
 

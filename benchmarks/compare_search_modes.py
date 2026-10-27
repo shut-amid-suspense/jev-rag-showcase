@@ -154,11 +154,11 @@ def main() -> None:
     os.environ['ASK_PDF_INDEX_DIR'] = str(ROOT / 'data/benchmark-cache/indexes')
     os.environ['GRADIO_ANALYTICS_ENABLED'] = 'False'
     sys.path.insert(0, str(ROOT))
-    import app
-    import agent
-    import classic
-    import keywords
-    import poc
+    from jev_rag import ui as app
+    from jev_rag import agent
+    from jev_rag import classic
+    from jev_rag import keywords
+    from jev_rag import api
 
     modes = [(label, runner) for label, _, runner in app.METHODS.values()]
     if {label for label, _ in modes} != {'Fast', 'Standard', 'Thorough'}:
@@ -186,7 +186,7 @@ def main() -> None:
     if result_path.exists() or report_path.exists():
         parser.error('Choose a new output prefix to preserve an existing recorded run')
     requests = []
-    original_post = poc.post
+    original_post = api.post
 
     def measured_post(url, body, supplied_key, attempts=3):
         start = time.perf_counter()
@@ -210,15 +210,15 @@ def main() -> None:
         requests.append(record)
         return response, elapsed_ms
 
-    for module in [poc, agent, classic, keywords]:
+    for module in [api, agent, classic, keywords]:
         module.post = measured_post
     data = {'project': 'Jev RAG POC', 'status': 'running',
         'started_at': datetime.now().astimezone().isoformat(),
         'case_file': relative(case_path), 'case_sha256': sha256(case_path), 'evaluation_scope': case.get('evaluation_scope'), 'document': relative(pdf_path), 'document_sha256': sha256(pdf_path),
         'questions': questions, 'models': {'answer': agent.PROVIDERS['gemini']['model'],
-        'embedding': poc.EMBED_MODEL, 'reranker': poc.JEV_MODEL},
+        'embedding': api.EMBED_MODEL, 'reranker': api.JEV_MODEL},
         'source_revision': ((subprocess.run(['git', '-C', str(ROOT), 'rev-parse', 'HEAD'], capture_output=True, text=True).stdout.strip() or None) if (ROOT / '.git').exists() else None),
-        'application_source_sha256': {path.name: sha256(path) for path in ROOT.glob('*.py')},
+        'application_source_sha256': {relative(path): sha256(path) for path in [ROOT / 'app.py', *sorted((ROOT / 'jev_rag').glob('*.py'))]},
         'benchmark_sha256': sha256(Path(__file__)), 'application': []}
 
     def save() -> None:

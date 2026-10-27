@@ -10,10 +10,11 @@ import os
 import re
 import tempfile
 
-from poc import BM25, EMBED_MODEL
+from .api import EMBED_MODEL
+from .retrieval import BM25
+from .paths import DATA_DIR
 
-DIR = os.environ.get('ASK_PDF_INDEX_DIR') or os.path.join(
-    os.path.dirname(os.path.abspath(__file__)), 'data', 'indexes')
+DIR = os.environ.get('ASK_PDF_INDEX_DIR') or str(DATA_DIR / 'indexes')
 MAX_SAVED = 10
 VERSION = 2
 

@@ -18,9 +18,8 @@ import json
 import os
 import time
 
-from poc import DECISIONS_URL, JEV_MODEL, HTTPStatusError, embed, post
-from ableton_eval import rrf
-from squad_eval import CHAT_URL, top_k
+from .api import CHAT_URL, DECISIONS_URL, JEV_MODEL, HTTPStatusError, embed, post
+from .retrieval import rrf, top_k
 
 # CEREBRAS_BASE_URL exists only to point a test run at a local fake service.
 CEREBRAS = os.environ.get("CEREBRAS_BASE_URL", "https://api.cerebras.ai")
