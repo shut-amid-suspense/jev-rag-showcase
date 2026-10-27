@@ -5,5 +5,3 @@
 - **Synthetic support handbook:** fictional material included in `benchmarks/fixtures/` and the generated demo PDF in `examples/`. It is a portable functional example, not the corpus used to claim hard-task accuracy.
 - **Gradio and PyMuPDF:** application dependencies installed through `requirements.txt`. They are not vendored into this repository; their package metadata and upstream projects provide their own terms and attribution.
 - **OpenRouter, Jev, Gemini and optional Cerebras/Qwen:** external model services used by the application. No model weights or provider credentials are bundled.
-
-The sharing copy retains the original project history and adds a local packaging commit. No new license was selected as part of preparing this evaluation copy.

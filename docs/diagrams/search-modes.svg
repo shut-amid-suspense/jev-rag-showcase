@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="870" viewBox="0 0 1400 870" role="img" aria-labelledby="title desc">
+<title id="title">Jev RAG: three retrieval workflows</title>
+<desc id="desc">All modes share a page-labelled document index. Fast sends five hybrid-search passages directly to the answer model. Standard expands queries and uses Jev to rank a pool down to five. Thorough uses Jev during agent searches and can repeat or read a full page, within six model turns.</desc>
+<rect width="1400" height="870" fill="#ffffff"/>
+
+<text x="56" y="48" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="700" fill="#546780" letter-spacing="1.7">JEV RAG / IMPLEMENTED ARCHITECTURE</text>
+<text x="56" y="94" font-family="Arial,Helvetica,sans-serif" font-size="36" font-weight="700" fill="#172b45">One document. Three retrieval workflows.</text>
+<text x="56" y="124" font-family="Arial,Helvetica,sans-serif" font-size="19" font-weight="400" fill="#546780">Jev selects evidence. The generative model writes the final answer.</text>
+<rect x="900" y="33" width="18" height="18" rx="4" fill="#f4f7fa" stroke="#b8c7d8"/>
+<text x="927" y="48" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="400" fill="#546780">Local retrieval</text>
+<rect x="1070" y="33" width="18" height="18" rx="4" fill="#e2f7ee" stroke="#b8c7d8"/>
+<text x="1097" y="48" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="400" fill="#546780">Jev</text>
+<rect x="1170" y="33" width="18" height="18" rx="4" fill="#eef2ff" stroke="#b8c7d8"/>
+<text x="1197" y="48" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="400" fill="#546780">Generation</text>
+<rect x="56" y="160" width="180" height="100" rx="14" fill="#f4f7fa" stroke="#d8e1eb"/>
+<text x="146" y="201" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="700" fill="#172b45" text-anchor="middle">Upload a PDF</text>
+<text x="146" y="230" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="400" fill="#546780" text-anchor="middle">Extract + label pages</text>
+<path d="M242,210 L269,210" fill="none" stroke="#718198" stroke-width="2"/>
+<polyline points="262,205 269,210 262,215" fill="none" stroke="#718198" stroke-width="2"/>
+<rect x="278" y="160" width="1066" height="100" rx="14" fill="#f7fafc" stroke="#d8e1eb"/>
+<text x="302" y="188" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="700" fill="#546780" letter-spacing="1.7">SHARED DOCUMENT INDEX</text>
+<text x="302" y="217" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="700" fill="#172b45">Page-labelled passages + keyword index + embedding vectors</text>
+<text x="302" y="242" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="400" fill="#546780">Embeddings via OpenRouter; search runs locally. Validated JSON cache keyed by PDF content.</text>
+<rect x="56" y="292" width="1288" height="116" rx="14" fill="#f8fafc" stroke="#d8e1eb"/>
+<rect x="56" y="432" width="1288" height="116" rx="14" fill="#f0faf6" stroke="#d8e1eb"/>
+<rect x="56" y="572" width="1288" height="188" rx="14" fill="#f6f5fc" stroke="#d8e1eb"/>
+<text x="82" y="329" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="700" fill="#546780" letter-spacing="1.7">FAST</text>
+<text x="82" y="359" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="700" fill="#172b45">Single search</text>
+<text x="82" y="385" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="400" fill="#546780">Baseline: no Jev</text>
+<rect x="278" y="312" width="270" height="76" rx="14" fill="#f4f7fa" stroke="#ced9e5"/>
+<text x="413.0" y="343" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="700" fill="#172b45" text-anchor="middle">Hybrid search</text>
+<text x="413.0" y="368" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="400" fill="#546780" text-anchor="middle">Keywords + vector similarity</text>
+<path d="M554,350 L596,350" fill="none" stroke="#718198" stroke-width="2"/>
+<polyline points="589,345 596,350 589,355" fill="none" stroke="#718198" stroke-width="2"/>
+<rect x="606" y="312" width="250" height="76" rx="14" fill="#f4f7fa" stroke="#ced9e5"/>
+<text x="731.0" y="343" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="700" fill="#172b45" text-anchor="middle">Take top 5 passages</text>
+<text x="731.0" y="368" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="400" fill="#546780" text-anchor="middle">One fixed retrieval pass</text>
+<path d="M862,350 L904,350" fill="none" stroke="#718198" stroke-width="2"/>
+<polyline points="897,345 904,350 897,355" fill="none" stroke="#718198" stroke-width="2"/>
+<rect x="914" y="312" width="402" height="76" rx="14" fill="#eef2ff" stroke="#b8c6f1"/>
+<text x="1115.0" y="343" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="700" fill="#172b45" text-anchor="middle">Generate an answer</text>
+<text x="1115.0" y="368" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="400" fill="#546780" text-anchor="middle">Selected passages + source IDs</text>
+<text x="82" y="469" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="700" fill="#546780" letter-spacing="1.7">STANDARD</text>
+<text x="82" y="499" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="700" fill="#172b45">Expand + rank</text>
+<text x="82" y="525" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="400" fill="#546780">One Jev call</text>
+<rect x="278" y="452" width="236" height="76" rx="14" fill="#eef2ff" stroke="#b8c6f1"/>
+<text x="396.0" y="483" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="700" fill="#172b45" text-anchor="middle">Generate terms</text>
+<text x="396.0" y="508" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="400" fill="#546780" text-anchor="middle">Up to 6 search terms</text>
+<rect x="544" y="452" width="236" height="76" rx="14" fill="#f4f7fa" stroke="#ced9e5"/>
+<text x="662.0" y="483" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="700" fill="#172b45" text-anchor="middle">Hybrid candidate pool</text>
+<text x="662.0" y="508" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="400" fill="#546780" text-anchor="middle">Combine up to 40 passages</text>
+<rect x="810" y="452" width="236" height="76" rx="14" fill="#e2f7ee" stroke="#55b99a"/>
+<text x="928.0" y="483" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="700" fill="#172b45" text-anchor="middle">Jev ranks passages</text>
+<text x="928.0" y="508" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="400" fill="#546780" text-anchor="middle">Keep the best 5</text>
+<rect x="1076" y="452" width="240" height="76" rx="14" fill="#eef2ff" stroke="#b8c6f1"/>
+<text x="1196.0" y="483" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="700" fill="#172b45" text-anchor="middle">Generate an answer</text>
+<text x="1196.0" y="508" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="400" fill="#546780" text-anchor="middle">From selected evidence</text>
+<path d="M518,490 L536,490" fill="none" stroke="#718198" stroke-width="2"/>
+<polyline points="529,485 536,490 529,495" fill="none" stroke="#718198" stroke-width="2"/>
+<path d="M784,490 L802,490" fill="none" stroke="#718198" stroke-width="2"/>
+<polyline points="795,485 802,490 795,495" fill="none" stroke="#718198" stroke-width="2"/>
+<path d="M1050,490 L1068,490" fill="none" stroke="#718198" stroke-width="2"/>
+<polyline points="1061,485 1068,490 1061,495" fill="none" stroke="#718198" stroke-width="2"/>
+<text x="82" y="609" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="700" fill="#546780" letter-spacing="1.7">THOROUGH</text>
+<text x="82" y="639" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="700" fill="#172b45">Iterate on evidence</text>
+<text x="82" y="665" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="400" fill="#546780">Up to 6 model turns</text>
+<rect x="278" y="592" width="236" height="76" rx="14" fill="#eef2ff" stroke="#b8c6f1"/>
+<text x="396.0" y="623" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="700" fill="#172b45" text-anchor="middle">Agent chooses action</text>
+<text x="396.0" y="648" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="400" fill="#546780" text-anchor="middle">Search path shown here</text>
+<rect x="544" y="592" width="236" height="76" rx="14" fill="#f4f7fa" stroke="#ced9e5"/>
+<text x="662.0" y="623" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="700" fill="#172b45" text-anchor="middle">Hybrid shortlist</text>
+<text x="662.0" y="648" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="400" fill="#546780" text-anchor="middle">Up to 20 passages</text>
+<rect x="810" y="592" width="236" height="76" rx="14" fill="#e2f7ee" stroke="#55b99a"/>
+<text x="928.0" y="623" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="700" fill="#172b45" text-anchor="middle">Jev ranks passages</text>
+<text x="928.0" y="648" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="400" fill="#546780" text-anchor="middle">Return the best 3</text>
+<rect x="1076" y="592" width="240" height="76" rx="14" fill="#eef2ff" stroke="#b8c6f1"/>
+<text x="1196.0" y="623" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="700" fill="#172b45" text-anchor="middle">Agent evaluates next</text>
+<text x="1196.0" y="648" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="400" fill="#546780" text-anchor="middle">Answer or continue</text>
+<path d="M518,630 L536,630" fill="none" stroke="#718198" stroke-width="2"/>
+<polyline points="529,625 536,630 529,635" fill="none" stroke="#718198" stroke-width="2"/>
+<path d="M784,630 L802,630" fill="none" stroke="#718198" stroke-width="2"/>
+<polyline points="795,625 802,630 795,635" fill="none" stroke="#718198" stroke-width="2"/>
+<path d="M1050,630 L1068,630" fill="none" stroke="#718198" stroke-width="2"/>
+<polyline points="1061,625 1068,630 1061,635" fill="none" stroke="#718198" stroke-width="2"/>
+<path d="M1196,675 L1196,706 L396,706 L396,675" fill="none" stroke="#718198" stroke-width="2"/>
+<polyline points="391,682 396,675 401,682" fill="none" stroke="#718198" stroke-width="2"/>
+<text x="796" y="698" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="400" fill="#546780" text-anchor="middle">The agent may search again; read_page can bypass ranking.</text>
+<text x="278" y="741" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="400" fill="#546780">Six turns limit model iterations, not the total number of tool calls or a monetary budget.</text>
+<text x="56" y="802" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="700" fill="#172b45">Evidence coverage and answer completeness are evaluated separately.</text>
+<text x="56" y="832" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="400" fill="#546780">Gemini generated the recorded answers. Optional Cerebras/Qwen generation is supported but was not benchmarked here.</text>
+</svg>

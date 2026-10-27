@@ -1,8 +1,16 @@
-# Jev RAG — an evaluated document assistant
+# Jev RAG
 
 Ask practical questions about a long PDF and inspect the passages behind each answer. This proof of concept explores whether a decision model, **Jev**, can improve the selection of evidence for a generative answer model.
 
+[Run locally](#start-the-app) · [Architecture](ARCHITECTURE.md) · [Evaluation](#evaluation)
+
 The application compares three complete retrieval workflows. It also records Jev's ranking on fixed candidate pools, so its contribution can be inspected separately from query expansion.
+
+![Jev RAG architecture: shared document index and three retrieval workflows](docs/diagrams/search-modes.png)
+
+**Read the diagram:** gray is local retrieval, green is Jev selecting evidence, and blue is the generative model. All three modes reuse the same document index. Jev is a decision layer in Standard and Thorough; Fast is the control without it.
+
+[Architecture, data flow and engineering tradeoffs](ARCHITECTURE.md) · [Editable SVG](docs/diagrams/search-modes.svg)
 
 | Search mode | What happens | Jev's role |
 |---|---|---|
@@ -11,6 +19,18 @@ The application compares three complete retrieval workflows. It also records Jev
 | **Thorough** | An agent can search again or read a page before answering | Ranks the candidates for each search |
 
 Gemini writes the final answers in the recorded comparisons. Jev selects evidence; it does not generate the answer prose. An optional Cerebras/Qwen route is also implemented but was not part of those comparisons.
+
+## Architecture decisions and challenges
+
+| Engineering question | Decision in this prototype | Evidence or limitation |
+|---|---|---|
+| How do we recover evidence spread across sections? | Hybrid retrieval plus focused query expansion; an agent can read a full page. | Fast declined five multi-part diagnostic tasks when its retrieved context was incomplete. |
+| Where does Jev contribute? | Rank candidate passages before answer generation and record the before/after lists. | On identical Standard pools, canonical evidence in the chosen five rose from 11/23 to 18/23. |
+| How are cost and latency controlled? | Cache document indexes, cap selected context, and limit the agent to six model turns. | This is not a hard request or spending budget; tool calls add provider requests. |
+| How do we avoid overstating grounded answers? | Show source passages and evaluate required facts separately from page hits. | Valid citation IDs do not prove semantic support; the agent's citation check is weaker than the fixed-context modes. |
+| Why keep storage local? | Inspectable JSON caches and local ranking make the experiment easy to reproduce. | Linear similarity search and shared process state are single-user choices, not a large-scale hosted architecture. |
+
+The [architecture document](ARCHITECTURE.md) includes the provider boundary, agent sequence, evaluation design, source map and the limits of each decision. Proposed improvements are separated from implemented behavior.
 
 ## Start the app
 
@@ -28,16 +48,17 @@ API keys are held in memory for the active app session. Re-enter them after a pa
 
 The demo handbook is fictional and intended to demonstrate operation. It is not the accuracy test corpus.
 
-## Where to review the work
+## Documentation
 
-1. [Pipeline and exact source locations](docs/jev-pipeline.md) — where Jev enters each workflow.
-2. [Source-grounded troubleshooting review](docs/comparisons/2026-10-26-accuracy-review.md) — six multi-part tasks, frozen criteria, omissions, limitations and ranking evidence.
-3. [Recorded answers and Jev decision traces](docs/comparisons/2026-10-26-jev-troubleshooting.json) — request-level models, costs, candidate IDs and rankings.
-4. [Benchmark instructions and coverage inventory](benchmarks/README.md) — reproduce all three modes using only this repository.
+- [Architecture](ARCHITECTURE.md) — data flow, design decisions and engineering tradeoffs.
+- [Retrieval pipelines](docs/jev-pipeline.md) — the three search modes and their implementation.
+- [Evaluation methodology and results](docs/comparisons/2026-10-26-accuracy-review.md) — diagnostic tasks, scoring criteria and limitations.
+- [Recorded benchmark data](docs/comparisons/2026-10-26-jev-troubleshooting.json) — answers, provider usage and Jev ranking traces.
+- [Running the benchmarks](benchmarks/README.md) — reproduction instructions and experiment coverage.
 
-## What was measured
+## Evaluation
 
-The six-task technical-support diagnostic uses an 867-page manual and 24 required facts committed before the run. The reviewer checked completeness against source evidence.
+The six-task technical-support diagnostic uses an 867-page manual and 24 required facts committed before the run. Answers were assessed for completeness against source evidence using an assistant-scored rubric.
 
 | Mode | Required-fact points / 24 | Median whole-answer time | Mean API cost per task |
 |---|---:|---:|---:|
@@ -73,10 +94,10 @@ The benchmark builds a PDF from its committed synthetic handbook and stores repo
 
 The recorded manual cases and frozen questions are included, but the copyrighted Ableton PDF is not. Place the matching manual under the case's repository-local path to rerun those cases. Its fingerprint and original executed source hashes are recorded. Small [frozen source snapshots](benchmarks/recorded-source/manifest.json) keep historical evidence verifiable even from the ZIP, without another repository or the original Git history.
 
-## Scope of this sharing version
+## Scope and limitations
 
 This is a local, single-user research application. It supports text-based PDFs and optional question screenshots; it does not OCR scanned PDFs. The recorded diagnostic did not evaluate screenshots, production workloads, access control or concurrent users.
 
-This sharing version improves setup, removes browser-persisted API keys, uses validated data-only JSON caches, and avoids stopping other running processes. Retrieval and answering algorithms are unchanged. Historical measurements refer to their original source versions, which remain included for inspection; packaging checks are described in [VERIFICATION.md](VERIFICATION.md).
+API keys live in session memory, and document indexes use validated JSON caches. Historical measurements refer to the source versions preserved with each experiment; the current retrieval and answering algorithms match those versions. Setup, storage and credential-handling checks are documented in [VERIFICATION.md](VERIFICATION.md).
 
 See [HOW_IT_WORKS.md](HOW_IT_WORKS.md) for usage and [PRIVACY.md](PRIVACY.md) for the data flow.
