@@ -18,7 +18,7 @@ Jev cannot take the whole corpus: a choice question caps at 255 options and
 the model's context is ~32k tokens, so it always needs a shortlist here.
 
 Usage: python3 -m experiments.squad_eval --probe       one question through every pipeline
-       python3 -m experiments.squad_eval               full run, writes squad-results.json
+       python3 -m experiments.squad_eval               full run, writes squad.json
 Data:  data/squad-dev-v2.0.json from rajpurkar.github.io/SQuAD-explorer
 """
 
@@ -183,7 +183,7 @@ def main():
     print(f"llm replies that were not an id or none: {unparsed}")
     print(f"dropped connections retried: {dict(RETRIES) or 0}")
 
-    out = str(EXPERIMENT_RESULTS / "squad-results.json")
+    out = str(EXPERIMENT_RESULTS / "squad.json")
     json.dump({"config": {"K": K, "llm": LLM_MODEL, "jev": JEV_MODEL, "embed": EMBED_MODEL,
                           "workers": WORKERS}, "summary": summary, "rows": rows},
               open(out, "w"), indent=2)

@@ -40,7 +40,7 @@ class RepositoryLayoutTests(unittest.TestCase):
         self.assertEqual(Path(ableton_eval.QUESTIONS), ROOT / 'experiments/fixtures/ableton-questions.json')
         self.assertTrue(Path(ableton_eval.QUESTIONS).is_file())
         self.assertEqual(Path(squad_eval.DATA).parent, ROOT / 'data')
-        for name in ['results.json', 'squad-results.json', 'ableton-results.json', 'section-results.json', 'clef-results.json']:
+        for name in ['poc.json', 'squad.json', 'ableton.json', 'section.json', 'clef.json']:
             self.assertTrue((ROOT / 'experiments/results' / name).is_file())
 
     def test_shared_retrieval_preserves_keyword_vector_and_fusion_behavior(self):

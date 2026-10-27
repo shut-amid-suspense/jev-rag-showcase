@@ -10,7 +10,7 @@ Steps (each writes a file in data/, so later steps are repeatable and cheap):
              the chunk's wording; that chunk is the gold -> experiments/fixtures/ableton-questions.json
   probe      one question through every method
   run        every question through every method, sequentially (one request
-             at a time, so latencies are not inflated) -> ableton-results.json
+             at a time, so latencies are not inflated) -> ableton.json
 
 Scoring: "chunk" = picked the exact gold chunk; "page" = picked any chunk on
 the gold chunk's page (the manual often says the same thing twice in a page).
@@ -278,7 +278,7 @@ def run(probe=False):
           f"{pct([r['embed']['search_ms'] for r in rows], .5):.0f} ms, not counted above")
     print(f"llm unparsed replies: {sum(r['hybrid>llm']['pick'].startswith('unparsed') for r in rows)}")
     print(f"dropped connections retried: {dict(RETRIES) or 0}")
-    out = str(EXPERIMENT_RESULTS / "ableton-results.json")
+    out = str(EXPERIMENT_RESULTS / "ableton.json")
     json.dump({"config": {"K": K, "pool": POOL, "jev": JEV_MODEL, "llm": LLM_MODEL,
                           "embed": EMBED_MODEL, "qgen": QGEN_MODEL},
                "summary": summary, "rows": rows}, open(out, "w"), indent=1)

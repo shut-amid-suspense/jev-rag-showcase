@@ -12,7 +12,7 @@ Pipelines, each scored on top-1 accuracy and per-query latency:
 
 Stdlib only. Key: $OPENROUTER_API_KEY supplied in the environment.
 Usage: python3 -m experiments.poc --probe     one call per endpoint, then stop
-       python3 -m experiments.poc             full run, writes results.json
+       python3 -m experiments.poc             full run, writes poc.json
 """
 
 import json
@@ -183,7 +183,7 @@ def main():
     print(f"\nembedding shortlist recall@{SHORTLIST_K}: {recall}/{len(rows)}")
     print(f"Jev cost: all={cost['jev_all']:.5f} USD, shortlist={cost['embed+jev']:.5f} USD")
 
-    out = str(EXPERIMENT_RESULTS / "results.json")
+    out = str(EXPERIMENT_RESULTS / "poc.json")
     with open(out, "w") as f:
         json.dump({"summary": summary, "jev_cost_usd": cost,
                    "shortlist_recall": recall, "rows": rows}, f, indent=2)

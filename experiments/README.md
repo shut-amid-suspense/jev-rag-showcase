@@ -6,11 +6,11 @@ Run experiments as modules from the repository root, after installing `requireme
 
 | Experiment | Command | Saved result |
 |---|---|---|
-| Synthetic near-duplicate passages | `python -m experiments.poc` | [results.json](results/results.json) |
-| SQuAD paragraph retrieval | `python -m experiments.squad_eval` | [squad-results.json](results/squad-results.json) |
-| Ableton retrieval and table-of-contents navigation | `python -m experiments.ableton_eval run` | [ableton-results.json](results/ableton-results.json) |
-| Section/page chunking alternatives | `python -m experiments.section_eval` | [section-results.json](results/section-results.json) |
-| Jev, Clef and Clef-flash decisions | `python -m experiments.clef_eval` | [clef-results.json](results/clef-results.json) |
+| Synthetic near-duplicate passages | `python -m experiments.poc` | [poc.json](results/poc.json) |
+| SQuAD paragraph retrieval | `python -m experiments.squad_eval` | [squad.json](results/squad.json) |
+| Ableton retrieval and table-of-contents navigation | `python -m experiments.ableton_eval run` | [ableton.json](results/ableton.json) |
+| Section/page chunking alternatives | `python -m experiments.section_eval` | [section.json](results/section.json) |
+| Jev, Clef and Clef-flash decisions | `python -m experiments.clef_eval` | [clef.json](results/clef.json) |
 
 The commands overwrite their fixed result paths. The committed result files are historical observations, not new runs of the reorganized code. Corpus preparation and model calls are unnecessary for viewing those records.
 

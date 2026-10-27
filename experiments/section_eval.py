@@ -12,7 +12,7 @@ All are scored the same way, by page: a pick is a hit when the piece covers the
 page the question was written from. "section" pieces can span two pages, an
 advantage under this scoring; "section+page" removes it and is the fair comparison.
 
-Run: .venv/bin/python -m experiments.section_eval      (writes section-results.json)
+Run: .venv/bin/python -m experiments.section_eval      (writes section.json)
 """
 
 import json
@@ -175,7 +175,7 @@ def main():
     row("Jev median ms", lambda r: r["jev_median_ms"])
     row("cost $", lambda r: r["cost_usd"])
     json.dump({"headings_found": found, "headings_total": total, "results": results},
-              open(str(EXPERIMENT_RESULTS / "section-results.json"), "w"), indent=1)
+              open(str(EXPERIMENT_RESULTS / "section.json"), "w"), indent=1)
 
 
 if __name__ == "__main__":

@@ -11,7 +11,7 @@ Tasks
   passage_all  same questions against all 120 passages — a long request, which
             the Clef model card says Workers AI may truncate
 
-Key: $OPENROUTER_API_KEY. Usage: python3 -m experiments.clef_eval  (writes clef-results.json)
+Key: $OPENROUTER_API_KEY. Usage: python3 -m experiments.clef_eval  (writes clef.json)
 """
 
 import json
@@ -187,7 +187,7 @@ def main():
             p90 = f"{v['p90_ms']:.0f}" if v["p90_ms"] else "-"
             print(f"{name:<12} {s:<5}  {v['correct']:>2}/{v['of']:<4}  {med:>9}   {p90:>6}"
                   f"   {v['errors']:>6}   {v['cost_usd']:.5f}")
-    out = str(EXPERIMENT_RESULTS / "clef-results.json")
+    out = str(EXPERIMENT_RESULTS / "clef.json")
     with open(out, "w") as f:
         json.dump(results, f, indent=2)
     print(f"wrote {out}")
