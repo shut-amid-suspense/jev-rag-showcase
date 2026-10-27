@@ -1,4 +1,4 @@
-"""Offline regressions for the sharing copy. No provider calls or real keys."""
+"""Offline regressions for local state and credential handling. No provider calls or real keys."""
 import json
 import os
 from pathlib import Path

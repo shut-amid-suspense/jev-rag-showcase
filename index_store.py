@@ -1,7 +1,7 @@
 """Content-addressed PDF indexes stored as data-only JSON, never pickle.
 
 Only the most recently used indexes are retained. Credentials are not part of
-an index. The sharing copy starts with no indexes or uploaded documents.
+an index. A fresh checkout contains no indexes or uploaded documents.
 """
 import hashlib
 import json

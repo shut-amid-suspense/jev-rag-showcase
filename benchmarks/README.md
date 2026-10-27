@@ -33,15 +33,11 @@ sesame run OPENROUTER_API_KEY -- .venv/bin/python benchmarks/compare_search_mode
 
 The default result files are `docs/comparisons/jev-rag-modes.md` and `.json`. Live runs incur API charges. The runner refuses to overwrite an existing recorded run; choose a new `--output-prefix` to run again.
 
-## Existing manual case
+## Measurement scope
 
-`cases/live11.json` freezes the exact ten questions used in the recorded manual comparison. It expects the PDF at `data/live11-manual-en.pdf` within this repository. That copyrighted PDF is not committed. Use the complete synthetic example above when the manual is unavailable.
+Each mode uses the same indexed PDF and answer model. The order rotates between questions. The JSON records successful model requests, provider-reported costs, citations, model turns, source hashes and elapsed times. The Markdown report contains every answer and explains the limitations of expected-page matching. Generated PDFs and indexes stay under the Git-ignored `data/benchmark-cache/` directory. Generated PDFs are refreshed when their source text changes.
 
-```bash
-sesame run OPENROUTER_API_KEY -- .venv/bin/python benchmarks/compare_search_modes.py --case benchmarks/cases/live11.json --output-prefix docs/comparisons/manual-repeat
-```
-
-Each mode uses the same indexed PDF and answer model. The order rotates between questions. The JSON records the actual model requests, provider-reported costs, citations, model turns, source hashes and elapsed times. The Markdown report contains every answer and explains the limitations of expected-page matching. Generated PDFs and indexes stay under the Git-ignored `data/benchmark-cache/` directory.
+Recorded request costs cover successful responses; failed or retried requests can incur additional unreported charges. They are not a billing ledger. Indexing costs are reported separately from per-answer costs.
 
 ## Coverage inventory
 
@@ -62,6 +58,14 @@ There are also separate retrieval research scripts in this repository. They are 
 | [ableton_eval.py](../ableton_eval.py) | BM25, embeddings, hybrid, hybrid plus Jev, hybrid plus a chat-model reranker, table-of-contents navigation with Jev |
 | [section_eval.py](../section_eval.py) | Page-based, section-and-page, and section-based passage boundaries |
 | [clef_eval.py](../clef_eval.py) | Jev, Clef and Clef-flash decision models for intent and passage selection |
+
+## Historical research limitations
+
+The older research scripts and saved JSON files measure passage selection, not complete answers. They were not rerun during the current application checks. Their cost fields are not directly comparable with the complete three-mode pipeline: some omit query embeddings or initial indexing, and some latency fields exclude local similarity search. See each script for its exact accounting.
+
+The SQuAD experiment treats `is_impossible` as an abstention label. That label belongs to a question's associated paragraph; the script does not establish that every other paragraph in its shared corpus lacks an answer. Its unanswerable-item scores therefore have an additional limitation.
+
+`ableton_eval.py` and `section_eval.py` require the matching manual and Poppler's `pdftotext` and `pdftohtml` commands. `ableton_eval.py ingest` creates `data/chunks.json`; the committed `data/questions.json` belongs to that historical chunking scheme. The SQuAD experiment requires `data/squad-dev-v2.0.json`. These external corpora and tools are unnecessary for the application or portable benchmark. Older research commands overwrite their fixed result filenames; preserve saved results before rerunning them.
 
 ## Source-grounded troubleshooting accuracy diagnostic
 

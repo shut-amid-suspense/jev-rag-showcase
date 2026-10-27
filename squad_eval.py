@@ -3,7 +3,9 @@
 Corpus: all 1,204 real Wikipedia paragraphs of the SQuAD v2 dev set (median
 113 words). Questions: a seeded sample of answerable questions (gold = the
 paragraph the question was written from) plus unanswerable ones (gold = none;
-SQuAD v2 marks them is_impossible — no paragraph contains the answer).
+SQuAD v2 marks them is_impossible for their associated paragraph).
+That label is not checked against every other paragraph in the corpus, so a
+retrieved answer elsewhere can be incorrectly counted as a failed abstention.
 
 Pipelines, all scored top-1 against the gold paragraph:
   bm25            local keyword search over the whole corpus

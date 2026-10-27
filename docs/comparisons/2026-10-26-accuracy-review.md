@@ -1,6 +1,6 @@
 # Jev RAG: source-grounded troubleshooting review
 
-The earlier ten-question run was a time/cost smoke test. This separate diagnostic uses six multi-constraint technical-support scenarios, with four required facts each, frozen before the live run. All three application modes used the same manual, questions and Gemini answer model.
+This diagnostic uses six multi-constraint technical-support scenarios, with four required facts each, frozen before the live run. All three application modes used the same manual, questions and Gemini answer model.
 
 ## Where Jev is used
 

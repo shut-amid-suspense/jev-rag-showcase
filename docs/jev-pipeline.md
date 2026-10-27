@@ -21,18 +21,6 @@ The Jev request contains candidate passage IDs and text plus the question. Its s
 
 Can Jev select the correct evidence more accurately, faster or more cheaply than conventional retrieval or a general chat-model reranker? The original retrieval experiments and saved results address passage selection. A whole-answer comparison between application modes also changes query expansion, search steps and context, so it cannot by itself isolate Jev's effect on answer quality.
 
-## Observed calls in the ten-question operational smoke test
-
-The actual recorded requests in [the three-mode smoke test](comparisons/2026-10-26-jev-rag-modes.json) contain:
-
-| Mode | Jev calls |
-|---|---:|
-| Fast | 0 |
-| Standard | 10 |
-| Thorough | 19 |
-
-This run established operation, time and cost. Its simple lookups, unrelated absence controls and page-hit counts do not establish realistic answer accuracy. The [troubleshooting criteria](../benchmarks/cases/troubleshooting-live11.json) and [review protocol](../benchmarks/accuracy-protocol.md) define a separate source-grounded diagnostic.
-
 ## Source-grounded troubleshooting diagnostic
 
-The subsequent six-task run recorded 0 Jev calls in Fast, 6 in Standard, and 17 in Thorough. [The accuracy review](comparisons/2026-10-26-accuracy-review.md) separates final-answer completeness from the ranking contribution: in Standard's identical candidate pools, canonical evidence in the chosen five passages increased from 11/23 before Jev to 18/23 after Jev. This is a passage-ranking result on a small diagnostic, not a general answer-accuracy claim.
+The six-task run recorded 0 Jev calls in Fast, 6 in Standard, and 17 in Thorough. [The accuracy review](comparisons/2026-10-26-accuracy-review.md) separates final-answer completeness from the ranking contribution: in Standard's identical candidate pools, canonical evidence in the chosen five passages increased from 11/23 before Jev to 18/23 after Jev. This is a passage-ranking result on a small diagnostic, not a general answer-accuracy claim.

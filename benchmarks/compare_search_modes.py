@@ -1,7 +1,7 @@
 """Benchmark all three Jev RAG application modes using repository-local inputs.
 
-Run with the project's Python environment and an OPENROUTER_API_KEY supplied by
-Sesame. No source code or credentials are read from another repository.
+Run with the project's Python environment and an OPENROUTER_API_KEY in the
+environment. No source code or credentials are read from another repository.
 """
 from __future__ import annotations
 
@@ -15,7 +15,6 @@ import statistics
 import subprocess
 import sys
 import time
-from zoneinfo import ZoneInfo
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -46,6 +45,15 @@ def make_fixture(source: Path, target: Path) -> None:
             if remaining < 0:
                 raise ValueError('Fixture page overflows; shorten the source text')
         document.save(target)
+
+
+def ensure_fixture(source: Path, target: Path) -> None:
+    """Reuse the generated PDF only while its committed text is unchanged."""
+    marker = target.with_suffix('.source.sha256')
+    expected = sha256(source)
+    if not target.exists() or not marker.exists() or marker.read_text().strip() != expected:
+        make_fixture(source, target)
+        marker.write_text(expected + '\n')
 
 
 def summary(rows: list[dict]) -> dict:
@@ -93,7 +101,7 @@ def write_report(data: dict, target: Path, result_path: Path) -> None:
             per_1000 = 'incomplete cost data'
         lines.append(f"| Jev RAG — {mode} | {values['median_seconds']:.2f} s | {values['slowest_seconds']:.2f} s | {price} | {per_1000} | {values['mean_requests']:.1f} |")
     lines += ['',
-        'Costs are provider-reported `usage.cost` for the complete answer pipeline: query embeddings, query expansion where used, reranking where used and answer generation. Initial indexing is separate. Per-1,000 figures extrapolate this small sample; they are not a bulk run or guaranteed prices.', '',
+        'Costs are provider-reported `usage.cost` from successful recorded requests: query embeddings, query expansion where used, reranking where used and answer generation. Failed or retried attempts may incur additional unreported charges. Initial indexing is separate. Per-1,000 figures extrapolate this small sample; they are not a bulk run or guaranteed prices.', '',
         f"Index preparation: {data['indexing']['seconds']:.2f} s, ${data['indexing']['known_cost_usd']:.6f}, {data['indexing']['passages']} passages. Saved index reused: {data['indexing']['reused']}.", '',
         f"Total known API cost for this run, including any indexing calls: ${data['total_known_cost_usd']:.6f}.", '',
         '## Where Jev was used', '',
@@ -109,7 +117,7 @@ def write_report(data: dict, target: Path, result_path: Path) -> None:
     lines += ['',
         'Questions marked with no expected page are absence controls when present. Their full answers and source lists are preserved below; empty citations by themselves do not prove a correct refusal. If the case includes required-fact criteria, these need a separate source-grounded review; the timing runner does not automatically establish answer accuracy.', '',
         '## Reproduce from this repository', '',
-        '[Benchmark instructions](../../benchmarks/README.md) include a synthetic handbook and questions that are committed in this repository. The default run builds its own PDF from that fixture, so it does not require a downloaded manual or another checkout.', '',
+        f"[Benchmark instructions]({Path(os.path.relpath(ROOT / 'benchmarks/README.md', target.parent)).as_posix()}) include a synthetic handbook and questions that are committed in this repository. The default run builds its own PDF from that fixture, so it does not require a downloaded manual or another checkout.", '',
         'Run this exact case from the repository root after making its PDF available at the recorded repository-local path:', '',
         '```bash',
         f"sesame run OPENROUTER_API_KEY -- .venv/bin/python benchmarks/compare_search_modes.py --case {data['case_file']} --output-prefix docs/comparisons/repeated-jev-rag-modes",
@@ -136,8 +144,8 @@ def main() -> None:
     case_path = local_path(args.case)
     case = json.loads(case_path.read_text())
     pdf_path = local_path(case['document'])
-    if case.get('generate_from') and not pdf_path.exists():
-        make_fixture(local_path(case['generate_from']), pdf_path)
+    if case.get('generate_from'):
+        ensure_fixture(local_path(case['generate_from']), pdf_path)
     if not pdf_path.exists():
         parser.error(f"Document missing: {case['document']}. Use the default synthetic case for a complete in-repository example.")
     questions = case['questions']
@@ -170,7 +178,7 @@ def main() -> None:
         return
     key = os.environ.get('OPENROUTER_API_KEY', '').strip()
     if not key:
-        parser.error('Supply OPENROUTER_API_KEY through sesame run')
+        parser.error('Supply OPENROUTER_API_KEY in the environment (Sesame is optional)')
     output_prefix = local_path(args.output_prefix)
     output_prefix.parent.mkdir(parents=True, exist_ok=True)
     result_path = output_prefix.with_suffix('.json')
@@ -205,7 +213,7 @@ def main() -> None:
     for module in [poc, agent, classic, keywords]:
         module.post = measured_post
     data = {'project': 'Jev RAG POC', 'status': 'running',
-        'started_at': datetime.now(ZoneInfo('Europe/Berlin')).isoformat(),
+        'started_at': datetime.now().astimezone().isoformat(),
         'case_file': relative(case_path), 'case_sha256': sha256(case_path), 'evaluation_scope': case.get('evaluation_scope'), 'document': relative(pdf_path), 'document_sha256': sha256(pdf_path),
         'questions': questions, 'models': {'answer': agent.PROVIDERS['gemini']['model'],
         'embedding': poc.EMBED_MODEL, 'reranker': poc.JEV_MODEL},
@@ -266,7 +274,7 @@ def main() -> None:
                     'seconds': round(row['seconds'], 2), 'cost_usd': row['known_cost_usd'],
                     'source_pages': row['source_pages'], 'answer': row['answer']}), flush=True)
         data['status'] = 'complete'
-        data['finished_at'] = datetime.now(ZoneInfo('Europe/Berlin')).isoformat()
+        data['finished_at'] = datetime.now().astimezone().isoformat()
         save()
         write_report(data, report_path, result_path)
         print(json.dumps({'summary': data['summary'], 'total_known_cost_usd': data['total_known_cost_usd']}), flush=True)

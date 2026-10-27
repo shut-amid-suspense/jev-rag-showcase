@@ -4,7 +4,7 @@ Ask practical questions about a long PDF and inspect the passages behind each an
 
 [Run locally](#start-the-app) · [Architecture](ARCHITECTURE.md) · [Evaluation](#evaluation)
 
-The application compares three complete retrieval workflows. It also records Jev's ranking on fixed candidate pools, so its contribution can be inspected separately from query expansion.
+The application offers three retrieval workflows. The benchmark records Jev's ranking on fixed candidate pools, so its contribution can be inspected separately from query expansion.
 
 ![Jev RAG architecture: shared document index and three retrieval workflows](docs/diagrams/search-modes.png)
 
@@ -72,7 +72,7 @@ These are **assistant-reviewed completeness points on six diagnostic cases**, no
 
 On identical Standard candidate pools, Jev increased canonical evidence chunks in the selected five passages from **11/23 to 18/23**. This is a passage-ranking contribution; equivalent evidence may exist outside the canonical chunks. The [review](docs/comparisons/2026-10-26-accuracy-review.md) includes the per-task comparisons and every grading explanation.
 
-A separate [ten-question operational smoke test](docs/comparisons/2026-10-26-jev-rag-modes.md) records time and cost on simpler questions. It is not an accuracy claim. Historical retrieval experiments remain in the repository and are listed separately in the coverage inventory.
+Historical retrieval experiments remain in the repository and are listed separately in the benchmark coverage inventory. Their passage-selection metrics are distinct from this whole-answer diagnostic.
 
 ## Reproduce and check
 
@@ -92,7 +92,7 @@ With `OPENROUTER_API_KEY` supplied in your environment, run the portable three-m
 
 The benchmark builds a PDF from its committed synthetic handbook and stores reports inside this repository. Live requests incur API charges. Sesame is an optional way to supply the environment variable; it is not required.
 
-The recorded manual cases and frozen questions are included, but the copyrighted Ableton PDF is not. Place the matching manual under the case's repository-local path to rerun those cases. Its fingerprint and original executed source hashes are recorded. Small [frozen source snapshots](benchmarks/recorded-source/manifest.json) keep historical evidence verifiable even from the ZIP, without another repository or the original Git history.
+The recorded manual cases and frozen questions are included, but the copyrighted Ableton PDF is not. Place the matching manual under the case's repository-local path to rerun those cases. Its fingerprint and original executed source hashes are recorded. A [frozen source snapshot](benchmarks/recorded-source/manifest.json) keeps historical evidence verifiable even from the ZIP, without another repository or the original Git history.
 
 ## Scope and limitations
 

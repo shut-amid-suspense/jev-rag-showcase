@@ -157,7 +157,7 @@ Two different questions are measured:
 - **Can the workflow answer the task?** Six multi-section support scenarios have 24 preregistered required facts. The assistant review assigns covered, partial or missing labels and records its limitations. This measures diagnostic completeness, not representative production accuracy.
 - **What did Jev change on the same input?** Standard's traces compare five candidates before and after Jev on each unchanged pool. Canonical evidence coverage increased from 11/23 to 18/23 across those cases. This isolates a ranking contribution, not Jev's causal effect on the final answer and not all possible valid evidence in a repetitive manual.
 
-The raw measurements, fixed criteria, individual grades and original source snapshots are included. One rubric item was overly demanding relative to its question; the review explicitly flags it. The ten-question timing smoke test is kept separate from the harder diagnostic. No screenshots, broad enterprise test set, repeated-run confidence interval or independent blinded grading were evaluated.
+The raw measurements, fixed criteria, individual grades and original source snapshots are included. One rubric item was overly demanding relative to its question; the review explicitly flags it. The synthetic handbook tests operation and is separate from the harder diagnostic. No screenshots, broad enterprise test set, repeated-run confidence interval or independent blinded grading were evaluated.
 
 See [the accuracy review](docs/comparisons/2026-10-26-accuracy-review.md), [protocol](benchmarks/accuracy-protocol.md) and [evidence verifier](scripts/verify_evidence.py).
 

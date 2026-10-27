@@ -1,28 +1,6 @@
 {
-  "purpose": "Original executed code retained locally so archived result hashes remain verifiable in a ZIP or fresh repository. Current UI and cache cleanup did not change the retrieval/answering functions.",
+  "purpose": "Exact executed source files and frozen inputs for the recorded troubleshooting diagnostic. Earlier operational smoke-test artifacts are excluded. Current UI, credentials, caching and benchmark tooling are documented separately.",
   "snapshots": [
-    {
-      "original_revision": "309c4852f4a8933c67144d374f7f4e0f95b2da65",
-      "directory": "benchmarks/recorded-source/309c485",
-      "files": {
-        "HOW_IT_WORKS.md": "0b89caf534a91705dce2776a74f3333a4f4e92c142a37a22e7de4e945f7de914",
-        "ableton_eval.py": "f38afb41faf8a10d18e0982d117d4e9b6ab54940e76c152be639613f6b8644a8",
-        "agent.py": "f70e7c3ea06778b3fc7cfd7e47874173017decfe37c2cdcf741a648230eb24b4",
-        "app.py": "8adef4daa8ed35ff170e3f5aa14ef6104fe0056ba90807cddb60fb8ac8926d9e",
-        "benchmarks/cases/live11.json": "c1a546296683e59e4e72cdf6aa70145236437fbf14e249e437fbc3e047e4cac5",
-        "benchmarks/cases/support-handbook.json": "e5bd7676a8ed45dbe176e2e89140c05530379409dc7868560c690669e884a109",
-        "benchmarks/compare_search_modes.py": "db9e428eb7b0a6e5f5dc07d4c509c167dea1d273a53ab7deab81619cf6029dcb",
-        "benchmarks/fixtures/support-handbook.txt": "cee651b4a8b8170a4b695b19a774255ce5060740c7c67eec5a85e6ff9d9cfc8a",
-        "classic.py": "600c84173783177fcdb34b6cd8273bb32fed7cdd0649cc8f80c5529e891259b0",
-        "clef_eval.py": "fcc72c7f79ca55274516ebb61dbd30b3e3b9ece696d40860a55386ab0c764210",
-        "index_store.py": "e523412a9096bf5049c61c0affff89b4fc74e13a50a3667ba62d4ab6254d1d37",
-        "keywords.py": "8a787ab4298ff21440638a31af0a337ea9c56f9de209f5ecfe7de134a2530fcb",
-        "poc.py": "4a08569db41c895aff3640fccdf203b19bb075dc528eb9cee252123b1ea2b072",
-        "requirements.txt": "a1251ec550f216a9914b1ec6c6b6218f77d84499e661a2870520222ac95f7ee3",
-        "section_eval.py": "b116aee1501a66b93f204444d5daaff4cc40aac5f7f45f001d0c3c4023b4078b",
-        "squad_eval.py": "f04824b63050d52bf5d6b81e000cfdc8f0b456f5821a35b686c56731455349ab"
-      }
-    },
     {
       "original_revision": "c34cd3e266a7ab3e8398906927852bf2851dd52e",
       "directory": "benchmarks/recorded-source/c34cd3e",
@@ -32,11 +10,8 @@
         "agent.py": "f70e7c3ea06778b3fc7cfd7e47874173017decfe37c2cdcf741a648230eb24b4",
         "app.py": "8adef4daa8ed35ff170e3f5aa14ef6104fe0056ba90807cddb60fb8ac8926d9e",
         "benchmarks/accuracy-protocol.md": "52a7548007a48d168c96e6c5523a72ac311979140f7f1f8786418b396c384b3b",
-        "benchmarks/cases/live11.json": "c1a546296683e59e4e72cdf6aa70145236437fbf14e249e437fbc3e047e4cac5",
-        "benchmarks/cases/support-handbook.json": "e5bd7676a8ed45dbe176e2e89140c05530379409dc7868560c690669e884a109",
         "benchmarks/cases/troubleshooting-live11.json": "02cefca633a6a2e0d1cf15cde757a67c900c1a0662fd8b31b98dd36d5b919849",
         "benchmarks/compare_search_modes.py": "b84d6fa614dacbae7015f3063e3c2a170e7fb372e58b6cee849ce232f5618b68",
-        "benchmarks/fixtures/support-handbook.txt": "cee651b4a8b8170a4b695b19a774255ce5060740c7c67eec5a85e6ff9d9cfc8a",
         "classic.py": "600c84173783177fcdb34b6cd8273bb32fed7cdd0649cc8f80c5529e891259b0",
         "clef_eval.py": "fcc72c7f79ca55274516ebb61dbd30b3e3b9ece696d40860a55386ab0c764210",
         "index_store.py": "e523412a9096bf5049c61c0affff89b4fc74e13a50a3667ba62d4ab6254d1d37",

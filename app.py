@@ -4,8 +4,8 @@ Three steps on one page: (1) session-only API keys; (2) upload a PDF,
 indexed right away (BM25 + embeddings) with live progress; (3) ask, with an
 optional screenshot, by one of three searches: Standard (keywords.py: the model
 writes search terms, Jev keeps the best passages), Fast (classic.py: one search)
-or Thorough (agent.py: a tool-calling agent searches until sure). Each answers
-with the passages it relied on, or says the PDF doesn't cover the question.
+or Thorough (agent.py: a tool-calling agent searches for up to six model turns).
+Answers show named passages, or can say the PDF does not cover the question.
 Asking is locked until the PDF is ready.
 
 Run:  .venv/bin/python app.py      (then open the printed local URL)
@@ -39,8 +39,8 @@ from squad_eval import unit
 
 MAX_WORDS, MIN_WORDS, BATCH = 300, 25, 100
 # Indexes live on the server, keyed by the fingerprint of the PDF's bytes: the most recent
-# ones in memory, all of them on disk (index_store.py), so an unchanged PDF is never indexed
-# twice, even after a restart. (Gradio deletes per-session state when the browser's
+# ones in memory and up to ten on disk (index_store.py), so a retained unchanged PDF can
+# reuse its saved index after a restart. (Gradio deletes per-session state when the browser's
 # connection drops, which once lost the index while the page still said "ready".)
 INDEXES = collections.OrderedDict()
 MAX_INDEXES = 3
@@ -240,22 +240,23 @@ def index_pdf(pdf_path, saved, force=False):
     t0 = time.perf_counter()
     yield f"**{name}** · reading the PDF…", *cleared, *ask_lock(False, LOCKED), gr.skip()
     try:
-        doc = pymupdf.open(pdf_path)
-        outline = [{"level": lvl, "title": " ".join(title.split()), "page": page}
-                   for lvl, title, page in doc.get_toc() if page >= 1]
-        chunks = []
-        for pno, page in enumerate(doc, 1):
-            words = page.get_text().split()
-            before = [i for i in outline if i["page"] <= pno]
-            section = before[-1]["title"] if before else ""
-            label = f"[{section}, p. {pno}] " if section else f"[p. {pno}] "
-            n_parts = max(1, -(-len(words) // MAX_WORDS))
-            size = -(-len(words) // n_parts)
-            for part in range(n_parts):
-                w = words[part * size:(part + 1) * size]
-                if len(w) >= MIN_WORDS:
-                    chunks.append({"id": f"c{len(chunks)}", "page": pno, "section": section,
-                                   "label": label, "text": label + " ".join(w)})
+        with pymupdf.open(pdf_path) as doc:
+            page_count = len(doc)
+            outline = [{"level": lvl, "title": " ".join(title.split()), "page": page}
+                       for lvl, title, page in doc.get_toc() if page >= 1]
+            chunks = []
+            for pno, page in enumerate(doc, 1):
+                words = page.get_text().split()
+                before = [i for i in outline if i["page"] <= pno]
+                section = before[-1]["title"] if before else ""
+                label = f"[{section}, p. {pno}] " if section else f"[p. {pno}] "
+                n_parts = max(1, -(-len(words) // MAX_WORDS))
+                size = -(-len(words) // n_parts)
+                for part in range(n_parts):
+                    w = words[part * size:(part + 1) * size]
+                    if len(w) >= MIN_WORDS:
+                        chunks.append({"id": f"c{len(chunks)}", "page": pno, "section": section,
+                                       "label": label, "text": label + " ".join(w)})
         if not chunks:
             yield (f"**{name}** · no text found. This looks like a scanned PDF without a text "
                    f"layer, so it can't be searched.", *cleared,
@@ -275,11 +276,11 @@ def index_pdf(pdf_path, saved, force=False):
                    f"{time.perf_counter() - t0:.0f} s", *cleared, *ask_lock(False, LOCKED), gr.skip())
         vecs = [v for r in results for v in r[0]]
         cost = sum(r[2].get("cost", 0) for r in results)
-        index = {"name": name, "pages": len(doc), "chunks": chunks,
+        index = {"name": name, "pages": page_count, "chunks": chunks,
                  "bm25": BM25([c["text"] for c in chunks]), "uvecs": [unit(v) for v in vecs]}
         remember(fp, index)
         index_store.save(fp, index)
-        yield (f"**{name}** · {len(doc)} pages · {total} passages · **ready** · indexed in "
+        yield (f"**{name}** · {page_count} pages · {total} passages · **ready** · indexed in "
                f"{time.perf_counter() - t0:.0f} s for ${cost:.4f}", *cleared,
                *ask_lock(True, READY), fp)
     except Exception as e:
@@ -347,11 +348,11 @@ def steps_md(steps):
 
 
 # The three searches: (name on the switch, the one line shown under it, runner).
-METHODS = {"classic": ("Fast", "One search with your words. Fastest, but can miss details.",
+METHODS = {"classic": ("Fast", "One hybrid search with your words; can miss details.",
                        run_classic),
            "keywords": ("Standard", "Writes search terms from your question and screenshot, then "
-                                    "keeps the best passages.", run_keywords),
-           "agent": ("Thorough", "Keeps searching until it is sure. Slowest.", run_agent)}
+                                    "asks Jev to rank the passages.", run_keywords),
+           "agent": ("Thorough", "Can search again or read full pages, within six model turns.", run_agent)}
 
 
 def method_help(method):
@@ -444,8 +445,7 @@ def ask(box, method, model, fp, saved, saved_cb, history):
 
 # ---------------------------------------------------------------- UI
 
-# A readable column on wide screens; each search choice on its own full-width line.
-# A readable column on wide screens; the two choices as compact switches with 44px targets;
+# A readable column on wide screens; the two controls use compact switches with 44px targets;
 # a clear primary Ask button. Colours come from the theme, so dark mode follows.
 CSS = """
 .gradio-container { max-width: 760px !important; margin: 0 auto !important; }
@@ -555,8 +555,8 @@ HEAD = """
 """
 
 with gr.Blocks(title="Ask a large PDF") as demo:
-    gr.Markdown("# Ask a large PDF\nUpload a PDF and ask questions about it. Every answer shows "
-                "the passages it is based on.")
+    gr.Markdown("# Ask a large PDF\nUpload a PDF and ask questions about it. Inspect source passages "
+                "and search steps alongside the answer.")
     with gr.Accordion("How it works", open=False):
         gr.Markdown(GUIDE.split("\n", 1)[1])  # the file's own title is the accordion label
     # Credentials stay in Gradio session memory, never BrowserState/localStorage.

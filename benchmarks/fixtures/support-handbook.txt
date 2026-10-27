@@ -20,7 +20,7 @@ Atlas audit exports use JSONL format. Each line is one complete event with an ev
 ---
 Sign-in sessions
 
-An Atlas staff sign-in session expires after four hours of inactivity. Signing in again creates a new session identifier. The fictional system does not store a payroll administrator password in this handbook. Service operators can inspect the session timestamp but cannot recover a password from a document. Beacon staff sessions expire after two hours of inactivity, which is a different service-specific rule. A user who changes teams must have their service access reviewed separately. Access review is independent of maintenance scheduling and billing adjustments.
+An Atlas staff sign-in session expires after four hours of inactivity. Signing in again creates a new session identifier. Service operators can inspect the session timestamp and revoke a session when needed. The handbook does not list an on-call telephone number. Beacon staff sessions expire after two hours of inactivity, which is a different service-specific rule. A user who changes teams must have their service access reviewed separately. Access review is independent of maintenance scheduling and billing adjustments.
 ---
 Backups and restores
 
@@ -28,4 +28,4 @@ Atlas backups start daily at 02:30 UTC and are retained for 21 days. A restore e
 ---
 Evidence retention
 
-Atlas signed audit reports are retained for 365 days. Raw diagnostic logs are retained for 30 days. These are different artifacts: the signed report contains the reviewed findings, while the raw logs contain the original events. When a report cites a raw log, it also records the event identifier and capture time. Export files follow their own 180-day expiration rule. The handbook does not provide transport prices, travel schedules or personal financial information. Questions about those topics cannot be answered from this fictional document.
+Atlas signed audit reports are retained for 365 days. Raw diagnostic logs are retained for 30 days. These are different artifacts: the signed report contains the reviewed findings, while the raw logs contain the original events. When a report cites a raw log, it also records the event identifier and capture time. Export files follow their own 180-day expiration rule. The handbook does not specify a contracted maximum recovery time for outages. An acknowledgement target is not a recovery-time commitment.

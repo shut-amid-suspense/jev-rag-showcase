@@ -117,7 +117,9 @@ class HTTPStatusError(RuntimeError):
     """The API answered with an HTTP error; .code is the status."""
 
     def __init__(self, url, code, body):
-        super().__init__(f"{url} -> HTTP {code}: {body[:400]!r}")
+        # Provider error bodies can echo submitted text or credentials.
+        # Keep them out of exceptions, terminal logs and benchmark failure reports.
+        super().__init__(f"{url} -> HTTP {code}")
         self.code = code
 
 

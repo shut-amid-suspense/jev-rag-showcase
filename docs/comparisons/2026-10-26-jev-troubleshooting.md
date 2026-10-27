@@ -24,7 +24,7 @@ The runner calls the application functions directly. It does not automate browse
 | Jev RAG — Standard | 18.18 s | 20.01 s | $0.007001 | $7.00 | 4.0 |
 | Jev RAG — Thorough | 27.76 s | 30.52 s | $0.011760 | $11.76 | 10.7 |
 
-Costs are provider-reported `usage.cost` for the complete answer pipeline: query embeddings, query expansion where used, reranking where used and answer generation. Initial indexing is separate. Per-1,000 figures extrapolate this small sample; they are not a bulk run or guaranteed prices.
+Costs are provider-reported `usage.cost` for the complete answer pipeline: query embeddings, query expansion where used, reranking where used and answer generation. Failed or retried attempts may incur additional unreported charges. Initial indexing is separate. Per-1,000 figures extrapolate this small sample; they are not a bulk run or guaranteed prices.
 
 Index preparation: 0.25 s, $0.000000, 1047 passages. Saved index reused: True.
 
